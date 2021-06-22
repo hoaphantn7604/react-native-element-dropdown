@@ -7,6 +7,7 @@ import {
   View,
   Modal,
   Text,
+  SafeAreaView
 } from 'react-native';
 import { styles } from './styles';
 import { Dropdown } from './type';
