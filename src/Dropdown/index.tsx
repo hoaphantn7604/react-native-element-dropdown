@@ -113,7 +113,7 @@ const DropdownComponent: Dropdown = (props) => {
   const _renderDropdown = () => {
     return (
       <TouchableWithoutFeedback onPress={showOrClose}>
-        <View style={styles.dropdown} ref={ref} onLayout={_measure}>
+        <View style={styles.dropdown}>
           {renderLeftIcon?.()}
           <Text style={[styles.textItem, textStyle, font()]}>
             {currentValue && currentValue[labelField] || placeholder}
@@ -211,8 +211,8 @@ const DropdownComponent: Dropdown = (props) => {
   }, [orientation])
 
   return (
-    <View>
-      <View style={[style]}>
+    <View >
+      <View style={[style]} ref={ref} onLayout={_measure}>
         {_renderTitle()}
         {_renderDropdown()}
         {_renderModal()}

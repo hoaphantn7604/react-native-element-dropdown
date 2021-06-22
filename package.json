@@ -1,7 +1,7 @@
 {
   "name": "react-native-element-dropdown",
   "title": "React Native Element Dropdown",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React Native Element Dropdown",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-element-dropdown.git",
-    "baseUrl": "https://github.com/github_account/react-native-element-dropdown"
+    "url": "git+https://github.com/hoaphantn7604/react-native-element-dropdown.git",
+    "baseUrl": "https://github.com/hoaphantn7604/react-native-element-dropdown"
   },
   "keywords": [
     "react-native"
