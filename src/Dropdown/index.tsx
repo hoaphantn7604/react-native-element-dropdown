@@ -213,7 +213,7 @@ const DropdownComponent: Dropdown = (props) => {
         {_renderDropdown()}
         {_renderModal()}
       </View>
-      {textError && <Text style={[styles.textError, textErrorStyle, font()]}>{textError}</Text>}
+      {textError && !visible && <Text style={[styles.textError, textErrorStyle, font()]}>{textError}</Text>}
     </View>
   );
 };

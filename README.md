@@ -19,6 +19,9 @@ or
     cd ios && pod install
 ```
 
+#### Demo
+![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo.png)
+
 #### Props
 | Props              | Params               | isRequire | Description      |
 | ------------------ | -------------------- | --------- | ---------------- |
