@@ -37,7 +37,7 @@ const DropdownScreen = _props => {
         placeholder="Select item"
         value={dropdown}
         onChange={item => {
-          setDropdown(item);
+          setDropdown(item.value);
           console.log('selected', item);
         }}
       />
@@ -54,7 +54,7 @@ const DropdownScreen = _props => {
         placeholder="Select item"
         value={dropdown1}
         onChange={item => {
-          setDropdown1(item);
+          setDropdown1(item.value);
           console.log('selected', item);
         }}
         renderLeftIcon={() => (
