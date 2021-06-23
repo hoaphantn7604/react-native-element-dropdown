@@ -20,23 +20,6 @@ export const styles = StyleSheet.create({
       borderTopLeftRadius: scale(16),
       borderTopRightRadius: scale(16),
     },
-    header: {
-      height: scale(40),
-      width: '100%',
-      borderTopLeftRadius: scale(16),
-      borderTopRightRadius: scale(16),
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderBottomWidth: scale(0.3),
-      borderBottomColor: '#DDDDDD',
-      backgroundColor: 'white'
-    },
-    pan:{
-      width: scale(40),
-      height: scale(6),
-      borderRadius: scale(6),
-      backgroundColor: '#DDDDDD'
-    },
     closeIcon: {
       width: scale(45),
       height: scale(45),
@@ -78,7 +61,6 @@ export const styles = StyleSheet.create({
     input: {
       borderWidth: scale(0.5),
       borderColor: '#DDDDDD',
-      borderRadius: scale(12),
       paddingHorizontal: scale(8),
       marginBottom: scale(8),
       margin:scale(6)

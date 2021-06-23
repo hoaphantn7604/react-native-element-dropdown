@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
-import Dropdown from 'react-native-element-dropdown';
+import {Dropdown, MultiSelect} from 'react-native-element-dropdown';
 
 const data = [
   {label: 'Item 1', value: '1'},
@@ -15,7 +15,7 @@ const data = [
 
 const DropdownScreen = _props => {
   const [dropdown, setDropdown] = useState(null);
-  const [dropdown1, setDropdown1] = useState(null);
+  const [selected, setSelected] = useState([]);
 
   const _renderItem = item => {
     return (
@@ -29,32 +29,18 @@ const DropdownScreen = _props => {
   return (
     <View style={styles.container}>
       <Dropdown
-        data={data}
-        containerStyle={styles.shadow}
-        labelField="label"
-        valueField="value"
-        label="Title"
-        placeholder="Select item"
-        value={dropdown}
-        onChange={item => {
-          setDropdown(item.value);
-          console.log('selected', item);
-        }}
-      />
-
-      <Dropdown
-        style={styles.dropdown2}
+        style={styles.dropdown}
         containerStyle={styles.shadow}
         data={data}
         search
         searchPlaceholder="Search"
         labelField="label"
         valueField="value"
-        label="Title"
+        label="Dropdown"
         placeholder="Select item"
-        value={dropdown1}
+        value={dropdown}
         onChange={item => {
-          setDropdown1(item.value);
+          setDropdown(item.value);
           console.log('selected', item);
         }}
         renderLeftIcon={() => (
@@ -62,6 +48,23 @@ const DropdownScreen = _props => {
         )}
         renderItem={item => _renderItem(item)}
         textError="Error"
+      />
+
+      <MultiSelect
+        style={styles.dropdown}
+        data={data}
+        labelField="label"
+        valueField="value"
+        label="Multi Select"
+        placeholder="Select item"
+        search
+        searchPlaceholder="Search"
+        value={selected}
+        onChange={item => {
+          setSelected(item);
+          console.log('selected', item);
+        }}
+        renderItem={item => _renderItem(item)}
       />
     </View>
   );
@@ -76,21 +79,15 @@ const styles = StyleSheet.create({
     padding: 40,
   },
   dropdown: {
-    marginTop: 20,
     backgroundColor: 'white',
-    borderRadius: 12,
-    padding: 12,
-  },
-  dropdown2: {
-    backgroundColor: 'transparent',
     borderBottomColor: 'gray',
     borderBottomWidth: 0.5,
     marginTop: 20,
   },
   icon: {
     marginRight: 5,
-    width: 24,
-    height: 24,
+    width: 18,
+    height: 18,
   },
   item: {
     paddingVertical: 17,

@@ -1,5 +1,6 @@
 // main index.js
 
 import Dropdown from './src/Dropdown';
+import MultiSelect from './src/MultiSelect';
 
-export default Dropdown;
+export { Dropdown, MultiSelect };

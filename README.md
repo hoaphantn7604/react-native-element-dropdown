@@ -21,8 +21,9 @@ or
 
 #### Demo
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo.png)
+![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo2.png)
 
-#### Props
+#### Dropdown Props
 | Props              | Params               | isRequire | Description      |
 | ------------------ | -------------------- | --------- | ---------------- |
 | data               | Array                | Yes       |                  |
@@ -47,11 +48,38 @@ or
 | renderLeftIcon     | () => JSX.Element    | No        |                  |
 | renderItem         | (item) => JSX.Element| No        |                  |
 
+#### MultiSelect Props
+| Props              | Params               | isRequire | Description      |
+| ------------------ | -------------------- | --------- | ---------------- |
+| data               | Array                | Yes       |                  |
+| labelField         | String               | Yes       |                  |
+| valueField         | String               | Yes       |                  |
+| onChange           | (value[]) => void    | Yes       |                  |
+| style              | ViewStyle            | No        |                  |
+| containerStyle     | ViewStyle            | No        |                  |
+| fontFamily         | String               | No        |                  |
+| labelStyle         | TextStyle            | No        |                  |
+| textStyle          | TextStyle            | No        |                  |
+| iconColor          | String               | No        |                  |
+| activeColor        | String               | No        |                  |
+| value              | Item                 | No        |                  |
+| label              | String               | No        |                  |
+| placeholder        | String               | No        |                  |
+| selectedStyle      | ViewStyle            | No        |                  |
+| selectedTextStyle  | TextStyle            | No        |                  |
+| search             | Boolean              | No        |                  |
+| inputSearchStyle   | ViewStyle            | No        |                  |
+| searchPlaceholder  | String               | No        |                  |
+| textError          | String               | No        |                  |
+| textErrorStyle     | TextStyle            | No        |                  |
+| renderLeftIcon     | () => JSX.Element    | No        |                  |
+| renderItem         | (item) => JSX.Element| No        |                  |
+
 ## Usage
 ```javascript
     import React, {useState} from 'react';
-    import {StyleSheet, View, SafeAreaView} from 'react-native';
-    import Dropdown from 'react-native-element-dropdown';
+    import {StyleSheet, View, Text, Image} from 'react-native';
+    import {Dropdown, MultiSelect} from 'react-native-element-dropdown';
 
     const data = [
         {label: 'Item 1', value: '1'},
@@ -66,46 +94,58 @@ or
 
     const DropdownScreen = _props => {
         const [dropdown, setDropdown] = useState(null);
-        const [dropdown1, setDropdown1] = useState(null);
+        const [selected, setSelected] = useState([]);
+
+        const _renderItem = item => {
+            return (
+            <View style={styles.item}>
+                <Text style={styles.textItem}>{item.label}</Text>
+                <Image style={styles.icon} source={require('./assets/tick.png')} />
+            </View>
+            );
+        };
 
         return (
-            <SafeAreaView style={{flex: 1}}>
             <View style={styles.container}>
                 <Dropdown
-                    data={data}
-                    labelField="label"
-                    valueField="value"
-                    label="Title"
-                    placeholder="Select item"
-                    value={dropdown}
-                    onChange={item => {
-                        setDropdown(item);
-                        console.log('selected', item);
-                    }}
-                />
-
-                <Dropdown
-                    style={styles.dropdown2}
-                    containerStyle={{
-                        padding: 10,
-                        height: 300,
-                    }}
+                    style={styles.dropdown}
+                    containerStyle={styles.shadow}
                     data={data}
                     search
                     searchPlaceholder="Search"
                     labelField="label"
                     valueField="value"
-                    label="Title"
+                    label="Dropdown"
                     placeholder="Select item"
-                    value={dropdown1}
+                    value={dropdown}
                     onChange={item => {
-                        setDropdown1(item);
+                    setDropdown(item.value);
                         console.log('selected', item);
                     }}
+                    renderLeftIcon={() => (
+                        <Image style={styles.icon} source={require('./assets/account.png')} />
+                    )}
+                    renderItem={item => _renderItem(item)}
                     textError="Error"
                 />
+
+                <MultiSelect
+                    style={styles.dropdown}
+                    data={data}
+                    labelField="label"
+                    valueField="value"
+                    label="Multi Select"
+                    placeholder="Select item"
+                    search
+                    searchPlaceholder="Search"
+                    value={selected}
+                    onChange={item => {
+                    setSelected(item);
+                        console.log('selected', item);
+                    }}
+                    renderItem={item => _renderItem(item)}
+                />
             </View>
-            </SafeAreaView>
         );
     };
 
@@ -118,19 +158,36 @@ or
             padding: 40,
         },
         dropdown: {
-            marginTop: 20,
             backgroundColor: 'white',
-            borderRadius: 12,
-            padding: 12,
-        },
-        dropdown2: {
-            backgroundColor: 'transparent',
             borderBottomColor: 'gray',
             borderBottomWidth: 0.5,
             marginTop: 20,
         },
         icon: {
             marginRight: 5,
+            width: 18,
+            height: 18,
+        },
+        item: {
+            paddingVertical: 17,
+            paddingHorizontal: 4,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+        },
+        textItem: {
+            flex: 1,
+            fontSize: 16,
+        },
+        shadow: {
+            shadowColor: '#000',
+            shadowOffset: {
+            width: 0,
+            height: 1,
+            },
+            shadowOpacity: 0.2,
+            shadowRadius: 1.41,
+            elevation: 2,
         },
     });
 ```
