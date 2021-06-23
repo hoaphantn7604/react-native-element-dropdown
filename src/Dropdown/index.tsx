@@ -7,7 +7,7 @@ import {
   View,
   Modal,
   Text,
-  SafeAreaView
+  Dimensions,
 } from 'react-native';
 import { styles } from './styles';
 import { Dropdown } from './type';
@@ -56,6 +56,7 @@ const DropdownComponent: Dropdown = (props) => {
   const [textSearch, setTextSearch] = useState<string>('');
   const [listData, setListData] = useState<any[]>(data);
   const [position, setPosition] = useState<any>();
+  const { width, height } = Dimensions.get('window');
 
   useEffect(() => {
     getValue();
@@ -171,15 +172,16 @@ const DropdownComponent: Dropdown = (props) => {
 
   const _renderModal = () => {
     if (visible && position) {
+      const top = position?.py + position?.fy + scale(10);
       return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
         <TouchableWithoutFeedback onPress={showOrClose}>
-          <View style={{ flex: 1, alignItems: 'center' }}>
+          <View style={{ width: width, height: height, alignItems: 'center' }}>
             <View style={[{ backgroundColor: 'white' }, {
               borderWidth: scale(0.5),
               borderColor: '#EEEEEE',
-              height: 400,
+              height: 300,
               width: position?.px,
-              top: position?.py + position?.fy + scale(10)
+              top: top,
             }, containerStyle]}
             >
               {_renderList()}
@@ -191,6 +193,10 @@ const DropdownComponent: Dropdown = (props) => {
     return null
   }
 
+  useEffect(() => {
+    _measure();
+  }, [visible])
+
   const _measure = () => {
     ref.current.measure((width, height, px, py, fx, fy) => {
       const location = {
@@ -199,7 +205,7 @@ const DropdownComponent: Dropdown = (props) => {
         px: px,
         py: py,
         width: width,
-        height: height
+        height: height,
       }
       setPosition(location);
     })
@@ -207,7 +213,7 @@ const DropdownComponent: Dropdown = (props) => {
 
   return (
     <View >
-      <View style={[style]} ref={ref} onLayout={_measure}>
+      <View style={[style]} ref={ref}>
         {_renderTitle()}
         {_renderDropdown()}
         {_renderModal()}
