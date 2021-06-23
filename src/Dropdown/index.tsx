@@ -207,7 +207,6 @@ const DropdownComponent: Dropdown = (props) => {
 
   return (
     <View >
-      <SafeAreaView/>
       <View style={[style]} ref={ref} onLayout={_measure}>
         {_renderTitle()}
         {_renderDropdown()}
