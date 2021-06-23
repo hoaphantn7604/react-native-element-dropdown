@@ -14,6 +14,7 @@ import { Dropdown } from './type';
 import CInput from '../TextInput';
 import { useRef } from 'react';
 import { useScale } from '../utilsScale';
+import {useDeviceOrientation} from '../useDeviceOrientation';
 
 const { scale } = useScale;
 const ic_down = require('./icon/down.png');
@@ -26,6 +27,7 @@ const defaultProps = {
 }
 
 const DropdownComponent: Dropdown = (props) => {
+  const orientation = useDeviceOrientation();
   const {
     onChange,
     style,
@@ -195,7 +197,7 @@ const DropdownComponent: Dropdown = (props) => {
 
   useEffect(() => {
     _measure();
-  }, [visible])
+  }, [visible, orientation])
 
   const _measure = () => {
     ref.current.measure((width, height, px, py, fx, fy) => {
