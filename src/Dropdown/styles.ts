@@ -76,11 +76,12 @@ export const styles = StyleSheet.create({
       marginTop: scale(10)
     },
     input: {
-      borderWidth: scale(1),
+      borderWidth: scale(0.5),
       borderColor: '#DDDDDD',
       borderRadius: scale(12),
       paddingHorizontal: scale(8),
-      marginBottom: scale(8)
+      marginBottom: scale(8),
+      margin:scale(6)
     },
   });
   

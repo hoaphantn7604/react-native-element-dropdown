@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  SafeAreaView,
-  Text,
-  Image,
-  ScrollView,
-} from 'react-native';
+import {StyleSheet, View, Text, Image} from 'react-native';
 import Dropdown from 'react-native-element-dropdown';
 
 const data = [
@@ -34,108 +27,43 @@ const DropdownScreen = _props => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <ScrollView>
-        <View style={styles.container}>
-          <Dropdown
-            data={data}
-            labelField="label"
-            valueField="value"
-            label="Title"
-            placeholder="Select item"
-            value={dropdown}
-            onChange={item => {
-              setDropdown(item);
-              console.log('selected', item);
-            }}
-          />
+    <View style={styles.container}>
+      <Dropdown
+        data={data}
+        containerStyle={styles.shadow}
+        labelField="label"
+        valueField="value"
+        label="Title"
+        placeholder="Select item"
+        value={dropdown}
+        onChange={item => {
+          setDropdown(item);
+          console.log('selected', item);
+        }}
+      />
 
-          <Dropdown
-            style={styles.dropdown2}
-            containerStyle={{
-              padding: 10,
-              height: 300,
-            }}
-            data={data}
-            search
-            searchPlaceholder="Search"
-            labelField="label"
-            valueField="value"
-            label="Title"
-            placeholder="Select item"
-            value={dropdown1}
-            onChange={item => {
-              setDropdown1(item);
-              console.log('selected', item);
-            }}
-            renderLeftIcon={() => (
-              <Image
-                style={styles.icon}
-                source={require('./assets/account.png')}
-              />
-            )}
-            renderItem={item => _renderItem(item)}
-            textError="Error"
-          />
-
-          <Dropdown
-            style={styles.dropdown2}
-            containerStyle={{
-              padding: 10,
-              height: 300,
-            }}
-            data={data}
-            search
-            searchPlaceholder="Search"
-            labelField="label"
-            valueField="value"
-            label="Title"
-            placeholder="Select item"
-            value={dropdown1}
-            onChange={item => {
-              setDropdown1(item);
-              console.log('selected', item);
-            }}
-            renderLeftIcon={() => (
-              <Image
-                style={styles.icon}
-                source={require('./assets/account.png')}
-              />
-            )}
-            renderItem={item => _renderItem(item)}
-            textError="Error"
-          />
-
-          <Dropdown
-            style={styles.dropdown2}
-            containerStyle={{
-              padding: 10,
-              height: 300,
-            }}
-            data={data}
-            search
-            searchPlaceholder="Search"
-            labelField="label"
-            valueField="value"
-            label="Title"
-            placeholder="Select item"
-            value={dropdown1}
-            onChange={item => {
-              setDropdown1(item);
-              console.log('selected', item);
-            }}
-            renderLeftIcon={() => (
-              <Image
-                style={styles.icon}
-                source={require('./assets/account.png')}
-              />
-            )}
-            renderItem={item => _renderItem(item)}
-            textError="Error"
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      <Dropdown
+        style={styles.dropdown2}
+        containerStyle={styles.shadow}
+        data={data}
+        search
+        searchPlaceholder="Search"
+        labelField="label"
+        valueField="value"
+        label="Title"
+        placeholder="Select item"
+        value={dropdown1}
+        onChange={item => {
+          setDropdown1(item);
+          console.log('selected', item);
+        }}
+        renderLeftIcon={() => (
+          <Image style={styles.icon} source={require('./assets/account.png')} />
+        )}
+        renderItem={item => _renderItem(item)}
+        textError="Error"
+      />
+    </View>
   );
 };
 
@@ -174,5 +102,15 @@ const styles = StyleSheet.create({
   textItem: {
     flex: 1,
     fontSize: 16,
+  },
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
   },
 });
