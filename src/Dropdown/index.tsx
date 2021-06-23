@@ -178,12 +178,14 @@ const DropdownComponent: Dropdown = (props) => {
       return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
         <TouchableWithoutFeedback onPress={showOrClose}>
           <View style={{ width: width, height: height, alignItems: 'center' }}>
+            <View style={{height: top}}/>
             <View style={[{ backgroundColor: 'white' }, {
               borderWidth: scale(0.5),
               borderColor: '#EEEEEE',
-              height: 300,
               width: position?.px,
-              top: top,
+              flex: 1,
+              marginBottom: scale(20),
+              maxHeight: scale(300)
             }, containerStyle]}
             >
               {_renderList()}
