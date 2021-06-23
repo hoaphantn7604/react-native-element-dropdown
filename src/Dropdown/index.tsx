@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { styles } from './styles';
 import { Dropdown } from './type';
-import CInput from './TextInput';
+import CInput from '../TextInput';
 import { useRef } from 'react';
 import { useScale } from '../utilsScale';
 

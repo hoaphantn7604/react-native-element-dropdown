@@ -5,12 +5,10 @@ import {
   Text
 } from 'react-native';
 import { CTextInput } from './type';
-import { useScale } from '../../utilsScale';
+import { useScale } from '../utilsScale';
 import { styles } from './styles';
 
 const { scale } = useScale;
-const ic_eye = require('./icon/eye.png');
-const ic_uneye = require('./icon/uneye.png');
 const ic_close= require('./icon/close.png');
 
 const defaultProps = {
@@ -27,7 +25,6 @@ const TextInputComponent: CTextInput = (props) => {
     style,
     value,
     label,
-    secureTextEntry,
     placeholderTextColor = '#000',
     placeholder = '',
     showIcon,
@@ -45,8 +42,7 @@ const TextInputComponent: CTextInput = (props) => {
   } = props;
 
   const [text, setText] = useState<string>('');
-  const [textEntry, setTextEntry] = useState<boolean>(secureTextEntry ? true : false);
-
+  
   useEffect(() => {
     if (value) {
       if (currency || numeric) {
@@ -79,10 +75,6 @@ const TextInputComponent: CTextInput = (props) => {
     }
   };
 
-  const onChangeTextEntry = () => {
-    setTextEntry(!textEntry);
-  };
-
   const _renderRightIcon = () => {
     if (showIcon) {
       if (renderRightIcon) {
@@ -90,18 +82,11 @@ const TextInputComponent: CTextInput = (props) => {
           renderRightIcon()
         );
       }
-      if (secureTextEntry) {
-        return (
-          <TouchableOpacity onPress={onChangeTextEntry}>
-            <Image source={textEntry ? ic_eye : ic_uneye} style={[styles.icon, iconStyle]} />
-          </TouchableOpacity>
-        );
-      } else {
-        return (
-          <TouchableOpacity onPress={() => onChange('')}>
-            <Image source={ic_close} style={[styles.icon, iconStyle]} />
-          </TouchableOpacity>)
-      }
+      return (
+        <TouchableOpacity onPress={() => onChange('')}>
+          <Image source={ic_close} style={[styles.icon, iconStyle]} />
+        </TouchableOpacity>)
+      
     }
     return null;
   };
@@ -134,7 +119,6 @@ const TextInputComponent: CTextInput = (props) => {
           <TextInput
             {...props}
             style={[styles.input, inputStyle, font()]}
-            secureTextEntry={textEntry}
             value={text}
             placeholder={placeholder}
             placeholderTextColor={placeholderTextColor}

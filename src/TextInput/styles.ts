@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { useScale } from '../../utilsScale';
+import { useScale } from '../utilsScale';
 const { scale, fontScale } = useScale;
 
 export const styles = StyleSheet.create({
