@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
       alignItems: 'center'
     },
     textItem: {
-      flex:1,
+      flex: 1,
       fontSize: fontScale(16)
     },
     icon: {

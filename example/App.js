@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, SafeAreaView} from 'react-native';
+import {StyleSheet, View, SafeAreaView, Text, Image} from 'react-native';
 import Dropdown from 'react-native-element-dropdown';
 
 const data = [
@@ -16,6 +16,15 @@ const data = [
 const DropdownScreen = _props => {
   const [dropdown, setDropdown] = useState(null);
   const [dropdown1, setDropdown1] = useState(null);
+
+  const _renderItem = item => {
+    return (
+      <View style={styles.item}>
+        <Text style={styles.textItem}>{item.label}</Text>
+        <Image style={styles.icon} source={require('./assets/tick.png')} />
+      </View>
+    );
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -51,14 +60,13 @@ const DropdownScreen = _props => {
             setDropdown1(item);
             console.log('selected', item);
           }}
-          // renderLeftIcon={() => (
-          //   <AntDesign
-          //     style={styles.icon}
-          //     color="black"
-          //     name="Safety"
-          //     size={20}
-          //   />
-          // )}
+          renderLeftIcon={() => (
+            <Image
+              style={styles.icon}
+              source={require('./assets/account.png')}
+            />
+          )}
+          renderItem={item => _renderItem(item)}
           textError="Error"
         />
       </View>
@@ -88,5 +96,17 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 5,
+    width: 24,
+    height: 24,
+  },
+  item: {
+    padding: 17,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  textItem: {
+    flex: 1,
+    fontSize: 16,
   },
 });

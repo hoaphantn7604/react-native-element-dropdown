@@ -42,6 +42,7 @@ or
 | textError          | String               | No        |                  |
 | textErrorStyle     | TextStyle            | No        |                  |
 | renderLeftIcon     | () => JSX.Element    | No        |                  |
+| renderItem         | (item) => JSX.Element| No        |                  |
 
 ## Usage
 ```javascript

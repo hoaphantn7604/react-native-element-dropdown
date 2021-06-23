@@ -13,7 +13,6 @@ import { styles } from './styles';
 import { Dropdown } from './type';
 import CInput from './TextInput';
 import { useRef } from 'react';
-import { useDeviceOrientation } from './useDeviceOrientation';
 import { useScale } from '../utilsScale';
 
 const { scale } = useScale;
@@ -27,7 +26,6 @@ const defaultProps = {
 }
 
 const DropdownComponent: Dropdown = (props) => {
-  const orientation = useDeviceOrientation();
   const {
     onChange,
     style,
@@ -49,6 +47,7 @@ const DropdownComponent: Dropdown = (props) => {
     placeholder,
     search = false,
     renderLeftIcon,
+    renderItem
   } = props;
 
   const ref = useRef(null);
@@ -125,13 +124,12 @@ const DropdownComponent: Dropdown = (props) => {
     )
   }
 
-  const renderItem = ({ item, index }: { item: any; index: number }) => {
+  const _renderItem = ({ item, index }: { item: any; index: number }) => {
     return (
-      <TouchableOpacity onPress={() => onSelect(item)}>
-        <View style={[styles.item, item[valueField] === (currentValue && currentValue[valueField]) && { backgroundColor: activeColor }]}>
-          <Text style={[styles.textItem, textStyle, font()]}
-          >{item[labelField]}</Text>
-        </View>
+      <TouchableOpacity onPress={() => onSelect(item)} style={[item[valueField] === (currentValue && currentValue[valueField]) && { backgroundColor: activeColor }]}>
+        {renderItem ? renderItem(item) : <View style={styles.item}>
+          <Text style={[styles.textItem, textStyle, font()]}>{item[labelField]}</Text>
+        </View>}
       </TouchableOpacity>
     );
   };
@@ -164,7 +162,7 @@ const DropdownComponent: Dropdown = (props) => {
       <FlatList
         ref={(e) => scrollToIndex(e)}
         data={listData}
-        renderItem={renderItem}
+        renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
         showsVerticalScrollIndicator={false}
       />
@@ -207,12 +205,9 @@ const DropdownComponent: Dropdown = (props) => {
     })
   }
 
-  useEffect(() => {
-    setVisible(false);
-  }, [orientation])
-
   return (
     <View >
+      <SafeAreaView/>
       <View style={[style]} ref={ref} onLayout={_measure}>
         {_renderTitle()}
         {_renderDropdown()}
