@@ -60,9 +60,6 @@ const DropdownComponent: Dropdown = (props) => {
   const [position, setPosition] = useState<any>();
   const { width, height } = Dimensions.get('window');
 
-  useEffect(() => {
-    getValue();
-  }, []);
 
   const font = () => {
     if (fontFamily) {
@@ -74,8 +71,15 @@ const DropdownComponent: Dropdown = (props) => {
     }
   }
 
-  const showOrClose = () => {
-    setVisible(!visible);
+  useEffect(() => {
+    getValue();
+  }, []);
+
+  const getValue = () => {
+    const getItem = data.filter(e => value === e[valueField]);
+    if (getItem.length > 0) {
+      setCurrentValue((e: any) => e = getItem[0]);
+    }
   }
 
   const scrollToIndex = (ref: any) => {
@@ -89,11 +93,8 @@ const DropdownComponent: Dropdown = (props) => {
     }
   }
 
-  const getValue = () => {
-    const getItem = data.filter(e => value === e[valueField]);
-    if (getItem.length > 0) {
-      setCurrentValue((e: any) => e = getItem[0]);
-    }
+  const showOrClose = () => {
+    setVisible(!visible);
   }
 
   const onSelect = (item: any) => {
@@ -129,7 +130,7 @@ const DropdownComponent: Dropdown = (props) => {
 
   const _renderItem = ({ item, index }: { item: any; index: number }) => {
     return (
-      <TouchableOpacity onPress={() => onSelect(item)} style={[item[valueField] === (currentValue && currentValue[valueField]) && { backgroundColor: activeColor }]}>
+      <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[item[valueField] === (currentValue && currentValue[valueField]) && { backgroundColor: activeColor }]}>
         {renderItem ? renderItem(item) : <View style={styles.item}>
           <Text style={[styles.textItem, textStyle, font()]}>{item[labelField]}</Text>
         </View>}
@@ -167,7 +168,6 @@ const DropdownComponent: Dropdown = (props) => {
         data={listData}
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
-        showsVerticalScrollIndicator={false}
       />
     </View>
   }
@@ -180,14 +180,7 @@ const DropdownComponent: Dropdown = (props) => {
         <TouchableWithoutFeedback onPress={showOrClose}>
           <View style={[{ width: width, height: height, alignItems: 'center' }, isFull && { backgroundColor: 'rgba(0,0,0,0.4)' }]}>
             <View style={{ height: top }} />
-            <View style={[{ backgroundColor: 'white' }, {
-              borderWidth: scale(0.5),
-              borderColor: '#EEEEEE',
-              width: position?.px,
-              flex: 1,
-              marginBottom: scale(20),
-              maxHeight: scale(300),
-            },styles.shadow, isFull && {width: width / 2, maxHeight: '100%'}, containerStyle]}
+            <View style={[{ width: position?.px }, styles.container, styles.shadow, isFull && { width: width / 2, maxHeight: '100%' }, containerStyle]}
             >
               {_renderList()}
             </View>

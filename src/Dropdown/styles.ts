@@ -5,26 +5,12 @@ const { scale, fontScale } = useScale;
 
 export const styles = StyleSheet.create({
     container: {
-      backgroundColor: 'white',
-      borderRadius: scale(8),
-      padding: scale(12),
-      justifyContent: 'center'
-    },
-    main: {
       flex: 1,
-      backgroundColor: 'rgba(0,0,0,0.6)',
-    },
-    modalContent: {
+      borderWidth: scale(0.5),
+      borderColor: '#EEEEEE',
       backgroundColor: 'white',
-      width: '100%',
-      borderTopLeftRadius: scale(16),
-      borderTopRightRadius: scale(16),
-    },
-    closeIcon: {
-      width: scale(45),
-      height: scale(45),
-      alignItems: 'center',
-      justifyContent: 'center',
+      marginBottom: scale(20),
+      maxHeight: scale(300),
     },
     dropdown: {
       flexDirection: 'row',
@@ -35,9 +21,6 @@ export const styles = StyleSheet.create({
     title: {
       marginVertical: scale(5),
       fontSize: fontScale(16)
-    },
-    list: {
-      maxHeight: scale(300)
     },
     item: {
       padding: scale(17),

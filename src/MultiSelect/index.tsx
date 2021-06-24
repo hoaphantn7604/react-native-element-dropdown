@@ -65,11 +65,6 @@ const MultiSelectComponent: MultiSelect = (props) => {
   const [position, setPosition] = useState<any>();
   const { width, height } = Dimensions.get('window');
 
-
-  useEffect(() => {
-    getValue();
-  }, []);
-
   const font = () => {
     if (fontFamily) {
       return {
@@ -80,8 +75,12 @@ const MultiSelectComponent: MultiSelect = (props) => {
     }
   }
 
-  const showOrClose = () => {
-    setVisible(!visible);
+  useEffect(() => {
+    getValue();
+  }, []);
+
+  const getValue = () => {
+    setCurrentValue(value);
   }
 
   const scrollToIndex = (ref: any) => {
@@ -95,8 +94,8 @@ const MultiSelectComponent: MultiSelect = (props) => {
     }
   }
 
-  const getValue = () => {
-    setCurrentValue(value);
+  const showOrClose = () => {
+    setVisible(!visible);
   }
 
   const onSelect = (item: any) => {
@@ -143,7 +142,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
 
   const _renderItem = ({ item, index }: { item: any; index: number }) => {
     return (
-      <TouchableOpacity onPress={() => onSelect(item)} style={[checkSelected(item) && { backgroundColor: activeColor, marginBottom: scale(0.5) }]}>
+      <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[checkSelected(item) && { backgroundColor: activeColor, marginBottom: scale(0.5) }]}>
         {renderItem ? renderItem(item) : <View style={styles.item}>
           <Text style={[styles.textItem, textStyle, font()]}>{item[labelField]}</Text>
         </View>}
@@ -181,7 +180,6 @@ const MultiSelectComponent: MultiSelect = (props) => {
         data={listData}
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
-        showsVerticalScrollIndicator={false}
         extraData={key}
       />
     </SafeAreaView>
@@ -195,14 +193,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
         <TouchableWithoutFeedback onPress={showOrClose}>
           <View style={[{ width: width, height: height, alignItems: 'center' }, isFull && { backgroundColor: 'rgba(0,0,0,0.4)' }]}>
             <View style={{ height: top }} />
-            <View style={[{ backgroundColor: 'white' }, {
-              borderWidth: scale(0.5),
-              borderColor: '#EEEEEE',
-              width: position?.px,
-              flex: 1,
-              marginBottom: scale(20),
-              maxHeight: scale(300)
-            },styles.shadow, isFull && {width: width / 2, maxHeight: '100%'}, containerStyle]}
+            <View style={[{ width: position?.px }, styles.container, styles.shadow, isFull && { width: width / 2, maxHeight: '100%' }, containerStyle]}
             >
               {_renderList()}
             </View>
