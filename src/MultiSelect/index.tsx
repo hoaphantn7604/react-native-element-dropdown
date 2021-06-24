@@ -13,7 +13,7 @@ import {
 import { styles } from './styles';
 import { MultiSelect } from './type';
 import CInput from '../TextInput';
-import { useScale } from '../utilsScale';
+import { useScale, useDetectDevice } from '../utilsScale';
 import { useDeviceOrientation } from '../useDeviceOrientation';
 
 const { scale, fontScale } = useScale;
@@ -189,10 +189,11 @@ const MultiSelectComponent: MultiSelect = (props) => {
 
   const _renderModal = () => {
     if (visible && position) {
-      const top = position?.py + position?.fy + scale(10);
+      const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
+      const top = isFull ? scale(20) : position?.py + position?.fy + scale(10);
       return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
         <TouchableWithoutFeedback onPress={showOrClose}>
-          <View style={{ width: width, height: height, alignItems: 'center' }}>
+          <View style={[{ width: width, height: height, alignItems: 'center' }, isFull && { backgroundColor: 'rgba(0,0,0,0.4)' }]}>
             <View style={{ height: top }} />
             <View style={[{ backgroundColor: 'white' }, {
               borderWidth: scale(0.5),
@@ -201,7 +202,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
               flex: 1,
               marginBottom: scale(20),
               maxHeight: scale(300)
-            }, containerStyle]}
+            },isFull && {width: width / 2, maxHeight: '100%'}, containerStyle]}
             >
               {_renderList()}
             </View>

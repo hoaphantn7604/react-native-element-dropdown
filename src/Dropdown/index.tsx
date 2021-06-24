@@ -13,8 +13,8 @@ import { styles } from './styles';
 import { Dropdown } from './type';
 import CInput from '../TextInput';
 import { useRef } from 'react';
-import { useScale } from '../utilsScale';
-import {useDeviceOrientation} from '../useDeviceOrientation';
+import { useScale, useDetectDevice } from '../utilsScale';
+import { useDeviceOrientation } from '../useDeviceOrientation';
 
 const { scale } = useScale;
 const ic_down = require('../assets/icon/down.png');
@@ -174,19 +174,20 @@ const DropdownComponent: Dropdown = (props) => {
 
   const _renderModal = () => {
     if (visible && position) {
-      const top = position?.py + position?.fy + scale(10);
+      const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
+      const top = isFull ? scale(20) : position?.py + position?.fy + scale(10);
       return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
         <TouchableWithoutFeedback onPress={showOrClose}>
-          <View style={{ width: width, height: height, alignItems: 'center' }}>
-            <View style={{height: top}}/>
+          <View style={[{ width: width, height: height, alignItems: 'center' }, isFull && { backgroundColor: 'rgba(0,0,0,0.4)' }]}>
+            <View style={{ height: top }} />
             <View style={[{ backgroundColor: 'white' }, {
               borderWidth: scale(0.5),
               borderColor: '#EEEEEE',
               width: position?.px,
               flex: 1,
               marginBottom: scale(20),
-              maxHeight: scale(300)
-            }, containerStyle]}
+              maxHeight: scale(300),
+            },isFull && {width: width / 2, maxHeight: '100%'}, containerStyle]}
             >
               {_renderList()}
             </View>
