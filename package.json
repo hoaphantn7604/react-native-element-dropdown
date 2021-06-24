@@ -3,7 +3,7 @@
   "title": "React Native Element Dropdown",
   "version": "1.0.0",
   "description": "React Native Element Dropdown",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
