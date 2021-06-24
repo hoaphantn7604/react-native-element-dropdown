@@ -80,5 +80,15 @@ export const styles = StyleSheet.create({
     marginLeft: scale(5), 
     color: 'gray', 
     fontSize: fontScale(16)
-  }
+  },
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+  },
 });

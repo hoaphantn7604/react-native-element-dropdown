@@ -46,7 +46,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     fontFamily,
     textStyle,
     textError,
-    iconColor,
+    iconColor = "gray",
     labelStyle,
     inputSearchStyle,
     searchPlaceholder,
@@ -202,7 +202,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
               flex: 1,
               marginBottom: scale(20),
               maxHeight: scale(300)
-            },isFull && {width: width / 2, maxHeight: '100%'}, containerStyle]}
+            },styles.shadow, isFull && {width: width / 2, maxHeight: '100%'}, containerStyle]}
             >
               {_renderList()}
             </View>
