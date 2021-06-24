@@ -37,7 +37,7 @@ or
 | textStyle          | TextStyle            | No        |                  |
 | iconColor          | String               | No        |                  |
 | activeColor        | String               | No        |                  |
-| value              | Item                 | No        |                  |
+| value              | Item[]               | No        |                  |
 | label              | String               | No        |                  |
 | placeholder        | String               | No        |                  |
 | search             | Boolean              | No        |                  |
@@ -46,6 +46,7 @@ or
 | textError          | String               | No        |                  |
 | textErrorStyle     | TextStyle            | No        |                  |
 | renderLeftIcon     | () => JSX.Element    | No        |                  |
+| renderRightIcon    | () => JSX.Element    | No        |                  |
 | renderItem         | (item) => JSX.Element| No        |                  |
 
 #### MultiSelect Props
@@ -62,7 +63,7 @@ or
 | textStyle          | TextStyle            | No        |                  |
 | iconColor          | String               | No        |                  |
 | activeColor        | String               | No        |                  |
-| value              | Item                 | No        |                  |
+| value              | Item[]               | No        |                  |
 | label              | String               | No        |                  |
 | placeholder        | String               | No        |                  |
 | selectedStyle      | ViewStyle            | No        |                  |
@@ -73,6 +74,7 @@ or
 | textError          | String               | No        |                  |
 | textErrorStyle     | TextStyle            | No        |                  |
 | renderLeftIcon     | () => JSX.Element    | No        |                  |
+| renderRightIcon    | () => JSX.Element    | No        |                  |
 | renderItem         | (item) => JSX.Element| No        |                  |
 
 ## Usage

@@ -49,6 +49,7 @@ const DropdownComponent: Dropdown = (props) => {
     placeholder,
     search = false,
     renderLeftIcon,
+    renderRightIcon,
     renderItem
   } = props;
 
@@ -122,7 +123,7 @@ const DropdownComponent: Dropdown = (props) => {
           <Text style={[styles.textItem, textStyle, font()]}>
             {currentValue && currentValue[labelField] || placeholder}
           </Text>
-          <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }]} />
+          {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }]} />}
         </View>
       </TouchableWithoutFeedback>
     )

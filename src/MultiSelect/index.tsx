@@ -54,6 +54,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     search = false,
     renderItem,
     renderLeftIcon,
+    renderRightIcon
   } = props;
 
   const ref = useRef(null);
@@ -129,7 +130,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
           <Text style={[styles.textItem, textStyle, font()]}>
             {placeholder}
           </Text>
-          <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }]} />
+          {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }]} />}
         </View>
       </TouchableWithoutFeedback>
     )

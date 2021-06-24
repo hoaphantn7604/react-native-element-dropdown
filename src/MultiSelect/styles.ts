@@ -33,8 +33,8 @@ export const styles = StyleSheet.create({
     fontSize: fontScale(16)
   },
   icon: {
-    width: scale(24),
-    height: scale(24),
+    width: scale(20),
+    height: scale(20),
   },
   textError: {
     color: 'red',
