@@ -181,12 +181,13 @@ const MultiSelectComponent: MultiSelect = (props) => {
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
         extraData={key}
+        showsVerticalScrollIndicator={true}
       />
     </SafeAreaView>
   }
 
   const _renderModal = () => {
-    if (visible && position) {
+    if (visible && position && position?.px && position?.py && position?.fy) {
       const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
       const top = isFull ? scale(20) : position?.py + position?.fy + scale(10);
       return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
