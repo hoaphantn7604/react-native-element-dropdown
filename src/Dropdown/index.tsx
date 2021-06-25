@@ -143,7 +143,7 @@ const DropdownComponent: Dropdown = (props) => {
     setTextSearch(text);
     if (text.length > 0) {
       const dataSearch = data.filter(e => {
-        const item = e[labelField].toLowerCase().replace(' ', '');
+        const item = e[labelField]?.toLowerCase().replace(' ', '');
         const key = text.toLowerCase().replace(' ', '');
 
         return item.indexOf(key) >= 0
@@ -180,7 +180,7 @@ const DropdownComponent: Dropdown = (props) => {
       const top = isFull ? scale(20) : position?.py + position?.fy + scale(10);
       return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
         <TouchableWithoutFeedback onPress={showOrClose}>
-          <View style={[{ width: width, height: height, alignItems: 'center' }, isFull && { backgroundColor: 'rgba(0,0,0,0.4)' }]}>
+          <View style={[{ width: width, height: height, alignItems: 'center' }, { backgroundColor: 'rgba(0,0,0,0.1)' }]}>
             <View style={{ height: top }} />
             <View style={[{ width: position?.px }, styles.container, styles.shadow, isFull && { width: width / 2, maxHeight: '100%' }, containerStyle]}
             >

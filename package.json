@@ -1,7 +1,7 @@
 {
   "name": "react-native-element-dropdown",
   "title": "React Native Element Dropdown",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React Native Element Dropdown",
   "main": "index.ts",
   "scripts": {
