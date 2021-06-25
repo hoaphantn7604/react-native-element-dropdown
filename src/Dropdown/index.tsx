@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  FlatList,
-  Image,
-  TouchableOpacity,
+  Dimensions, FlatList,
+  Image, Modal,
+  Text, TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
-  Modal,
-  Text,
-  Dimensions,
+  View
 } from 'react-native';
+import CInput from '../TextInput';
+import { useDeviceOrientation } from '../useDeviceOrientation';
+import { useDetectDevice, useScale } from '../utilsScale';
 import { styles } from './styles';
 import { Dropdown } from './type';
-import CInput from '../TextInput';
-import { useRef } from 'react';
-import { useScale, useDetectDevice } from '../utilsScale';
-import { useDeviceOrientation } from '../useDeviceOrientation';
 
 const { scale } = useScale;
 const ic_down = require('../assets/icon/down.png');
@@ -60,7 +56,7 @@ const DropdownComponent: Dropdown = (props) => {
   const [textSearch, setTextSearch] = useState<string>('');
   const [listData, setListData] = useState<any[]>(data);
   const [position, setPosition] = useState<any>();
-  const { width, height } = Dimensions.get('window');
+  const { width: W, height: H } = Dimensions.get('window');
 
 
   const font = () => {
@@ -120,7 +116,7 @@ const DropdownComponent: Dropdown = (props) => {
   const _renderDropdown = () => {
     return (
       <TouchableWithoutFeedback onPress={showOrClose}>
-        <View style={styles.dropdown} ref={ref}>
+        <View style={styles.dropdown} ref={ref} onLayout={_measure}>
           {renderLeftIcon?.()}
           <Text style={[styles.textItem, placeholderStyle, font()]}>
             {currentValue && currentValue[labelField] || placeholder}
@@ -198,21 +194,23 @@ const DropdownComponent: Dropdown = (props) => {
   }
 
   const _renderModal = () => {
-    const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
-    const w = position?.px;
-    const top = isFull ? scale(20) : position?.py + position?.fy + scale(5);
-    const bottom = height - top;
-    if (visible && top && bottom) {
+    if (visible && position) {
+      const {
+        isFull,
+        w,
+        top,
+        bottom
+      } = position
       return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
         <TouchableWithoutFeedback onPress={showOrClose}>
-          <View style={[{ width: width, height: height, alignItems: 'center' }, isFull && { backgroundColor: 'rgba(0,0,0,0.2)' }]}>
+          <View style={[{ width: W, height: H, alignItems: 'center' }, isFull && { backgroundColor: 'rgba(0,0,0,0.2)' }]}>
             <View style={{ height: top, width: w, justifyContent: 'flex-end' }}>
-              {bottom < maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: width/2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
+              {bottom < maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: W / 2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
                 {_renderListTop()}
               </View>}
             </View>
             <View style={{ height: bottom, width: w }}>
-              {bottom > maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: width/2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
+              {bottom > maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: W / 2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
                 {_renderListBottom()}
               </View>}
             </View>
@@ -225,20 +223,25 @@ const DropdownComponent: Dropdown = (props) => {
 
   useEffect(() => {
     _measure();
-  }, [visible, orientation])
+  }, [orientation])
 
   const _measure = () => {
-    ref.current.measure((width, height, px, py, fx, fy) => {
-      const location = {
-        fx: fx,
-        fy: fy,
-        px: px,
-        py: py,
-        width: width,
-        height: height,
-      }
-      setPosition(location);
-    })
+    if (ref) {
+      ref.current.measure((width, height, px, py, fx, fy) => {
+
+        const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
+        const w = px;
+        const top = isFull ? scale(20) : py + fy + scale(5);
+        const bottom = H - top;
+
+        setPosition({
+          isFull,
+          w,
+          top,
+          bottom
+        });
+      })
+    }
   }
 
   return (

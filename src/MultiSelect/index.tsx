@@ -1,20 +1,15 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  FlatList,
-  Image,
-  TouchableOpacity,
+  Dimensions, FlatList,
+  Image, Modal, Text, TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
-  SafeAreaView,
-  Text,
-  Dimensions,
-  Modal
+  View
 } from 'react-native';
+import CInput from '../TextInput';
+import { useDeviceOrientation } from '../useDeviceOrientation';
+import { useDetectDevice, useScale } from '../utilsScale';
 import { styles } from './styles';
 import { MultiSelect } from './type';
-import CInput from '../TextInput';
-import { useScale, useDetectDevice } from '../utilsScale';
-import { useDeviceOrientation } from '../useDeviceOrientation';
 
 const { scale, fontScale } = useScale;
 
@@ -65,7 +60,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
   const [listData, setListData] = useState<any[]>(data);
   const [key, setKey] = useState<number>(Math.random());
   const [position, setPosition] = useState<any>();
-  const { width, height } = Dimensions.get('window');
+  const { width: W, height: H } = Dimensions.get('window');
 
   const font = () => {
     if (fontFamily) {
@@ -127,7 +122,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
   const _renderDropdown = () => {
     return (
       <TouchableWithoutFeedback onPress={showOrClose}>
-        <View style={styles.dropdown} ref={ref}>
+        <View style={styles.dropdown} ref={ref} onLayout={_measure}>
           {renderLeftIcon?.()}
           <Text style={[styles.textItem, placeholderStyle, font()]}>
             {placeholder}
@@ -211,50 +206,55 @@ const MultiSelectComponent: MultiSelect = (props) => {
   }
 
   const _renderModal = () => {
-    const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
-    const w = position?.px;
-    const top = isFull ? scale(20) : position?.py + position?.fy + scale(10);
-    const bottom = height - top;
-    if (visible && top && bottom) {
+    if (visible && position) {
+      const {
+        isFull,
+        w,
+        top,
+        bottom
+      } = position
       return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
-      <TouchableWithoutFeedback onPress={showOrClose}>
-        <View style={[{ width: width, height: height, alignItems: 'center' }, isFull && { backgroundColor: 'rgba(0,0,0,0.2)' }]}>
-          <View style={{ height: top, width: w, justifyContent: 'flex-end' }}>
-            {bottom < maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: width/2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
-              {_renderListTop()}
-            </View>}
+        <TouchableWithoutFeedback onPress={showOrClose}>
+          <View style={[{ width: W, height: H, alignItems: 'center' }, isFull && { backgroundColor: 'rgba(0,0,0,0.2)' }]}>
+            <View style={{ height: top, width: w, justifyContent: 'flex-end' }}>
+              {bottom < maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: W / 2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
+                {_renderListTop()}
+              </View>}
+            </View>
+            <View style={{ height: bottom, width: w }}>
+              {bottom > maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: W / 2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
+                {_renderListBottom()}
+              </View>}
+            </View>
           </View>
-          <View style={{ height: bottom, width: w }}>
-            {bottom > maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: width/2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
-              {_renderListBottom()}
-            </View>}
-          </View>
-        </View>
-      </TouchableWithoutFeedback>
-    </Modal>
+        </TouchableWithoutFeedback>
+      </Modal>
     }
     return null
   }
 
   useEffect(() => {
     _measure();
-  }, [visible, orientation])
+  }, [orientation])
 
   const _measure = () => {
-    ref.current.measure((width, height, px, py, fx, fy) => {
-      const location = {
-        fx: fx,
-        fy: fy,
-        px: px,
-        py: py,
-        width: width,
-        height: height,
-      }
-      setPosition(location);
-    })
+    if (ref) {
+      ref.current.measure((width, height, px, py, fx, fy) => {
+
+        const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
+        const w = px;
+        const top = isFull ? scale(20) : py + fy + scale(5);
+        const bottom = H - top;
+
+        setPosition({
+          isFull,
+          w,
+          top,
+          bottom
+        });
+      })
+    }
   }
-
-
 
   const unSelect = (item: any) => {
     const index = currentValue.indexOf(item[valueField]);
