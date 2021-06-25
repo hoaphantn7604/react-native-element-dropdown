@@ -34,7 +34,7 @@ const DropdownComponent: Dropdown = (props) => {
     containerStyle,
     textErrorStyle,
     labelStyle,
-    textStyle,
+    placeholderStyle,
     inputSearchStyle,
     data,
     labelField,
@@ -121,7 +121,7 @@ const DropdownComponent: Dropdown = (props) => {
       <TouchableWithoutFeedback onPress={showOrClose}>
         <View style={styles.dropdown}>
           {renderLeftIcon?.()}
-          <Text style={[styles.textItem, textStyle, font()]}>
+          <Text style={[styles.textItem, placeholderStyle, font()]}>
             {currentValue && currentValue[labelField] || placeholder}
           </Text>
           {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }]} />}
@@ -134,7 +134,7 @@ const DropdownComponent: Dropdown = (props) => {
     return (
       <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[item[valueField] === (currentValue && currentValue[valueField]) && { backgroundColor: activeColor }]}>
         {renderItem ? renderItem(item) : <View style={styles.item}>
-          <Text style={[styles.textItem, textStyle, font()]}>{item[labelField]}</Text>
+          <Text style={[styles.textItem, placeholderStyle, font()]}>{item[labelField]}</Text>
         </View>}
       </TouchableOpacity>
     );

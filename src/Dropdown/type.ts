@@ -4,7 +4,7 @@ interface Props {
     style?: StyleProp<ViewStyle>;
     containerStyle?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<TextStyle>;
-    textStyle?: StyleProp<TextStyle>;
+    placeholderStyle?: StyleProp<TextStyle>;
     textErrorStyle?: StyleProp<TextStyle>;
     inputSearchStyle?: StyleProp<TextStyle>;
     fontFamily?: string;

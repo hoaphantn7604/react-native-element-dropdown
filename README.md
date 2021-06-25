@@ -34,12 +34,12 @@ or
 | containerStyle     | ViewStyle            | No        |                  |
 | fontFamily         | String               | No        |                  |
 | labelStyle         | TextStyle            | No        |                  |
-| textStyle          | TextStyle            | No        |                  |
 | iconColor          | String               | No        |                  |
 | activeColor        | String               | No        |                  |
 | value              | Item[]               | No        |                  |
 | label              | String               | No        |                  |
 | placeholder        | String               | No        |                  |
+| placeholderStyle   | TextStyle            | No        |                  |
 | search             | Boolean              | No        |                  |
 | inputSearchStyle   | ViewStyle            | No        |                  |
 | searchPlaceholder  | String               | No        |                  |
@@ -60,12 +60,12 @@ or
 | containerStyle     | ViewStyle            | No        |                  |
 | fontFamily         | String               | No        |                  |
 | labelStyle         | TextStyle            | No        |                  |
-| textStyle          | TextStyle            | No        |                  |
 | iconColor          | String               | No        |                  |
 | activeColor        | String               | No        |                  |
 | value              | Item[]               | No        |                  |
 | label              | String               | No        |                  |
 | placeholder        | String               | No        |                  |
+| placeholderStyle   | TextStyle            | No        |                  |
 | selectedStyle      | ViewStyle            | No        |                  |
 | selectedTextStyle  | TextStyle            | No        |                  |
 | search             | Boolean              | No        |                  |

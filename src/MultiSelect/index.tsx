@@ -44,7 +44,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     activeColor,
     containerStyle,
     fontFamily,
-    textStyle,
+    placeholderStyle,
     textError,
     iconColor = "gray",
     labelStyle,
@@ -128,7 +128,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
       <TouchableWithoutFeedback onPress={showOrClose}>
         <View style={styles.dropdown}>
           {renderLeftIcon?.()}
-          <Text style={[styles.textItem, textStyle, font()]}>
+          <Text style={[styles.textItem, placeholderStyle, font()]}>
             {placeholder}
           </Text>
           {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }]} />}
@@ -146,7 +146,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     return (
       <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[checkSelected(item) && { backgroundColor: activeColor, marginBottom: scale(0.5) }]}>
         {renderItem ? renderItem(item) : <View style={styles.item}>
-          <Text style={[styles.textItem, textStyle, font()]}>{item[labelField]}</Text>
+          <Text style={[styles.textItem, placeholderStyle, font()]}>{item[labelField]}</Text>
         </View>}
       </TouchableOpacity>
     );
