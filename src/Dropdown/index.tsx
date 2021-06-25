@@ -96,6 +96,7 @@ const DropdownComponent: Dropdown = (props) => {
 
   const showOrClose = () => {
     setVisible(!visible);
+    setListData(data);
   }
 
   const onSelect = (item: any) => {
@@ -180,7 +181,7 @@ const DropdownComponent: Dropdown = (props) => {
       const top = isFull ? scale(20) : position?.py + position?.fy + scale(10);
       return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
         <TouchableWithoutFeedback onPress={showOrClose}>
-          <View style={[{ width: width, height: height, alignItems: 'center' }, { backgroundColor: 'rgba(0,0,0,0.1)' }]}>
+          <View style={[{ width: width, height: height, alignItems: 'center' },isFull && { backgroundColor: 'rgba(0,0,0,0.2)' }]}>
             <View style={{ height: top }} />
             <View style={[{ width: position?.px }, styles.container, styles.shadow, isFull && { width: width / 2, maxHeight: '100%' }, containerStyle]}
             >
