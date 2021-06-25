@@ -9,6 +9,7 @@ interface Props {
     inputSearchStyle?: StyleProp<TextStyle>; 
     selectedStyle?: StyleProp<ViewStyle>;
     selectedTextStyle?: StyleProp<TextStyle>;
+    maxHeight?: number;
     fontFamily?: string; 
     iconColor?: string
     activeColor?: string

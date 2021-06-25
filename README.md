@@ -45,6 +45,7 @@ or
 | searchPlaceholder  | String               | No        |                  |
 | textError          | String               | No        |                  |
 | textErrorStyle     | TextStyle            | No        |                  |
+| maxHeight          | Number               | No        |                  |
 | renderLeftIcon     | () => JSX.Element    | No        |                  |
 | renderRightIcon    | () => JSX.Element    | No        |                  |
 | renderItem         | (item) => JSX.Element| No        |                  |
@@ -73,6 +74,7 @@ or
 | searchPlaceholder  | String               | No        |                  |
 | textError          | String               | No        |                  |
 | textErrorStyle     | TextStyle            | No        |                  |
+| maxHeight          | Number               | No        |                  |
 | renderLeftIcon     | () => JSX.Element    | No        |                  |
 | renderRightIcon    | () => JSX.Element    | No        |                  |
 | renderItem         | (item) => JSX.Element| No        |                  |

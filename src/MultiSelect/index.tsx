@@ -52,6 +52,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     searchPlaceholder,
     placeholder,
     search = false,
+    maxHeight = 300,
     renderItem,
     renderLeftIcon,
     renderRightIcon
@@ -215,22 +216,22 @@ const MultiSelectComponent: MultiSelect = (props) => {
     const top = isFull ? scale(20) : position?.py + position?.fy + scale(10);
     const bottom = height - top;
     if (visible && top && bottom) {
-
       return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
-        <TouchableWithoutFeedback onPress={showOrClose}>
-          <View style={[{ width: width, height: height, alignItems: 'center' }]}>
-            <View style={{ height: top, width: w, justifyContent: 'flex-end' }}>
-              {bottom < 300 && <View style={[{ width: w }, styles.container, styles.shadow, containerStyle]}>
-                {_renderListTop()}
-              </View>}
-            </View>
-            <View style={{ height: bottom, width: w }}>
-              {bottom > 300 && <View style={[{ width: w }, styles.container, styles.shadow, containerStyle]}>
-                {_renderListBottom()}
-              </View>}</View>
+      <TouchableWithoutFeedback onPress={showOrClose}>
+        <View style={[{ width: width, height: height, alignItems: 'center' }, isFull && { backgroundColor: 'rgba(0,0,0,0.2)' }]}>
+          <View style={{ height: top, width: w, justifyContent: 'flex-end' }}>
+            {bottom < maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: width/2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
+              {_renderListTop()}
+            </View>}
           </View>
-        </TouchableWithoutFeedback>
-      </Modal>
+          <View style={{ height: bottom, width: w }}>
+            {bottom > maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: width/2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
+              {_renderListBottom()}
+            </View>}
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </Modal>
     }
     return null
   }
@@ -294,7 +295,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
         {_renderModal()}
       </View>
       {textError && <Text style={[styles.textError, textErrorStyle, font()]}>{textError}</Text>}
-      {_renderItemSelected()}
+      {!visible && _renderItemSelected()}
     </View>
   );
 };

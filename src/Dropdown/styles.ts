@@ -9,7 +9,14 @@ export const styles = StyleSheet.create({
       borderWidth: scale(0.5),
       borderColor: '#EEEEEE',
       backgroundColor: 'white',
-      maxHeight: scale(300),
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.2,
+      shadowRadius: 1.41,
+      elevation: 2,
     },
     dropdown: {
       flexDirection: 'row',
@@ -46,16 +53,6 @@ export const styles = StyleSheet.create({
       paddingHorizontal: scale(8),
       marginBottom: scale(8),
       margin:scale(6)
-    },
-    shadow: {
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 1,
-      },
-      shadowOpacity: 0.2,
-      shadowRadius: 1.41,
-      elevation: 2,
     },
   });
   

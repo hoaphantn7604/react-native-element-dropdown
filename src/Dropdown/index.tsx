@@ -48,6 +48,7 @@ const DropdownComponent: Dropdown = (props) => {
     searchPlaceholder,
     placeholder,
     search = false,
+    maxHeight = 300,
     renderLeftIcon,
     renderRightIcon,
     renderItem
@@ -119,7 +120,7 @@ const DropdownComponent: Dropdown = (props) => {
   const _renderDropdown = () => {
     return (
       <TouchableWithoutFeedback onPress={showOrClose}>
-        <View style={styles.dropdown}>
+        <View style={styles.dropdown} ref={ref}>
           {renderLeftIcon?.()}
           <Text style={[styles.textItem, placeholderStyle, font()]}>
             {currentValue && currentValue[labelField] || placeholder}
@@ -199,22 +200,22 @@ const DropdownComponent: Dropdown = (props) => {
   const _renderModal = () => {
     const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
     const w = position?.px;
-    const top = isFull ? scale(20) : position?.py + position?.fy + scale(10);
+    const top = isFull ? scale(20) : position?.py + position?.fy + scale(5);
     const bottom = height - top;
     if (visible && top && bottom) {
-
       return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
         <TouchableWithoutFeedback onPress={showOrClose}>
-          <View style={[{ width: width, height: height, alignItems: 'center' }]}>
+          <View style={[{ width: width, height: height, alignItems: 'center' }, isFull && { backgroundColor: 'rgba(0,0,0,0.2)' }]}>
             <View style={{ height: top, width: w, justifyContent: 'flex-end' }}>
-              {bottom < 300 && <View style={[{ width: w }, styles.container, styles.shadow, containerStyle]}>
+              {bottom < maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: width/2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
                 {_renderListTop()}
               </View>}
             </View>
             <View style={{ height: bottom, width: w }}>
-              {bottom > 300 && <View style={[{ width: w }, styles.container, styles.shadow, containerStyle]}>
+              {bottom > maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: width/2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
                 {_renderListBottom()}
-              </View>}</View>
+              </View>}
+            </View>
           </View>
         </TouchableWithoutFeedback>
       </Modal>
@@ -242,7 +243,7 @@ const DropdownComponent: Dropdown = (props) => {
 
   return (
     <View >
-      <View style={[style]} ref={ref}>
+      <View style={[style]}>
         {_renderTitle()}
         {_renderDropdown()}
         {_renderModal()}

@@ -7,6 +7,7 @@ interface Props {
     placeholderStyle?: StyleProp<TextStyle>;
     textErrorStyle?: StyleProp<TextStyle>;
     inputSearchStyle?: StyleProp<TextStyle>;
+    maxHeight?: number;
     fontFamily?: string;
     iconColor?: string
     activeColor?: string
