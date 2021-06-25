@@ -155,7 +155,29 @@ const DropdownComponent: Dropdown = (props) => {
     }
   }
 
-  const _renderList = () => {
+  const _renderListTop = () => {
+    return <View style={{ flex: 1 }}>
+      <FlatList
+        ref={(e) => scrollToIndex(e)}
+        data={listData}
+        inverted
+        renderItem={_renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        showsVerticalScrollIndicator={true}
+      />
+      {search && <CInput
+        style={[styles.input, inputSearchStyle]}
+        inputStyle={font()}
+        placeholder={searchPlaceholder}
+        onChangeText={onSearch}
+        placeholderTextColor="gray"
+        iconStyle={{ tintColor: iconColor }}
+      />}
+    </View>
+  }
+
+
+  const _renderListBottom = () => {
     return <View style={{ flex: 1 }}>
       {search && <CInput
         style={[styles.input, inputSearchStyle]}
@@ -175,18 +197,28 @@ const DropdownComponent: Dropdown = (props) => {
     </View>
   }
 
+
+
+
   const _renderModal = () => {
-    if (visible && position && position?.px && position?.py && position?.fy) {
-      const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
-      const top = isFull ? scale(20) : position?.py + position?.fy + scale(10);
+    const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
+    const w = position?.px;
+    const top = isFull ? scale(20) : position?.py + position?.fy + scale(10);
+    const bottom = height - top;
+    if (visible && top && bottom) {
+
       return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
         <TouchableWithoutFeedback onPress={showOrClose}>
-          <View style={[{ width: width, height: height, alignItems: 'center' },isFull && { backgroundColor: 'rgba(0,0,0,0.2)' }]}>
-            <View style={{ height: top }} />
-            <View style={[{ width: position?.px }, styles.container, styles.shadow, isFull && { width: width / 2, maxHeight: '100%' }, containerStyle]}
-            >
-              {_renderList()}
+          <View style={[{ width: width, height: height, alignItems: 'center' }]}>
+            <View style={{ height: top, width: w, justifyContent: 'flex-end' }}>
+              {bottom < 300 && <View style={[{ width: w }, styles.container, styles.shadow, containerStyle]}>
+                {_renderListTop()}
+              </View>}
             </View>
+            <View style={{ height: bottom, width: w }}>
+              {bottom > 300 && <View style={[{ width: w }, styles.container, styles.shadow, containerStyle]}>
+                {_renderListBottom()}
+              </View>}</View>
           </View>
         </TouchableWithoutFeedback>
       </Modal>
