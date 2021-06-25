@@ -24,7 +24,7 @@ const useScale: UseScale = {
 const useDetectDevice: UseDetectDevice = {
     isAndroid: Platform.OS === 'android',
     isIOS: Platform.OS === 'ios',
-    isTablet: checkSmallDevice
+    isTablet: checkTablet
 }
 
 export { useScale, useDetectDevice };

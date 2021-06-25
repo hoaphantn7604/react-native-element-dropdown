@@ -1,4 +1,5 @@
 # react-native-element-dropdown
+    A react-native dropdown component easy to customize for both iOS and Android.
 
 ## Getting started
 ```js

@@ -9,6 +9,7 @@ import {
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
 import { useDetectDevice, useScale } from '../utilsScale';
+const {isTablet} = useDetectDevice;
 import { styles } from './styles';
 import { Dropdown } from './type';
 
@@ -228,8 +229,7 @@ const DropdownComponent: Dropdown = (props) => {
   const _measure = () => {
     if (ref) {
       ref.current.measure((width, height, px, py, fx, fy) => {
-
-        const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
+        const isFull = orientation === 'LANDSCAPE' && !isTablet;
         const w = px;
         const top = isFull ? scale(20) : py + fy + scale(5);
         const bottom = H - top;
