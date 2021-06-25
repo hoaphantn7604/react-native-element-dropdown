@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
       borderWidth: scale(0.5),
       borderColor: '#EEEEEE',
       backgroundColor: 'white',
-      marginBottom: scale(20),
       maxHeight: scale(300),
     },
     dropdown: {

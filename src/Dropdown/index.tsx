@@ -176,7 +176,6 @@ const DropdownComponent: Dropdown = (props) => {
     </View>
   }
 
-
   const _renderListBottom = () => {
     return <View style={{ flex: 1 }}>
       {search && <CInput
@@ -196,9 +195,6 @@ const DropdownComponent: Dropdown = (props) => {
       />
     </View>
   }
-
-
-
 
   const _renderModal = () => {
     const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
