@@ -30,21 +30,17 @@ or
 | labelField         | String               | Yes       |                  |
 | valueField         | String               | Yes       |                  |
 | onChange           | (item) => void       | Yes       |                  |
+| value              | Item                 | No        |                  |
+| placeholder        | String               | No        |                  |
+| placeholderStyle   | TextStyle            | No        |                  |
 | style              | ViewStyle            | No        |                  |
 | containerStyle     | ViewStyle            | No        |                  |
 | fontFamily         | String               | No        |                  |
-| labelStyle         | TextStyle            | No        |                  |
 | iconColor          | String               | No        |                  |
 | activeColor        | String               | No        |                  |
-| value              | Item[]               | No        |                  |
-| label              | String               | No        |                  |
-| placeholder        | String               | No        |                  |
-| placeholderStyle   | TextStyle            | No        |                  |
 | search             | Boolean              | No        |                  |
 | inputSearchStyle   | ViewStyle            | No        |                  |
 | searchPlaceholder  | String               | No        |                  |
-| textError          | String               | No        |                  |
-| textErrorStyle     | TextStyle            | No        |                  |
 | maxHeight          | Number               | No        |                  |
 | renderLeftIcon     | () => JSX.Element    | No        |                  |
 | renderRightIcon    | () => JSX.Element    | No        |                  |
@@ -57,23 +53,19 @@ or
 | labelField         | String               | Yes       |                  |
 | valueField         | String               | Yes       |                  |
 | onChange           | (value[]) => void    | Yes       |                  |
+| value              | Item[]               | No        |                  |
+| placeholder        | String               | No        |                  |
+| placeholderStyle   | TextStyle            | No        |                  |
 | style              | ViewStyle            | No        |                  |
 | containerStyle     | ViewStyle            | No        |                  |
 | fontFamily         | String               | No        |                  |
-| labelStyle         | TextStyle            | No        |                  |
 | iconColor          | String               | No        |                  |
 | activeColor        | String               | No        |                  |
-| value              | Item[]               | No        |                  |
-| label              | String               | No        |                  |
-| placeholder        | String               | No        |                  |
-| placeholderStyle   | TextStyle            | No        |                  |
 | selectedStyle      | ViewStyle            | No        |                  |
 | selectedTextStyle  | TextStyle            | No        |                  |
 | search             | Boolean              | No        |                  |
 | inputSearchStyle   | ViewStyle            | No        |                  |
 | searchPlaceholder  | String               | No        |                  |
-| textError          | String               | No        |                  |
-| textErrorStyle     | TextStyle            | No        |                  |
 | maxHeight          | Number               | No        |                  |
 | renderLeftIcon     | () => JSX.Element    | No        |                  |
 | renderRightIcon    | () => JSX.Element    | No        |                  |
@@ -113,13 +105,11 @@ or
             <View style={styles.container}>
                 <Dropdown
                     style={styles.dropdown}
-                    containerStyle={styles.shadow}
                     data={data}
                     search
                     searchPlaceholder="Search"
                     labelField="label"
                     valueField="value"
-                    label="Dropdown"
                     placeholder="Select item"
                     value={dropdown}
                     onChange={item => {
@@ -130,15 +120,13 @@ or
                         <Image style={styles.icon} source={require('./assets/account.png')} />
                     )}
                     renderItem={item => _renderItem(item)}
-                    textError="Error"
                 />
 
                 <MultiSelect
-                    style={styles.dropdown}
+                    style={styles.dropdown2}
                     data={data}
                     labelField="label"
                     valueField="value"
-                    label="Multi Select"
                     placeholder="Select item"
                     search
                     searchPlaceholder="Search"
@@ -167,6 +155,13 @@ or
             borderBottomWidth: 0.5,
             marginTop: 20,
         },
+        dropdown2: {
+            backgroundColor: 'white',
+            borderColor: 'gray',
+            borderWidth: 0.5,
+            marginTop: 20,
+            padding: 8,
+        },
         icon: {
             marginRight: 5,
             width: 18,
@@ -182,16 +177,6 @@ or
         textItem: {
             flex: 1,
             fontSize: 16,
-        },
-        shadow: {
-            shadowColor: '#000',
-            shadowOffset: {
-            width: 0,
-            height: 1,
-            },
-            shadowOpacity: 0.2,
-            shadowRadius: 1.41,
-            elevation: 2,
         },
     });
 ```

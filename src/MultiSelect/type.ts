@@ -3,7 +3,6 @@ import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 interface Props {
     style?: StyleProp<ViewStyle>;
     containerStyle?: StyleProp<ViewStyle>;
-    labelStyle?: StyleProp<TextStyle>;
     placeholderStyle?: StyleProp<TextStyle>
     textErrorStyle?: StyleProp<TextStyle>;
     inputSearchStyle?: StyleProp<TextStyle>; 
@@ -16,7 +15,6 @@ interface Props {
     data: any[];
     value?: any | null;
     textError?: string;
-    label?: string;
     placeholder?: string;
     labelField: string;
     valueField: string;

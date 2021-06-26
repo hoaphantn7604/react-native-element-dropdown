@@ -29,18 +29,14 @@ const DropdownComponent: Dropdown = (props) => {
     onChange,
     style,
     containerStyle,
-    textErrorStyle,
-    labelStyle,
     placeholderStyle,
     inputSearchStyle,
     data,
     labelField,
     valueField,
-    label,
     value,
     activeColor,
     fontFamily,
-    textError,
     iconColor = "gray",
     searchPlaceholder,
     placeholder,
@@ -104,20 +100,10 @@ const DropdownComponent: Dropdown = (props) => {
     setVisible(false);
   }
 
-  const _renderTitle = () => {
-    if (label) {
-      return (
-        <Text style={[styles.title, labelStyle]}>
-          {label}
-        </Text>
-      )
-    }
-  }
-
   const _renderDropdown = () => {
     return (
       <TouchableWithoutFeedback onPress={showOrClose}>
-        <View style={styles.dropdown} ref={ref} onLayout={_measure}>
+        <View style={styles.dropdown}>
           {renderLeftIcon?.()}
           <Text style={[styles.textItem, placeholderStyle, font()]}>
             {currentValue && currentValue[labelField] || placeholder}
@@ -246,12 +232,10 @@ const DropdownComponent: Dropdown = (props) => {
 
   return (
     <View >
-      <View style={[style]}>
-        {_renderTitle()}
+      <View style={[style]} ref={ref} onLayout={_measure}>
         {_renderDropdown()}
         {_renderModal()}
       </View>
-      {textError && !visible && <Text style={[styles.textError, textErrorStyle, font()]}>{textError}</Text>}
     </View>
   );
 };

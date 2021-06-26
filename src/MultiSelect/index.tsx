@@ -28,21 +28,17 @@ const MultiSelectComponent: MultiSelect = (props) => {
   const {
     onChange,
     data,
-    label,
     value,
     style,
     labelField,
     valueField,
-    textErrorStyle,
     selectedStyle,
     selectedTextStyle,
     activeColor,
     containerStyle,
     fontFamily,
     placeholderStyle,
-    textError,
     iconColor = "gray",
-    labelStyle,
     inputSearchStyle,
     searchPlaceholder,
     placeholder,
@@ -109,20 +105,10 @@ const MultiSelectComponent: MultiSelect = (props) => {
     setKey(Math.random());
   }
 
-  const _renderTitle = () => {
-    if (label) {
-      return (
-        <Text style={[styles.title, labelStyle, font()]}>
-          {label}
-        </Text>
-      )
-    }
-  }
-
   const _renderDropdown = () => {
     return (
       <TouchableWithoutFeedback onPress={showOrClose}>
-        <View style={styles.dropdown} ref={ref} onLayout={_measure}>
+        <View style={styles.dropdown}>
           {renderLeftIcon?.()}
           <Text style={[styles.textItem, placeholderStyle, font()]}>
             {placeholder}
@@ -289,12 +275,10 @@ const MultiSelectComponent: MultiSelect = (props) => {
 
   return (
     <View>
-      <View style={[style]}>
-        {_renderTitle()}
+      <View style={[style]} ref={ref} onLayout={_measure}>
         {_renderDropdown()}
         {_renderModal()}
       </View>
-      {textError && <Text style={[styles.textError, textErrorStyle, font()]}>{textError}</Text>}
       {!visible && _renderItemSelected()}
     </View>
   );

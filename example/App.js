@@ -35,7 +35,6 @@ const DropdownScreen = _props => {
         searchPlaceholder="Search"
         labelField="label"
         valueField="value"
-        label="Dropdown"
         placeholder="Select item"
         value={dropdown}
         onChange={item => {
@@ -46,15 +45,13 @@ const DropdownScreen = _props => {
           <Image style={styles.icon} source={require('./assets/account.png')} />
         )}
         renderItem={item => _renderItem(item)}
-        textError="Error"
       />
 
       <MultiSelect
-        style={styles.dropdown}
+        style={styles.dropdown2}
         data={data}
         labelField="label"
         valueField="value"
-        label="Multi Select"
         placeholder="Select item"
         search
         searchPlaceholder="Search"
@@ -82,6 +79,13 @@ const styles = StyleSheet.create({
     borderBottomColor: 'gray',
     borderBottomWidth: 0.5,
     marginTop: 20,
+  },
+  dropdown2: {
+    backgroundColor: 'white',
+    borderColor: 'gray',
+    borderWidth: 0.5,
+    marginTop: 20,
+    padding: 8,
   },
   icon: {
     marginRight: 5,
