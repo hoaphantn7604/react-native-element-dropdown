@@ -47,7 +47,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     searchPlaceholder,
     placeholder,
     search = false,
-    maxHeight = 300,
+    maxHeight = 340,
     renderItem,
     renderLeftIcon,
     renderRightIcon
@@ -77,7 +77,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
   }, []);
 
   const getValue = () => {
-    setCurrentValue(value);
+    setCurrentValue(value ? value : []);
   }
 
   const scrollToIndex = (ref: any) => {

@@ -45,7 +45,7 @@ const DropdownComponent: Dropdown = (props) => {
     searchPlaceholder,
     placeholder,
     search = false,
-    maxHeight = 300,
+    maxHeight = 340,
     renderLeftIcon,
     renderRightIcon,
     renderItem
