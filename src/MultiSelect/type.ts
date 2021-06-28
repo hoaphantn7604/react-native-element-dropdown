@@ -11,7 +11,7 @@ interface Props {
     maxHeight?: number;
     fontFamily?: string; 
     iconColor?: string
-    activeColor?: string
+    activeColor?: string;
     data: any[];
     value?: any | null;
     textError?: string;
@@ -19,6 +19,7 @@ interface Props {
     labelField: string;
     valueField: string;
     search?: boolean;
+    disable?: boolean;
     searchPlaceholder?: string
     onChange: (item: any) => void;
     renderLeftIcon?: () => JSX.Element | null | undefined;

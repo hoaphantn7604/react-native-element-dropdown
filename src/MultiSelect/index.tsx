@@ -44,6 +44,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     placeholder,
     search = false,
     maxHeight = 340,
+    disable = false,
     renderItem,
     renderLeftIcon,
     renderRightIcon
@@ -88,8 +89,11 @@ const MultiSelectComponent: MultiSelect = (props) => {
   }
 
   const showOrClose = () => {
-    setVisible(!visible);
-    setListData(data);
+    if(!disable){
+      setVisible(!visible);
+      setListData(data);
+    }
+ 
   }
 
   const onSelect = (item: any) => {

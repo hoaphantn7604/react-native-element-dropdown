@@ -42,6 +42,7 @@ or
 | inputSearchStyle   | ViewStyle            | No        |                  |
 | searchPlaceholder  | String               | No        |                  |
 | maxHeight          | Number               | No        |                  |
+| disable            | Boolean              | No        |                  |
 | renderLeftIcon     | () => JSX.Element    | No        |                  |
 | renderRightIcon    | () => JSX.Element    | No        |                  |
 | renderItem         | (item) => JSX.Element| No        |                  |
@@ -67,6 +68,7 @@ or
 | inputSearchStyle   | ViewStyle            | No        |                  |
 | searchPlaceholder  | String               | No        |                  |
 | maxHeight          | Number               | No        |                  |
+| disable            | Boolean              | No        |                  |
 | renderLeftIcon     | () => JSX.Element    | No        |                  |
 | renderRightIcon    | () => JSX.Element    | No        |                  |
 | renderItem         | (item) => JSX.Element| No        |                  |

@@ -42,6 +42,7 @@ const DropdownComponent: Dropdown = (props) => {
     placeholder,
     search = false,
     maxHeight = 340,
+    disable = false,
     renderLeftIcon,
     renderRightIcon,
     renderItem
@@ -89,8 +90,10 @@ const DropdownComponent: Dropdown = (props) => {
   }
 
   const showOrClose = () => {
-    setVisible(!visible);
-    setListData(data);
+    if(!disable){
+      setVisible(!visible);
+      setListData(data);
+    }
   }
 
   const onSelect = (item: any) => {

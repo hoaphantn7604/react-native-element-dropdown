@@ -7,8 +7,8 @@ interface Props {
     inputSearchStyle?: StyleProp<TextStyle>;
     maxHeight?: number;
     fontFamily?: string;
-    iconColor?: string
-    activeColor?: string
+    iconColor?: string;
+    activeColor?: string;
     data: any[];
     value?: any | null;
     label?: string;
@@ -16,7 +16,8 @@ interface Props {
     labelField: string;
     valueField: string;
     search?: boolean;
-    searchPlaceholder?: string
+    searchPlaceholder?: string;
+    disable?: boolean;
     onChange: (item: any) => void;
     renderLeftIcon?: () => JSX.Element | null | undefined;
     renderRightIcon?: () => JSX.Element | null | undefined;
