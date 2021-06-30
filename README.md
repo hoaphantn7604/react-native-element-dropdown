@@ -1,5 +1,5 @@
-# react-native-element-dropdown
-
+## react-native-element-dropdown
+`react-native-element-dropdown` A react-native dropdown component easy to customize for both iOS and Android.
 ## Getting started
 ```js
     npm install react-native-element-dropdown --save
@@ -185,7 +185,7 @@ or
 
 ### Suggested Packages
 - [react-native-utils-scale](https://www.npmjs.com/package/react-native-utils-scale) for flexible UI on many different screen sizes.
-- [react-native-element-image](https://www.npmjs.com/package/react-native-element-image) React Native image width auto width or height computation.
+- [react-native-element-image](https://www.npmjs.com/package/react-native-element-image) Automatically calculate width or height based on input Image component for React Native.
 - [react-native-element-timer](https://www.npmjs.com/package/react-native-element-timer) React Native Timer Countdown.
 - [react-native-vertical-swipe-view](https://www.npmjs.com/package/react-native-vertical-swipe-view) React Native Vertical Swipe View.
 - [react-native-checkbox-tree](https://www.npmjs.com/package/react-native-checkbox-tree) A simple and elegant checkbox tree for React Native.
