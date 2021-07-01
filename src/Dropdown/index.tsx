@@ -91,6 +91,7 @@ const DropdownComponent: Dropdown = (props) => {
 
   const showOrClose = () => {
     if(!disable){
+      _measure();
       setVisible(!visible);
       setListData(data);
     }
@@ -210,10 +211,6 @@ const DropdownComponent: Dropdown = (props) => {
     }
     return null
   }
-
-  useEffect(() => {
-    _measure();
-  }, [orientation])
 
   const _measure = () => {
     if (ref) {

@@ -90,6 +90,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
 
   const showOrClose = () => {
     if(!disable){
+      _measure();
       setVisible(!visible);
       setListData(data);
     }
@@ -222,10 +223,6 @@ const MultiSelectComponent: MultiSelect = (props) => {
     }
     return null
   }
-
-  useEffect(() => {
-    _measure();
-  }, [orientation])
 
   const _measure = () => {
     if (ref) {

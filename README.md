@@ -184,7 +184,7 @@ or
 ```
 
 ### Suggested Packages
-- [react-native-utils-scale](https://www.npmjs.com/package/react-native-utils-scale) for flexible UI on many different screen sizes.
+- [react-native-utils-scale](https://www.npmjs.com/package/react-native-utils-scale) Provide solutions to make your app flexible for different screen sizes, different devices.
 - [react-native-element-image](https://www.npmjs.com/package/react-native-element-image) Automatically calculate width or height based on input Image component for React Native.
 - [react-native-element-timer](https://www.npmjs.com/package/react-native-element-timer) React Native Timer Countdown.
 - [react-native-vertical-swipe-view](https://www.npmjs.com/package/react-native-vertical-swipe-view) React Native Vertical Swipe View.
