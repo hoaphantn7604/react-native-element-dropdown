@@ -144,7 +144,10 @@ const DropdownComponent: Dropdown = (props) => {
   }
 
   const scrollIndex = () => {
-    refList.current.scrollToIndex({ index: scrollToIndex, animated: false });
+    setTimeout(() => {
+      refList.current.scrollToIndex({ index: scrollToIndex, animated: false });
+    }, 200);
+   
   }
 
   const _renderListTop = () => {
