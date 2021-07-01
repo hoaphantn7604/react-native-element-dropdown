@@ -11,7 +11,7 @@ import { useDeviceOrientation } from '../useDeviceOrientation';
 import { useDetectDevice, useScale } from '../utilsScale';
 import { styles } from './styles';
 import { Dropdown } from './type';
-const {isTablet} = useDetectDevice;
+const { isTablet } = useDetectDevice;
 
 const { scale } = useScale;
 const ic_down = require('../assets/icon/down.png');
@@ -49,6 +49,7 @@ const DropdownComponent: Dropdown = (props) => {
   } = props;
 
   const ref = useRef(null);
+  const refList = useRef(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>(null);
   const [textSearch, setTextSearch] = useState<string>('');
@@ -78,7 +79,7 @@ const DropdownComponent: Dropdown = (props) => {
     }
   }
 
-  const scrollToIndex = useMemo(()=>{
+  const scrollToIndex = useMemo(() => {
     if (textSearch.length === 0) {
       const index = data.findIndex(e => value === e[valueField]);
       if (index !== -1) {
@@ -86,10 +87,10 @@ const DropdownComponent: Dropdown = (props) => {
       }
       return 0;
     }
-  },[value])
+  }, [value])
 
   const showOrClose = () => {
-    if(!disable){
+    if (!disable) {
       _measure();
       setVisible(!visible);
       setListData(data);
@@ -142,10 +143,16 @@ const DropdownComponent: Dropdown = (props) => {
     }
   }
 
+  const scrollIndex = () => {
+    refList.current.scrollToIndex({ index: scrollToIndex, animated: false });
+  }
+
   const _renderListTop = () => {
     return <View style={{ flex: 1 }}>
       <FlatList
+        ref={refList}
         initialScrollIndex={scrollToIndex}
+        onScrollToIndexFailed={scrollIndex}
         data={listData}
         inverted
         renderItem={_renderItem}
@@ -174,7 +181,9 @@ const DropdownComponent: Dropdown = (props) => {
         iconStyle={{ tintColor: iconColor }}
       />}
       <FlatList
+        ref={refList}
         initialScrollIndex={scrollToIndex}
+        onScrollToIndexFailed={scrollIndex}
         data={listData}
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
