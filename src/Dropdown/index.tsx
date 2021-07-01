@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Dimensions, FlatList,
   Image, Modal,
@@ -9,9 +9,9 @@ import {
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
 import { useDetectDevice, useScale } from '../utilsScale';
-const {isTablet} = useDetectDevice;
 import { styles } from './styles';
 import { Dropdown } from './type';
+const {isTablet} = useDetectDevice;
 
 const { scale } = useScale;
 const ic_down = require('../assets/icon/down.png');
@@ -78,16 +78,15 @@ const DropdownComponent: Dropdown = (props) => {
     }
   }
 
-  const scrollToIndex = (ref: any) => {
+  const scrollToIndex = useMemo(()=>{
     if (textSearch.length === 0) {
       const index = data.findIndex(e => value === e[valueField]);
-      if (index !== -1 && ref) {
-        setTimeout(() => {
-          ref.scrollToIndex({ index: index, animated: true })
-        }, 300);
+      if (index !== -1) {
+        return index;
       }
+      return 0;
     }
-  }
+  },[value])
 
   const showOrClose = () => {
     if(!disable){
@@ -146,7 +145,7 @@ const DropdownComponent: Dropdown = (props) => {
   const _renderListTop = () => {
     return <View style={{ flex: 1 }}>
       <FlatList
-        ref={(e) => scrollToIndex(e)}
+        initialScrollIndex={scrollToIndex}
         data={listData}
         inverted
         renderItem={_renderItem}
@@ -175,7 +174,7 @@ const DropdownComponent: Dropdown = (props) => {
         iconStyle={{ tintColor: iconColor }}
       />}
       <FlatList
-        ref={(e) => scrollToIndex(e)}
+        initialScrollIndex={scrollToIndex}
         data={listData}
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}

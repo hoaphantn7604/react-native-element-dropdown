@@ -77,17 +77,6 @@ const MultiSelectComponent: MultiSelect = (props) => {
     setCurrentValue(value ? value : []);
   }
 
-  const scrollToIndex = (ref: any) => {
-    if (textSearch.length === 0) {
-      const index = data.findIndex(e => value === e[valueField]);
-      if (index !== -1 && ref) {
-        setTimeout(() => {
-          ref.scrollToIndex({ index: index, animated: true })
-        }, 300);
-      }
-    }
-  }
-
   const showOrClose = () => {
     if(!disable){
       _measure();
@@ -157,7 +146,6 @@ const MultiSelectComponent: MultiSelect = (props) => {
   const _renderListTop = () => {
     return <View style={{ flex: 1 }}>
       <FlatList
-        ref={(e) => scrollToIndex(e)}
         data={listData}
         inverted
         renderItem={_renderItem}
@@ -187,7 +175,6 @@ const MultiSelectComponent: MultiSelect = (props) => {
         iconStyle={{ tintColor: iconColor }}
       />}
       <FlatList
-        ref={(e) => scrollToIndex(e)}
         data={listData}
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
