@@ -11,7 +11,6 @@ interface Props {
     activeColor?: string;
     data: any[];
     value?: any | null;
-    label?: string;
     placeholder?: string;
     labelField: string;
     valueField: string;
