@@ -132,8 +132,8 @@ const DropdownComponent: Dropdown = (props) => {
     setTextSearch(text);
     if (text.length > 0) {
       const dataSearch = data.filter(e => {
-        const item = e[labelField]?.toLowerCase().replace(' ', '');
-        const key = text.toLowerCase().replace(' ', '');
+        const item = e[labelField]?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const key = text.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
         return item.indexOf(key) >= 0
       });
