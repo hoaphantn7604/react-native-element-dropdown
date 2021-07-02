@@ -228,7 +228,7 @@ const DropdownComponent: Dropdown = (props) => {
       ref.current.measure((width, height, px, py, fx, fy) => {
         const isFull = orientation === 'LANDSCAPE' && !isTablet;
         const w = px;
-        const top = isFull ? scale(20) : py + fy + scale(5);
+        const top = isFull ? scale(20) : py + fy + scale(2);
         const bottom = H - top;
 
         setPosition({

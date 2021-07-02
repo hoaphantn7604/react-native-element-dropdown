@@ -217,7 +217,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
 
         const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
         const w = px;
-        const top = isFull ? scale(20) : py + fy + scale(5);
+        const top = isFull ? scale(20) : py + fy + scale(2);
         const bottom = H - top;
 
         setPosition({
