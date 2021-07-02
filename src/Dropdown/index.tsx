@@ -165,6 +165,7 @@ const DropdownComponent: Dropdown = (props) => {
       {search && <CInput
         style={[styles.input, inputSearchStyle]}
         inputStyle={font()}
+        autoCorrect={false}
         placeholder={searchPlaceholder}
         onChangeText={onSearch}
         placeholderTextColor="gray"
@@ -178,6 +179,7 @@ const DropdownComponent: Dropdown = (props) => {
       {search && <CInput
         style={[styles.input, inputSearchStyle]}
         inputStyle={font()}
+        autoCorrect={false}
         placeholder={searchPlaceholder}
         onChangeText={onSearch}
         placeholderTextColor="gray"
