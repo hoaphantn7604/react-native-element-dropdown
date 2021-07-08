@@ -48,30 +48,31 @@ or
 | renderItem         | (item) => JSX.Element| No        |                  |
 
 #### MultiSelect Props
-| Props              | Params               | isRequire | Description      |
-| ------------------ | -------------------- | --------- | ---------------- |
-| data               | Array                | Yes       |                  |
-| labelField         | String               | Yes       |                  |
-| valueField         | String               | Yes       |                  |
-| onChange           | (value[]) => void    | Yes       |                  |
-| value              | Item[]               | No        |                  |
-| placeholder        | String               | No        |                  |
-| placeholderStyle   | TextStyle            | No        |                  |
-| style              | ViewStyle            | No        |                  |
-| containerStyle     | ViewStyle            | No        |                  |
-| fontFamily         | String               | No        |                  |
-| iconColor          | String               | No        |                  |
-| activeColor        | String               | No        |                  |
-| selectedStyle      | ViewStyle            | No        |                  |
-| selectedTextStyle  | TextStyle            | No        |                  |
-| search             | Boolean              | No        |                  |
-| inputSearchStyle   | ViewStyle            | No        |                  |
-| searchPlaceholder  | String               | No        |                  |
-| maxHeight          | Number               | No        |                  |
-| disable            | Boolean              | No        |                  |
-| renderLeftIcon     | () => JSX.Element    | No        |                  |
-| renderRightIcon    | () => JSX.Element    | No        |                  |
-| renderItem         | (item) => JSX.Element| No        |                  |
+| Props              | Params                                               | isRequire | Description      |
+| ------------------ | -----------------------------------------------------| --------- | ---------------- |
+| data               | Array                                                | Yes       |                  |
+| labelField         | String                                               | Yes       |                  |
+| valueField         | String                                               | Yes       |                  |
+| onChange           | (value[]) => void                                    | Yes       |                  |
+| value              | Item[]                                               | No        |                  |
+| placeholder        | String                                               | No        |                  |
+| placeholderStyle   | TextStyle                                            | No        |                  |
+| style              | ViewStyle                                            | No        |                  |
+| containerStyle     | ViewStyle                                            | No        |                  |
+| fontFamily         | String                                               | No        |                  |
+| iconColor          | String                                               | No        |                  |
+| activeColor        | String                                               | No        |                  |
+| selectedStyle      | ViewStyle                                            | No        |                  |
+| selectedTextStyle  | TextStyle                                            | No        |                  |
+| search             | Boolean                                              | No        |                  |
+| inputSearchStyle   | ViewStyle                                            | No        |                  |
+| searchPlaceholder  | String                                               | No        |                  |
+| maxHeight          | Number                                               | No        |                  |
+| disable            | Boolean                                              | No        |                  |
+| renderLeftIcon     | () => JSX.Element                                    | No        |                  |
+| renderRightIcon    | () => JSX.Element                                    | No        |                  |
+| renderItem         | (item) => JSX.Element                                | No        |                  |
+| renderSelectedItem | (item, unSelect?:(item: any)=> void) => JSX.Element  | No        |                  |
 
 ## Usage
 ```javascript
@@ -186,6 +187,7 @@ or
 ### Suggested Packages
 - [react-native-utils-scale](https://www.npmjs.com/package/react-native-utils-scale) Provide solutions to make your app flexible for different screen sizes, different devices.
 - [react-native-element-image](https://www.npmjs.com/package/react-native-element-image) Automatically calculate width or height based on input Image component for React Native.
+- [react-native-element-textinput](https://www.npmjs.com/package/react-native-element-textinput) A react-native TextInput component easy to customize for both iOS and Android.
 - [react-native-element-timer](https://www.npmjs.com/package/react-native-element-timer) React Native Timer Countdown.
 - [react-native-vertical-swipe-view](https://www.npmjs.com/package/react-native-vertical-swipe-view) React Native Vertical Swipe View.
 - [react-native-checkbox-tree](https://www.npmjs.com/package/react-native-checkbox-tree) A simple and elegant checkbox tree for React Native.

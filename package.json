@@ -1,7 +1,7 @@
 {
   "name": "react-native-element-dropdown",
   "title": "React Native Element Dropdown",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "A react-native dropdown component easy to customize for both iOS and Android.",
   "main": "index.ts",
   "scripts": {
@@ -17,7 +17,8 @@
     "elements",
     "components",
     "dropdown",
-    "multiselect"
+    "multiselect",
+    "picker"
   ],
   "author": {
     "name": "Hoa Phan",

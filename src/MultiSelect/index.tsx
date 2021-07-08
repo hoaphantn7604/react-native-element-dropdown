@@ -47,7 +47,8 @@ const MultiSelectComponent: MultiSelect = (props) => {
     disable = false,
     renderItem,
     renderLeftIcon,
-    renderRightIcon
+    renderRightIcon,
+    renderSelectedItem
   } = props;
 
   const ref = useRef(null);
@@ -78,12 +79,12 @@ const MultiSelectComponent: MultiSelect = (props) => {
   }
 
   const showOrClose = () => {
-    if(!disable){
+    if (!disable) {
       _measure();
       setVisible(!visible);
       setListData(data);
     }
- 
+
   }
 
   const onSelect = (item: any) => {
@@ -233,9 +234,11 @@ const MultiSelectComponent: MultiSelect = (props) => {
   }
 
   const unSelect = (item: any) => {
-    const index = currentValue.indexOf(item[valueField]);
-    currentValue.splice(index, 1);
-    setKey(Math.random());
+    if (!disable) {
+      const index = currentValue.indexOf(item[valueField]);
+      currentValue.splice(index, 1);
+      setKey(Math.random());
+    }
   }
 
   const _renderItemSelected = () => {
@@ -249,16 +252,25 @@ const MultiSelectComponent: MultiSelect = (props) => {
     return (
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         {list.map(e => {
-          return (
-            <TouchableOpacity
+          if (renderSelectedItem) {
+            return <TouchableOpacity
               key={e[labelField]}
-              style={[styles.selectedItem, selectedStyle]}
               onPress={() => unSelect(e)}
             >
-              <Text style={[{ fontSize: fontScale(12), color: 'gray' }, selectedTextStyle, font()]}>{e[labelField]}</Text>
-              <Text style={[styles.selectedTextItem, selectedTextStyle]}>ⓧ</Text>
+              {renderSelectedItem(e, (e)=> {unSelect(e)})}
             </TouchableOpacity>
-          )
+          } else {
+            return (
+              <TouchableOpacity
+                key={e[labelField]}
+                style={[styles.selectedItem, selectedStyle]}
+                onPress={() => unSelect(e)}
+              >
+                <Text style={[{ fontSize: fontScale(12), color: 'gray' }, selectedTextStyle, font()]}>{e[labelField]}</Text>
+                <Text style={[styles.selectedTextItem, selectedTextStyle]}>ⓧ</Text>
+              </TouchableOpacity>
+            )
+          }
         })}
       </View>)
   }
