@@ -70,12 +70,14 @@ const DropdownComponent: Dropdown = (props) => {
 
   useEffect(() => {
     getValue();
-  }, [value]);
+  }, [value, data]);
 
   const getValue = () => {
     const getItem = data.filter(e => value === e[valueField]);
     if (getItem.length > 0) {
       setCurrentValue((e: any) => e = getItem[0]);
+    }else{
+      setCurrentValue(null);
     }
   }
 
@@ -87,7 +89,7 @@ const DropdownComponent: Dropdown = (props) => {
       }
       return 0;
     }
-  }, [value])
+  }, [value, data])
 
   const showOrClose = () => {
     if (!disable) {

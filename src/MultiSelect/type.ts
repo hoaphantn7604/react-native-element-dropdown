@@ -13,7 +13,7 @@ interface Props {
   iconColor?: string
   activeColor?: string;
   data: any[];
-  value?: any | null;
+  value?: any[] | null;
   textError?: string;
   placeholder?: string;
   labelField: string;
