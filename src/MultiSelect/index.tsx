@@ -235,9 +235,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
 
   const unSelect = (item: any) => {
     if (!disable) {
-      const index = currentValue.indexOf(item[valueField]);
-      currentValue.splice(index, 1);
-      setKey(Math.random());
+      onSelect(item);
     }
   }
 
