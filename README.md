@@ -72,7 +72,7 @@ or
 | renderLeftIcon     | () => JSX.Element                                    | No        |                  |
 | renderRightIcon    | () => JSX.Element                                    | No        |                  |
 | renderItem         | (item) => JSX.Element                                | No        |                  |
-| renderSelectedItem | (item, unSelect?:(item) => void) => JSX.Element      | No        |                  |
+| renderSelectedItem | (item, unSelect?: (item) => void) => JSX.Element      | No        |                  |
 
 ## Usage
 ```javascript
