@@ -72,7 +72,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
 
   useEffect(() => {
     getValue();
-  }, []);
+  }, [value]);
 
   const getValue = () => {
     setCurrentValue(value ? value : []);

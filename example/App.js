@@ -15,7 +15,7 @@ const data = [
 
 const DropdownScreen = _props => {
   const [dropdown, setDropdown] = useState(null);
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState(null);
 
   const _renderItem = item => {
     return (

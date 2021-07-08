@@ -70,7 +70,7 @@ const DropdownComponent: Dropdown = (props) => {
 
   useEffect(() => {
     getValue();
-  }, []);
+  }, [value]);
 
   const getValue = () => {
     const getItem = data.filter(e => value === e[valueField]);
