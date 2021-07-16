@@ -1,10 +1,11 @@
-import { StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { StyleProp, TextStyle, ViewStyle, TextProps } from 'react-native';
 
 interface Props {
     style?: StyleProp<ViewStyle>;
     containerStyle?: StyleProp<ViewStyle>;
     placeholderStyle?: StyleProp<TextStyle>;
     inputSearchStyle?: StyleProp<TextStyle>;
+    selectedTextProps?: TextProps;
     maxHeight?: number;
     fontFamily?: string;
     iconColor?: string;

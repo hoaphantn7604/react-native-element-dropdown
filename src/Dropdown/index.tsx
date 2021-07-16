@@ -21,6 +21,7 @@ const defaultProps = {
   activeColor: '#F6F7F8',
   data: [],
   style: {},
+  selectedTextProps: {}
 }
 
 const DropdownComponent: Dropdown = (props) => {
@@ -31,6 +32,7 @@ const DropdownComponent: Dropdown = (props) => {
     containerStyle,
     placeholderStyle,
     inputSearchStyle,
+    selectedTextProps,
     data,
     labelField,
     valueField,
@@ -111,7 +113,7 @@ const DropdownComponent: Dropdown = (props) => {
       <TouchableWithoutFeedback onPress={showOrClose}>
         <View style={styles.dropdown}>
           {renderLeftIcon?.()}
-          <Text style={[styles.textItem, placeholderStyle, font()]}>
+          <Text style={[styles.textItem, placeholderStyle, font()]} {...selectedTextProps}>
             {currentValue && currentValue[labelField] || placeholder}
           </Text>
           {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }]} />}
