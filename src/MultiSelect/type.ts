@@ -4,7 +4,6 @@ interface Props {
   style?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
   placeholderStyle?: StyleProp<TextStyle>
-  textErrorStyle?: StyleProp<TextStyle>;
   inputSearchStyle?: StyleProp<TextStyle>;
   selectedStyle?: StyleProp<ViewStyle>;
   selectedTextStyle?: StyleProp<TextStyle>;
@@ -14,7 +13,6 @@ interface Props {
   activeColor?: string;
   data: any[];
   value?: any[] | null;
-  textError?: string;
   placeholder?: string;
   labelField: string;
   valueField: string;

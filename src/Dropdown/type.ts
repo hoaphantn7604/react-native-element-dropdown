@@ -4,8 +4,9 @@ interface Props {
     style?: StyleProp<ViewStyle>;
     containerStyle?: StyleProp<ViewStyle>;
     placeholderStyle?: StyleProp<TextStyle>;
-    inputSearchStyle?: StyleProp<TextStyle>;
+    selectedTextStyle?: StyleProp<TextStyle>;
     selectedTextProps?: TextProps;
+    inputSearchStyle?: StyleProp<TextStyle>;
     maxHeight?: number;
     fontFamily?: string;
     iconColor?: string;

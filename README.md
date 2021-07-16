@@ -33,6 +33,7 @@ or
 | value              | Item                 | No        |                  |
 | placeholder        | String               | No        |                  |
 | placeholderStyle   | TextStyle            | No        |                  |
+| selectedTextStyle  | TextStyle            | No        |                  |
 | selectedTextProps  | TextProps            | No        |                  |
 | style              | ViewStyle            | No        |                  |
 | containerStyle     | ViewStyle            | No        |                  |
