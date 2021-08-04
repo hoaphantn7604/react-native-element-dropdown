@@ -1,7 +1,7 @@
 {
   "name": "react-native-element-dropdown",
   "title": "React Native Element Dropdown",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A react-native dropdown component easy to customize for both iOS and Android.",
   "main": "index.ts",
   "scripts": {

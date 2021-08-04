@@ -16,6 +16,17 @@ const { isTablet } = useDetectDevice;
 const { scale } = useScale;
 const ic_down = require('../assets/icon/down.png');
 
+const deepEqual = (x, y) => {
+  const ok = Object.keys,
+    tx = typeof x,
+    ty = typeof y;
+  return x && y && tx === 'object' && tx === ty
+    ? ok(x).length === ok(y).length &&
+        ok(x).every(key => deepEqual(x[key], y[key]))
+    : x === y;
+};
+
+
 const defaultProps = {
   placeholder: 'Select item',
   activeColor: '#F6F7F8',
@@ -60,7 +71,6 @@ const DropdownComponent: Dropdown = (props) => {
   const [position, setPosition] = useState<any>();
   const { width: W, height: H } = Dimensions.get('window');
 
-
   const font = () => {
     if (fontFamily) {
       return {
@@ -76,7 +86,7 @@ const DropdownComponent: Dropdown = (props) => {
   }, [value, data]);
 
   const getValue = () => {
-    const getItem = data.filter(e => value === e[valueField]);
+    const getItem = data.filter(e => deepEqual(value, e[valueField]));
     if (getItem.length > 0) {
       setCurrentValue((e: any) => e = getItem[0]);
     }else{
@@ -110,7 +120,7 @@ const DropdownComponent: Dropdown = (props) => {
   }
 
   const _renderDropdown = () => {
-    const isSelected = currentValue && currentValue[labelField];
+    const isSelected = currentValue && currentValue[valueField];
     return (
       <TouchableWithoutFeedback onPress={showOrClose}>
         <View style={styles.dropdown}>
@@ -125,8 +135,9 @@ const DropdownComponent: Dropdown = (props) => {
   }
 
   const _renderItem = ({ item, index }: { item: any; index: number }) => {
+    const isSelected = currentValue && currentValue[valueField];
     return (
-      <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[item[valueField] === (currentValue && currentValue[valueField]) && { backgroundColor: activeColor }]}>
+      <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[deepEqual(item[valueField], isSelected) && { backgroundColor: activeColor }]}>
         {renderItem ? renderItem(item) : <View style={styles.item}>
           <Text style={[styles.textItem, selectedTextStyle, font()]}>{item[labelField]}</Text>
         </View>}
