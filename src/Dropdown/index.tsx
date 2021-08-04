@@ -105,7 +105,7 @@ const DropdownComponent: Dropdown = (props) => {
   const onSelect = (item: any) => {
     onSearch('');
     setCurrentValue((e: any) => e = item);
-    onChange(item);
+    onChange(item[valueField]);
     setVisible(false);
   }
 
