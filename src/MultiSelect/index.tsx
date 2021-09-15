@@ -194,24 +194,27 @@ const MultiSelectComponent: MultiSelect = (props) => {
         top,
         bottom
       } = position
-      return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
-        <TouchableWithoutFeedback onPress={showOrClose}>
-          <View style={[{ width: W, height: H, alignItems: 'center' }, isFull && { backgroundColor: 'rgba(0,0,0,0.2)' }]}>
-            <View style={{ height: top, width: w, justifyContent: 'flex-end' }}>
-              {bottom < maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: W / 2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
-                {_renderListTop()}
-              </View>}
+      if (w && top && bottom) {
+        return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
+          <TouchableWithoutFeedback onPress={showOrClose}>
+            <View style={[{ width: W, height: H, alignItems: 'center' }, isFull && { backgroundColor: 'rgba(0,0,0,0.2)' }]}>
+              <View style={{ height: top, width: w, justifyContent: 'flex-end' }}>
+                {bottom < maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: W / 2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
+                  {_renderListTop()}
+                </View>}
+              </View>
+              <View style={{ height: bottom, width: w }}>
+                {bottom > maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: W / 2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
+                  {_renderListBottom()}
+                </View>}
+              </View>
             </View>
-            <View style={{ height: bottom, width: w }}>
-              {bottom > maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: W / 2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
-                {_renderListBottom()}
-              </View>}
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
+          </TouchableWithoutFeedback>
+        </Modal>
+      }
+      return null;
     }
-    return null
+    return null;
   }
 
   const _measure = () => {
@@ -255,7 +258,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
               key={e[labelField]}
               onPress={() => unSelect(e)}
             >
-              {renderSelectedItem(e, (e)=> {unSelect(e)})}
+              {renderSelectedItem(e, (e) => { unSelect(e) })}
             </TouchableOpacity>
           } else {
             return (
