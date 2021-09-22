@@ -224,16 +224,21 @@ const DropdownComponent: Dropdown = (props) => {
         left
       } = position
       if (w && top && bottom) {
+
+        const styleContainerVertical = { backgroundColor: 'rgba(0,0,0,0.2)', alignItems: 'center' };
+        const styleVertical = { marginBottom: scale(20), width: W / 2, alignSelf: 'center' };
+        const styleHorizontal = { left: left, maxHeight: maxHeight };
+
         return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
           <TouchableWithoutFeedback onPress={showOrClose}>
-            <View style={[{ width: W, height: H }, isFull && { backgroundColor: 'rgba(0,0,0,0.2)' }]}>
+            <View style={[{ width: W, height: H }, isFull && styleContainerVertical]}>
               <View style={{ height: top, width: w, justifyContent: 'flex-end' }}>
-                {bottom < maxHeight && <View style={[{ width: w, left: left, backgroundColor: 'red', }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: W / 2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
+                {bottom < maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleVertical : styleHorizontal]}>
                   {_renderListTop()}
                 </View>}
               </View>
               <View style={{ height: bottom, width: w }}>
-                {bottom > maxHeight && <View style={[{ width: w, left: left }, styles.container, containerStyle, isFull ? { marginBottom: scale(20), width: W / 2, alignSelf: 'center' } : { maxHeight: maxHeight }]}>
+                {bottom > maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleVertical : styleHorizontal]}>
                   {_renderListBottom()}
                 </View>}
               </View>
