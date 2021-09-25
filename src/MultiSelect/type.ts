@@ -1,3 +1,4 @@
+import React from 'react';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 interface Props {
@@ -24,6 +25,6 @@ interface Props {
   renderRightIcon?: () => JSX.Element | null | undefined;
   renderItem?: (item: any) => JSX.Element | null | undefined;
   renderSelectedItem?: (item: any, unSelect?: (item: any) => void) => JSX.Element | null | undefined;
-}
+};
 
-export type MultiSelect = React.FC<Props>
+export type MultiSelect = React.FC<Props>;

@@ -55,7 +55,7 @@ const DropdownComponent: Dropdown = (props) => {
     searchPlaceholder,
     placeholder,
     search = false,
-    maxHeight = 340,
+    maxHeight = scale(340),
     disable = false,
     renderLeftIcon,
     renderRightIcon,
@@ -79,7 +79,7 @@ const DropdownComponent: Dropdown = (props) => {
     } else {
       return {}
     }
-  }
+  };
 
   useEffect(() => {
     getValue();
@@ -92,7 +92,7 @@ const DropdownComponent: Dropdown = (props) => {
     } else {
       setCurrentValue(null);
     }
-  }
+  };
 
   const scrollToIndex = useMemo(() => {
     if (textSearch.length === 0) {
@@ -102,7 +102,7 @@ const DropdownComponent: Dropdown = (props) => {
       }
       return 0;
     }
-  }, [value, data])
+  }, [value, data]);
 
   const showOrClose = () => {
     if (!disable) {
@@ -110,14 +110,14 @@ const DropdownComponent: Dropdown = (props) => {
       setVisible(!visible);
       setListData(data);
     }
-  }
+  };
 
   const onSelect = (item: any) => {
     onSearch('');
     setCurrentValue((e: any) => e = item);
     onChange(item);
     setVisible(false);
-  }
+  };
 
   const _renderDropdown = () => {
     const isSelected = currentValue && currentValue[valueField];
@@ -132,7 +132,7 @@ const DropdownComponent: Dropdown = (props) => {
         </View>
       </TouchableWithoutFeedback>
     )
-  }
+  };
 
   const _renderItem = ({ item, index }: { item: any; index: number }) => {
     const isSelected = currentValue && currentValue[valueField];
@@ -158,14 +158,14 @@ const DropdownComponent: Dropdown = (props) => {
     } else {
       setListData(data);
     }
-  }
+  };
 
   const scrollIndex = () => {
     setTimeout(() => {
       refList.current.scrollToIndex({ index: scrollToIndex, animated: false });
     }, 200);
 
-  }
+  };
 
   const _renderListTop = () => {
     return <View style={{ flex: 1 }}>
@@ -189,7 +189,7 @@ const DropdownComponent: Dropdown = (props) => {
         iconStyle={{ tintColor: iconColor }}
       />}
     </View>
-  }
+  };
 
   const _renderListBottom = () => {
     return <View style={{ flex: 1 }}>
@@ -212,7 +212,7 @@ const DropdownComponent: Dropdown = (props) => {
         showsVerticalScrollIndicator={true}
       />
     </View>
-  }
+  };
 
   const _renderModal = () => {
     if (visible && position) {
@@ -250,7 +250,7 @@ const DropdownComponent: Dropdown = (props) => {
 
     }
     return null;
-  }
+  };
 
   const _measure = () => {
     if (ref) {
@@ -270,11 +270,11 @@ const DropdownComponent: Dropdown = (props) => {
         });
       })
     }
-  }
+  };
 
   return (
     <View >
-      <View style={[style]} ref={ref} onLayout={_measure}>
+      <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
         {_renderDropdown()}
         {_renderModal()}
       </View>

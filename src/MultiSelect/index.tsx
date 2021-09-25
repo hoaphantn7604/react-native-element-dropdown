@@ -43,7 +43,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     searchPlaceholder,
     placeholder,
     search = false,
-    maxHeight = 340,
+    maxHeight = scale(340),
     disable = false,
     renderItem,
     renderLeftIcon,
@@ -68,7 +68,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     } else {
       return {}
     }
-  }
+  };
 
   useEffect(() => {
     getValue();
@@ -76,7 +76,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
 
   const getValue = () => {
     setCurrentValue(value ? value : []);
-  }
+  };
 
   const showOrClose = () => {
     if (!disable) {
@@ -85,7 +85,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
       setListData(data);
     }
 
-  }
+  };
 
   const onSelect = (item: any) => {
     onSearch('');
@@ -98,7 +98,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     }
     onChange(currentValue);
     setKey(Math.random());
-  }
+  };
 
   const _renderDropdown = () => {
     return (
@@ -112,12 +112,12 @@ const MultiSelectComponent: MultiSelect = (props) => {
         </View>
       </TouchableWithoutFeedback>
     )
-  }
+  };
 
   const checkSelected = (item: any) => {
     const index = currentValue.findIndex(e => e === item[valueField]);
     return index > -1;
-  }
+  };
 
   const _renderItem = ({ item, index }: { item: any; index: number }) => {
     return (
@@ -142,7 +142,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     } else {
       setListData(data);
     }
-  }
+  };
 
   const _renderListTop = () => {
     return <View style={{ flex: 1 }}>
@@ -163,7 +163,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
         iconStyle={{ tintColor: iconColor }}
       />}
     </View>
-  }
+  };
 
 
   const _renderListBottom = () => {
@@ -184,7 +184,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
         showsVerticalScrollIndicator={true}
       />
     </View>
-  }
+  };
 
   const _renderModal = () => {
     if (visible && position) {
@@ -221,7 +221,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
       return null;
     }
     return null;
-  }
+  };
 
   const _measure = () => {
     if (ref) {
@@ -242,13 +242,13 @@ const MultiSelectComponent: MultiSelect = (props) => {
         });
       })
     }
-  }
+  };
 
   const unSelect = (item: any) => {
     if (!disable) {
       onSelect(item);
     }
-  }
+  };
 
   const _renderItemSelected = () => {
     const list = data.filter((e: any) => {
@@ -282,11 +282,11 @@ const MultiSelectComponent: MultiSelect = (props) => {
           }
         })}
       </View>)
-  }
+  };
 
   return (
     <View>
-      <View style={[style]} ref={ref} onLayout={_measure}>
+      <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
         {_renderDropdown()}
         {_renderModal()}
       </View>

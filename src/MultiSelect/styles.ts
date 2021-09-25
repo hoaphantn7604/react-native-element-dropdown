@@ -22,21 +22,21 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: scale(35)
+    height: scale(35),
   },
   title: {
     marginVertical: scale(5),
-    fontSize: fontScale(16)
+    fontSize: fontScale(16),
   },
   item: {
     padding: scale(17),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   textItem: {
     flex: 1,
-    fontSize: fontScale(16)
+    fontSize: fontScale(16),
   },
   icon: {
     width: scale(20),
@@ -45,14 +45,14 @@ export const styles = StyleSheet.create({
   textError: {
     color: 'red',
     fontSize: fontScale(14),
-    marginTop: scale(10)
+    marginTop: scale(10),
   },
   input: {
     borderWidth: scale(0.5),
     borderColor: '#DDDDDD',
     paddingHorizontal: scale(8),
     marginBottom: scale(8),
-    margin:scale(6)
+    margin:scale(6),
   },
   selectedItem: {
     height: scale(30),
@@ -63,11 +63,11 @@ export const styles = StyleSheet.create({
     paddingHorizontal: scale(8),
     marginTop: scale(12),
     marginRight: scale(8),
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   selectedTextItem: {
     marginLeft: scale(5), 
     color: 'gray', 
-    fontSize: fontScale(16)
+    fontSize: fontScale(16),
   },
 });

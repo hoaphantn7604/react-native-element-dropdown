@@ -1,3 +1,4 @@
+import React from 'react';
 import { StyleProp, TextStyle, ViewStyle, TextProps } from 'react-native';
 
 interface Props {
@@ -23,6 +24,6 @@ interface Props {
     renderLeftIcon?: () => JSX.Element | null | undefined;
     renderRightIcon?: () => JSX.Element | null | undefined;
     renderItem?: (item: any) => JSX.Element | null | undefined;
-  }
+  };
 
-  export type Dropdown = React.FC<Props>
+  export type Dropdown = React.FC<Props>;
