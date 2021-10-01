@@ -1,5 +1,9 @@
 ## react-native-element-dropdown
-`react-native-element-dropdown` A react-native dropdown component easy to customize for both iOS and Android.
+A React Native dropdown component easy to customize for both iOS and Android.
+
+#### Source code demo
+- [react-native-template-components](https://github.com/hoaphantn7604/react-native-template-components) A beautiful template for React Native.
+
 ## Getting started
 ```js
     npm install react-native-element-dropdown --save
@@ -185,13 +189,3 @@ or
         },
     });
 ```
-
-### Suggested Packages
-- [react-native-utils-scale](https://www.npmjs.com/package/react-native-utils-scale) Provide solutions to make your app flexible for different screen sizes, different devices.
-- [react-native-element-image](https://www.npmjs.com/package/react-native-element-image) Automatically calculate width or height based on input Image component for React Native.
-- [react-native-element-textinput](https://www.npmjs.com/package/react-native-element-textinput) A react-native TextInput component easy to customize for both iOS and Android.
-- [react-native-element-timer](https://www.npmjs.com/package/react-native-element-timer) React Native Timer Countdown.
-- [react-native-vertical-swipe-view](https://www.npmjs.com/package/react-native-vertical-swipe-view) React Native Vertical Swipe View.
-- [react-native-checkbox-tree](https://www.npmjs.com/package/react-native-checkbox-tree) A simple and elegant checkbox tree for React Native.
-- [react-native-curved-bottom-bar](https://www.npmjs.com/package/react-native-curved-bottom-bar) A high performance, beautiful and fully customizable curved bottom navigation bar for React Native.
-- [react-native-webrtc-simple](https://www.npmjs.com/package/react-native-webrtc-simple) A simple and easy to use module that help in making video call for React Native.
