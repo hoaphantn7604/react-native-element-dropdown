@@ -3,7 +3,8 @@ import {
   Dimensions, FlatList,
   Image, Modal, Text, TouchableOpacity,
   TouchableWithoutFeedback,
-  View
+  View,
+  ViewStyle
 } from 'react-native';
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
@@ -54,7 +55,6 @@ const MultiSelectComponent: MultiSelect = (props) => {
   const ref = useRef(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any[]>([]);
-  const [textSearch, setTextSearch] = useState<string>('');
   const [listData, setListData] = useState<any[]>(data);
   const [key, setKey] = useState<number>(Math.random());
   const [position, setPosition] = useState<any>();
@@ -130,7 +130,6 @@ const MultiSelectComponent: MultiSelect = (props) => {
   };
 
   const onSearch = (text: string) => {
-    setTextSearch(text);
     if (text.length > 0) {
       const dataSearch = data.filter(e => {
         const item = e[labelField]?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -197,9 +196,9 @@ const MultiSelectComponent: MultiSelect = (props) => {
       } = position
       if (w && top && bottom) {
 
-        const styleContainerVertical = { backgroundColor: 'rgba(0,0,0,0.2)', alignItems: 'center' };
-        const styleVertical = { marginBottom: scale(20), width: W / 2, alignSelf: 'center' };
-        const styleHorizontal = { left: left, maxHeight: maxHeight };
+        const styleContainerVertical: ViewStyle = { backgroundColor: 'rgba(0,0,0,0.2)', alignItems: 'center' };
+        const styleVertical: ViewStyle = { marginBottom: scale(20), width: W / 2, alignSelf: 'center' };
+        const styleHorizontal: ViewStyle = { left: left, maxHeight: maxHeight };
 
         return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
           <TouchableWithoutFeedback onPress={showOrClose}>

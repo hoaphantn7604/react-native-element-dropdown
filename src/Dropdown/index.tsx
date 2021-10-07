@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Dimensions, FlatList,
   Image, Modal,
   Text, TouchableOpacity,
   TouchableWithoutFeedback,
-  View
+  View,
+  ViewStyle
 } from 'react-native';
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
@@ -16,7 +17,7 @@ const { isTablet } = useDetectDevice;
 const { scale } = useScale;
 const ic_down = require('../assets/icon/down.png');
 
-const deepEqual = (x, y) => {
+const deepEqual: any = (x: any, y: any) => {
   const ok = Object.keys,
     tx = typeof x,
     ty = typeof y;
@@ -66,7 +67,6 @@ const DropdownComponent: Dropdown = (props) => {
   const refList = useRef(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>(null);
-  const [textSearch, setTextSearch] = useState<string>('');
   const [listData, setListData] = useState<any[]>(data);
   const [position, setPosition] = useState<any>();
   const { width: W, height: H } = Dimensions.get('window');
@@ -94,22 +94,38 @@ const DropdownComponent: Dropdown = (props) => {
     }
   };
 
-  const scrollToIndex = useMemo(() => {
-    if (textSearch.length === 0) {
-      const index = data.findIndex(e => value === e[valueField]);
-      if (index !== -1) {
-        return index;
-      }
-      return 0;
-    }
-  }, [value, data]);
-
   const showOrClose = () => {
     if (!disable) {
       _measure();
       setVisible(!visible);
       setListData(data);
     }
+    scrollIndex();
+  };
+
+  const onSearch = (text: string) => {
+    if (text.length > 0) {
+      const dataSearch = data.filter(e => {
+        const item = e[labelField]?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const key = text.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+        return item.indexOf(key) >= 0
+      });
+      setListData(dataSearch);
+    } else {
+      setListData(data);
+    }
+  };
+
+  const scrollIndex = () => {
+    setTimeout(() => {
+      if (refList) {
+        const index = data.findIndex(e => value === e[valueField]);
+        if (index !== -1) {
+          refList?.current?.scrollToIndex({ index: index, animated: false });
+        }
+      }
+    }, 200);
   };
 
   const onSelect = (item: any) => {
@@ -145,34 +161,10 @@ const DropdownComponent: Dropdown = (props) => {
     );
   };
 
-  const onSearch = (text: string) => {
-    setTextSearch(text);
-    if (text.length > 0) {
-      const dataSearch = data.filter(e => {
-        const item = e[labelField]?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        const key = text.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-
-        return item.indexOf(key) >= 0
-      });
-      setListData(dataSearch);
-    } else {
-      setListData(data);
-    }
-  };
-
-  const scrollIndex = () => {
-    setTimeout(() => {
-      refList.current.scrollToIndex({ index: scrollToIndex, animated: false });
-    }, 200);
-
-  };
-
   const _renderListTop = () => {
     return <View style={{ flex: 1 }}>
       <FlatList
         ref={refList}
-        initialScrollIndex={scrollToIndex}
-        onScrollToIndexFailed={scrollIndex}
         data={listData}
         inverted
         renderItem={_renderItem}
@@ -204,8 +196,6 @@ const DropdownComponent: Dropdown = (props) => {
       />}
       <FlatList
         ref={refList}
-        initialScrollIndex={scrollToIndex}
-        onScrollToIndexFailed={scrollIndex}
         data={listData}
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
@@ -225,9 +215,9 @@ const DropdownComponent: Dropdown = (props) => {
       } = position
       if (w && top && bottom) {
 
-        const styleContainerVertical = { backgroundColor: 'rgba(0,0,0,0.2)', alignItems: 'center' };
-        const styleVertical = { marginBottom: scale(20), width: W / 2, alignSelf: 'center' };
-        const styleHorizontal = { left: left, maxHeight: maxHeight };
+        const styleContainerVertical: ViewStyle = { backgroundColor: 'rgba(0,0,0,0.2)', alignItems: 'center' };
+        const styleVertical: ViewStyle = { marginBottom: scale(20), width: W / 2, alignSelf: 'center' };
+        const styleHorizontal: ViewStyle = { left: left, maxHeight: maxHeight };
 
         return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
           <TouchableWithoutFeedback onPress={showOrClose}>
