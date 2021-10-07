@@ -165,6 +165,7 @@ const DropdownComponent: Dropdown = (props) => {
     return <View style={{ flex: 1 }}>
       <FlatList
         ref={refList}
+        onScrollToIndexFailed={scrollIndex}
         data={listData}
         inverted
         renderItem={_renderItem}
@@ -196,6 +197,7 @@ const DropdownComponent: Dropdown = (props) => {
       />}
       <FlatList
         ref={refList}
+        onScrollToIndexFailed={scrollIndex}
         data={listData}
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
