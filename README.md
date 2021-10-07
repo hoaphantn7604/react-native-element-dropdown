@@ -1,9 +1,6 @@
 ## react-native-element-dropdown
 A React Native dropdown component easy to customize for both iOS and Android.
 
-#### Source code demo
-- [react-native-template-components](https://github.com/hoaphantn7604/react-native-template-components) A beautiful template for React Native.
-
 ## Getting started
 ```js
     npm install react-native-element-dropdown --save
@@ -23,6 +20,8 @@ or
     cd ios && pod install
 ```
 
+#### Source code demo
+- [react-native-template-components](https://github.com/hoaphantn7604/react-native-template-components) A beautiful template for React Native.
 #### Demo
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo.png)
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo2.png)
