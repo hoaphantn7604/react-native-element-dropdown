@@ -73,10 +73,10 @@ const MultiSelectComponent: MultiSelect = (props) => {
     }
   };
 
-  const onKeyboardDidShow =(e: KeyboardEvent)=> {
+  const onKeyboardDidShow = (e: KeyboardEvent) => {
     setKeyboardHeight(e.endCoordinates.height);
   }
-  const onKeyboardDidHide =()=> {
+  const onKeyboardDidHide = () => {
     setKeyboardHeight(0);
   }
 
@@ -161,6 +161,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
   const _renderListTop = () => {
     return <View style={{ flex: 1 }}>
       <FlatList
+        keyboardShouldPersistTaps="handled"
         data={listData}
         inverted
         renderItem={_renderItem}
@@ -175,8 +176,8 @@ const MultiSelectComponent: MultiSelect = (props) => {
         onChangeText={onSearch}
         placeholderTextColor="gray"
         iconStyle={{ tintColor: iconColor }}
-        onFocus={()=> setFocus(true)}
-        onBlur={()=> {setFocus(false)}}
+        onFocus={() => setFocus(true)}
+        onBlur={() => { setFocus(false) }}
       />}
     </View>
   };
@@ -192,10 +193,11 @@ const MultiSelectComponent: MultiSelect = (props) => {
         onChangeText={onSearch}
         placeholderTextColor="gray"
         iconStyle={{ tintColor: iconColor }}
-        onFocus={()=> setFocus(true)}
-        onBlur={()=> {setFocus(false)}}
+        onFocus={() => setFocus(true)}
+        onBlur={() => { setFocus(false) }}
       />}
       <FlatList
+        keyboardShouldPersistTaps="handled"
         data={listData}
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
@@ -220,8 +222,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
         const styleHorizontal: ViewStyle = { left: left, maxHeight: maxHeight };
         const isTopPosition = bottom < maxHeight;
         const keyboadPosition = keyboardHeight - bottom;
-        const marginTop = isTopPosition ? (focus && keyboardHeight > 0 ? top - keyboadPosition : top) : top;
-
+        const marginTop = isTopPosition ? (focus && keyboardHeight > 0 && keyboardHeight > bottom ? top - keyboadPosition : top) : top;
 
         return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
           <TouchableWithoutFeedback onPress={showOrClose}>

@@ -84,10 +84,10 @@ const DropdownComponent: DropdownProps = (props) => {
     }
   };
 
-  const onKeyboardDidShow =(e: KeyboardEvent)=> {
+  const onKeyboardDidShow = (e: KeyboardEvent) => {
     setKeyboardHeight(e.endCoordinates.height);
   }
-  const onKeyboardDidHide =()=> {
+  const onKeyboardDidHide = () => {
     setKeyboardHeight(0);
   }
 
@@ -179,6 +179,7 @@ const DropdownComponent: DropdownProps = (props) => {
   const _renderListTop = () => {
     return <View style={{ flex: 1 }}>
       <FlatList
+        keyboardShouldPersistTaps="handled"
         ref={refList}
         onScrollToIndexFailed={scrollIndex}
         data={listData}
@@ -195,8 +196,8 @@ const DropdownComponent: DropdownProps = (props) => {
         onChangeText={onSearch}
         placeholderTextColor="gray"
         iconStyle={{ tintColor: iconColor }}
-        onFocus={()=> setFocus(true)}
-        onBlur={()=> {setFocus(false)}}
+        onFocus={() => setFocus(true)}
+        onBlur={() => { setFocus(false) }}
       />}
     </View>
   };
@@ -211,10 +212,11 @@ const DropdownComponent: DropdownProps = (props) => {
         onChangeText={onSearch}
         placeholderTextColor="gray"
         iconStyle={{ tintColor: iconColor }}
-        onFocus={()=> setFocus(true)}
-        onBlur={()=> {setFocus(false)}}
+        onFocus={() => setFocus(true)}
+        onBlur={() => { setFocus(false) }}
       />}
       <FlatList
+        keyboardShouldPersistTaps="handled"
         ref={refList}
         onScrollToIndexFailed={scrollIndex}
         data={listData}
@@ -241,7 +243,7 @@ const DropdownComponent: DropdownProps = (props) => {
         const styleHorizontal: ViewStyle = { left: left, maxHeight: maxHeight };
         const isTopPosition = bottom < maxHeight;
         const keyboadPosition = keyboardHeight - bottom;
-        const marginTop = isTopPosition ? (focus && keyboardHeight > 0 ? top - keyboadPosition : top) : top;
+        const marginTop = isTopPosition ? (focus && keyboardHeight > 0 && keyboardHeight > bottom ? top - keyboadPosition : top) : top;
 
         return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
           <TouchableWithoutFeedback onPress={showOrClose}>
