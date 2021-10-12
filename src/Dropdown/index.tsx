@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Dimensions, FlatList,
-  Image, Modal,
+  Image, Keyboard, Modal,
   Text, TouchableOpacity,
   TouchableWithoutFeedback,
   View,
-  ViewStyle
+  ViewStyle,
+  KeyboardEvent
 } from 'react-native';
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
@@ -69,6 +70,8 @@ const DropdownComponent: DropdownProps = (props) => {
   const [currentValue, setCurrentValue] = useState<any>(null);
   const [listData, setListData] = useState<any[]>(data);
   const [position, setPosition] = useState<any>();
+  const [focus, setFocus] = useState<boolean>(false);
+  const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
   const { width: W, height: H } = Dimensions.get('window');
 
   const font = () => {
@@ -80,6 +83,18 @@ const DropdownComponent: DropdownProps = (props) => {
       return {}
     }
   };
+
+  const onKeyboardDidShow =(e: KeyboardEvent)=> {
+    setKeyboardHeight(e.endCoordinates.height);
+  }
+  const onKeyboardDidHide =()=> {
+    setKeyboardHeight(0);
+  }
+
+  useEffect(() => {
+    Keyboard.addListener('keyboardDidShow', onKeyboardDidShow);
+    Keyboard.addListener('keyboardDidHide', onKeyboardDidHide);
+  }, []);
 
   useEffect(() => {
     getValue();
@@ -180,6 +195,8 @@ const DropdownComponent: DropdownProps = (props) => {
         onChangeText={onSearch}
         placeholderTextColor="gray"
         iconStyle={{ tintColor: iconColor }}
+        onFocus={()=> setFocus(true)}
+        onBlur={()=> {setFocus(false)}}
       />}
     </View>
   };
@@ -194,6 +211,8 @@ const DropdownComponent: DropdownProps = (props) => {
         onChangeText={onSearch}
         placeholderTextColor="gray"
         iconStyle={{ tintColor: iconColor }}
+        onFocus={()=> setFocus(true)}
+        onBlur={()=> {setFocus(false)}}
       />}
       <FlatList
         ref={refList}
@@ -220,17 +239,20 @@ const DropdownComponent: DropdownProps = (props) => {
         const styleContainerVertical: ViewStyle = { backgroundColor: 'rgba(0,0,0,0.2)', alignItems: 'center' };
         const styleVertical: ViewStyle = { marginBottom: scale(20), width: W / 2, alignSelf: 'center' };
         const styleHorizontal: ViewStyle = { left: left, maxHeight: maxHeight };
+        const isTopPosition = bottom < maxHeight;
+        const keyboadPosition = keyboardHeight - bottom;
+        const marginTop = isTopPosition ? (focus && keyboardHeight > 0 ? top - keyboadPosition : top) : top;
 
         return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
           <TouchableWithoutFeedback onPress={showOrClose}>
             <View style={[{ width: W, height: H }, isFull && styleContainerVertical]}>
-              <View style={{ height: top, width: w, justifyContent: 'flex-end' }}>
-                {bottom < maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleVertical : styleHorizontal]}>
+              <View style={{ height: marginTop, width: w, justifyContent: 'flex-end' }}>
+                {isTopPosition && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleVertical : styleHorizontal]}>
                   {_renderListTop()}
                 </View>}
               </View>
               <View style={{ height: bottom, width: w }}>
-                {bottom > maxHeight && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleVertical : styleHorizontal]}>
+                {!isTopPosition && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleVertical : styleHorizontal]}>
                   {_renderListBottom()}
                 </View>}
               </View>
