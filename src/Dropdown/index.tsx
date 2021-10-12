@@ -11,7 +11,7 @@ import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
 import { useDetectDevice, useScale } from '../utilsScale';
 import { styles } from './styles';
-import { Dropdown } from './type';
+import { DropdownProps } from './type';
 const { isTablet } = useDetectDevice;
 
 const { scale } = useScale;
@@ -36,7 +36,7 @@ const defaultProps = {
   selectedTextProps: {}
 }
 
-const DropdownComponent: Dropdown = (props) => {
+const DropdownComponent: DropdownProps = (props) => {
   const orientation = useDeviceOrientation();
   const {
     onChange,

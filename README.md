@@ -79,6 +79,14 @@ or
 | renderItem         | (item) => JSX.Element                                | No        |                  |
 | renderSelectedItem | (item, unSelect?: (item) => void) => JSX.Element      | No        |                  |
 
+
+#### SelectCountry extends Dropdown 
+| Props              | Params               | isRequire | Description      |
+| ------------------ | -------------------- | --------- | ---------------- |
+| imageField         | String               | Yes       |                  |
+| imageStyle         | ImageStyle           | No        |                  |
+
+
 ## Usage
 ```javascript
     import React, {useState} from 'react';
