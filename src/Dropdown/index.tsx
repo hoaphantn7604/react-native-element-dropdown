@@ -304,11 +304,9 @@ const DropdownComponent: DropdownProps = (props) => {
   };
 
   return (
-    <View >
-      <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
-        {_renderDropdown()}
-        {_renderModal()}
-      </View>
+    <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
+      {_renderDropdown()}
+      {_renderModal()}
     </View>
   );
 };

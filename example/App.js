@@ -85,8 +85,11 @@ const local_data = [
 
 const DropdownScreen = _props => {
   const [dropdown, setDropdown] = useState(null);
+  const [dropdown2, setDropdown2] = useState(null);
   const [selected, setSelected] = useState(null);
+  const [selected2, setSelected2] = useState(null);
   const [country, setCountry] = useState(null);
+  const [country2, setCountry2] = useState(null);
 
   const _renderItem = item => {
     return (
@@ -118,20 +121,73 @@ const DropdownScreen = _props => {
         renderItem={item => _renderItem(item)}
       />
 
-      <SelectCountry
-        style={styles.dropdown}
-        selectedTextStyle={styles.selectedText}
+      <Dropdown
+        style={styles.dropdown2}
+        data={data}
         search
-        value={country}
-        data={local_data}
+        searchPlaceholder="Search"
+        labelField="label"
         valueField="value"
-        labelField="lable"
-        imageField="image"
         placeholder="Select item"
-        searchPlaceholder="Search..."
-        onChange={e => {
-          setCountry(e.value);
+        value={dropdown2}
+        onChange={item => {
+          setDropdown2(item.value);
+          console.log('selected', item);
         }}
+        renderLeftIcon={() => (
+          <Image style={styles.icon} source={require('./assets/account.png')} />
+        )}
+        renderItem={item => _renderItem(item)}
+      />
+
+      <View style={styles.row}>
+        <SelectCountry
+          style={[styles.dropdown, {flex: 1, marginRight:10}]}
+          selectedTextStyle={styles.selectedText}
+          search
+          value={country}
+          data={local_data}
+          valueField="value"
+          labelField="lable"
+          imageField="image"
+          placeholder="Select item"
+          searchPlaceholder="Search..."
+          onChange={e => {
+            setCountry(e.value);
+          }}
+        />
+
+        <SelectCountry
+          style={[styles.dropdown, {flex: 1, marginLeft:10}]}
+          selectedTextStyle={styles.selectedText}
+          search
+          value={country2}
+          data={local_data}
+          valueField="value"
+          labelField="lable"
+          imageField="image"
+          placeholder="Select item"
+          searchPlaceholder="Search..."
+          onChange={e => {
+            setCountry2(e.value);
+          }}
+        />
+      </View>
+
+      <MultiSelect
+        style={styles.dropdown}
+        data={data}
+        labelField="label"
+        valueField="value"
+        placeholder="Select item"
+        search
+        searchPlaceholder="Search"
+        value={selected}
+        onChange={item => {
+          setSelected(item);
+          console.log('selected', item);
+        }}
+        renderItem={item => _renderItem(item)}
       />
 
       <MultiSelect
@@ -142,9 +198,9 @@ const DropdownScreen = _props => {
         placeholder="Select item"
         search
         searchPlaceholder="Search"
-        value={selected}
+        value={selected2}
         onChange={item => {
-          setSelected(item);
+          setSelected2(item);
           console.log('selected', item);
         }}
         renderItem={item => _renderItem(item)}
@@ -165,13 +221,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderBottomColor: 'gray',
     borderBottomWidth: 0.5,
-    marginTop: 20,
+    marginTop: 80,
   },
   dropdown2: {
     backgroundColor: 'white',
     borderColor: 'gray',
     borderWidth: 0.5,
-    marginTop: 20,
+    marginTop: 80,
     padding: 8,
   },
   icon: {
@@ -192,5 +248,8 @@ const styles = StyleSheet.create({
   },
   selectedText: {
     marginLeft: 8,
+  },
+  row: {
+    flexDirection: 'row',
   },
 });

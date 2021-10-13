@@ -82,11 +82,13 @@ const TextInputComponent: CTextInput = (props) => {
           renderRightIcon()
         );
       }
-      return (
-        <TouchableOpacity onPress={() => onChange('')}>
-          <Image source={ic_close} style={[styles.icon, iconStyle]} />
-        </TouchableOpacity>)
-      
+      if(text.length > 0){
+        return (
+          <TouchableOpacity onPress={() => onChange('')}>
+            <Image source={ic_close} style={[styles.icon, iconStyle]} />
+          </TouchableOpacity>)
+      }
+      return null;   
     }
     return null;
   };
