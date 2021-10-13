@@ -86,6 +86,11 @@ const MultiSelectComponent: MultiSelect = (props) => {
   useEffect(() => {
     Keyboard.addListener('keyboardDidShow', onKeyboardDidShow);
     Keyboard.addListener('keyboardDidHide', onKeyboardDidHide);
+
+    return ()=>{
+      Keyboard.removeAllListeners('keyboardDidShow');
+      Keyboard.removeAllListeners('keyboardDidHide');
+    }
   }, []);
 
   useEffect(() => {
@@ -184,7 +189,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
         style={[styles.input, inputSearchStyle]}
         inputStyle={font()}
         autoCorrect={false}
-        keyboardType="visible-password"
+        keyboardType={isIOS ? 'default' : 'visible-password'}
         placeholder={searchPlaceholder}
         onChangeText={onSearch}
         placeholderTextColor="gray"
@@ -202,7 +207,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
         style={[styles.input, inputSearchStyle]}
         inputStyle={font()}
         autoCorrect={false}
-        keyboardType="visible-password"
+        keyboardType={isIOS ? 'default' : 'visible-password'}
         placeholder={searchPlaceholder}
         onChangeText={onSearch}
         placeholderTextColor="gray"
