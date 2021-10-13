@@ -23,10 +23,10 @@ or
 #### Source code demo
 - [react-native-template-components](https://github.com/hoaphantn7604/react-native-template-components) A beautiful template for React Native.
 #### Demo
-| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo.png) |![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo2.png)|
-| ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo3.png)|![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo4.png)|
-
+![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo.png)
+![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo2.png)
+![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo3.png)
+![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo4.png)
 
 #### Dropdown Props
 | Props              | Params               | isRequire | Description      |
