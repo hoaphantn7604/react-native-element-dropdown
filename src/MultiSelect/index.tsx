@@ -5,7 +5,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
-  KeyboardEvent
+  KeyboardEvent,
 } from 'react-native';
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
@@ -14,7 +14,7 @@ import { styles } from './styles';
 import { MultiSelect } from './type';
 
 const { scale, fontScale } = useScale;
-
+const { isTablet, isIOS } = useDetectDevice;
 const ic_down = require('../assets/icon/down.png');
 
 const defaultProps = {
@@ -50,7 +50,9 @@ const MultiSelectComponent: MultiSelect = (props) => {
     renderItem,
     renderLeftIcon,
     renderRightIcon,
-    renderSelectedItem
+    renderSelectedItem,
+    onFocus,
+    onBlur
   } = props;
 
   const ref = useRef(null);
@@ -74,11 +76,12 @@ const MultiSelectComponent: MultiSelect = (props) => {
   };
 
   const onKeyboardDidShow = (e: KeyboardEvent) => {
-    setKeyboardHeight(e.endCoordinates.height);
-  }
+    setKeyboardHeight(e.endCoordinates.height + (isIOS ? 0 : 30));
+  };
+
   const onKeyboardDidHide = () => {
     setKeyboardHeight(0);
-  }
+  };
 
   useEffect(() => {
     Keyboard.addListener('keyboardDidShow', onKeyboardDidShow);
@@ -98,8 +101,17 @@ const MultiSelectComponent: MultiSelect = (props) => {
       _measure();
       setVisible(!visible);
       setListData(data);
-    }
 
+      if (!visible) {
+        if (onFocus) {
+          onFocus();
+        }
+      } else {
+        if (onBlur) {
+            onBlur();
+        }
+      }
+    }
   };
 
   const onSelect = (item: any) => {
@@ -172,6 +184,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
         style={[styles.input, inputSearchStyle]}
         inputStyle={font()}
         autoCorrect={false}
+        keyboardType="visible-password"
         placeholder={searchPlaceholder}
         onChangeText={onSearch}
         placeholderTextColor="gray"
@@ -189,6 +202,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
         style={[styles.input, inputSearchStyle]}
         inputStyle={font()}
         autoCorrect={false}
+        keyboardType="visible-password"
         placeholder={searchPlaceholder}
         onChangeText={onSearch}
         placeholderTextColor="gray"
@@ -222,7 +236,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
         const styleHorizontal: ViewStyle = { left: left, maxHeight: maxHeight };
         const isTopPosition = bottom < maxHeight;
         const keyboadPosition = keyboardHeight - bottom;
-        const marginTop = isTopPosition ? (focus && keyboardHeight > 0 && keyboardHeight > bottom ? top - keyboadPosition : top) : top;
+        const marginTop = isTopPosition ? (focus && keyboardHeight > 0 && keyboardHeight > bottom ? top - keyboadPosition : top) : focus && bottom < keyboardHeight + scale(50) ? top - (keyboardHeight - bottom + scale(50)) : top;
 
         return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
           <TouchableWithoutFeedback onPress={showOrClose}>
@@ -250,7 +264,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     if (ref) {
       ref.current.measure((width, height, px, py, fx, fy) => {
 
-        const isFull = orientation === 'LANDSCAPE' && !useDetectDevice.isTablet;
+        const isFull = orientation === 'LANDSCAPE' && !isTablet;
         const w = px;
         const top = isFull ? scale(20) : py + fy + scale(2);
         const bottom = H - top;

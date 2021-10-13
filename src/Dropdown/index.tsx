@@ -6,15 +6,15 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
-  KeyboardEvent
+  KeyboardEvent,
 } from 'react-native';
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
 import { useDetectDevice, useScale } from '../utilsScale';
 import { styles } from './styles';
 import { DropdownProps } from './type';
-const { isTablet } = useDetectDevice;
 
+const { isTablet, isIOS } = useDetectDevice;
 const { scale } = useScale;
 const ic_down = require('../assets/icon/down.png');
 
@@ -61,7 +61,9 @@ const DropdownComponent: DropdownProps = (props) => {
     disable = false,
     renderLeftIcon,
     renderRightIcon,
-    renderItem
+    renderItem,
+    onFocus,
+    onBlur
   } = props;
 
   const ref = useRef(null);
@@ -85,11 +87,12 @@ const DropdownComponent: DropdownProps = (props) => {
   };
 
   const onKeyboardDidShow = (e: KeyboardEvent) => {
-    setKeyboardHeight(e.endCoordinates.height);
-  }
+    setKeyboardHeight(e.endCoordinates.height + (isIOS ? 0 : 30));
+  };
+
   const onKeyboardDidHide = () => {
     setKeyboardHeight(0);
-  }
+  };
 
   useEffect(() => {
     Keyboard.addListener('keyboardDidShow', onKeyboardDidShow);
@@ -114,6 +117,16 @@ const DropdownComponent: DropdownProps = (props) => {
       _measure();
       setVisible(!visible);
       setListData(data);
+
+      if (!visible) {
+        if (onFocus) {
+          onFocus();
+        }
+      } else {
+        if (onBlur) {
+            onBlur();
+        }
+      }
     }
     scrollIndex();
   };
@@ -192,6 +205,7 @@ const DropdownComponent: DropdownProps = (props) => {
         style={[styles.input, inputSearchStyle]}
         inputStyle={font()}
         autoCorrect={false}
+        keyboardType="visible-password"
         placeholder={searchPlaceholder}
         onChangeText={onSearch}
         placeholderTextColor="gray"
@@ -208,6 +222,7 @@ const DropdownComponent: DropdownProps = (props) => {
         style={[styles.input, inputSearchStyle]}
         inputStyle={font()}
         autoCorrect={false}
+        keyboardType="visible-password"
         placeholder={searchPlaceholder}
         onChangeText={onSearch}
         placeholderTextColor="gray"
@@ -243,7 +258,7 @@ const DropdownComponent: DropdownProps = (props) => {
         const styleHorizontal: ViewStyle = { left: left, maxHeight: maxHeight };
         const isTopPosition = bottom < maxHeight;
         const keyboadPosition = keyboardHeight - bottom;
-        const marginTop = isTopPosition ? (focus && keyboardHeight > 0 && keyboardHeight > bottom ? top - keyboadPosition : top) : top;
+        const marginTop = isTopPosition ? (focus && keyboardHeight > 0 && keyboardHeight > bottom ? top - keyboadPosition : top) : focus && bottom < keyboardHeight + scale(50) ? top - (keyboardHeight - bottom + scale(50)) : top;
 
         return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
           <TouchableWithoutFeedback onPress={showOrClose}>

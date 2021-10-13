@@ -25,6 +25,8 @@ interface Props {
   renderRightIcon?: () => JSX.Element | null | undefined;
   renderItem?: (item: any) => JSX.Element | null | undefined;
   renderSelectedItem?: (item: any, unSelect?: (item: any) => void) => JSX.Element | null | undefined;
+  onFocus?:() => void;
+  onBlur?:() => void;
 };
 
 export type MultiSelect = React.FC<Props>;

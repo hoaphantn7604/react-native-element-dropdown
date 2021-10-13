@@ -24,6 +24,8 @@ export interface PropsDropdown {
     renderLeftIcon?: () => JSX.Element | null | undefined;
     renderRightIcon?: () => JSX.Element | null | undefined;
     renderItem?: (item: any) => JSX.Element | null | undefined;
+    onFocus?:() => void;
+    onBlur?:() => void;
   };
 
   export type DropdownProps = React.FC<PropsDropdown>;

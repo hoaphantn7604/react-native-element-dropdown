@@ -51,6 +51,8 @@ or
 | renderLeftIcon     | () => JSX.Element    | No        |                  |
 | renderRightIcon    | () => JSX.Element    | No        |                  |
 | renderItem         | (item) => JSX.Element| No        |                  |
+| onFocus            | () => void           | No        |                  |
+| onBlur             | () => void           | No        |                  |
 
 #### MultiSelect Props
 | Props              | Params                                               | isRequire | Description      |
@@ -77,7 +79,9 @@ or
 | renderLeftIcon     | () => JSX.Element                                    | No        |                  |
 | renderRightIcon    | () => JSX.Element                                    | No        |                  |
 | renderItem         | (item) => JSX.Element                                | No        |                  |
-| renderSelectedItem | (item, unSelect?: (item) => void) => JSX.Element      | No        |                  |
+| renderSelectedItem | (item, unSelect?: (item) => void) => JSX.Element     | No        |                  |
+| onFocus            | () => void                                           | No        |                  |
+| onBlur             | () => void                                           | No        |                  |
 
 
 #### SelectCountry extends Dropdown 
