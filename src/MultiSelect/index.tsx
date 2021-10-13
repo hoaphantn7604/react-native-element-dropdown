@@ -84,12 +84,12 @@ const MultiSelectComponent: MultiSelect = (props) => {
   };
 
   useEffect(() => {
-    Keyboard.addListener('keyboardDidShow', onKeyboardDidShow);
-    Keyboard.addListener('keyboardDidHide', onKeyboardDidHide);
-
+    const susbcriptionKeyboardDidShow = Keyboard.addListener('keyboardDidShow', onKeyboardDidShow);
+    const susbcriptionKeyboardDidHide = Keyboard.addListener('keyboardDidHide', onKeyboardDidHide);
+    
     return ()=>{
-      Keyboard.removeAllListeners('keyboardDidShow');
-      Keyboard.removeAllListeners('keyboardDidHide');
+      susbcriptionKeyboardDidShow.remove();
+      susbcriptionKeyboardDidHide.remove();
     }
   }, []);
 
