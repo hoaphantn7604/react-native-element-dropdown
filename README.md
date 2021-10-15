@@ -1,6 +1,13 @@
 ## react-native-element-dropdown
 A React Native dropdown component easy to customize for both iOS and Android.
 
+## Features
+* Dropdown and Multiselect in one package
+* Easy to use
+* Consistent look and feel on iOS and Android
+* Customizable font size, colors and animation duration
+* Implemented with typescript
+
 ## Getting started
 ```js
     npm install react-native-element-dropdown --save
