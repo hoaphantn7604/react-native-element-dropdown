@@ -271,10 +271,10 @@ const MultiSelectComponent: MultiSelect = (props) => {
       ref.current.measure((width, height, px, py, fx, fy) => {
 
         const isFull = orientation === 'LANDSCAPE' && !isTablet;
-        const w = px;
-        const top = isFull ? scale(20) : py + fy + scale(2);
+        const w = parseInt(px);
+        const top = isFull ? scale(20) : parseInt(py) + parseInt(fy) + scale(2);
         const bottom = H - top;
-        const left = fx;
+        const left = parseInt(fx);
 
         setPosition({
           isFull,
