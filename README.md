@@ -15,12 +15,12 @@ or
 ```js
     react-native link react-native-element-dropdown
 ```
-### Build IOS
+### Setup IOS
 ```js
     - pod install
     - react-native run-ios
 ```
-### Build Android
+### Setup Android
 ```js
     - react-native run-android
 ```
