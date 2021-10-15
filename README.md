@@ -55,7 +55,7 @@ or
 | maxHeight          | Number               | No        | Customize height for container list                                 |
 | fontFamily         | String               | No        | Customize font style                                                |
 | iconColor          | String               | No        | Color of icons                                                      |
-| activeColor        | String               | No        | Background color for item selected                                  |
+| activeColor        | String               | No        | Background color for item selected in container list                |
 | search             | Boolean              | No        | Show or hide input search                                           |
 | inputSearchStyle   | ViewStyle            | No        | Styling for input search                                            |
 | searchPlaceholder  | String               | No        | The string that will be rendered before text input has been entered |
