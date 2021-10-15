@@ -81,7 +81,7 @@ or
 | maxHeight          | Number                                               | No        | Customize height for container list                                 |
 | fontFamily         | String                                               | No        | Customize font style                                                |
 | iconColor          | String                                               | No        | Color of icons                                                      |
-| activeColor        | String                                               | No        | Background color for item selected                                  |
+| activeColor        | String                                               | No        | Background color for item selected in container list                |
 | selectedStyle      | ViewStyle                                            | No        | Styling for selected view                                           |
 | selectedTextStyle  | TextStyle                                            | No        | Styling for selected text                                           |
 | renderSelectedItem | (item, unSelect?: (item) => void) => JSX.Element     | No        | Takes an item from data and renders it into the list selected       |
