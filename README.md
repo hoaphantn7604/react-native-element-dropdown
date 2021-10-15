@@ -52,8 +52,8 @@ or
 | selectedTextProps  | TextProps            | No        | Text Props for selected text. Ex: numberOfLines={1}                 |
 | style              | ViewStyle            | No        | Styling for container view                                          |
 | containerStyle     | ViewStyle            | No        | Styling for container list                                          |
-| maxHeight          | Number               | No        | Set height for container list                                       |
-| fontFamily         | String               | No        | Set font style                                                      |
+| maxHeight          | Number               | No        | Customize height for container list                                 |
+| fontFamily         | String               | No        | Customize font style                                                |
 | iconColor          | String               | No        | Color of icons                                                      |
 | activeColor        | String               | No        | Background color for item selected                                  |
 | search             | Boolean              | No        | Show or hide input search                                           |
@@ -78,8 +78,8 @@ or
 | placeholderStyle   | TextStyle                                            | No        | Styling for text placeholder                                        |
 | style              | ViewStyle                                            | No        | Styling for container view                                          |
 | containerStyle     | ViewStyle                                            | No        | Styling for container list                                          |
-| maxHeight          | Number                                               | No        | Set height for container list                                       |
-| fontFamily         | String                                               | No        | Set font style                                                      |
+| maxHeight          | Number                                               | No        | Customize height for container list                                 |
+| fontFamily         | String                                               | No        | Customize font style                                                |
 | iconColor          | String                                               | No        | Color of icons                                                      |
 | activeColor        | String                                               | No        | Background color for item selected                                  |
 | selectedStyle      | ViewStyle                                            | No        | Styling for selected view                                           |
