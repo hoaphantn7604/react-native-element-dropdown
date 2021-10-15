@@ -24,12 +24,12 @@ or
 ```
 ### Setup IOS
 ```js
-    - pod install
-    - react-native run-ios
+    pod install
+    react-native run-ios
 ```
 ### Setup Android
 ```js
-    - react-native run-android
+    react-native run-android
 ```
 
 
