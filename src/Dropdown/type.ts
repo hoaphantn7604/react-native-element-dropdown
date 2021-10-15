@@ -21,6 +21,7 @@ export interface PropsDropdown {
     searchPlaceholder?: string;
     disable?: boolean;
     autoScroll?: boolean;
+    showsVerticalScrollIndicator?: boolean;
     onChange: (item: any) => void;
     renderLeftIcon?: () => JSX.Element | null | undefined;
     renderRightIcon?: () => JSX.Element | null | undefined;

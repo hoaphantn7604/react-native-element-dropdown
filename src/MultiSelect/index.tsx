@@ -52,7 +52,8 @@ const MultiSelectComponent: MultiSelect = (props) => {
     renderRightIcon,
     renderSelectedItem,
     onFocus,
-    onBlur
+    onBlur,
+    showsVerticalScrollIndicator = true
   } = props;
 
   const ref = useRef(null);
@@ -183,7 +184,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
         inverted
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
-        showsVerticalScrollIndicator={true}
+        showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
       {search && <CInput
         style={[styles.input, inputSearchStyle]}
@@ -220,7 +221,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
         data={listData}
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
-        showsVerticalScrollIndicator={true}
+        showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
     </View>
   };

@@ -19,6 +19,7 @@ interface Props {
   valueField: string;
   search?: boolean;
   disable?: boolean;
+  showsVerticalScrollIndicator?: boolean;
   searchPlaceholder?: string
   onChange: (item: any) => void;
   renderLeftIcon?: () => JSX.Element | null | undefined;

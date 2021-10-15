@@ -64,7 +64,8 @@ const DropdownComponent: DropdownProps = (props) => {
     renderItem,
     onFocus,
     onBlur,
-    autoScroll = true
+    autoScroll = true,
+    showsVerticalScrollIndicator = true
   } = props;
 
   const ref = useRef(null);
@@ -207,7 +208,7 @@ const DropdownComponent: DropdownProps = (props) => {
         inverted
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
-        showsVerticalScrollIndicator={true}
+        showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
       {search && <CInput
         style={[styles.input, inputSearchStyle]}
@@ -245,7 +246,7 @@ const DropdownComponent: DropdownProps = (props) => {
         data={listData}
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
-        showsVerticalScrollIndicator={true}
+        showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
     </View>
   };
