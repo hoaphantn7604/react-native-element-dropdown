@@ -63,7 +63,8 @@ const DropdownComponent: DropdownProps = (props) => {
     renderRightIcon,
     renderItem,
     onFocus,
-    onBlur
+    onBlur,
+    autoScroll = true
   } = props;
 
   const ref = useRef(null);
@@ -151,14 +152,16 @@ const DropdownComponent: DropdownProps = (props) => {
   };
 
   const scrollIndex = () => {
-    setTimeout(() => {
-      if (refList) {
-        const index = data.findIndex(e => value === e[valueField]);
-        if (index !== -1) {
-          refList?.current?.scrollToIndex({ index: index, animated: false });
+    if(autoScroll){
+      setTimeout(() => {
+        if (refList) {
+          const index = data.findIndex(e => value === e[valueField]);
+          if (index !== -1) {
+            refList?.current?.scrollToIndex({ index: index, animated: false });
+          }
         }
-      }
-    }, 200);
+      }, 200);
+    } 
   };
 
   const onSelect = (item: any) => {

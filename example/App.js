@@ -111,6 +111,7 @@ const DropdownScreen = _props => {
         valueField="value"
         placeholder="Select item"
         value={dropdown}
+        autoScroll={false}
         onChange={item => {
           setDropdown(item.value);
           console.log('selected', item);
