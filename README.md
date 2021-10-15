@@ -15,10 +15,16 @@ or
 ```js
     react-native link react-native-element-dropdown
 ```
-### IOS
+### Build IOS
 ```js
-    cd ios && pod install
+    - pod install
+    - react-native run-ios
 ```
+### Build Android
+```js
+    - react-native run-android
+```
+
 
 #### Source code demo
 - [react-native-template-components](https://github.com/hoaphantn7604/react-native-template-components) A beautiful template for React Native.
