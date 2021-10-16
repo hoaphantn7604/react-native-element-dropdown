@@ -194,6 +194,7 @@ const DropdownScreen = _props => {
       <MultiSelect
         style={styles.dropdown2}
         data={data}
+        // maxHeight={200}
         labelField="label"
         valueField="value"
         placeholder="Select item"
@@ -222,13 +223,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderBottomColor: 'gray',
     borderBottomWidth: 0.5,
-    marginTop: 80,
+    marginTop: 60,
   },
   dropdown2: {
     backgroundColor: 'white',
     borderColor: 'gray',
     borderWidth: 0.5,
-    marginTop: 80,
+    marginTop: 60,
     padding: 8,
   },
   icon: {
