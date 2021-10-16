@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Image, View, Text, ImageStyle } from 'react-native';
-import { Dropdown } from '../../index';
+import Dropdown  from '../Dropdown';
 import { PropsDropdown } from '../Dropdown/type';
 import { styles } from './styles';
 

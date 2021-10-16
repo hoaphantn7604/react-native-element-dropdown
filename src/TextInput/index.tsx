@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import {
   Image, TextInput,
   TouchableOpacity, View,
-  Text
+  TouchableWithoutFeedback
 } from 'react-native';
 import { CTextInput } from './type';
-import { useScale } from '../utilsScale';
 import { styles } from './styles';
 
-const { scale } = useScale;
-const ic_close= require('./icon/close.png');
+const ic_close = require('./icon/close.png');
 
 const defaultProps = {
   style: {},
@@ -24,55 +22,27 @@ const TextInputComponent: CTextInput = (props) => {
     fontFamily,
     style,
     value,
-    label,
     placeholderTextColor = '#000',
     placeholder = '',
     showIcon,
     inputStyle,
     iconStyle,
-    currency,
-    numeric,
-    labelStyle,
-    unitCurrency,
-    textErrorStyle,
-    textError,
-    onChangeText = (value: string) => {},
+    onChangeText = (value: string) => { },
     renderLeftIcon,
     renderRightIcon,
   } = props;
 
   const [text, setText] = useState<string>('');
-  
+
   useEffect(() => {
     if (value) {
-      if (currency || numeric) {
-        setText(formatCurrency(value));
-      } else {
-        setText(value);
-      }
+      setText(value);
     }
-  }, []);
-
-  const formatCurrency = (num: string) => {
-    const values = num.toString().replace(/\D/g, '');
-    return values.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  };
-
-  const reConvertCurrency = (x: string) => {
-    let s;
-    s = x.split('.');
-    s = s.join('');
-    return s;
-  };
+  }, [value]);
 
   const onChange = (text: string) => {
-    if (currency || numeric) {
-      setText(formatCurrency(text));
-      onChangeText(reConvertCurrency(text));
-    } else {
-      setText(text);
-      onChangeText(text);
-    }
+    setText(text);
+    onChangeText(text);
   };
 
   const _renderRightIcon = () => {
@@ -82,13 +52,13 @@ const TextInputComponent: CTextInput = (props) => {
           renderRightIcon()
         );
       }
-      if(text.length > 0){
+      if (text.length > 0) {
         return (
           <TouchableOpacity onPress={() => onChange('')}>
             <Image source={ic_close} style={[styles.icon, iconStyle]} />
           </TouchableOpacity>)
       }
-      return null;   
+      return null;
     }
     return null;
   };
@@ -104,20 +74,10 @@ const TextInputComponent: CTextInput = (props) => {
   }
 
   return (
-    <View>
+    <TouchableWithoutFeedback>
       <View style={[style]}>
-        {label && (
-          <Text style={[styles.label, labelStyle]}>
-            {label}
-          </Text>
-        )}
         <View style={styles.textInput}>
           {renderLeftIcon?.()}
-          {currency && unitCurrency && (
-            <Text style={{ marginRight: scale(3) }}>
-              {unitCurrency}
-            </Text>
-          )}
           <TextInput
             {...props}
             style={[styles.input, inputStyle, font()]}
@@ -129,8 +89,7 @@ const TextInputComponent: CTextInput = (props) => {
           {_renderRightIcon()}
         </View>
       </View>
-      {textError && <Text style={[styles.textError, textErrorStyle]}>{textError}</Text>}
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

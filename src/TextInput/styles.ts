@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     textInput: {
       flexDirection: 'row',
       alignItems: 'center',
-      height: scale(40),
+      height: scale(45),
     },
     input: {
       fontSize: fontScale(16),

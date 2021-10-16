@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Dimensions, FlatList,
   Image, Keyboard, Modal, Text, TouchableOpacity,
@@ -57,14 +57,18 @@ const MultiSelectComponent: MultiSelect = (props) => {
   } = props;
 
   const ref = useRef(null);
+  const refInput = useRef(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any[]>([]);
   const [listData, setListData] = useState<any[]>(data);
   const [key, setKey] = useState<number>(Math.random());
   const [position, setPosition] = useState<any>();
+  const [positionInput, setPositionInput] = useState<any>();
   const [focus, setFocus] = useState<boolean>(false);
   const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
   const { width: W, height: H } = Dimensions.get('window');
+  const styleContainerVertical: ViewStyle = { backgroundColor: 'rgba(0,0,0,0.1)', alignItems: 'center' };
+  const styleHorizontal: ViewStyle = { marginBottom: scale(20), width: W / 2, alignSelf: 'center' };
 
   const font = () => {
     if (fontFamily) {
@@ -77,7 +81,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
   };
 
   const onKeyboardDidShow = (e: KeyboardEvent) => {
-    setKeyboardHeight(e.endCoordinates.height + (isIOS ? 0 : 30));
+    setKeyboardHeight(e.endCoordinates.height + (isIOS ? 0 : scale(50)));
   };
 
   const onKeyboardDidHide = () => {
@@ -87,8 +91,8 @@ const MultiSelectComponent: MultiSelect = (props) => {
   useEffect(() => {
     const susbcriptionKeyboardDidShow = Keyboard.addListener('keyboardDidShow', onKeyboardDidShow);
     const susbcriptionKeyboardDidHide = Keyboard.addListener('keyboardDidHide', onKeyboardDidHide);
-    
-    return ()=>{
+
+    return () => {
       susbcriptionKeyboardDidShow.remove();
       susbcriptionKeyboardDidHide.remove();
     }
@@ -114,7 +118,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
         }
       } else {
         if (onBlur) {
-            onBlur();
+          onBlur();
         }
       }
     }
@@ -186,36 +190,40 @@ const MultiSelectComponent: MultiSelect = (props) => {
         keyExtractor={(item, index) => index.toString()}
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
-      {search && <CInput
-        style={[styles.input, inputSearchStyle]}
-        inputStyle={font()}
-        autoCorrect={false}
-        keyboardType={isIOS ? 'default' : 'visible-password'}
-        placeholder={searchPlaceholder}
-        onChangeText={onSearch}
-        placeholderTextColor="gray"
-        iconStyle={{ tintColor: iconColor }}
-        onFocus={() => setFocus(true)}
-        onBlur={() => { setFocus(false) }}
-      />}
+      {search && <View ref={refInput} onLayout={_measureInput}>
+        <CInput
+          style={[styles.input, inputSearchStyle]}
+          inputStyle={font()}
+          autoCorrect={false}
+          keyboardType={isIOS ? 'default' : 'visible-password'}
+          placeholder={searchPlaceholder}
+          onChangeText={onSearch}
+          placeholderTextColor="gray"
+          iconStyle={{ tintColor: iconColor }}
+          onFocus={() => setFocus(true)}
+          onBlur={() => { setFocus(false) }}
+        />
+      </View>}
     </View>
   };
 
 
   const _renderListBottom = () => {
     return <View style={{ flex: 1 }}>
-      {search && <CInput
-        style={[styles.input, inputSearchStyle]}
-        inputStyle={font()}
-        autoCorrect={false}
-        keyboardType={isIOS ? 'default' : 'visible-password'}
-        placeholder={searchPlaceholder}
-        onChangeText={onSearch}
-        placeholderTextColor="gray"
-        iconStyle={{ tintColor: iconColor }}
-        onFocus={() => setFocus(true)}
-        onBlur={() => { setFocus(false) }}
-      />}
+      {search && <View ref={refInput} onLayout={_measureInput}>
+        <CInput
+          style={[styles.input, inputSearchStyle]}
+          inputStyle={font()}
+          autoCorrect={false}
+          keyboardType={isIOS ? 'default' : 'visible-password'}
+          placeholder={searchPlaceholder}
+          onChangeText={onSearch}
+          placeholderTextColor="gray"
+          iconStyle={{ tintColor: iconColor }}
+          onFocus={() => setFocus(true)}
+          onBlur={() => { setFocus(false) }}
+        />
+      </View>}
       <FlatList
         keyboardShouldPersistTaps="handled"
         data={listData}
@@ -226,34 +234,43 @@ const MultiSelectComponent: MultiSelect = (props) => {
     </View>
   };
 
-  const _renderModal = () => {
+  const _renderModal = useCallback(() => {
     if (visible && position) {
       const {
         isFull,
         w,
         top,
         bottom,
-        left
+        left,
+        height
       } = position
       if (w && top && bottom) {
+        const styleVertical: ViewStyle = { left: left, maxHeight: maxHeight };
+        const isTopPosition = bottom < scale(isIOS ? scale(200) : scale(300));
+        let topHeight = isTopPosition ? top - height : top;
 
-        const styleContainerVertical: ViewStyle = { backgroundColor: 'rgba(0,0,0,0.2)', alignItems: 'center' };
-        const styleVertical: ViewStyle = { marginBottom: scale(20), width: W / 2, alignSelf: 'center' };
-        const styleHorizontal: ViewStyle = { left: left, maxHeight: maxHeight };
-        const isTopPosition = bottom < maxHeight;
-        const keyboadPosition = keyboardHeight - bottom;
-        const marginTop = isTopPosition ? (focus && keyboardHeight > 0 && keyboardHeight > bottom ? top - keyboadPosition : top) : focus && bottom < keyboardHeight + scale(50) ? top - (keyboardHeight - bottom + scale(50)) : top;
+        let keyboardStyle: ViewStyle = {};
+
+        if (positionInput && focus && keyboardHeight > 0 && bottom < keyboardHeight + height) {
+          if (isTopPosition) {
+            topHeight = H - keyboardHeight;
+          } else {
+            keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
+            const { height } = positionInput;
+            topHeight = H - keyboardHeight - height;
+          }
+        }
 
         return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
           <TouchableWithoutFeedback onPress={showOrClose}>
-            <View style={[{ width: W, height: H }, isFull && styleContainerVertical]}>
-              <View style={{ height: marginTop, width: w, justifyContent: 'flex-end' }}>
-                {isTopPosition && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleVertical : styleHorizontal]}>
+            <View style={[{ flex: 1 }, isFull && styleContainerVertical, keyboardStyle]}>
+              <View style={{ height: topHeight, width: w, justifyContent: 'flex-end' }}>
+                {isTopPosition && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleHorizontal : styleVertical]}>
                   {_renderListTop()}
                 </View>}
               </View>
-              <View style={{ height: bottom, width: w }}>
-                {!isTopPosition && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleVertical : styleHorizontal]}>
+              <View style={{ flex: 1 }}>
+                {!isTopPosition && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleHorizontal : styleVertical]}>
                   {_renderListBottom()}
                 </View>}
               </View>
@@ -264,12 +281,11 @@ const MultiSelectComponent: MultiSelect = (props) => {
       return null;
     }
     return null;
-  };
+  }, [focus, position, visible, keyboardHeight, listData]);
 
   const _measure = () => {
     if (ref) {
       ref.current.measure((width, height, px, py, fx, fy) => {
-
         const isFull = orientation === 'LANDSCAPE' && !isTablet;
         const w = parseInt(px);
         const top = isFull ? scale(20) : parseInt(py) + parseInt(fy) + scale(2);
@@ -281,7 +297,18 @@ const MultiSelectComponent: MultiSelect = (props) => {
           w,
           top,
           bottom,
-          left
+          left,
+          height: parseInt(py)
+        });
+      })
+    }
+  };
+
+  const _measureInput = () => {
+    if (refInput) {
+      refInput.current.measure((width, height, px, py, fx, fy) => {
+        setPositionInput({
+          height: parseInt(py)
         });
       })
     }
