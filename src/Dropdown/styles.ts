@@ -53,5 +53,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: scale(8),
     marginBottom: scale(8),
     margin: scale(6),
+    height: scale(45)
   },
 });

@@ -75,7 +75,6 @@ const DropdownComponent: DropdownProps = (props) => {
   const [currentValue, setCurrentValue] = useState<any>(null);
   const [listData, setListData] = useState<any[]>(data);
   const [position, setPosition] = useState<any>();
-  const [positionInput, setPositionInput] = useState<any>();
   const [focus, setFocus] = useState<boolean>(false);
   const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
 
@@ -215,7 +214,7 @@ const DropdownComponent: DropdownProps = (props) => {
         keyExtractor={(item, index) => index.toString()}
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
-      {search && <View ref={refInput} onLayout={_measureInput}>
+      {search &&
         <CInput
           style={[styles.input, inputSearchStyle]}
           inputStyle={font()}
@@ -228,13 +227,13 @@ const DropdownComponent: DropdownProps = (props) => {
           onFocus={() => setFocus(true)}
           onBlur={() => { setFocus(false) }}
         />
-      </View>}
+      }
     </View>
   };
 
   const _renderListBottom = () => {
     return <View style={{ flex: 1 }}>
-      {search && <View ref={refInput} onLayout={_measureInput}>
+      {search &&
         <CInput
           style={[styles.input, inputSearchStyle]}
           inputStyle={font()}
@@ -247,7 +246,7 @@ const DropdownComponent: DropdownProps = (props) => {
           onFocus={() => setFocus(true)}
           onBlur={() => { setFocus(false) }}
         />
-      </View>}
+      }
       <FlatList
         keyboardShouldPersistTaps="handled"
         ref={refList}
@@ -276,13 +275,12 @@ const DropdownComponent: DropdownProps = (props) => {
         let topHeight = isTopPosition ? top - height : top;
 
         let keyboardStyle: ViewStyle = {};
-        if (positionInput && focus && keyboardHeight > 0 && bottom < keyboardHeight + height) {
+        if (focus && keyboardHeight > 0 && bottom < keyboardHeight + height) {
           if (isTopPosition) {
             topHeight = H - keyboardHeight;
           } else {
             keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
-            const { height } = positionInput;
-            topHeight = H - keyboardHeight - height;
+            topHeight = H - keyboardHeight - scale(55);
           }
         }
 
@@ -321,18 +319,8 @@ const DropdownComponent: DropdownProps = (props) => {
           isFull,
           w,
           top,
-          bottom,
+          bottom: parseInt(bottom),
           left,
-          height: parseInt(py)
-        });
-      })
-    }
-  };
-
-  const _measureInput = () => {
-    if (refInput) {
-      refInput.current.measure((width, height, px, py, fx, fy) => {
-        setPositionInput({
           height: parseInt(py)
         });
       })
