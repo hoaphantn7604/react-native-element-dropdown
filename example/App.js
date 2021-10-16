@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, Image, ScrollView} from 'react-native';
+import {StyleSheet, View, Text, Image} from 'react-native';
 import {
   Dropdown,
   MultiSelect,
@@ -101,7 +101,6 @@ const DropdownScreen = _props => {
   };
 
   return (
-    <ScrollView style={{flex:1}}>
     <View style={styles.container}>
       <Dropdown
         style={styles.dropdown}
@@ -144,7 +143,7 @@ const DropdownScreen = _props => {
 
       <View style={styles.row}>
         <SelectCountry
-          style={[styles.dropdown, {flex: 1, marginRight:10}]}
+          style={[styles.dropdown, {flex: 1, marginRight: 10}]}
           selectedTextStyle={styles.selectedText}
           search
           value={country}
@@ -160,7 +159,7 @@ const DropdownScreen = _props => {
         />
 
         <SelectCountry
-          style={[styles.dropdown, {flex: 1, marginLeft:10}]}
+          style={[styles.dropdown, {flex: 1, marginLeft: 10}]}
           selectedTextStyle={styles.selectedText}
           search
           value={country2}
@@ -209,7 +208,6 @@ const DropdownScreen = _props => {
         renderItem={item => _renderItem(item)}
       />
     </View>
-    </ScrollView>
   );
 };
 
@@ -225,13 +223,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderBottomColor: 'gray',
     borderBottomWidth: 0.5,
-    marginTop: 130,
+    marginTop: 40,
   },
   dropdown2: {
     backgroundColor: 'white',
     borderColor: 'gray',
     borderWidth: 0.5,
-    marginTop: 130,
+    marginTop: 40,
     padding: 8,
   },
   icon: {
