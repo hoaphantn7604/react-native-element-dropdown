@@ -194,7 +194,6 @@ const DropdownScreen = _props => {
       <MultiSelect
         style={styles.dropdown2}
         data={data}
-        // maxHeight={200}
         labelField="label"
         valueField="value"
         placeholder="Select item"

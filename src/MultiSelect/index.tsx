@@ -57,7 +57,6 @@ const MultiSelectComponent: MultiSelect = (props) => {
   } = props;
 
   const ref = useRef(null);
-  const refInput = useRef(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any[]>([]);
   const [listData, setListData] = useState<any[]>(data);

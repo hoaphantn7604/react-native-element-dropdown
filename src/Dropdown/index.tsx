@@ -69,7 +69,6 @@ const DropdownComponent: DropdownProps = (props) => {
   } = props;
 
   const ref = useRef(null);
-  const refInput = useRef(null);
   const refList = useRef(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>(null);

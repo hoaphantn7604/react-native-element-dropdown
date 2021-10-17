@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Image, View, Text, ImageStyle } from 'react-native';
-import Dropdown  from '../Dropdown';
+import { Dropdown } from '../../index';
 import { PropsDropdown } from '../Dropdown/type';
 import { styles } from './styles';
 
@@ -15,7 +15,7 @@ const CountrySelectConponent: React.FC<Props> = props => {
     return (
       <View style={styles.item}>
         <Image source={item[imageField]} style={[styles.image, imageStyle]} />
-        <Text style={[selectedTextStyle]}>
+        <Text style={[styles.selectedTextStyle ,selectedTextStyle]}>
           {item[labelField]}
         </Text>
       </View>

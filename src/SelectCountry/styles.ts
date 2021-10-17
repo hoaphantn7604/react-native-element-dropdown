@@ -24,8 +24,6 @@ export const styles = StyleSheet.create({
     marginRight: scale(3),
   },
   selectedTextStyle: {
-    color: 'white',
-    fontWeight: 'bold',
     fontSize: scale(12),
   },
 });
