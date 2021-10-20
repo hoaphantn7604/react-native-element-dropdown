@@ -32,16 +32,13 @@ export function useDeviceOrientation() {
   }, []);
 
   useEffect(() => {
-    Dimensions.addEventListener('change', () => {
+    const susbcription = Dimensions.addEventListener('change', () => {
       const screen = Dimensions.get('window');
       onChange(screen);
     });
 
     return () => {
-      Dimensions.removeEventListener('change', ()=>{
-        const screen = Dimensions.get('window');
-        onChange(screen);
-      });
+      susbcription.remove();
     };
   }, []);
 
