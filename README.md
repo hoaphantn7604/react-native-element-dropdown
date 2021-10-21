@@ -59,7 +59,7 @@ or
 | search             | Boolean                                         | No        | Show or hide input search                                           |
 | inputSearchStyle   | ViewStyle                                       | No        | Styling for input search                                            |
 | searchPlaceholder  | String                                          | No        | The string that will be rendered before text input has been entered |
-| renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element| No        | Customize text input search                                         |
+| renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element| No        | Customize TextInput search                                         |
 | disable            | Boolean                                         | No        | Specifies the disabled state of the Dropdown                        |
 | autoScroll         | Boolean                                         | No        | Auto scroll to index item selected, default is true                 |
 | showsVerticalScrollIndicator | Boolean                               | No        | When true, shows a vertical scroll indicator, default is true       |
@@ -92,7 +92,7 @@ or
 | search             | Boolean                                              | No        | Show or hide input search                                           |
 | inputSearchStyle   | ViewStyle                                            | No        | Styling for input search                                            |
 | searchPlaceholder  | String                                               | No        | The string that will be rendered before text input has been entered |
-| renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element     | No        | Customize text input search                                         |
+| renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element     | No        | Customize TextInput search                                         |
 | disable            | Boolean                                              | No        | Specifies the disabled state of the Dropdown                        |
 | showsVerticalScrollIndicator | Boolean                                    | No        | When true, shows a vertical scroll indicator, default is true       |
 | renderLeftIcon     | () => JSX.Element                                    | No        | Customize left icon for dropdown                                    |
