@@ -51,6 +51,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     renderLeftIcon,
     renderRightIcon,
     renderSelectedItem,
+    renderInputSearch,
     onFocus,
     onBlur,
     showsVerticalScrollIndicator = true
@@ -178,6 +179,28 @@ const MultiSelectComponent: MultiSelect = (props) => {
     }
   };
 
+  const renderSearch = () => {
+    if (search) {
+      if (renderInputSearch) {
+        return renderInputSearch((text) => { onSearch(text) });
+      } else {
+        return <CInput
+          style={[styles.input, inputSearchStyle]}
+          inputStyle={font()}
+          autoCorrect={false}
+          keyboardType={isIOS ? 'default' : 'visible-password'}
+          placeholder={searchPlaceholder}
+          onChangeText={onSearch}
+          placeholderTextColor="gray"
+          iconStyle={{ tintColor: iconColor }}
+          onFocus={() => setFocus(true)}
+          onBlur={() => { setFocus(false) }}
+        />
+      }
+    }
+    return null;
+  }
+
   const _renderListTop = () => {
     return <View style={{ flex: 1 }}>
       <FlatList
@@ -188,40 +211,14 @@ const MultiSelectComponent: MultiSelect = (props) => {
         keyExtractor={(item, index) => index.toString()}
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
-      {search &&
-        <CInput
-          style={[styles.input, inputSearchStyle]}
-          inputStyle={font()}
-          autoCorrect={false}
-          keyboardType={isIOS ? 'default' : 'visible-password'}
-          placeholder={searchPlaceholder}
-          onChangeText={onSearch}
-          placeholderTextColor="gray"
-          iconStyle={{ tintColor: iconColor }}
-          onFocus={() => setFocus(true)}
-          onBlur={() => { setFocus(false) }}
-        />
-      }
+      {renderSearch()}
     </View>
   };
 
 
   const _renderListBottom = () => {
     return <View style={{ flex: 1 }}>
-      {search &&
-        <CInput
-          style={[styles.input, inputSearchStyle]}
-          inputStyle={font()}
-          autoCorrect={false}
-          keyboardType={isIOS ? 'default' : 'visible-password'}
-          placeholder={searchPlaceholder}
-          onChangeText={onSearch}
-          placeholderTextColor="gray"
-          iconStyle={{ tintColor: iconColor }}
-          onFocus={() => setFocus(true)}
-          onBlur={() => { setFocus(false) }}
-        />
-      }
+      {renderSearch()}
       <FlatList
         keyboardShouldPersistTaps="handled"
         data={listData}

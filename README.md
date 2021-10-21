@@ -39,34 +39,35 @@ or
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo.gif)
 
 #### Dropdown Props
-| Props              | Params               | isRequire | Description                                                         |
-| ------------------ | -------------------- | --------- | ------------------------------------------------------------------- |
-| data               | Array                | Yes       | Data is a plain array                                               |
-| labelField         | String               | Yes       | Extract the label from the data item                                |
-| valueField         | String               | Yes       | Extract the primary key from the data item                          |
-| onChange           | (item) => void       | Yes       | Selection callback                                                  |
-| value              | Item                 | No        | Selected value                                                      |
-| placeholder        | String               | No        | The string that will be rendered before dropdown has been selected  |
-| placeholderStyle   | TextStyle            | No        | Styling for text placeholder                                        |
-| selectedTextStyle  | TextStyle            | No        | Styling for selected text                                           |
-| selectedTextProps  | TextProps            | No        | Text Props for selected text. Ex: numberOfLines={1}                 |
-| style              | ViewStyle            | No        | Styling for container view                                          |
-| containerStyle     | ViewStyle            | No        | Styling for container list                                          |
-| maxHeight          | Number               | No        | Customize height for container list                                 |
-| fontFamily         | String               | No        | Customize font style                                                |
-| iconColor          | String               | No        | Color of icons                                                      |
-| activeColor        | String               | No        | Background color for item selected in container list                |
-| search             | Boolean              | No        | Show or hide input search                                           |
-| inputSearchStyle   | ViewStyle            | No        | Styling for input search                                            |
-| searchPlaceholder  | String               | No        | The string that will be rendered before text input has been entered |
-| disable            | Boolean              | No        | Specifies the disabled state of the Dropdown                        |
-| autoScroll         | Boolean              | No        | Auto scroll to index item selected, default is true                 |
-| showsVerticalScrollIndicator | Boolean    | No        | When true, shows a vertical scroll indicator, default is true       |
-| renderLeftIcon     | () => JSX.Element    | No        | Customize left icon for dropdown                                    |
-| renderRightIcon    | () => JSX.Element    | No        | Customize right icon for dropdown                                   |
-| renderItem         | (item) => JSX.Element| No        | Takes an item from data and renders it into the list                |
-| onFocus            | () => void           | No        | Callback that is called when the dropdown is focused                |
-| onBlur             | () => void           | No        | Callback that is called when the dropdown is blurred                | 
+| Props              | Params                                          | isRequire | Description                                                         |
+| ------------------ | ----------------------------------------------- | --------- | ------------------------------------------------------------------- |
+| data               | Array                                           | Yes       | Data is a plain array                                               |
+| labelField         | String                                          | Yes       | Extract the label from the data item                                |
+| valueField         | String                                          | Yes       | Extract the primary key from the data item                          |
+| onChange           | (item) => void                                  | Yes       | Selection callback                                                  |
+| value              | Item                                            | No        | Selected value                                                      |
+| placeholder        | String                                          | No        | The string that will be rendered before dropdown has been selected  |
+| placeholderStyle   | TextStyle                                       | No        | Styling for text placeholder                                        |
+| selectedTextStyle  | TextStyle                                       | No        | Styling for selected text                                           |
+| selectedTextProps  | TextProps                                       | No        | Text Props for selected text. Ex: numberOfLines={1}                 |
+| style              | ViewStyle                                       | No        | Styling for container view                                          |
+| containerStyle     | ViewStyle                                       | No        | Styling for container list                                          |
+| maxHeight          | Number                                          | No        | Customize height for container list                                 |
+| fontFamily         | String                                          | No        | Customize font style                                                |
+| iconColor          | String                                          | No        | Color of icons                                                      |
+| activeColor        | String                                          | No        | Background color for item selected in container list                |
+| search             | Boolean                                         | No        | Show or hide input search                                           |
+| inputSearchStyle   | ViewStyle                                       | No        | Styling for input search                                            |
+| searchPlaceholder  | String                                          | No        | The string that will be rendered before text input has been entered |
+| renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element| No        | Customize text input search                                         |
+| disable            | Boolean                                         | No        | Specifies the disabled state of the Dropdown                        |
+| autoScroll         | Boolean                                         | No        | Auto scroll to index item selected, default is true                 |
+| showsVerticalScrollIndicator | Boolean                               | No        | When true, shows a vertical scroll indicator, default is true       |
+| renderLeftIcon     | () => JSX.Element                               | No        | Customize left icon for dropdown                                    |
+| renderRightIcon    | () => JSX.Element                               | No        | Customize right icon for dropdown                                   |
+| renderItem         | (item) => JSX.Element                           | No        | Takes an item from data and renders it into the list                |
+| onFocus            | () => void                                      | No        | Callback that is called when the dropdown is focused                |
+| onBlur             | () => void                                      | No        | Callback that is called when the dropdown is blurred                | 
 
 
 #### MultiSelect Props
@@ -91,6 +92,7 @@ or
 | search             | Boolean                                              | No        | Show or hide input search                                           |
 | inputSearchStyle   | ViewStyle                                            | No        | Styling for input search                                            |
 | searchPlaceholder  | String                                               | No        | The string that will be rendered before text input has been entered |
+| renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element     | No        | Customize text input search                                         |
 | disable            | Boolean                                              | No        | Specifies the disabled state of the Dropdown                        |
 | showsVerticalScrollIndicator | Boolean                                    | No        | When true, shows a vertical scroll indicator, default is true       |
 | renderLeftIcon     | () => JSX.Element                                    | No        | Customize left icon for dropdown                                    |
