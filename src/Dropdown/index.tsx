@@ -105,8 +105,17 @@ const DropdownComponent: DropdownProps = (props) => {
     const susbcriptionKeyboardDidHide = Keyboard.addListener('keyboardDidHide', onKeyboardDidHide);
 
     return () => {
-      susbcriptionKeyboardDidShow.remove();
-      susbcriptionKeyboardDidHide.remove();
+      if (susbcriptionKeyboardDidShow.remove) {
+        susbcriptionKeyboardDidShow.remove();
+      } else {
+        Keyboard.removeListener('keyboardDidShow', onKeyboardDidShow);
+      }
+
+      if (susbcriptionKeyboardDidHide.remove) {
+        susbcriptionKeyboardDidHide.remove();
+      } else {
+        Keyboard.removeListener('keyboardDidHide', onKeyboardDidHide);
+      }
     }
   }, []);
 
