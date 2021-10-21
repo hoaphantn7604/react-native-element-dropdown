@@ -38,7 +38,14 @@ export function useDeviceOrientation() {
     });
 
     return () => {
-      susbcription.remove();
+      if(susbcription?.remove){
+        susbcription.remove();
+      }else {
+        Dimensions.removeEventListener('change', ()=>{
+          const screen = Dimensions.get('window');
+          onChange(screen);
+        });  
+      }
     };
   }, []);
 
