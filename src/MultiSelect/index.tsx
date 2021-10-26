@@ -254,13 +254,23 @@ const MultiSelectComponent: MultiSelect = (props) => {
         let topHeight = isTopPosition ? top - height : top;
 
         let keyboardStyle: ViewStyle = {};
-
-        if (focus && keyboardHeight > 0 && bottom < keyboardHeight + height) {
-          if (isTopPosition) {
-            topHeight = H - keyboardHeight;
-          } else {
-            keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
-            topHeight = H - keyboardHeight - scale(55);
+        if (renderInputSearch) {
+          if (keyboardHeight > 0 && bottom < keyboardHeight + height) {
+            if (isTopPosition) {
+              topHeight = H - keyboardHeight;
+            } else {
+              keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
+              topHeight = H - keyboardHeight - scale(55);
+            }
+          }
+        } else {
+          if (focus && keyboardHeight > 0 && bottom < keyboardHeight + height) {
+            if (isTopPosition) {
+              topHeight = H - keyboardHeight;
+            } else {
+              keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
+              topHeight = H - keyboardHeight - scale(55);
+            }
           }
         }
 
