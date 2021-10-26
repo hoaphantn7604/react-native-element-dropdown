@@ -59,8 +59,9 @@ or
 | search             | Boolean                                         | No        | Show or hide input search                                           |
 | inputSearchStyle   | ViewStyle                                       | No        | Styling for input search                                            |
 | searchPlaceholder  | String                                          | No        | The string that will be rendered before text input has been entered |
-| renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element| No        | Customize TextInput search                                         |
+| renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element| No        | Customize TextInput search                                          |
 | disable            | Boolean                                         | No        | Specifies the disabled state of the Dropdown                        |
+| dropdownPosition   | 'auto' or 'top' or 'bottom'                     | No        | Dropdown list position. Default is 'auto'                           |
 | autoScroll         | Boolean                                         | No        | Auto scroll to index item selected, default is true                 |
 | showsVerticalScrollIndicator | Boolean                               | No        | When true, shows a vertical scroll indicator, default is true       |
 | renderLeftIcon     | () => JSX.Element                               | No        | Customize left icon for dropdown                                    |
@@ -92,8 +93,9 @@ or
 | search             | Boolean                                              | No        | Show or hide input search                                           |
 | inputSearchStyle   | ViewStyle                                            | No        | Styling for input search                                            |
 | searchPlaceholder  | String                                               | No        | The string that will be rendered before text input has been entered |
-| renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element     | No        | Customize TextInput search                                         |
+| renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element     | No        | Customize TextInput search                                          |
 | disable            | Boolean                                              | No        | Specifies the disabled state of the Dropdown                        |
+| dropdownPosition   | 'auto' or 'top' or 'bottom'                          | No        | Dropdown list position. Default is 'auto'                           |
 | showsVerticalScrollIndicator | Boolean                                    | No        | When true, shows a vertical scroll indicator, default is true       |
 | renderLeftIcon     | () => JSX.Element                                    | No        | Customize left icon for dropdown                                    |
 | renderRightIcon    | () => JSX.Element                                    | No        | Customize right icon for dropdown                                   |

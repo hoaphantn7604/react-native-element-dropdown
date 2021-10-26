@@ -22,6 +22,7 @@ export interface PropsDropdown {
   disable?: boolean;
   autoScroll?: boolean;
   showsVerticalScrollIndicator?: boolean;
+  dropdownPosition?: 'auto' | 'top' | 'bottom';
   onChange: (item: any) => void;
   renderLeftIcon?: () => JSX.Element | null | undefined;
   renderRightIcon?: () => JSX.Element | null | undefined;

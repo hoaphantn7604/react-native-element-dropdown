@@ -66,7 +66,8 @@ const DropdownComponent: DropdownProps = (props) => {
     onFocus,
     onBlur,
     autoScroll = true,
-    showsVerticalScrollIndicator = true
+    showsVerticalScrollIndicator = true,
+    dropdownPosition = 'auto'
   } = props;
 
   const ref = useRef(null);
@@ -276,7 +277,7 @@ const DropdownComponent: DropdownProps = (props) => {
       } = position
       if (w && top && bottom) {
         const styleVertical: ViewStyle = { left: left, maxHeight: maxHeight };
-        const isTopPosition = bottom < scale(isIOS ? scale(200) : scale(300));
+        const isTopPosition = dropdownPosition === 'auto' ? bottom < scale(isIOS ? scale(200) : scale(300)) : dropdownPosition === 'top' ? true : false;
         let topHeight = isTopPosition ? top - height : top;
 
         let keyboardStyle: ViewStyle = {};

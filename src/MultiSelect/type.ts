@@ -21,6 +21,7 @@ interface Props {
   disable?: boolean;
   showsVerticalScrollIndicator?: boolean;
   searchPlaceholder?: string
+  dropdownPosition?: 'auto' | 'top' | 'bottom';
   onChange: (item: any) => void;
   renderLeftIcon?: () => JSX.Element | null | undefined;
   renderRightIcon?: () => JSX.Element | null | undefined;
