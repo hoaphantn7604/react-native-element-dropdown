@@ -111,7 +111,7 @@ or
 | imageStyle         | ImageStyle           | No        | Styling for image                    |
 
 
-### Dropdown exmaple 1
+### Dropdown example 1
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/example1.png)
 ```javascript
   import React, { useState } from 'react';
@@ -168,7 +168,7 @@ or
   });
 ```
 
-### Dropdown exmaple 2
+### Dropdown example 2
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/example2.png)
 ```javascript
   import React, { useState } from 'react';
