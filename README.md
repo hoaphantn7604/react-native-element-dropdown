@@ -452,7 +452,7 @@ or
   });
 ```
 
-### SelectCountry example
+### SelectCountry example 1
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/example5.png)
 ```js
   import React, { useState } from 'react';
@@ -543,7 +543,7 @@ or
 
 ```
 
-### SelectCountry 2
+### SelectCountry example 2
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/example6.png)
 ```js
   import React, { useState } from 'react';
