@@ -7,7 +7,6 @@ import {
   View,
   ViewStyle,
   KeyboardEvent,
-  Alert,
 } from 'react-native';
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
