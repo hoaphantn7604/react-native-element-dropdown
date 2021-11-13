@@ -191,8 +191,8 @@ const DropdownComponent: DropdownProps = (props) => {
       <TouchableWithoutFeedback onPress={showOrClose}>
         <View style={styles.dropdown}>
           {renderLeftIcon?.()}
-          <Text style={[styles.textItem, isSelected ? selectedTextStyle : placeholderStyle, font()]} {...selectedTextProps}>
-            {isSelected ? currentValue[labelField] : placeholder}
+          <Text style={[styles.textItem, isSelected !== null ? selectedTextStyle : placeholderStyle, font()]} {...selectedTextProps}>
+            {isSelected !== null ? currentValue[labelField] : placeholder}
           </Text>
           {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }]} />}
         </View>
