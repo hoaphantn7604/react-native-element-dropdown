@@ -42,7 +42,7 @@ public class ElementDropdownModule extends ReactContextBaseJavaModule {
     public boolean isTablet() {
         // TODO: Implement some actually useful functionality
         if ((reactContext.getResources().getConfiguration().screenLayout &
-                Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                Configuration.SCREENLAYOUT_SIZE_MASK) >=
                 Configuration.SCREENLAYOUT_SIZE_LARGE) {
             return true;
         }
