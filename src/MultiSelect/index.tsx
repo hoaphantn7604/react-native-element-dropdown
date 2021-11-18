@@ -359,13 +359,13 @@ const MultiSelectComponent: MultiSelect = (props) => {
   };
 
   return (
-    <View>
+    <>
       <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
         {_renderDropdown()}
         {_renderModal()}
       </View>
       {!visible && _renderItemSelected()}
-    </View>
+    </>
   );
 };
 
