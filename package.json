@@ -18,6 +18,7 @@
     "components",
     "material",
     "dropdown",
+    "menu",
     "multiselect",
     "picker",
     "select",
