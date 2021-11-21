@@ -37,6 +37,7 @@ or
 [react-native-template-components](https://github.com/hoaphantn7604/react-native-template-components) A beautiful template for React Native.
 #### Demo
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo.gif)
+![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/demo2.gif)
 
 #### Dropdown Props
 | Props              | Params                                          | isRequire | Description                                                         |
