@@ -162,6 +162,7 @@ or
           onBlur={() => setIsFocus(false)}
           onChange={item => {
             setValue(item.value);
+            setIsFocus(false);
           }}
           renderLeftIcon={() => (
             <AntDesign
