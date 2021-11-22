@@ -99,6 +99,13 @@ or
 | imageStyle         | ImageStyle           | No        | Styling for image                    |
 
 
+### Method
+| API         | Params      | Description          | 
+| ----------- | ------------| ---------------------|
+| open        | () => void  | Open dropdown list   |
+| close       | () => void  | Close dropdown list  |
+
+
 ### Dropdown example
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/example.png)
 ```js
