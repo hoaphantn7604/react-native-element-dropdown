@@ -1,30 +1,34 @@
-import { NativeModules, Platform } from 'react-native';
+import { Platform, PixelRatio, Dimensions } from 'react-native';
 import { UseScale, UseDetectDevice } from './type';
 
-const { ElementDropdown } = NativeModules;
-const { 
-    checkSmallDevice,
-    checkTablet,
-    deviceInch
-} = ElementDropdown.getConstants();
+const { width, height } = Dimensions.get('window');
 
 const useScale: UseScale = {
     fontScale: (number: number = 1) => {
-        const value = (deviceInch + (checkSmallDevice || checkTablet ? 2 : 3)) / 10;
-        const scale = number * Number(value.toFixed(1));
-        return scale;
+       return number;
     },
     scale: (number: number = 1) => {
-        const value = (deviceInch + (checkSmallDevice || checkTablet ? 3 : 4)) / 10;
-        const scale = number * Number(value.toFixed(1));
-        return scale;
+      return number;
     },
+};
+
+const isTablet = () => {
+  let pixelDensity = PixelRatio.get();
+  const adjustedWidth = width * pixelDensity;
+  const adjustedHeight = height * pixelDensity;
+  if (pixelDensity < 2 && (adjustedWidth >= 1000 || adjustedHeight >= 1000)) {
+    return true;
+  } else {
+    return (
+      pixelDensity === 2 && (adjustedWidth >= 1920 || adjustedHeight >= 1920)
+    );
+  }
 };
 
 const useDetectDevice: UseDetectDevice = {
     isAndroid: Platform.OS === 'android',
     isIOS: Platform.OS === 'ios',
-    isTablet: checkTablet
+    isTablet: isTablet()
 }
 
 export { useScale, useDetectDevice };
