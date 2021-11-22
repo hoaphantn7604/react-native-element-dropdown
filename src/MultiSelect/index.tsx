@@ -75,11 +75,21 @@ const MultiSelectComponent= React.forwardRef((props: MultiSelectProps, currentRe
   });
 
   const eventOpen = () => {
-    setVisible(true);
+    if (!disable) {
+      setVisible(true);
+      if (onFocus) {
+        onFocus();
+      }
+    }
   }
 
   const eventClose = () => {
-    setVisible(false);
+    if (!disable) {
+      setVisible(false);
+      if (onBlur) {
+        onBlur();
+      }
+    }
   }
 
   const font = () => {

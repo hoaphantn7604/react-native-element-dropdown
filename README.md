@@ -99,7 +99,7 @@ or
 | imageStyle         | ImageStyle           | No        | Styling for image                    |
 
 
-### Method
+#### Method
 | API         | Params      | Description          | 
 | ----------- | ------------| ---------------------|
 | open        | () => void  | Open dropdown list   |

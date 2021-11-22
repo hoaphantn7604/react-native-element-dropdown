@@ -88,11 +88,21 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   });
 
   const eventOpen = () => {
-    setVisible(true);
+    if (!disable) {
+      setVisible(true);
+      if (onFocus) {
+        onFocus();
+      }
+    }
   }
 
   const eventClose = () => {
-    setVisible(false);
+    if (!disable) {
+      setVisible(false);
+      if (onBlur) {
+        onBlur();
+      }
+    }
   }
 
   const font = () => {
