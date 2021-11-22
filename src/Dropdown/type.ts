@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleProp, TextStyle, ViewStyle, TextProps, ImageStyle } from 'react-native';
 
-export interface PropsDropdown {
+export interface IProps {
   style?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
   placeholderStyle?: StyleProp<TextStyle>;
@@ -34,4 +34,4 @@ export interface PropsDropdown {
 
 };
 
-export type DropdownProps = React.FC<PropsDropdown>;
+export type DropdownProps = IProps;

@@ -1,13 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { useScale } from '../utilsScale';
-
-const { scale, fontScale } = useScale;
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    borderWidth: scale(0.5),
+    borderWidth: 0.5,
     borderColor: '#EEEEEE',
     shadowColor: '#000',
     shadowOffset: {
@@ -22,53 +19,53 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: scale(35),
+    height: 35,
   },
   title: {
-    marginVertical: scale(5),
-    fontSize: fontScale(16),
+    marginVertical: 5,
+    fontSize: 16,
   },
   item: {
-    padding: scale(17),
+    padding: 17,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   textItem: {
     flex: 1,
-    fontSize: fontScale(16),
+    fontSize: 16,
   },
   icon: {
-    width: scale(20),
-    height: scale(20),
+    width: 20,
+    height: 20,
   },
   textError: {
     color: 'red',
-    fontSize: fontScale(14),
-    marginTop: scale(10),
+    fontSize: 14,
+    marginTop: 10,
   },
   input: {
-    borderWidth: scale(0.5),
+    borderWidth: 0.5,
     borderColor: '#DDDDDD',
-    paddingHorizontal: scale(8),
-    marginBottom: scale(8),
-    margin:scale(6),
-    height: scale(45)
+    paddingHorizontal: 8,
+    marginBottom: 8,
+    margin: 6,
+    height: 45
   },
   selectedItem: {
-    padding: scale(8),
+    padding: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: scale(0.5),
+    borderWidth: 0.5,
     borderColor: 'gray',
-    paddingHorizontal: scale(8),
-    marginTop: scale(12),
-    marginRight: scale(8),
+    paddingHorizontal: 8,
+    marginTop: 12,
+    marginRight: 8,
     flexDirection: 'row',
   },
   selectedTextItem: {
-    marginLeft: scale(5), 
+    marginLeft: 5, 
     color: 'gray', 
-    fontSize: fontScale(16),
+    fontSize: 16,
   },
 });

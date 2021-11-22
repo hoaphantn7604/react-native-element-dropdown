@@ -189,7 +189,7 @@ or
     label: {
       position: 'absolute',
       backgroundColor: 'white',
-      left: 16,
+      left: 22,
       top: 8,
       zIndex: 999,
       paddingHorizontal: 8,
@@ -405,7 +405,7 @@ or
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/example3.png)
 ```js
   import React, { useState } from 'react';
-  import { StyleSheet } from 'react-native';
+  import { StyleSheet, View } from 'react-native';
   import { MultiSelect } from 'react-native-element-dropdown';
   import AntDesign from 'react-native-vector-icons/AntDesign';
 
@@ -424,35 +424,42 @@ or
     const [selected, setSelected] = useState([]);
 
     return (
-      <MultiSelect
-        style={styles.dropdown}
-        placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
-        inputSearchStyle={styles.inputSearchStyle}
-        iconStyle={styles.iconStyle}
-        search
-        data={data}
-        labelField="label"
-        valueField="value"
-        placeholder="Select item"
-        searchPlaceholder="Search..."
-        value={selected}
-        onChange={item => {
-          setSelected(item);
-        }}
-        renderLeftIcon={() => (
-          <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
-        )}
-        selectedStyle={styles.selectedStyle}
-      />
+      <View style={styles.container}>
+        <MultiSelect
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          search
+          data={data}
+          labelField="label"
+          valueField="value"
+          placeholder="Select item"
+          searchPlaceholder="Search..."
+          value={selected}
+          onChange={item => {
+            setSelected(item);
+          }}
+          renderLeftIcon={() => (
+            <AntDesign
+              style={styles.icon}
+              color="black"
+              name="Safety"
+              size={20}
+            />
+          )}
+          selectedStyle={styles.selectedStyle}
+        />
+      </View>
     );
   };
 
   export default MultiSelectComponent;
 
   const styles = StyleSheet.create({
+    container: { padding: 16 },
     dropdown: {
-      margin: 16,
       height: 50,
       backgroundColor: 'transparent',
       borderBottomColor: 'gray',
@@ -513,43 +520,50 @@ or
     };
 
     return (
-      <MultiSelect
-        style={styles.dropdown}
-        placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
-        inputSearchStyle={styles.inputSearchStyle}
-        iconStyle={styles.iconStyle}
-        data={data}
-        labelField="label"
-        valueField="value"
-        placeholder="Select item"
-        value={selected}
-        search
-        searchPlaceholder="Search..."
-        onChange={item => {
-          setSelected(item);
-        }}
-        renderLeftIcon={() => (
-          <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
-        )}
-        renderItem={renderItem}
-        renderSelectedItem={(item, unSelect) => (
-          <TouchableOpacity onPress={() => unSelect && unSelect(item)}>
-            <View style={styles.selectedStyle}>
-              <Text style={styles.textSelectedStyle}>{item.label}</Text>
-              <AntDesign color="black" name="delete" size={17} />
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+      <View style={styles.container}>
+        <MultiSelect
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          data={data}
+          labelField="label"
+          valueField="value"
+          placeholder="Select item"
+          value={selected}
+          search
+          searchPlaceholder="Search..."
+          onChange={item => {
+            setSelected(item);
+          }}
+          renderLeftIcon={() => (
+            <AntDesign
+              style={styles.icon}
+              color="black"
+              name="Safety"
+              size={20}
+            />
+          )}
+          renderItem={renderItem}
+          renderSelectedItem={(item, unSelect) => (
+            <TouchableOpacity onPress={() => unSelect && unSelect(item)}>
+              <View style={styles.selectedStyle}>
+                <Text style={styles.textSelectedStyle}>{item.label}</Text>
+                <AntDesign color="black" name="delete" size={17} />
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
     );
   };
 
   export default MultiSelectComponent;
 
   const styles = StyleSheet.create({
+    container: { padding: 16 },
     dropdown: {
-      margin: 16,
       height: 50,
       backgroundColor: 'white',
       borderRadius: 12,

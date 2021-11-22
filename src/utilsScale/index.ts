@@ -1,16 +1,7 @@
 import { Platform, PixelRatio, Dimensions } from 'react-native';
-import { UseScale, UseDetectDevice } from './type';
+import { UseDetectDevice } from './type';
 
 const { width, height } = Dimensions.get('window');
-
-const useScale: UseScale = {
-    fontScale: (number: number = 1) => {
-       return number;
-    },
-    scale: (number: number = 1) => {
-      return number;
-    },
-};
 
 const isTablet = () => {
   let pixelDensity = PixelRatio.get();
@@ -31,4 +22,4 @@ const useDetectDevice: UseDetectDevice = {
     isTablet: isTablet()
 }
 
-export { useScale, useDetectDevice };
+export { useDetectDevice };

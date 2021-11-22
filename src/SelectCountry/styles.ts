@@ -1,30 +1,27 @@
 import { StyleSheet } from 'react-native';
-import { useScale } from '../utilsScale';
-
-const { scale, fontScale } = useScale;
 
 export const styles = StyleSheet.create({
   dropdown: {
-    width: scale(58),
-    paddingHorizontal: scale(6),
-    height: scale(26),
+    width: 58,
+    paddingHorizontal: 6,
+    height: 26,
   },
   container: {
-    width: scale(60),
+    width: 60,
   },
   item: {
     flexDirection: 'row',
-    padding: scale(6),
+    padding: 6,
     alignItems: 'center',
   },
   image: {
-    width: scale(20),
-    height: scale(20),
-    marginRight: scale(3),
-    marginVertical: scale(4)
+    width: 20,
+    height: 20,
+    marginRight: 3,
+    marginVertical: 4
   },
   selectedTextStyle: {
     flex:1,
-    fontSize: fontScale(12),
+    fontSize: 12,
   },
 });

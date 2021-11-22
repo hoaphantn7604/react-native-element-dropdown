@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import {
   Dimensions, FlatList,
   Image, Keyboard, Modal,
@@ -10,12 +10,11 @@ import {
 } from 'react-native';
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
-import { useDetectDevice, useScale } from '../utilsScale';
+import { useDetectDevice } from '../utilsScale';
 import { styles } from './styles';
 import { DropdownProps } from './type';
 
 const { isTablet, isIOS } = useDetectDevice;
-const { scale } = useScale;
 const ic_down = require('../assets/icon/down.png');
 
 const deepEqual: any = (x: any, y: any) => {
@@ -36,7 +35,7 @@ const defaultProps = {
   selectedTextProps: {}
 }
 
-const DropdownComponent: DropdownProps = (props) => {
+const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) => {
   const orientation = useDeviceOrientation();
   const {
     onChange,
@@ -57,7 +56,7 @@ const DropdownComponent: DropdownProps = (props) => {
     searchPlaceholder,
     placeholder,
     search = false,
-    maxHeight = scale(340),
+    maxHeight = 340,
     disable = false,
     renderLeftIcon,
     renderRightIcon,
@@ -81,7 +80,20 @@ const DropdownComponent: DropdownProps = (props) => {
 
   const { width: W, height: H } = Dimensions.get('window');
   const styleContainerVertical: ViewStyle = { backgroundColor: 'rgba(0,0,0,0.1)', alignItems: 'center' };
-  const styleHorizontal: ViewStyle = { marginBottom: scale(20), width: W / 2, alignSelf: 'center' };
+  const styleHorizontal: ViewStyle = { marginBottom: 20, width: W / 2, alignSelf: 'center' };
+
+
+  useImperativeHandle(currentRef, () => {
+    return { open: eventOpen, close: eventClose };
+  });
+
+  const eventOpen = () => {
+    setVisible(true);
+  }
+
+  const eventClose = () => {
+    setVisible(false);
+  }
 
   const font = () => {
     if (fontFamily) {
@@ -94,7 +106,7 @@ const DropdownComponent: DropdownProps = (props) => {
   };
 
   const onKeyboardDidShow = (e: KeyboardEvent) => {
-    setKeyboardHeight(e.endCoordinates.height + (isIOS ? 0 : scale(50)));
+    setKeyboardHeight(e.endCoordinates.height + (isIOS ? 0 : 50));
   };
 
   const onKeyboardDidHide = () => {
@@ -277,7 +289,7 @@ const DropdownComponent: DropdownProps = (props) => {
       } = position
       if (w && top && bottom) {
         const styleVertical: ViewStyle = { left: left, maxHeight: maxHeight };
-        const isTopPosition = dropdownPosition === 'auto' ? bottom < scale(isIOS ? scale(200) : scale(300)) : dropdownPosition === 'top' ? true : false;
+        const isTopPosition = dropdownPosition === 'auto' ? bottom < (isIOS ? 200 : 300) : dropdownPosition === 'top' ? true : false;
         let topHeight = isTopPosition ? top - height : top;
 
         let keyboardStyle: ViewStyle = {};
@@ -287,7 +299,7 @@ const DropdownComponent: DropdownProps = (props) => {
               topHeight = H - keyboardHeight;
             } else {
               keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
-              topHeight = H - keyboardHeight - scale(55);
+              topHeight = H - keyboardHeight - 55;
             }
           }
         } else {
@@ -296,7 +308,7 @@ const DropdownComponent: DropdownProps = (props) => {
               topHeight = H - keyboardHeight;
             } else {
               keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
-              topHeight = H - keyboardHeight - scale(55);
+              topHeight = H - keyboardHeight - 55;
             }
           }
         }
@@ -328,7 +340,7 @@ const DropdownComponent: DropdownProps = (props) => {
       ref.current.measure((width, height, px, py, fx, fy) => {
         const isFull = orientation === 'LANDSCAPE' && !isTablet;
         const w = parseInt(px);
-        const top = isFull ? scale(20) : parseInt(py) + parseInt(fy) + scale(2);
+        const top = isFull ? 20 : parseInt(py) + parseInt(fy) + 2;
         const bottom = H - top;
         const left = parseInt(fx);
 
@@ -350,7 +362,7 @@ const DropdownComponent: DropdownProps = (props) => {
       {_renderModal()}
     </View>
   );
-};
+});
 
 DropdownComponent.defaultProps = defaultProps;
 

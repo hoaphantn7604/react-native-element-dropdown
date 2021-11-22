@@ -1,7 +1,7 @@
 import React from 'react';
 import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
-interface Props {
+interface IProps {
   style?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
   placeholderStyle?: StyleProp<TextStyle>
@@ -33,4 +33,4 @@ interface Props {
   onBlur?:() => void;
 };
 
-export type MultiSelect = React.FC<Props>;
+export type MultiSelectProps = IProps;

@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import { Image, View, Text, ImageStyle } from 'react-native';
 import Dropdown from '../Dropdown';
-import { PropsDropdown } from '../Dropdown/type';
+import { IProps } from '../Dropdown/type';
 import { styles } from './styles';
 
-interface Props extends PropsDropdown {
+interface Props extends IProps {
   imageField: string;
   imageStyle?: ImageStyle;
 }

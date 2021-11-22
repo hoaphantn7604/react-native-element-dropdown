@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import {
   Dimensions, FlatList,
   Image, Keyboard, Modal, Text, TouchableOpacity,
@@ -9,11 +9,10 @@ import {
 } from 'react-native';
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
-import { useDetectDevice, useScale } from '../utilsScale';
+import { useDetectDevice } from '../utilsScale';
 import { styles } from './styles';
-import { MultiSelect } from './type';
+import { MultiSelectProps } from './type';
 
-const { scale, fontScale } = useScale;
 const { isTablet, isIOS } = useDetectDevice;
 const ic_down = require('../assets/icon/down.png');
 
@@ -25,7 +24,7 @@ const defaultProps = {
   style: {},
 }
 
-const MultiSelectComponent: MultiSelect = (props) => {
+const MultiSelectComponent= React.forwardRef((props: MultiSelectProps, currentRef) => {
   const orientation = useDeviceOrientation();
   const {
     onChange,
@@ -46,7 +45,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     searchPlaceholder,
     placeholder,
     search = false,
-    maxHeight = scale(340),
+    maxHeight = 340,
     disable = false,
     renderItem,
     renderLeftIcon,
@@ -69,7 +68,19 @@ const MultiSelectComponent: MultiSelect = (props) => {
   const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
   const { width: W, height: H } = Dimensions.get('window');
   const styleContainerVertical: ViewStyle = { backgroundColor: 'rgba(0,0,0,0.1)', alignItems: 'center' };
-  const styleHorizontal: ViewStyle = { marginBottom: scale(20), width: W / 2, alignSelf: 'center' };
+  const styleHorizontal: ViewStyle = { marginBottom: 20, width: W / 2, alignSelf: 'center' };
+
+  useImperativeHandle(currentRef, () => {
+    return { open: eventOpen, close: eventClose };
+  });
+
+  const eventOpen = () => {
+    setVisible(true);
+  }
+
+  const eventClose = () => {
+    setVisible(false);
+  }
 
   const font = () => {
     if (fontFamily) {
@@ -82,7 +93,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
   };
 
   const onKeyboardDidShow = (e: KeyboardEvent) => {
-    setKeyboardHeight(e.endCoordinates.height + (isIOS ? 0 : scale(50)));
+    setKeyboardHeight(e.endCoordinates.height + (isIOS ? 0 : 50));
   };
 
   const onKeyboardDidHide = () => {
@@ -168,7 +179,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
 
   const _renderItem = ({ item, index }: { item: any; index: number }) => {
     return (
-      <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[checkSelected(item) && { backgroundColor: activeColor, marginBottom: scale(0.5) }]}>
+      <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[checkSelected(item) && { backgroundColor: activeColor, marginBottom: 0.5 }]}>
         {renderItem ? renderItem(item) : <View style={styles.item}>
           <Text style={[styles.textItem, placeholderStyle, font()]}>{item[labelField]}</Text>
         </View>}
@@ -252,7 +263,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
       } = position
       if (w && top && bottom) {
         const styleVertical: ViewStyle = { left: left, maxHeight: maxHeight };
-        const isTopPosition = dropdownPosition === 'auto' ? bottom < scale(isIOS ? scale(200) : scale(300)) : dropdownPosition === 'top' ? true : false;
+        const isTopPosition = dropdownPosition === 'auto' ? bottom < (isIOS ? 200 : 300) : dropdownPosition === 'top' ? true : false;
         let topHeight = isTopPosition ? top - height : top;
 
         let keyboardStyle: ViewStyle = {};
@@ -262,7 +273,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
               topHeight = H - keyboardHeight;
             } else {
               keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
-              topHeight = H - keyboardHeight - scale(55);
+              topHeight = H - keyboardHeight - 55;
             }
           }
         } else {
@@ -271,7 +282,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
               topHeight = H - keyboardHeight;
             } else {
               keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
-              topHeight = H - keyboardHeight - scale(55);
+              topHeight = H - keyboardHeight - 55;
             }
           }
         }
@@ -303,7 +314,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
       ref.current.measure((width, height, px, py, fx, fy) => {
         const isFull = orientation === 'LANDSCAPE' && !isTablet;
         const w = parseInt(px);
-        const top = isFull ? scale(20) : parseInt(py) + parseInt(fy) + scale(2);
+        const top = isFull ? 20 : parseInt(py) + parseInt(fy) + 2;
         const bottom = H - top;
         const left = parseInt(fx);
 
@@ -350,7 +361,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
                 style={[styles.selectedItem, selectedStyle]}
                 onPress={() => unSelect(e)}
               >
-                <Text style={[{ fontSize: fontScale(12), color: 'gray' }, selectedTextStyle, font()]}>{e[labelField]}</Text>
+                <Text style={[{ fontSize: 12, color: 'gray' }, selectedTextStyle, font()]}>{e[labelField]}</Text>
                 <Text style={[styles.selectedTextItem, selectedTextStyle]}>ⓧ</Text>
               </TouchableOpacity>
             )
@@ -368,7 +379,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
       {!visible && _renderItemSelected()}
     </>
   );
-};
+});
 
 MultiSelectComponent.defaultProps = defaultProps;
 
