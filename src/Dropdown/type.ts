@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleProp, TextStyle, ViewStyle, TextProps, ImageProps } from 'react-native';
+import { StyleProp, TextStyle, ViewStyle, TextProps, ImageStyle } from 'react-native';
 
 export interface PropsDropdown {
   style?: StyleProp<ViewStyle>;
@@ -8,7 +8,7 @@ export interface PropsDropdown {
   selectedTextStyle?: StyleProp<TextStyle>;
   selectedTextProps?: TextProps;
   inputSearchStyle?: StyleProp<TextStyle>;
-  iconStyle?: StyleProp<ImageProps>;
+  iconStyle?: StyleProp<ImageStyle>;
   maxHeight?: number;
   fontFamily?: string;
   iconColor?: string;

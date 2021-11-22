@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageProps, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
@@ -8,7 +8,7 @@ interface Props {
   inputSearchStyle?: StyleProp<TextStyle>;
   selectedStyle?: StyleProp<ViewStyle>;
   selectedTextStyle?: StyleProp<TextStyle>;
-  iconStyle?: StyleProp<ImageProps>;
+  iconStyle?: StyleProp<ImageStyle>;
   maxHeight?: number;
   fontFamily?: string;
   iconColor?: string
