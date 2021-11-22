@@ -18,21 +18,6 @@ or
     yarn add react-native-element-dropdown
 ```
 
-### RN Version < 0.60
-```js
-    react-native link react-native-element-dropdown
-```
-### Run IOS
-```js
-    pod install
-    react-native run-ios
-```
-### Run Android
-```js
-    react-native run-android
-```
-
-
 #### Source code demo
 [react-native-template-components](https://github.com/hoaphantn7604/react-native-template-components) A beautiful template for React Native.
 #### Demo
@@ -55,6 +40,7 @@ or
 | containerStyle     | ViewStyle                                       | No        | Styling for container list                                          |
 | maxHeight          | Number                                          | No        | Customize height for container list                                 |
 | fontFamily         | String                                          | No        | Customize font style                                                |
+| iconStyle          | ImageStyle                                      | No        | Styling for icon                                                    |
 | iconColor          | String                                          | No        | Color of icons                                                      |
 | activeColor        | String                                          | No        | Background color for item selected in container list                |
 | search             | Boolean                                         | No        | Show or hide input search                                           |
@@ -86,6 +72,7 @@ or
 | containerStyle     | ViewStyle                                            | No        | Styling for container list                                          |
 | maxHeight          | Number                                               | No        | Customize height for container list                                 |
 | fontFamily         | String                                               | No        | Customize font style                                                |
+| iconStyle          | ImageStyle                                           | No        | Styling for icon                                                    |
 | iconColor          | String                                               | No        | Color of icons                                                      |
 | activeColor        | String                                               | No        | Background color for item selected in container list                |
 | selectedStyle      | ViewStyle                                            | No        | Styling for selected view                                           |

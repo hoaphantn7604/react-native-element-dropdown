@@ -36,6 +36,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
     valueField,
     selectedStyle,
     selectedTextStyle,
+    iconStyle,
     activeColor,
     containerStyle,
     fontFamily,
@@ -154,7 +155,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
           <Text style={[styles.textItem, placeholderStyle, font()]}>
             {placeholder}
           </Text>
-          {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }]} />}
+          {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }, iconStyle]} />}
         </View>
       </TouchableWithoutFeedback>
     )
@@ -202,7 +203,7 @@ const MultiSelectComponent: MultiSelect = (props) => {
           placeholder={searchPlaceholder}
           onChangeText={onSearch}
           placeholderTextColor="gray"
-          iconStyle={{ tintColor: iconColor }}
+          iconStyle={[{ tintColor: iconColor }, iconStyle]}
           onFocus={() => setFocus(true)}
           onBlur={() => { setFocus(false) }}
         />

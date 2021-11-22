@@ -45,6 +45,7 @@ const DropdownComponent: DropdownProps = (props) => {
     placeholderStyle,
     selectedTextStyle,
     inputSearchStyle,
+    iconStyle,
     selectedTextProps,
     data,
     labelField,
@@ -194,7 +195,7 @@ const DropdownComponent: DropdownProps = (props) => {
           <Text style={[styles.textItem, isSelected !== null ? selectedTextStyle : placeholderStyle, font()]} {...selectedTextProps}>
             {isSelected !== null ? currentValue[labelField] : placeholder}
           </Text>
-          {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }]} />}
+          {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }, iconStyle]} />}
         </View>
       </TouchableWithoutFeedback>
     )
@@ -224,7 +225,7 @@ const DropdownComponent: DropdownProps = (props) => {
           placeholder={searchPlaceholder}
           onChangeText={onSearch}
           placeholderTextColor="gray"
-          iconStyle={{ tintColor: iconColor }}
+          iconStyle={[{ tintColor: iconColor }, iconStyle]}
           onFocus={() => setFocus(true)}
           onBlur={() => { setFocus(false) }}
         />
