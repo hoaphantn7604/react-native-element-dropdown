@@ -15,13 +15,13 @@ export const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     padding: scale(6),
-    height: scale(50),
     alignItems: 'center',
   },
   image: {
     width: scale(20),
     height: scale(20),
     marginRight: scale(3),
+    marginVertical: scale(4)
   },
   selectedTextStyle: {
     flex:1,

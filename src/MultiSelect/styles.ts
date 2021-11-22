@@ -56,7 +56,7 @@ export const styles = StyleSheet.create({
     height: scale(45)
   },
   selectedItem: {
-    height: scale(30),
+    padding: scale(8),
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: scale(0.5),
