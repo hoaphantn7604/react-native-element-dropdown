@@ -219,7 +219,7 @@ const DropdownComponent: DropdownProps = (props) => {
       } else {
         return <CInput
           style={[styles.input, inputSearchStyle]}
-          inputStyle={font()}
+          inputStyle={[inputSearchStyle, font()]}
           autoCorrect={false}
           keyboardType={isIOS ? 'default' : 'visible-password'}
           placeholder={searchPlaceholder}
