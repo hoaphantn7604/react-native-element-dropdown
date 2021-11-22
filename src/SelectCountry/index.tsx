@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useImperativeHandle, useMemo, useRef } from 'react';
 import { Image, View, Text, ImageStyle } from 'react-native';
 import Dropdown from '../Dropdown';
 import { IProps } from '../Dropdown/type';
@@ -9,13 +9,28 @@ interface Props extends IProps {
   imageStyle?: ImageStyle;
 }
 
-const CountrySelectConponent: React.FC<Props> = props => {
+const CountrySelectConponent = React.forwardRef((props: Props, currentRef) => {
   const { data, value, valueField, labelField, imageField, selectedTextStyle, imageStyle } = props;
+  const ref: any = useRef(null);
+
+  useImperativeHandle(currentRef, () => {
+    return { open: eventOpen, close: eventClose };
+  });
+
+  const eventOpen = () => {
+    ref.current.open();
+  }
+
+  const eventClose = () => {
+    ref.current.close();
+  }
+
+
   const _renderItem = (item: any) => {
     return (
       <View style={styles.item}>
         <Image source={item[imageField]} style={[styles.image, imageStyle]} />
-        <Text style={[styles.selectedTextStyle ,selectedTextStyle]}>
+        <Text style={[styles.selectedTextStyle, selectedTextStyle]}>
           {item[labelField]}
         </Text>
       </View>
@@ -29,6 +44,7 @@ const CountrySelectConponent: React.FC<Props> = props => {
 
   return (
     <Dropdown
+      ref={ref}
       {...props}
       renderItem={_renderItem}
       renderLeftIcon={() => {
@@ -40,6 +56,6 @@ const CountrySelectConponent: React.FC<Props> = props => {
       }}
     />
   );
-};
+});
 
 export default CountrySelectConponent;
