@@ -362,7 +362,7 @@ const MultiSelectComponent= React.forwardRef((props: MultiSelectProps, currentRe
               key={e[labelField]}
               onPress={() => unSelect(e)}
             >
-              {renderSelectedItem(e, (e) => { unSelect(e) })}
+              {renderSelectedItem(e, () => { unSelect(e) })}
             </TouchableOpacity>
           } else {
             return (

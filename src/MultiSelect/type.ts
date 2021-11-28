@@ -27,7 +27,7 @@ interface IProps {
   renderLeftIcon?: () => JSX.Element | null | undefined;
   renderRightIcon?: () => JSX.Element | null | undefined;
   renderItem?: (item: any) => JSX.Element | null | undefined;
-  renderSelectedItem?: (item: any, unSelect?: (item: any) => void) => JSX.Element | null | undefined;
+  renderSelectedItem?: (item: any, unSelect?: () => void) => JSX.Element | null | undefined;
   renderInputSearch?: (onSearch: (text:string) => void) => JSX.Element | null | undefined;
   onFocus?:() => void;
   onBlur?:() => void;
