@@ -193,7 +193,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
       setTimeout(() => {
         if (refList) {
           const index = listData.findIndex(e => deepEqual(value, e[valueField]));
-          if (index !== -1 && index <= listData.length -1) {
+          if (index > -1 && index <= listData.length -1) {
             refList?.current?.scrollToIndex({ index: index, animated: false });
           }
         }
