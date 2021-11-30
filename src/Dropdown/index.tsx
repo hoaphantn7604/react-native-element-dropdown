@@ -143,10 +143,6 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   }, []);
 
   useEffect(() => {
-    setListData(data);
-  }, [data]);
-
-  useEffect(() => {
     getValue();
   }, [value, data]);
 
@@ -195,7 +191,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   const scrollIndex = () => {
     if (autoScroll) {
       setTimeout(() => {
-        if (refList) {
+        if (refList && listData.length > 0) {
           const index = listData.findIndex(e => deepEqual(value, e[valueField]));
           if (index > -1 && index <= listData.length - 1) {
             refList?.current?.scrollToIndex({ index: index, animated: false });
