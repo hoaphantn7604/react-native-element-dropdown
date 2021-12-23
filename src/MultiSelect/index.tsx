@@ -58,7 +58,7 @@ const MultiSelectComponent= React.forwardRef((props: MultiSelectProps, currentRe
     dropdownPosition = 'auto'
   } = props;
 
-  const ref = useRef(null);
+  const ref = useRef<View>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any[]>([]);
   const [listData, setListData] = useState<any[]>(data);
@@ -321,20 +321,20 @@ const MultiSelectComponent= React.forwardRef((props: MultiSelectProps, currentRe
 
   const _measure = () => {
     if (ref) {
-      ref.current.measure((width, height, px, py, fx, fy) => {
+      ref?.current?.measure((width, height, px, py, fx, fy) => {
         const isFull = orientation === 'LANDSCAPE' && !isTablet;
-        const w = parseInt(px);
-        const top = isFull ? 20 : parseInt(py) + parseInt(fy) + 2;
+        const w = px;
+        const top = isFull ? 20 : py + fy + 2;
         const bottom = H - top;
-        const left = parseInt(fx);
+        const left = fx;
 
         setPosition({
           isFull,
           w,
           top,
-          bottom : parseInt(bottom),
+          bottom : bottom,
           left,
-          height: parseInt(py)
+          height: py
         });
       })
     }

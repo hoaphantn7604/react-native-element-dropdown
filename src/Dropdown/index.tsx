@@ -69,8 +69,8 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     dropdownPosition = 'auto'
   } = props;
 
-  const ref = useRef(null);
-  const refList = useRef(null);
+  const ref = useRef<View>(null);
+  const refList = useRef<FlatList>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>(null);
   const [listData, setListData] = useState<any[]>(data);
@@ -347,20 +347,20 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
 
   const _measure = () => {
     if (ref) {
-      ref.current.measure((width, height, px, py, fx, fy) => {
+      ref?.current?.measure((width, height, px, py, fx, fy) => {
         const isFull = orientation === 'LANDSCAPE' && !isTablet;
-        const w = parseInt(px);
-        const top = isFull ? 20 : parseInt(py) + parseInt(fy) + 2;
+        const w = px;
+        const top = isFull ? 20 : py + fy + 2;
         const bottom = H - top;
-        const left = parseInt(fx);
+        const left = fx;
 
         setPosition({
           isFull,
           w,
           top,
-          bottom: parseInt(bottom),
+          bottom: bottom,
           left,
-          height: parseInt(py)
+          height: py
         });
       })
     }
