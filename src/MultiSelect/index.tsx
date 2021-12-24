@@ -58,7 +58,7 @@ const MultiSelectComponent= React.forwardRef((props: MultiSelectProps, currentRe
     dropdownPosition = 'auto'
   } = props;
 
-  const ref = useRef(null);
+  const ref = useRef<View>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any[]>([]);
   const [listData, setListData] = useState<any[]>(data);
