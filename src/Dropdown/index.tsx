@@ -87,6 +87,10 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     return { open: eventOpen, close: eventClose };
   });
 
+  useEffect(() => {
+    setListData(data);
+  }, [data]);
+
   const eventOpen = () => {
     if (!disable) {
       setVisible(true);

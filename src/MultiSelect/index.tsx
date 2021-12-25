@@ -24,7 +24,7 @@ const defaultProps = {
   style: {},
 }
 
-const MultiSelectComponent= React.forwardRef((props: MultiSelectProps, currentRef) => {
+const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentRef) => {
   const orientation = useDeviceOrientation();
   const {
     onChange,
@@ -73,6 +73,10 @@ const MultiSelectComponent= React.forwardRef((props: MultiSelectProps, currentRe
   useImperativeHandle(currentRef, () => {
     return { open: eventOpen, close: eventClose };
   });
+
+  useEffect(() => {
+    setListData(data);
+  }, [data]);
 
   const eventOpen = () => {
     if (!disable) {
@@ -332,7 +336,7 @@ const MultiSelectComponent= React.forwardRef((props: MultiSelectProps, currentRe
           isFull,
           w,
           top,
-          bottom : parseInt(bottom),
+          bottom: parseInt(bottom),
           left,
           height: parseInt(py)
         });
