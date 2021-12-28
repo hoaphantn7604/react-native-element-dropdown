@@ -45,7 +45,6 @@ const CountrySelectConponent = React.forwardRef((props: Props, currentRef) => {
   return (
     <Dropdown
       ref={ref}
-      {...props}
       renderItem={_renderItem}
       renderLeftIcon={() => {
         if (selectItem?.image) {
@@ -54,6 +53,7 @@ const CountrySelectConponent = React.forwardRef((props: Props, currentRef) => {
           return null;
         }
       }}
+      {...props}
     />
   );
 });
