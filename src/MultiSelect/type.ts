@@ -31,6 +31,7 @@ interface IProps {
   renderInputSearch?: (onSearch: (text:string) => void) => JSX.Element | null | undefined;
   onFocus?:() => void;
   onBlur?:() => void;
+  alwaysRenderItemSelected: boolean;
 };
 
 export type MultiSelectProps = IProps;

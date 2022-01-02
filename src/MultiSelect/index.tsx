@@ -55,7 +55,8 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     onFocus,
     onBlur,
     showsVerticalScrollIndicator = true,
-    dropdownPosition = 'auto'
+    dropdownPosition = 'auto',
+    alwaysRenderItemSelected = false
   } = props;
 
   const ref = useRef<View>(null);
@@ -390,7 +391,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
         {_renderDropdown()}
         {_renderModal()}
       </View>
-      {!visible && _renderItemSelected()}
+      {(!visible || alwaysRenderItemSelected) && _renderItemSelected()}
     </>
   );
 });

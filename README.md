@@ -90,6 +90,7 @@ or
 | renderItem         | (item) => JSX.Element                                | No        | Takes an item from data and renders it into the list                |
 | onFocus            | () => void                                           | No        | Callback that is called when the dropdown is focused                |
 | onBlur             | () => void                                           | No        | Callback that is called when the dropdown is blurred                |
+| alwaysRenderSelectedItem | Boolean                                        | No        | Always show the list of selected items                              |
 
 
 #### SelectCountry extends Dropdown 
