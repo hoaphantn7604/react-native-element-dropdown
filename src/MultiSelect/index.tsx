@@ -138,7 +138,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
   }, [value]);
 
   const getValue = () => {
-    setCurrentValue(value ? value : []);
+    setCurrentValue(value ? [...value] : []);
   };
 
   const showOrClose = () => {
@@ -352,7 +352,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
 
   const _renderItemSelected = () => {
     const list = data.filter((e: any) => {
-      const check = currentValue.indexOf(e[valueField]);
+      const check = value?.indexOf(e[valueField]);
       if (check !== -1) {
         return e;
       }
