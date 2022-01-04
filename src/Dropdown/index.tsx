@@ -61,6 +61,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     renderLeftIcon,
     renderRightIcon,
     renderItem,
+    renderListFooterComponent = null,
     renderInputSearch,
     onFocus,
     onBlur,
@@ -209,7 +210,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     onSearch('');
     setCurrentValue((e: any) => e = item);
     onChange(item);
-    setVisible(false);
+    eventClose();
   };
 
   const _renderDropdown = () => {
@@ -269,6 +270,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
         data={listData}
         inverted
         renderItem={_renderItem}
+        ListFooterComponent={renderListFooterComponent}
         keyExtractor={(item, index) => index.toString()}
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
@@ -285,6 +287,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
         onScrollToIndexFailed={scrollIndex}
         data={listData}
         renderItem={_renderItem}
+        ListFooterComponent={renderListFooterComponent}
         keyExtractor={(item, index) => index.toString()}
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />

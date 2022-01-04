@@ -28,6 +28,7 @@ export interface IProps {
   renderLeftIcon?: () => JSX.Element | null | undefined;
   renderRightIcon?: () => JSX.Element | null | undefined;
   renderItem?: (item: any) => JSX.Element | null | undefined;
+  renderListFooterComponent?: () => JSX.Element | null;
   renderInputSearch?: (onSearch: (text:string) => void) => JSX.Element | null | undefined;
   onFocus?: () => void;
   onBlur?: () => void;
