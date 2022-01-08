@@ -66,7 +66,8 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     onBlur,
     autoScroll = true,
     showsVerticalScrollIndicator = true,
-    dropdownPosition = 'auto'
+    dropdownPosition = 'auto',
+    flatListProps
   } = props;
 
   const ref = useRef<View>(null);
@@ -209,7 +210,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     onSearch('');
     setCurrentValue((e: any) => e = item);
     onChange(item);
-    setVisible(false);
+    eventClose();
   };
 
   const _renderDropdown = () => {
@@ -263,6 +264,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   const _renderListTop = () => {
     return <View style={{ flex: 1 }}>
       <FlatList
+        {...flatListProps}
         keyboardShouldPersistTaps="handled"
         ref={refList}
         onScrollToIndexFailed={scrollIndex}
@@ -280,6 +282,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     return <View style={{ flex: 1 }}>
       {renderSearch()}
       <FlatList
+        {...flatListProps}
         keyboardShouldPersistTaps="handled"
         ref={refList}
         onScrollToIndexFailed={scrollIndex}

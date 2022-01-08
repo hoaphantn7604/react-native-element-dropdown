@@ -55,7 +55,8 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     onFocus,
     onBlur,
     showsVerticalScrollIndicator = true,
-    dropdownPosition = 'auto'
+    dropdownPosition = 'auto',
+    flatListProps
   } = props;
 
   const ref = useRef<View>(null);
@@ -240,6 +241,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
   const _renderListTop = () => {
     return <View style={{ flex: 1 }}>
       <FlatList
+        {...flatListProps}
         keyboardShouldPersistTaps="handled"
         data={listData}
         inverted
@@ -256,6 +258,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     return <View style={{ flex: 1 }}>
       {renderSearch()}
       <FlatList
+        {...flatListProps}
         keyboardShouldPersistTaps="handled"
         data={listData}
         renderItem={_renderItem}

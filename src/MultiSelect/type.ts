@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { FlatListProps, ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 interface IProps {
   style?: StyleProp<ViewStyle>;
@@ -23,6 +23,7 @@ interface IProps {
   showsVerticalScrollIndicator?: boolean;
   searchPlaceholder?: string
   dropdownPosition?: 'auto' | 'top' | 'bottom';
+  flatListProps?: FlatListProps<any>;
   onChange: (item: any) => void;
   renderLeftIcon?: () => JSX.Element | null | undefined;
   renderRightIcon?: () => JSX.Element | null | undefined;

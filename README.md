@@ -54,6 +54,7 @@ or
 | renderLeftIcon     | () => JSX.Element                               | No        | Customize left icon for dropdown                                    |
 | renderRightIcon    | () => JSX.Element                               | No        | Customize right icon for dropdown                                   |
 | renderItem         | (item) => JSX.Element                           | No        | Takes an item from data and renders it into the list                |
+| flatListProps      | FlatListProps                                   | No        | Customize FlastList element                                         |
 | onFocus            | () => void                                      | No        | Callback that is called when the dropdown is focused                |
 | onBlur             | () => void                                      | No        | Callback that is called when the dropdown is blurred                | 
 
@@ -88,6 +89,7 @@ or
 | renderLeftIcon     | () => JSX.Element                                    | No        | Customize left icon for dropdown                                    |
 | renderRightIcon    | () => JSX.Element                                    | No        | Customize right icon for dropdown                                   |
 | renderItem         | (item) => JSX.Element                                | No        | Takes an item from data and renders it into the list                |
+| flatListProps      | FlatListProps                                        | No        | Customize FlastList element                                         |
 | onFocus            | () => void                                           | No        | Callback that is called when the dropdown is focused                |
 | onBlur             | () => void                                           | No        | Callback that is called when the dropdown is blurred                |
 
