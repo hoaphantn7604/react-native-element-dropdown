@@ -140,7 +140,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
   }, [value]);
 
   const getValue = () => {
-    setCurrentValue(value ? [...value] : []);
+    setCurrentValue(value ? value : []);
   };
 
   const showOrClose = () => {
