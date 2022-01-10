@@ -89,7 +89,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   });
 
   useEffect(() => {
-    setListData(data);
+    setListData([...data]);
   }, [data]);
 
   const eventOpen = () => {
@@ -350,7 +350,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
       return null;
     }
     return null;
-  }, [focus, position, visible, keyboardHeight, listData]);
+  }, [focus, position, visible, keyboardHeight, listData, value]);
 
   const _measure = () => {
     if (ref) {

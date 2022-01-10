@@ -77,7 +77,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
   });
 
   useEffect(() => {
-    setListData(data);
+    setListData([...data]);
   }, [data]);
 
   const eventOpen = () => {
