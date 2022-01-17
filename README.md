@@ -44,6 +44,7 @@ or
 | iconColor          | String                                          | No        | Color of icons                                                      |
 | activeColor        | String                                          | No        | Background color for item selected in container list                |
 | search             | Boolean                                         | No        | Show or hide input search                                           |
+| searchFunction     | (inputText, labelText) => Boolean               | No        | Callback used to filter the list of items                           |
 | inputSearchStyle   | ViewStyle                                       | No        | Styling for input search                                            |
 | searchPlaceholder  | String                                          | No        | The string that will be rendered before text input has been entered |
 | renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element| No        | Customize TextInput search                                          |
