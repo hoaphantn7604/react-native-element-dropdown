@@ -18,8 +18,6 @@ import _ from 'lodash';
 const { isTablet, isIOS } = useDetectDevice;
 const ic_down = require('../assets/icon/down.png');
 
-
-
 const defaultProps = {
   placeholder: 'Select item',
   activeColor: '#F6F7F8',
