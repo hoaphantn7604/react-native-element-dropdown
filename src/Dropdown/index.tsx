@@ -47,6 +47,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     searchPlaceholder,
     placeholder,
     search = false,
+    searchFunction,
     maxHeight = 340,
     disable = false,
     renderLeftIcon,
@@ -58,7 +59,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     autoScroll = true,
     showsVerticalScrollIndicator = true,
     dropdownPosition = 'auto',
-    flatListProps
+    flatListProps,
   } = props;
 
   const ref = useRef<View>(null);
@@ -172,12 +173,20 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
 
   const onSearch = (text: string) => {
     if (text.length > 0) {
-      const dataSearch = data.filter(e => {
+      const defaultFilterFunction = e => {
         const item = _.get(e, labelField)?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const key = text.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
         return item.indexOf(key) >= 0
-      });
+      }
+
+      const propSearchFunction = e => {
+        const labelText = _.get(e, labelField);
+        
+        return searchFunction?.(text, labelText);
+      }
+      
+      const dataSearch = data.filter(searchFunction ? propSearchFunction : defaultFilterFunction);
       setListData(dataSearch);
     } else {
       setListData(data);
