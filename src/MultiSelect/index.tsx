@@ -12,6 +12,7 @@ import { useDeviceOrientation } from '../useDeviceOrientation';
 import { useDetectDevice } from '../utilsScale';
 import { styles } from './styles';
 import { MultiSelectProps } from './type';
+import _ from 'lodash';
 
 const { isTablet, isIOS } = useDetectDevice;
 const ic_down = require('../assets/icon/down.png');
@@ -164,11 +165,11 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
   const onSelect = (item: any) => {
     onSearch('');
 
-    const index = currentValue.findIndex(e => e === item[valueField]);
+    const index = currentValue.findIndex(e => e === _.get(item, valueField));
     if (index > -1) {
       currentValue.splice(index, 1);
     } else {
-      currentValue.push(item[valueField]);
+      currentValue.push(_.get(item, valueField));
     }
     onChange(currentValue);
     setKey(Math.random());
@@ -189,7 +190,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
   };
 
   const checkSelected = (item: any) => {
-    const index = currentValue.findIndex(e => e === item[valueField]);
+    const index = currentValue.findIndex(e => e === _.get(item, valueField));
     return index > -1;
   };
 
@@ -197,7 +198,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     return (
       <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[checkSelected(item) && { backgroundColor: activeColor, marginBottom: 0.5 }]}>
         {renderItem ? renderItem(item) : <View style={styles.item}>
-          <Text style={[styles.textItem, placeholderStyle, font()]}>{item[labelField]}</Text>
+          <Text style={[styles.textItem, placeholderStyle, font()]}>{_.get(item, labelField)}</Text>
         </View>}
       </TouchableOpacity>
     );
@@ -206,7 +207,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
   const onSearch = (text: string) => {
     if (text.length > 0) {
       const dataSearch = data.filter(e => {
-        const item = e[labelField]?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const item = _.get(e, labelField)?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const key = text.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
         return item.indexOf(key) >= 0
@@ -356,7 +357,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
 
   const _renderItemSelected = () => {
     const list = data.filter((e: any) => {
-      const check = value?.indexOf(e[valueField]);
+      const check = value?.indexOf(_.get(e, valueField));
       if (check !== -1) {
         return e;
       }
@@ -367,7 +368,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
         {list.map(e => {
           if (renderSelectedItem) {
             return <TouchableOpacity
-              key={e[labelField]}
+              key={_.get(e, labelField)}
               onPress={() => unSelect(e)}
             >
               {renderSelectedItem(e, () => { unSelect(e) })}
@@ -375,11 +376,11 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
           } else {
             return (
               <TouchableOpacity
-                key={e[labelField]}
+                key={_.get(e, labelField)}
                 style={[styles.selectedItem, selectedStyle]}
                 onPress={() => unSelect(e)}
               >
-                <Text style={[{ fontSize: 12, color: 'gray' }, selectedTextStyle, font()]}>{e[labelField]}</Text>
+                <Text style={[{ fontSize: 12, color: 'gray' }, selectedTextStyle, font()]}>{_.get(e, labelField)}</Text>
                 <Text style={[styles.selectedTextItem, selectedTextStyle]}>ⓧ</Text>
               </TouchableOpacity>
             )

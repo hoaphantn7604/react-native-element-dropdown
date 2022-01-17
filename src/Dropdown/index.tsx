@@ -13,19 +13,12 @@ import { useDeviceOrientation } from '../useDeviceOrientation';
 import { useDetectDevice } from '../utilsScale';
 import { styles } from './styles';
 import { DropdownProps } from './type';
+import _ from 'lodash';
 
 const { isTablet, isIOS } = useDetectDevice;
 const ic_down = require('../assets/icon/down.png');
 
-const deepEqual: any = (x: any, y: any) => {
-  const ok = Object.keys,
-    tx = typeof x,
-    ty = typeof y;
-  return x && y && tx === 'object' && tx === ty
-    ? ok(x).length === ok(y).length &&
-    ok(x).every(key => deepEqual(x[key], y[key]))
-    : x === y;
-};
+
 
 const defaultProps = {
   placeholder: 'Select item',
@@ -152,7 +145,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   }, [value, data]);
 
   const getValue = () => {
-    const getItem = data.filter(e => deepEqual(value, e[valueField]));
+    const getItem = data.filter(e => _.isEqual(value, _.get(e, valueField)));
     if (getItem.length > 0) {
       setCurrentValue((e: any) => e = getItem[0]);
     } else {
@@ -182,7 +175,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   const onSearch = (text: string) => {
     if (text.length > 0) {
       const dataSearch = data.filter(e => {
-        const item = e[labelField]?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const item = _.get(e, labelField)?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const key = text.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
         return item.indexOf(key) >= 0
@@ -197,7 +190,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     if (autoScroll) {
       setTimeout(() => {
         if (refList && listData.length > 0) {
-          const index = listData.findIndex(e => deepEqual(value, e[valueField]));
+          const index = listData.findIndex(e => _.isEqual(value, _.get(e, valueField)));
           if (index > -1 && index <= listData.length - 1) {
             refList?.current?.scrollToIndex({ index: index, animated: false });
           }
@@ -214,13 +207,13 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   };
 
   const _renderDropdown = () => {
-    const isSelected = currentValue && currentValue[valueField];
+    const isSelected = currentValue && _.get(currentValue, valueField);
     return (
       <TouchableWithoutFeedback onPress={showOrClose}>
         <View style={styles.dropdown}>
           {renderLeftIcon?.()}
           <Text style={[styles.textItem, isSelected !== null ? selectedTextStyle : placeholderStyle, font()]} {...selectedTextProps}>
-            {isSelected !== null ? currentValue[labelField] : placeholder}
+            {isSelected !== null ? _.get(currentValue, labelField) : placeholder}
           </Text>
           {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }, iconStyle]} />}
         </View>
@@ -229,11 +222,11 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   };
 
   const _renderItem = ({ item, index }: { item: any; index: number }) => {
-    const isSelected = currentValue && currentValue[valueField];
+    const isSelected = currentValue && _.get(currentValue, valueField);
     return (
-      <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[deepEqual(item[valueField], isSelected) && { backgroundColor: activeColor }]}>
+      <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[_.isEqual(_.get(item, valueField), isSelected) && { backgroundColor: activeColor }]}>
         {renderItem ? renderItem(item) : <View style={styles.item}>
-          <Text style={[styles.textItem, selectedTextStyle, font()]}>{item[labelField]}</Text>
+          <Text style={[styles.textItem, selectedTextStyle, font()]}>{_.get(item, labelField)}</Text>
         </View>}
       </TouchableOpacity>
     );
