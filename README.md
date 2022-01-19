@@ -30,7 +30,7 @@ or
 | data               | Array                                           | Yes       | Data is a plain array                                               |
 | labelField         | String                                          | Yes       | Extract the label from the data item                                |
 | valueField         | String                                          | Yes       | Extract the primary key from the data item                          |
-| onChange           | (item) => void                                  | Yes       | Selection callback                                                  |
+| onChange           | (item: object) => void                          | Yes       | Selection callback                                                  |
 | value              | Item                                            | No        | Selected value                                                      |
 | placeholder        | String                                          | No        | The string that will be rendered before dropdown has been selected  |
 | placeholderStyle   | TextStyle                                       | No        | Styling for text placeholder                                        |
@@ -54,7 +54,7 @@ or
 | showsVerticalScrollIndicator | Boolean                               | No        | When true, shows a vertical scroll indicator, default is true       |
 | renderLeftIcon     | () => JSX.Element                               | No        | Customize left icon for dropdown                                    |
 | renderRightIcon    | () => JSX.Element                               | No        | Customize right icon for dropdown                                   |
-| renderItem         | (item) => JSX.Element                           | No        | Takes an item from data and renders it into the list                |
+| renderItem         | (item: object) => JSX.Element                   | No        | Takes an item from data and renders it into the list                |
 | flatListProps      | FlatListProps                                   | No        | Customize FlastList element                                         |
 | onFocus            | () => void                                      | No        | Callback that is called when the dropdown is focused                |
 | onBlur             | () => void                                      | No        | Callback that is called when the dropdown is blurred                | 
@@ -79,7 +79,7 @@ or
 | activeColor        | String                                               | No        | Background color for item selected in container list                |
 | selectedStyle      | ViewStyle                                            | No        | Styling for selected view                                           |
 | selectedTextStyle  | TextStyle                                            | No        | Styling for selected text                                           |
-| renderSelectedItem | (item: any, unSelect?: () => void) => JSX.Element    | No        | Takes an item from data and renders it into the list selected       |
+| renderSelectedItem | (item: object, unSelect?: () => void) => JSX.Element | No        | Takes an item from data and renders it into the list selected       |
 | alwaysRenderSelectedItem | Boolean                                        | No        | Always show the list of selected items                              |
 | search             | Boolean                                              | No        | Show or hide input search                                           |
 | searchQurey        | (keyword: string, labelValue: string) => Boolean     | No        | Callback used to filter the list of items                           |
@@ -91,7 +91,7 @@ or
 | showsVerticalScrollIndicator | Boolean                                    | No        | When true, shows a vertical scroll indicator, default is true       |
 | renderLeftIcon     | () => JSX.Element                                    | No        | Customize left icon for dropdown                                    |
 | renderRightIcon    | () => JSX.Element                                    | No        | Customize right icon for dropdown                                   |
-| renderItem         | (item) => JSX.Element                                | No        | Takes an item from data and renders it into the list                |
+| renderItem         | (item: object) => JSX.Element                        | No        | Takes an item from data and renders it into the list                |
 | flatListProps      | FlatListProps                                        | No        | Customize FlastList element                                         |
 | onFocus            | () => void                                           | No        | Callback that is called when the dropdown is focused                |
 | onBlur             | () => void                                           | No        | Callback that is called when the dropdown is blurred                |
