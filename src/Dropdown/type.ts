@@ -32,6 +32,7 @@ export interface IProps {
   renderInputSearch?: (onSearch: (text:string) => void) => JSX.Element | null | undefined;
   onFocus?: () => void;
   onBlur?: () => void;
+  searchQuery?: (keyword: string, labelValue: string) => boolean;
 };
 
 export type DropdownProps = IProps;

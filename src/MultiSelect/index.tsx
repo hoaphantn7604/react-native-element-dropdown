@@ -59,6 +59,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     dropdownPosition = 'auto',
     flatListProps,
     alwaysRenderItemSelected = false,
+    searchQuery
   } = props;
 
   const ref = useRef<View>(null);
@@ -206,17 +207,26 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
 
   const onSearch = (text: string) => {
     if (text.length > 0) {
-      const dataSearch = data.filter(e => {
+      const defaultFilterFunction = (e: any) => {
         const item = _.get(e, labelField)?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const key = text.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
         return item.indexOf(key) >= 0
-      });
+      }
+
+      const propSearchFunction = (e: any) => {
+        const labelText = _.get(e, labelField);
+
+        return searchQuery?.(text, labelText);
+      }
+
+      const dataSearch = data.filter(searchQuery ? propSearchFunction : defaultFilterFunction);
       setListData(dataSearch);
     } else {
       setListData(data);
     }
   };
+
 
   const renderSearch = () => {
     if (search) {
