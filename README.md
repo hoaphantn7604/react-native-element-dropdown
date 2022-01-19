@@ -44,7 +44,7 @@ or
 | iconColor          | String                                          | No        | Color of icons                                                      |
 | activeColor        | String                                          | No        | Background color for item selected in container list                |
 | search             | Boolean                                         | No        | Show or hide input search                                           |
-| searchQurey        | (keyword: string, labelValue: string) => Boolean| No        | Callback used to filter the list of items                           |
+| searchQuery        | (keyword: string, labelValue: string) => Boolean| No        | Callback used to filter the list of items                           |
 | inputSearchStyle   | ViewStyle                                       | No        | Styling for input search                                            |
 | searchPlaceholder  | String                                          | No        | The string that will be rendered before text input has been entered |
 | renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element| No        | Customize TextInput search                                          |
@@ -82,7 +82,7 @@ or
 | renderSelectedItem | (item: object, unSelect?: () => void) => JSX.Element | No        | Takes an item from data and renders it into the list selected       |
 | alwaysRenderSelectedItem | Boolean                                        | No        | Always show the list of selected items                              |
 | search             | Boolean                                              | No        | Show or hide input search                                           |
-| searchQurey        | (keyword: string, labelValue: string) => Boolean     | No        | Callback used to filter the list of items                           |
+| searchQuery        | (keyword: string, labelValue: string) => Boolean     | No        | Callback used to filter the list of items                           |
 | inputSearchStyle   | ViewStyle                                            | No        | Styling for input search                                            |
 | searchPlaceholder  | String                                               | No        | The string that will be rendered before text input has been entered |
 | renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element     | No        | Customize TextInput search                                          |
