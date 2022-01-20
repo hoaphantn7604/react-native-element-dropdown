@@ -7,6 +7,7 @@ import {
   View,
   ViewStyle,
   KeyboardEvent,
+  I18nManager
 } from 'react-native';
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
@@ -359,7 +360,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
         const w = parseInt(px);
         const top = isFull ? 20 : parseInt(py) + parseInt(fy) + 2;
         const bottom = H - top;
-        const left = parseInt(fx);
+        const left = I18nManager.isRTL?W - px - fx : fx;
 
         setPosition({
           isFull,
