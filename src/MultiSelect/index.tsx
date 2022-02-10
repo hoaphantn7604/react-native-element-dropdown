@@ -343,18 +343,18 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     if (ref) {
       ref.current.measure((width, height, px, py, fx, fy) => {
         const isFull = orientation === 'LANDSCAPE' && !isTablet;
-        const w = parseInt(px.toString());
-        const top = isFull ? 20 : parseInt(py.toString()) + parseInt(fy.toString()) + 2;
+        const w = parseInt(px?.toString());
+        const top = isFull ? 20 : parseInt(py?.toString()) + parseInt(fy?.toString()) + 2;
         const bottom = H - top;
-        const left = I18nManager.isRTL ? W - parseInt(px.toString()) - parseInt(fx.toString()) : parseInt(fx.toString());
+        const left = I18nManager.isRTL ? W - parseInt(px?.toString()) - parseInt(fx?.toString()) : parseInt(fx?.toString());
 
         setPosition({
           isFull,
           w,
           top,
-          bottom: parseInt(bottom.toString()),
+          bottom: parseInt(bottom?.toString()),
           left,
-          height: parseInt(py.toString())
+          height: parseInt(py?.toString())
         });
       })
     }
