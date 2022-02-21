@@ -57,7 +57,8 @@ or
 | renderItem         | (item: object) => JSX.Element                   | No        | Takes an item from data and renders it into the list                |
 | flatListProps      | FlatListProps                                   | No        | Customize FlastList element                                         |
 | onFocus            | () => void                                      | No        | Callback that is called when the dropdown is focused                |
-| onBlur             | () => void                                      | No        | Callback that is called when the dropdown is blurred                | 
+| onBlur             | () => void                                      | No        | Callback that is called when the dropdown is blurred                |
+| keyboardAvoiding   | Boolean                                         | No        | keyboardAvoiding default is true                                    |  
 
 
 #### MultiSelect Props
@@ -95,6 +96,7 @@ or
 | flatListProps      | FlatListProps                                        | No        | Customize FlastList element                                         |
 | onFocus            | () => void                                           | No        | Callback that is called when the dropdown is focused                |
 | onBlur             | () => void                                           | No        | Callback that is called when the dropdown is blurred                |
+| keyboardAvoiding   | Boolean                                              | No        | keyboardAvoiding default is true                                    |
 
 
 #### SelectCountry extends Dropdown 

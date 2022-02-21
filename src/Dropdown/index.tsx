@@ -50,6 +50,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     search = false,
     maxHeight = 340,
     disable = false,
+    keyboardAvoiding = true,
     renderLeftIcon,
     renderRightIcon,
     renderItem,
@@ -311,22 +312,25 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
         let topHeight = isTopPosition ? top - height : top;
 
         let keyboardStyle: ViewStyle = {};
-        if (renderInputSearch) {
-          if (keyboardHeight > 0 && bottom < keyboardHeight + height) {
-            if (isTopPosition) {
-              topHeight = H - keyboardHeight;
-            } else {
-              keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
-              topHeight = H - keyboardHeight - 55;
+
+        if (keyboardAvoiding) {
+          if (renderInputSearch) {
+            if (keyboardHeight > 0 && bottom < keyboardHeight + height) {
+              if (isTopPosition) {
+                topHeight = H - keyboardHeight;
+              } else {
+                keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
+                topHeight = H - keyboardHeight - 55;
+              }
             }
-          }
-        } else {
-          if (focus && keyboardHeight > 0 && bottom < keyboardHeight + height) {
-            if (isTopPosition) {
-              topHeight = H - keyboardHeight;
-            } else {
-              keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
-              topHeight = H - keyboardHeight - 55;
+          } else {
+            if (focus && keyboardHeight > 0 && bottom < keyboardHeight + height) {
+              if (isTopPosition) {
+                topHeight = H - keyboardHeight;
+              } else {
+                keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
+                topHeight = H - keyboardHeight - 55;
+              }
             }
           }
         }

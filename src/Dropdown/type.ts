@@ -25,6 +25,7 @@ export interface IProps {
   showsVerticalScrollIndicator?: boolean;
   dropdownPosition?: 'auto' | 'top' | 'bottom';
   flatListProps?: any;
+  keyboardAvoiding?: boolean;
   onChange: (item: any) => void;
   renderLeftIcon?: () => JSX.Element | null | undefined;
   renderRightIcon?: () => JSX.Element | null | undefined;

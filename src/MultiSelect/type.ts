@@ -25,6 +25,7 @@ interface IProps {
   dropdownPosition?: 'auto' | 'top' | 'bottom';
   flatListProps?: any;
   alwaysRenderItemSelected?: boolean;
+  keyboardAvoiding?: boolean;
   onChange: (item: any) => void;
   renderLeftIcon?: () => JSX.Element | null | undefined;
   renderRightIcon?: () => JSX.Element | null | undefined;
