@@ -243,6 +243,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
 
   const renderSearch = () => {
     if (search) {
+      _measure();
       if (renderInputSearch) {
         return renderInputSearch((text) => { onSearch(text) });
       } else {
