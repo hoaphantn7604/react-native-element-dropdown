@@ -265,7 +265,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   }
 
   const _renderListTop = () => {
-    return <View style={{ flex: 1 }}>
+    return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
       <FlatList
         {...flatListProps}
         keyboardShouldPersistTaps="handled"
@@ -278,11 +278,11 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
       {renderSearch()}
-    </View>
+    </View></TouchableWithoutFeedback>
   };
 
   const _renderListBottom = () => {
-    return <View style={{ flex: 1 }}>
+    return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
       {renderSearch()}
       <FlatList
         {...flatListProps}
@@ -294,7 +294,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
         keyExtractor={(item, index) => index.toString()}
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
-    </View>
+    </View></TouchableWithoutFeedback>
   };
 
   const _renderModal = useCallback(() => {

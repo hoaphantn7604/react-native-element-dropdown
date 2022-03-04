@@ -254,7 +254,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
   }
 
   const _renderListTop = () => {
-    return <View style={{ flex: 1 }}>
+    return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
       <FlatList
         {...flatListProps}
         keyboardShouldPersistTaps="handled"
@@ -265,12 +265,12 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
       {renderSearch()}
-    </View>
+    </View></TouchableWithoutFeedback>
   };
 
 
   const _renderListBottom = () => {
-    return <View style={{ flex: 1 }}>
+    return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
       {renderSearch()}
       <FlatList
         {...flatListProps}
@@ -280,7 +280,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
         keyExtractor={(item, index) => index.toString()}
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
-    </View>
+    </View></TouchableWithoutFeedback>
   };
 
   const _renderModal = useCallback(() => {
