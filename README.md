@@ -97,6 +97,7 @@ or
 | onFocus            | () => void                                           | No        | Callback that is called when the dropdown is focused                |
 | onBlur             | () => void                                           | No        | Callback that is called when the dropdown is blurred                |
 | keyboardAvoiding   | Boolean                                              | No        | keyboardAvoiding default is true                                    |
+| inside             | Boolean                                              | No        | inside default is false                                             |
 
 
 #### SelectCountry extends Dropdown 
