@@ -50,6 +50,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     maxHeight = 340,
     disable = false,
     keyboardAvoiding = true,
+    inside = false,
     renderItem,
     renderLeftIcon,
     renderRightIcon,
@@ -370,7 +371,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     }
   };
 
-  const _renderItemSelected = () => {
+  const _renderItemSelected = (inside: boolean) => {
     const list = data.filter((e: any) => {
       const check = value?.indexOf(_.get(e, valueField));
       if (check !== -1) {
@@ -379,7 +380,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     });
 
     return (
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+      <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }, inside && {flex:1}]}>
         {list.map(e => {
           if (renderSelectedItem) {
             return <TouchableOpacity
@@ -403,6 +404,33 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
         })}
       </View>)
   };
+  
+
+  const _renderInside = () => {
+    return <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
+      {_renderDropdownInside()}
+      {_renderModal()}
+    </View>
+  }
+
+  const _renderDropdownInside = () => {
+    return (
+      <TouchableWithoutFeedback onPress={showOrClose}>
+        <View style={styles.dropdownInside}>
+          {renderLeftIcon?.()}
+          {value && value?.length > 0 ? _renderItemSelected(true) :
+            <Text style={[styles.textItem, placeholderStyle, font()]}>
+              {placeholder}
+            </Text>}
+          {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }, iconStyle]} />}
+        </View>
+      </TouchableWithoutFeedback>
+    )
+  };
+
+  if(inside){
+    return _renderInside();
+  }
 
   return (
     <>
@@ -410,7 +438,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
         {_renderDropdown()}
         {_renderModal()}
       </View>
-      {(!visible || alwaysRenderItemSelected) && _renderItemSelected()}
+      {(!visible || alwaysRenderItemSelected) && _renderItemSelected(false)}
     </>
   );
 });

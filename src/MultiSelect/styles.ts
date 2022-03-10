@@ -21,6 +21,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     height: 35,
   },
+  dropdownInside: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    minHeight: 35,
+  },
   title: {
     marginVertical: 5,
     fontSize: 16,
@@ -59,7 +65,7 @@ export const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: 'gray',
     paddingHorizontal: 8,
-    marginTop: 12,
+    marginVertical: 6,
     marginRight: 8,
     flexDirection: 'row',
   },
