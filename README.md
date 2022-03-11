@@ -67,8 +67,8 @@ or
 | data               | Array                                                | Yes       | Data is a plain array                                               |
 | labelField         | String                                               | Yes       | Extract the label from the data item                                |
 | valueField         | String                                               | Yes       | Extract the primary key from the data item                          |
-| onChange           | (value[]) => void                                    | Yes       | Selection callback                                                  |
-| value              | Item[]                                               | No        | Selected value                                                      |
+| onChange           | (value[]) => void                                    | Yes       | Selection callback. A array containing the "valueField".           |
+| value              | Item[]                                               | No        | Selected value. A array containing the "valueField".                |
 | placeholder        | String                                               | No        | The string that will be rendered before dropdown has been selected  |
 | placeholderStyle   | TextStyle                                            | No        | Styling for text placeholder                                        |
 | style              | ViewStyle                                            | No        | Styling for container view                                          |
