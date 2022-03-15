@@ -126,13 +126,13 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     const susbcriptionKeyboardDidHide = Keyboard.addListener('keyboardDidHide', onKeyboardDidHide);
 
     return () => {
-      if (susbcriptionKeyboardDidShow?.remove) {
+      if (typeof susbcriptionKeyboardDidShow?.remove === 'function') {
         susbcriptionKeyboardDidShow.remove();
       } else {
         Keyboard.removeListener('keyboardDidShow', onKeyboardDidShow);
       }
 
-      if (susbcriptionKeyboardDidHide?.remove) {
+      if (typeof susbcriptionKeyboardDidHide?.remove === 'function') {
         susbcriptionKeyboardDidHide.remove();
       } else {
         Keyboard.removeListener('keyboardDidHide', onKeyboardDidHide);
