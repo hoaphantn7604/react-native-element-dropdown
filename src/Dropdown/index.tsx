@@ -359,7 +359,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   }, [focus, position, visible, keyboardHeight, listData, value]);
 
   const _measure = () => {
-    if (ref) {
+    if (ref && ref?.current) {
       ref.current.measure((width, height, px, py, fx, fy) => {
         const isFull = orientation === 'LANDSCAPE' && !isTablet;
         const w = parseInt(px?.toString());

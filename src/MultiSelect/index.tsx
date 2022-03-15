@@ -345,7 +345,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
   }, [focus, position, visible, keyboardHeight, listData, currentValue]);
 
   const _measure = () => {
-    if (ref) {
+    if (ref && ref?.current) {
       ref.current.measure((width, height, px, py, fx, fy) => {
         const isFull = orientation === 'LANDSCAPE' && !isTablet;
         const w = parseInt(px?.toString());
