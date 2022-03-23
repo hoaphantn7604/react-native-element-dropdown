@@ -114,6 +114,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
   };
 
   const onKeyboardDidShow = (e: KeyboardEvent) => {
+    _measure();
     setKeyboardHeight(e.endCoordinates.height + (isIOS ? 0 : 50));
   };
 
@@ -233,7 +234,6 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
 
   const renderSearch = () => {
     if (search) {
-      _measure();
       if (renderInputSearch) {
         return renderInputSearch((text) => { onSearch(text) });
       } else {

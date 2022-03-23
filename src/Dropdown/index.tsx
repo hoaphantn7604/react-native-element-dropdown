@@ -115,6 +115,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   };
 
   const onKeyboardDidShow = (e: KeyboardEvent) => {
+    _measure();
     setKeyboardHeight(e.endCoordinates.height + (isIOS ? 0 : 50));
   };
 
@@ -243,7 +244,6 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
 
   const renderSearch = () => {
     if (search) {
-      _measure();
       if (renderInputSearch) {
         return renderInputSearch((text) => { onSearch(text) });
       } else {
