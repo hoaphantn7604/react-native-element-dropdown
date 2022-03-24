@@ -380,7 +380,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   };
 
   return (
-    <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
+    <View style={[{ justifyContent: 'center' }, style]} ref={ref}>
       {_renderDropdown()}
       {_renderModal()}
     </View>
