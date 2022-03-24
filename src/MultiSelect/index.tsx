@@ -407,7 +407,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
   
 
   const _renderInside = () => {
-    return <View style={[{ justifyContent: 'center' }, style]} ref={ref}>
+    return <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
       {_renderDropdownInside()}
       {_renderModal()}
     </View>
@@ -434,7 +434,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
 
   return (
     <>
-      <View style={[{ justifyContent: 'center' }, style]} ref={ref}>
+      <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
         {_renderDropdown()}
         {_renderModal()}
       </View>
