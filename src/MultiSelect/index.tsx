@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useImperativeHandle, useRef, useState, useMemo } from 'react';
 import {
   Dimensions, FlatList,
   Image, Keyboard, Modal, Text, TouchableOpacity,
@@ -254,7 +254,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     return null;
   }
 
-  const _renderListTop = () => {
+  const _renderListTop = useMemo(() => {
     return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
       <FlatList
         {...flatListProps}
@@ -267,10 +267,10 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
       />
       {renderSearch()}
     </View></TouchableWithoutFeedback>
-  };
+  }, [listData]);
 
 
-  const _renderListBottom = () => {
+  const _renderListBottom = useMemo(() => {
     return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
       {renderSearch()}
       <FlatList
@@ -282,7 +282,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
     </View></TouchableWithoutFeedback>
-  };
+  }, [listData]);
 
   const _renderModal = useCallback(() => {
     if (visible && position) {
@@ -327,12 +327,12 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
             <View style={[{ flex: 1 }, isFull && styleContainerVertical, keyboardStyle]}>
               <View style={{ height: topHeight, width: w, justifyContent: 'flex-end' }}>
                 {isTopPosition && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleHorizontal : styleVertical]}>
-                  {_renderListTop()}
+                  {_renderListTop}
                 </View>}
               </View>
               <View style={{ flex: 1 }}>
                 {!isTopPosition && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleHorizontal : styleVertical]}>
-                  {_renderListBottom()}
+                  {_renderListBottom}
                 </View>}
               </View>
             </View>
