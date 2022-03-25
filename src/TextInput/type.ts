@@ -1,19 +1,20 @@
+import React from "react";
 import {
   ImageStyle,
   StyleProp,
-  TextInputProps, 
+  TextInputProps,
   TextStyle,
-  ViewStyle
-} from 'react-native';
+  ViewStyle,
+} from "react-native";
 
 interface Props extends TextInputProps {
-  fontFamily?: string;
-  style?: StyleProp<ViewStyle>;
-  inputStyle?: StyleProp<TextStyle>;
-  iconStyle?: StyleProp<ImageStyle>;
-  showIcon?: boolean;
-  renderRightIcon?: () => JSX.Element | null | undefined;
-  renderLeftIcon?: () => JSX.Element | null | undefined;
+  readonly fontFamily?: string;
+  readonly style?: StyleProp<ViewStyle>;
+  readonly inputStyle?: StyleProp<TextStyle>;
+  readonly iconStyle?: StyleProp<ImageStyle>;
+  readonly showIcon?: boolean;
+  readonly renderRightIcon?: () => JSX.Element | null | undefined;
+  readonly renderLeftIcon?: () => JSX.Element | null | undefined;
 }
 
-export type CTextInput = React.FC<Props>
+export type CTextInput = React.FC<Props>;

@@ -1,5 +1,5 @@
-export interface UseDetectDevice {  
-    isAndroid: boolean;
-    isIOS: boolean;
-    isTablet: boolean;
+export interface UseDetectDevice {
+  readonly isAndroid: boolean;
+  readonly isIOS: boolean;
+  readonly isTablet: boolean;
 }
