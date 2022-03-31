@@ -1,53 +1,39 @@
-import { useEffect, useState, useCallback } from 'react';
-import { Dimensions } from 'react-native';
+import {useEffect, useState} from 'react'
+import {Dimensions, ScaledSize} from 'react-native'
 
-const screen = Dimensions.get('window');
+const isOrientationPortrait = ({width, height}: ScaledSize) => height >= width
+const isOrientationLandscape = ({width, height}: ScaledSize) => width >= height
 
 export function useDeviceOrientation() {
-  const isOrientationPortrait = ({
-    width,
-    height,
-  }: {
-    width: number;
-    height: number;
-  }) => height >= width;
-  const isOrientationLandscape = ({
-    width,
-    height,
-  }: {
-    width: number;
-    height: number;
-  }) => width >= height;
-
-  const [orientation, setOrientation] = useState({
+  const screen = Dimensions.get('screen')
+  const initialState = {
     portrait: isOrientationPortrait(screen),
     landscape: isOrientationLandscape(screen),
-  });
+  }
 
-  const onChange = useCallback((screen) => {
-    setOrientation({
-      portrait: isOrientationPortrait(screen),
-      landscape: isOrientationLandscape(screen),
-    });
-  }, []);
+  const [orientation, setOrientation] = useState(initialState)
 
   useEffect(() => {
-    const susbcription = Dimensions.addEventListener('change', () => {
-      const screen = Dimensions.get('window');
-      onChange(screen);
-    });
+    const onChange = ({screen}: {screen: ScaledSize}) => {
+      setOrientation({
+        portrait: isOrientationPortrait(screen),
+        landscape: isOrientationLandscape(screen),
+      })
+    }
+
+    const subscription = Dimensions.addEventListener('change', onChange)
 
     return () => {
-      if (typeof susbcription?.remove === 'function') {
-        susbcription.remove();
-      }else {
-        Dimensions.removeEventListener('change', ()=>{
-          const screen = Dimensions.get('window');
-          onChange(screen);
-        });  
+      // @ts-expect-error - React Native >= 0.65
+      if (typeof subscription?.remove === 'function') {
+        // @ts-expect-error - need update @types/react-native@0.65.x
+        subscription.remove()
+      } else {
+        // React Native < 0.65
+        Dimensions.removeEventListener('change', onChange)
       }
-    };
-  }, []);
+    }
+  }, [])
 
   return orientation.portrait === true ? 'PORTRAIT' : 'LANDSCAPE';
 }
