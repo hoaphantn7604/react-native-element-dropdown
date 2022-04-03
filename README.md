@@ -74,6 +74,7 @@ or
 | style              | ViewStyle                                            | No        | Styling for container view                                          |
 | containerStyle     | ViewStyle                                            | No        | Styling for container list                                          |
 | maxHeight          | Number                                               | No        | Customize height for container list                                 |
+| maxSelect          | Number                                               | No        | maximum number of items that can be selected                        |
 | fontFamily         | String                                               | No        | Customize font style                                                |
 | iconStyle          | ImageStyle                                           | No        | Styling for icon                                                    |
 | iconColor          | String                                               | No        | Color of icons                                                      |
