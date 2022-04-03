@@ -27,10 +27,10 @@ export interface IProps {
   flatListProps?: any;
   keyboardAvoiding?: boolean;
   onChange: (item: any) => void;
-  renderLeftIcon?: () => JSX.Element | null | undefined;
-  renderRightIcon?: () => JSX.Element | null | undefined;
-  renderItem?: (item: any) => JSX.Element | null | undefined;
-  renderInputSearch?: (onSearch: (text:string) => void) => JSX.Element | null | undefined;
+  renderLeftIcon?: () => React.ReactNode | null | undefined;
+  renderRightIcon?: () => React.ReactNode | null | undefined;
+  renderItem?: (item: any) => React.ReactNode | null | undefined;
+  renderInputSearch?: (onSearch: (text:string) => void) => React.ReactNode | null | undefined;
   onFocus?: () => void;
   onBlur?: () => void;
   searchQuery?: (keyword: string, labelValue: string) => boolean;

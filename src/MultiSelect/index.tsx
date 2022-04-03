@@ -48,6 +48,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     placeholder,
     search = false,
     maxHeight = 340,
+    maxSelect,
     disable = false,
     keyboardAvoiding = true,
     inside = false,
@@ -174,7 +175,14 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     if (index > -1) {
       currentValue.splice(index, 1);
     } else {
-      currentValue.push(_.get(item, valueField));
+      if(maxSelect){
+        if(currentValue.length < maxSelect){
+          currentValue.push(_.get(item, valueField));
+        }
+      }else{
+        currentValue.push(_.get(item, valueField));
+      }
+      
     }
     onChange(currentValue);
     setKey(Math.random());

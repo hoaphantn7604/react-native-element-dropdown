@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ImageStyle,
   StyleProp,
@@ -12,8 +13,8 @@ interface Props extends TextInputProps {
   inputStyle?: StyleProp<TextStyle>;
   iconStyle?: StyleProp<ImageStyle>;
   showIcon?: boolean;
-  renderRightIcon?: () => JSX.Element | null | undefined;
-  renderLeftIcon?: () => JSX.Element | null | undefined;
+  renderRightIcon?: () => React.ReactNode | null | undefined;
+  renderLeftIcon?: () => React.ReactNode | null | undefined;
 }
 
 export type CTextInput = React.FC<Props>
