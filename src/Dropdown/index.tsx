@@ -180,7 +180,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
         const item = _.get(e, labelField)?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const key = text.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-        return item.indexOf(key) >= 0;
+        return item.indexOf(key) >= 0
       }
 
       const propSearchFunction = (e: any) => {
@@ -197,9 +197,9 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   };
 
   const scrollIndex = () => {
-    if (autoScroll && keyboardHeight === 0) {
+    if (autoScroll && listData.length == data.length) {
       setTimeout(() => {
-        if (refList && refList?.current && listData.length > 0) {
+        if (refList && refList?.current) {
           const index = _.findIndex(listData, e => _.isEqual(value, _.get(e, valueField)));
           if (index > -1 && index <= listData.length - 1) {
             refList?.current?.scrollToIndex({ index: index, animated: false });
@@ -279,7 +279,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
       />
       {renderSearch()}
     </View></TouchableWithoutFeedback>
-  }, [listData]);
+  }, [listData, currentValue]);
 
   const _renderListBottom = useMemo(() => {
     return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
@@ -295,7 +295,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
     </View></TouchableWithoutFeedback>
-  }, [listData]);
+  }, [listData, currentValue]);
 
   const _renderModal = useMemo(() => {
     if (visible && position) {
