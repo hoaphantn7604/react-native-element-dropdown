@@ -174,13 +174,13 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     scrollIndex();
   };
 
-  const onSearch = _.debounce((text: string) => {
+  const onSearch = (text: string) => {
     if (text.length > 0) {
       const defaultFilterFunction = (e: any) => {
         const item = _.get(e, labelField)?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const key = text.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-        return _.indexOf(item, key) >= 0;
+        return item.indexOf(key) >= 0;
       }
 
       const propSearchFunction = (e: any) => {
@@ -194,12 +194,12 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     } else {
       setListData(data);
     }
-  }, 1000);
+  };
 
   const scrollIndex = () => {
     if (autoScroll && keyboardHeight === 0) {
       setTimeout(() => {
-        if (refList && listData.length > 0) {
+        if (refList && refList?.current && listData.length > 0) {
           const index = _.findIndex(listData, e => _.isEqual(value, _.get(e, valueField)));
           if (index > -1 && index <= listData.length - 1) {
             refList?.current?.scrollToIndex({ index: index, animated: false });

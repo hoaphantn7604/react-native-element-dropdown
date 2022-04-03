@@ -217,13 +217,13 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     );
   };
 
-  const onSearch = _.debounce((text: string) => {
+  const onSearch = (text: string) => {
     if (text.length > 0) {
       const defaultFilterFunction = (e: any) => {
         const item = _.get(e, labelField)?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const key = text.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-        return item.indexOf(key) >= 0
+        return item.indexOf(key) >= 0;
       }
 
       const propSearchFunction = (e: any) => {
@@ -237,7 +237,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     } else {
       setListData(data);
     }
-  }, 1000);
+  };
 
 
   const renderSearch = () => {
