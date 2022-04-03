@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useImperativeHandle, useRef, useState, useMemo } from 'react';
+import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import {
   Dimensions, FlatList,
   Image, Keyboard, Modal,
@@ -264,7 +264,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     return null;
   }
 
-  const _renderListTop = useMemo(() => {
+  const _renderListTop = () => {
     return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
       <FlatList
         {...flatListProps}
@@ -279,9 +279,9 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
       />
       {renderSearch()}
     </View></TouchableWithoutFeedback>
-  }, [listData, currentValue]);
+  };
 
-  const _renderListBottom = useMemo(() => {
+  const _renderListBottom = () => {
     return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
       {renderSearch()}
       <FlatList
@@ -295,9 +295,9 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
     </View></TouchableWithoutFeedback>
-  }, [listData, currentValue]);
+  };
 
-  const _renderModal = useMemo(() => {
+  const _renderModal = useCallback(() => {
     if (visible && position) {
       const {
         isFull,
@@ -341,12 +341,12 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
             <View style={[{ flex: 1 }, isFull && styleContainerVertical, keyboardStyle]}>
               <View style={{ height: topHeight, width: w, justifyContent: 'flex-end' }}>
                 {isTopPosition && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleHorizontal : styleVertical]}>
-                  {_renderListTop}
+                  {_renderListTop()}
                 </View>}
               </View>
               <View style={{ flex: 1 }}>
                 {!isTopPosition && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleHorizontal : styleVertical]}>
-                  {_renderListBottom}
+                  {_renderListBottom()}
                 </View>}
               </View>
             </View>
@@ -382,7 +382,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
   return (
     <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
       {_renderDropdown()}
-      {_renderModal}
+      {_renderModal()}
     </View>
   );
 });

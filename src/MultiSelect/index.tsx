@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useImperativeHandle, useRef, useState, useMemo } from 'react';
+import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import {
   Dimensions, FlatList,
   Image, Keyboard, Modal, Text, TouchableOpacity,
@@ -175,14 +175,14 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     if (index > -1) {
       currentValue.splice(index, 1);
     } else {
-      if(maxSelect){
-        if(currentValue.length < maxSelect){
+      if (maxSelect) {
+        if (currentValue.length < maxSelect) {
           currentValue.push(_.get(item, valueField));
         }
-      }else{
+      } else {
         currentValue.push(_.get(item, valueField));
       }
-      
+
     }
     onChange(currentValue);
     setKey(Math.random());
@@ -223,7 +223,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
         const item = _.get(e, labelField)?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const key = text.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-        return item.indexOf(key) >= 0;
+        return item.indexOf(key) >= 0
       }
 
       const propSearchFunction = (e: any) => {
@@ -262,7 +262,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     return null;
   }
 
-  const _renderListTop = useMemo(() => {
+  const _renderListTop = () => {
     return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
       <FlatList
         {...flatListProps}
@@ -275,10 +275,10 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
       />
       {renderSearch()}
     </View></TouchableWithoutFeedback>
-  }, [listData]);
+  };
 
 
-  const _renderListBottom = useMemo(() => {
+  const _renderListBottom = () => {
     return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
       {renderSearch()}
       <FlatList
@@ -290,9 +290,9 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       />
     </View></TouchableWithoutFeedback>
-  }, [listData]);
+  };
 
-  const _renderModal = useMemo(() => {
+  const _renderModal = useCallback(() => {
     if (visible && position) {
       const {
         isFull,
@@ -335,12 +335,12 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
             <View style={[{ flex: 1 }, isFull && styleContainerVertical, keyboardStyle]}>
               <View style={{ height: topHeight, width: w, justifyContent: 'flex-end' }}>
                 {isTopPosition && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleHorizontal : styleVertical]}>
-                  {_renderListTop}
+                  {_renderListTop()}
                 </View>}
               </View>
               <View style={{ flex: 1 }}>
                 {!isTopPosition && <View style={[{ width: w }, styles.container, containerStyle, isFull ? styleHorizontal : styleVertical]}>
-                  {_renderListBottom}
+                  {_renderListBottom()}
                 </View>}
               </View>
             </View>
@@ -360,7 +360,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
         const top = isFull ? 20 : Math.floor(py) + Math.floor(fy) + 2;
         const bottom = H - top;
         const left = I18nManager.isRTL ? W - Math.floor(px) - Math.floor(fx) : Math.floor(fx);
-        
+
         setPosition({
           isFull,
           w,
@@ -388,7 +388,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     });
 
     return (
-      <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }, inside && {flex:1}]}>
+      <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }, inside && { flex: 1 }]}>
         {list.map(e => {
           if (renderSelectedItem) {
             return <TouchableOpacity
@@ -412,12 +412,12 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
         })}
       </View>)
   };
-  
+
 
   const _renderInside = () => {
     return <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
       {_renderDropdownInside()}
-      {_renderModal}
+      {_renderModal()}
     </View>
   }
 
@@ -436,7 +436,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     )
   };
 
-  if(inside){
+  if (inside) {
     return _renderInside();
   }
 
@@ -444,7 +444,7 @@ const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentR
     <>
       <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
         {_renderDropdown()}
-        {_renderModal}
+        {_renderModal()}
       </View>
       {(!visible || alwaysRenderItemSelected) && _renderItemSelected(false)}
     </>
