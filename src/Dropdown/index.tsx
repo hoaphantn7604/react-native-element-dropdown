@@ -174,7 +174,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     scrollIndex();
   };
 
-  const onSearch = (text: string) => {
+  const onSearch = _.debounce((text: string) => {
     if (text.length > 0) {
       const defaultFilterFunction = (e: any) => {
         const item = _.get(e, labelField)?.toLowerCase().replace(' ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -194,7 +194,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
     } else {
       setListData(data);
     }
-  };
+  }, 1000);
 
   const scrollIndex = () => {
     if (autoScroll && keyboardHeight === 0) {
