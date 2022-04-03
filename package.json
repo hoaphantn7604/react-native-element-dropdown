@@ -31,7 +31,7 @@
   "license": "MIT",
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
-  "devDependencies": {
+  "peerDependencies": {
     "react": "*",
     "react-native": "*",
     "lodash": "*"
