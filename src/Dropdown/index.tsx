@@ -336,7 +336,7 @@ const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) =>
           }
         }
 
-        return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']}>
+        return <Modal transparent visible={visible} supportedOrientations={['landscape', 'portrait']} onRequestClose={showOrClose}>
           <TouchableWithoutFeedback onPress={showOrClose}>
             <View style={[{ flex: 1 }, isFull && styleContainerVertical, keyboardStyle]}>
               <View style={{ height: topHeight, width: w, justifyContent: 'flex-end' }}>
