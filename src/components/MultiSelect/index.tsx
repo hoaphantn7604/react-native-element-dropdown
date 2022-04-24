@@ -8,7 +8,7 @@ import {
   KeyboardEvent,
   I18nManager
 } from 'react-native';
-import CInput from '../textInput';
+import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
 import { useDetectDevice } from '../../toolkits';
 import { styles } from './styles';
