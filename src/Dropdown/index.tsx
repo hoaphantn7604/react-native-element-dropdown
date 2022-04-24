@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
-import { useDetectDevice } from '../utilsScale';
+import { useDetectDevice } from '../Toolkits';
 import { styles } from './styles';
 import { DropdownProps } from './model';
 import _ from 'lodash';
