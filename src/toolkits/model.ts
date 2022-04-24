@@ -1,4 +1,4 @@
-export interface UseDetectDeviceProps {  
+export interface IUseDetectDevice {  
     isAndroid: boolean;
     isIOS: boolean;
     isTablet: boolean;
