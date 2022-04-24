@@ -8,9 +8,9 @@ import {
   KeyboardEvent,
   I18nManager
 } from 'react-native';
-import CInput from '../TextInput';
+import CInput from '../textInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
-import { useDetectDevice } from '../Toolkits';
+import { useDetectDevice } from '../toolkits';
 import { styles } from './styles';
 import { MultiSelectProps } from './model';
 import _ from 'lodash';

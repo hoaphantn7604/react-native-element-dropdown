@@ -1,5 +1,5 @@
-import Dropdown from './src/Dropdown1';
-import MultiSelect from './src/MultiSelect1';
-import SelectCountry from './src/SelectCountry1';
+import Dropdown from './src/dropdown';
+import MultiSelect from './src/multiSelect';
+import SelectCountry from './src/selectCountry';
 
 export { Dropdown, MultiSelect, SelectCountry };
