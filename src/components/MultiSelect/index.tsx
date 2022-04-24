@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import {
   Dimensions, FlatList,
-  Image, Keyboard, Modal,
-  Text, TouchableOpacity,
+  Image, Keyboard, Modal, Text, TouchableOpacity,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
@@ -11,9 +10,9 @@ import {
 } from 'react-native';
 import CInput from '../textInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
-import { useDetectDevice } from '../toolkits';
+import { useDetectDevice } from '../../toolkits';
 import { styles } from './styles';
-import { DropdownProps } from './model';
+import { MultiSelectProps } from './model';
 import _ from 'lodash';
 
 const { isTablet, isIOS } = useDetectDevice;
@@ -22,61 +21,62 @@ const ic_down = require('../assets/icon/down.png');
 const defaultProps = {
   placeholder: 'Select item',
   activeColor: '#F6F7F8',
+  backgroundColor: 'white',
   data: [],
   style: {},
-  selectedTextProps: {}
 }
 
-const DropdownComponent: DropdownProps = React.forwardRef((props, currentRef) => {
+const MultiSelectComponent: MultiSelectProps = React.forwardRef((props, currentRef) => {
   const orientation = useDeviceOrientation();
   const {
     onChange,
-    style,
-    containerStyle,
-    placeholderStyle,
-    selectedTextStyle,
-    inputSearchStyle,
-    iconStyle,
-    selectedTextProps,
     data,
+    value,
+    style,
     labelField,
     valueField,
-    value,
+    selectedStyle,
+    selectedTextStyle,
+    iconStyle,
     activeColor,
+    containerStyle,
     fontFamily,
+    placeholderStyle,
     iconColor = "gray",
+    inputSearchStyle,
     searchPlaceholder,
     placeholder,
     search = false,
     maxHeight = 340,
+    maxSelect,
     disable = false,
     keyboardAvoiding = true,
+    inside = false,
+    renderItem,
     renderLeftIcon,
     renderRightIcon,
-    renderItem,
+    renderSelectedItem,
     renderInputSearch,
     onFocus,
     onBlur,
-    autoScroll = true,
     showsVerticalScrollIndicator = true,
     dropdownPosition = 'auto',
     flatListProps,
+    alwaysRenderItemSelected = false,
     searchQuery
   } = props;
 
   const ref = useRef<View>(null);
-  const refList = useRef<FlatList>(null);
   const [visible, setVisible] = useState<boolean>(false);
-  const [currentValue, setCurrentValue] = useState<any>(null);
+  const [currentValue, setCurrentValue] = useState<any[]>([]);
   const [listData, setListData] = useState<any[]>(data);
+  const [key, setKey] = useState<number>(Math.random());
   const [position, setPosition] = useState<any>();
   const [focus, setFocus] = useState<boolean>(false);
   const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
-
   const { width: W, height: H } = Dimensions.get('window');
   const styleContainerVertical: ViewStyle = { backgroundColor: 'rgba(0,0,0,0.1)', alignItems: 'center' };
   const styleHorizontal: ViewStyle = { marginBottom: 20, width: W / 2, alignSelf: 'center' };
-
 
   useImperativeHandle(currentRef, () => {
     return { open: eventOpen, close: eventClose };
@@ -144,15 +144,10 @@ const DropdownComponent: DropdownProps = React.forwardRef((props, currentRef) =>
 
   useEffect(() => {
     getValue();
-  }, [value, data]);
+  }, [value]);
 
   const getValue = () => {
-    const getItem = data.filter(e => _.isEqual(value, _.get(e, valueField)));
-    if (getItem.length > 0) {
-      setCurrentValue((e: any) => e = getItem[0]);
-    } else {
-      setCurrentValue(null);
-    }
+    setCurrentValue(value ? [...value] : []);
   };
 
   const showOrClose = () => {
@@ -171,7 +166,55 @@ const DropdownComponent: DropdownProps = React.forwardRef((props, currentRef) =>
         }
       }
     }
-    scrollIndex();
+  };
+
+  const onSelect = (item: any) => {
+    onSearch('');
+
+    const index = currentValue.findIndex(e => e === _.get(item, valueField));
+    if (index > -1) {
+      currentValue.splice(index, 1);
+    } else {
+      if (maxSelect) {
+        if (currentValue.length < maxSelect) {
+          currentValue.push(_.get(item, valueField));
+        }
+      } else {
+        currentValue.push(_.get(item, valueField));
+      }
+
+    }
+    onChange(currentValue);
+    setKey(Math.random());
+  };
+
+  const _renderDropdown = () => {
+    return (
+      <TouchableWithoutFeedback onPress={showOrClose}>
+        <View style={styles.dropdown}>
+          {renderLeftIcon?.()}
+          <Text style={[styles.textItem, placeholderStyle, font()]}>
+            {placeholder}
+          </Text>
+          {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }, iconStyle]} />}
+        </View>
+      </TouchableWithoutFeedback>
+    )
+  };
+
+  const checkSelected = (item: any) => {
+    const index = currentValue.findIndex(e => e === _.get(item, valueField));
+    return index > -1;
+  };
+
+  const _renderItem = ({ item, index }: { item: any; index: number }) => {
+    return (
+      <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[checkSelected(item) && { backgroundColor: activeColor, marginBottom: 0.5 }]}>
+        {renderItem ? renderItem(item) : <View style={styles.item}>
+          <Text style={[styles.textItem, placeholderStyle, font()]}>{_.get(item, labelField)}</Text>
+        </View>}
+      </TouchableOpacity>
+    );
   };
 
   const onSearch = (text: string) => {
@@ -196,51 +239,6 @@ const DropdownComponent: DropdownProps = React.forwardRef((props, currentRef) =>
     }
   };
 
-  const scrollIndex = () => {
-    if (autoScroll && data.length > 0 && listData.length == data.length) {
-      setTimeout(() => {
-        if (refList && refList?.current) {
-          const index = _.findIndex(listData, e => _.isEqual(value, _.get(e, valueField)));
-          if (index > -1 && index <= listData.length - 1) {
-            refList?.current?.scrollToIndex({ index: index, animated: false });
-          }
-        }
-      }, 200);
-    }
-  };
-
-  const onSelect = (item: any) => {
-    onSearch('');
-    setCurrentValue((e: any) => e = item);
-    onChange(item);
-    eventClose();
-  };
-
-  const _renderDropdown = () => {
-    const isSelected = currentValue && _.get(currentValue, valueField);
-    return (
-      <TouchableWithoutFeedback onPress={showOrClose}>
-        <View style={styles.dropdown}>
-          {renderLeftIcon?.()}
-          <Text style={[styles.textItem, isSelected !== null ? selectedTextStyle : placeholderStyle, font()]} {...selectedTextProps}>
-            {isSelected !== null ? _.get(currentValue, labelField) : placeholder}
-          </Text>
-          {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }, iconStyle]} />}
-        </View>
-      </TouchableWithoutFeedback>
-    )
-  };
-
-  const _renderItem = ({ item, index }: { item: any; index: number }) => {
-    const isSelected = currentValue && _.get(currentValue, valueField);
-    return (
-      <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[_.isEqual(_.get(item, valueField), isSelected) && { backgroundColor: activeColor }]}>
-        {renderItem ? renderItem(item) : <View style={styles.item}>
-          <Text style={[styles.textItem, selectedTextStyle, font()]}>{_.get(item, labelField)}</Text>
-        </View>}
-      </TouchableOpacity>
-    );
-  };
 
   const renderSearch = () => {
     if (search) {
@@ -269,8 +267,6 @@ const DropdownComponent: DropdownProps = React.forwardRef((props, currentRef) =>
       <FlatList
         {...flatListProps}
         keyboardShouldPersistTaps="handled"
-        ref={refList}
-        onScrollToIndexFailed={scrollIndex}
         data={listData}
         inverted
         renderItem={_renderItem}
@@ -281,14 +277,13 @@ const DropdownComponent: DropdownProps = React.forwardRef((props, currentRef) =>
     </View></TouchableWithoutFeedback>
   };
 
+
   const _renderListBottom = () => {
     return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
       {renderSearch()}
       <FlatList
         {...flatListProps}
         keyboardShouldPersistTaps="handled"
-        ref={refList}
-        onScrollToIndexFailed={scrollIndex}
         data={listData}
         renderItem={_renderItem}
         keyExtractor={(item, index) => index.toString()}
@@ -313,7 +308,6 @@ const DropdownComponent: DropdownProps = React.forwardRef((props, currentRef) =>
         let topHeight = isTopPosition ? top - height : top;
 
         let keyboardStyle: ViewStyle = {};
-
         if (keyboardAvoiding) {
           if (renderInputSearch) {
             if (keyboardHeight > 0 && bottom < keyboardHeight + height) {
@@ -356,7 +350,7 @@ const DropdownComponent: DropdownProps = React.forwardRef((props, currentRef) =>
       return null;
     }
     return null;
-  }, [focus, position, visible, keyboardHeight, listData, value]);
+  }, [focus, position, visible, keyboardHeight, listData, currentValue]);
 
   const _measure = () => {
     if (ref && ref?.current) {
@@ -366,7 +360,7 @@ const DropdownComponent: DropdownProps = React.forwardRef((props, currentRef) =>
         const top = isFull ? 20 : Math.floor(py) + Math.floor(fy) + 2;
         const bottom = H - top;
         const left = I18nManager.isRTL ? W - Math.floor(px) - Math.floor(fx) : Math.floor(fx);
-        
+
         setPosition({
           isFull,
           w,
@@ -379,15 +373,85 @@ const DropdownComponent: DropdownProps = React.forwardRef((props, currentRef) =>
     }
   };
 
-  return (
-    <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
-      {_renderDropdown()}
+  const unSelect = (item: any) => {
+    if (!disable) {
+      onSelect(item);
+    }
+  };
+
+  const _renderItemSelected = (inside: boolean) => {
+    const list = data.filter((e: any) => {
+      const check = value?.indexOf(_.get(e, valueField));
+      if (check !== -1) {
+        return e;
+      }
+    });
+
+    return (
+      <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }, inside && { flex: 1 }]}>
+        {list.map(e => {
+          if (renderSelectedItem) {
+            return <TouchableOpacity
+              key={_.get(e, labelField)}
+              onPress={() => unSelect(e)}
+            >
+              {renderSelectedItem(e, () => { unSelect(e) })}
+            </TouchableOpacity>
+          } else {
+            return (
+              <TouchableOpacity
+                key={_.get(e, labelField)}
+                style={[styles.selectedItem, selectedStyle]}
+                onPress={() => unSelect(e)}
+              >
+                <Text style={[{ fontSize: 12, color: 'gray' }, selectedTextStyle, font()]}>{_.get(e, labelField)}</Text>
+                <Text style={[styles.selectedTextItem, selectedTextStyle]}>ⓧ</Text>
+              </TouchableOpacity>
+            )
+          }
+        })}
+      </View>)
+  };
+
+
+  const _renderInside = () => {
+    return <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
+      {_renderDropdownInside()}
       {_renderModal()}
     </View>
+  }
+
+  const _renderDropdownInside = () => {
+    return (
+      <TouchableWithoutFeedback onPress={showOrClose}>
+        <View style={styles.dropdownInside}>
+          {renderLeftIcon?.()}
+          {value && value?.length > 0 ? _renderItemSelected(true) :
+            <Text style={[styles.textItem, placeholderStyle, font()]}>
+              {placeholder}
+            </Text>}
+          {renderRightIcon ? renderRightIcon() : <Image source={ic_down} style={[styles.icon, { tintColor: iconColor }, iconStyle]} />}
+        </View>
+      </TouchableWithoutFeedback>
+    )
+  };
+
+  if (inside) {
+    return _renderInside();
+  }
+
+  return (
+    <>
+      <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
+        {_renderDropdown()}
+        {_renderModal()}
+      </View>
+      {(!visible || alwaysRenderItemSelected) && _renderItemSelected(false)}
+    </>
   );
 });
 
-DropdownComponent.defaultProps = defaultProps;
+MultiSelectComponent.defaultProps = defaultProps;
 
-export default DropdownComponent;
+export default MultiSelectComponent;
 

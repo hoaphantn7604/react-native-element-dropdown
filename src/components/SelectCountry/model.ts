@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImageStyle } from 'react-native';
-import { IProps } from "../dropdown/model";
+import { IProps } from "../Dropdown/model";
 
 interface Props extends IProps {
     imageField: string;
