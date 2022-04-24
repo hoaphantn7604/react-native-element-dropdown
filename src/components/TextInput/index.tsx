@@ -7,7 +7,7 @@ import {
 import { CTextInput } from './model';
 import { styles } from './styles';
 
-const ic_close = require('./icon/close.png');
+const ic_close = require('../../assets/close.png');
 
 const defaultProps = {
   style: {},

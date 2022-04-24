@@ -10,14 +10,14 @@ import {
   I18nManager
 } from 'react-native';
 import CInput from '../TextInput';
-import { useDeviceOrientation } from '../useDeviceOrientation';
+import { useDeviceOrientation } from '../../useDeviceOrientation';
 import { useDetectDevice } from '../../toolkits';
 import { styles } from './styles';
 import { DropdownProps } from './model';
 import _ from 'lodash';
 
 const { isTablet, isIOS } = useDetectDevice;
-const ic_down = require('../assets/icon/down.png');
+const ic_down = require('../../assets/down.png');
 
 const defaultProps = {
   placeholder: 'Select item',

@@ -1,7 +1,7 @@
 {
   "name": "react-native-element-dropdown",
   "title": "React Native Element Dropdown",
-  "version": "1.8.8",
+  "version": "1.8.9",
   "description": "A react-native dropdown component easy to customize for both iOS and Android.",
   "main": "index.ts",
   "scripts": {
@@ -33,7 +33,9 @@
   "readmeFilename": "README.md",
   "peerDependencies": {
     "react": "*",
-    "react-native": "*",
+    "react-native": "*"
+  },
+  "dependencies": {
     "lodash": "*"
   },
   "devDependencies": {
