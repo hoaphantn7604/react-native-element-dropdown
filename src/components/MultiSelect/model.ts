@@ -1,6 +1,11 @@
 import React from 'react';
 import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
+export interface IMultiSelectRef {
+  open: () => void;
+  close: () => void;
+}
+
 interface IProps {
   style?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
@@ -39,4 +44,4 @@ interface IProps {
   searchQuery?: (keyword: string, labelValue: string) => boolean;
 };
 
-export type MultiSelectProps = React.FC<IProps>;
+export type MultiSelectProps = IProps;

@@ -26,7 +26,7 @@ const defaultProps = {
   style: {},
 }
 
-const MultiSelectComponent: MultiSelectProps = React.forwardRef((props, currentRef) => {
+const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, currentRef) => {
   const orientation = useDeviceOrientation();
   const {
     onChange,

@@ -5,7 +5,7 @@ import { SelectCountryProps } from './model';
 import { styles } from './styles';
 
 
-const SelectCountryConponent: SelectCountryProps = React.forwardRef((props, currentRef) => {
+const SelectCountryConponent = React.forwardRef<any, SelectCountryProps>((props, currentRef) => {
   const { data, value, valueField, labelField, imageField, selectedTextStyle, imageStyle } = props;
   const ref: any = useRef(null);
 

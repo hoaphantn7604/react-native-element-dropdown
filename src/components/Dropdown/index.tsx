@@ -27,7 +27,7 @@ const defaultProps = {
   selectedTextProps: {}
 }
 
-const DropdownComponent: DropdownProps = React.forwardRef((props, currentRef) => {
+const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRef) => {
   const orientation = useDeviceOrientation();
   const {
     onChange,
@@ -366,7 +366,7 @@ const DropdownComponent: DropdownProps = React.forwardRef((props, currentRef) =>
         const top = isFull ? 20 : Math.floor(py) + Math.floor(fy) + 2;
         const bottom = H - top;
         const left = I18nManager.isRTL ? W - Math.floor(px) - Math.floor(fx) : Math.floor(fx);
-        
+
         setPosition({
           isFull,
           w,
