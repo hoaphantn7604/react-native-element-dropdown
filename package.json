@@ -35,5 +35,8 @@
     "react": "*",
     "react-native": "*",
     "lodash": "*"
+  },
+  "devDependencies": {
+    "@types/lodash": "*"
   }
 }

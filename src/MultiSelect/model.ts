@@ -39,4 +39,4 @@ interface IProps {
   searchQuery?: (keyword: string, labelValue: string) => boolean;
 };
 
-export type MultiSelectProps = IProps;
+export type MultiSelectProps = React.FC<IProps>;

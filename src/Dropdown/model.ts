@@ -36,4 +36,4 @@ export interface IProps {
   searchQuery?: (keyword: string, labelValue: string) => boolean;
 };
 
-export type DropdownProps = IProps;
+export type DropdownProps = React.FC<IProps>;

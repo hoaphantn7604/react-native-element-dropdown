@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, useMemo, useRef } from 'react';
 import { Image, View, Text, ImageStyle } from 'react-native';
 import Dropdown from '../Dropdown';
-import { IProps } from '../Dropdown/type';
+import { IProps } from '../Dropdown/model';
 import { styles } from './styles';
 
 interface Props extends IProps {

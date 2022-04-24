@@ -13,7 +13,7 @@ import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
 import { useDetectDevice } from '../utilsScale';
 import { styles } from './styles';
-import { DropdownProps } from './type';
+import { DropdownProps } from './model';
 import _ from 'lodash';
 
 const { isTablet, isIOS } = useDetectDevice;
@@ -27,7 +27,7 @@ const defaultProps = {
   selectedTextProps: {}
 }
 
-const DropdownComponent = React.forwardRef((props: DropdownProps, currentRef) => {
+const DropdownComponent: DropdownProps = React.forwardRef((props, currentRef) => {
   const orientation = useDeviceOrientation();
   const {
     onChange,

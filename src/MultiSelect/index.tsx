@@ -12,7 +12,7 @@ import CInput from '../TextInput';
 import { useDeviceOrientation } from '../useDeviceOrientation';
 import { useDetectDevice } from '../utilsScale';
 import { styles } from './styles';
-import { MultiSelectProps } from './type';
+import { MultiSelectProps } from './model';
 import _ from 'lodash';
 
 const { isTablet, isIOS } = useDetectDevice;
@@ -26,7 +26,7 @@ const defaultProps = {
   style: {},
 }
 
-const MultiSelectComponent = React.forwardRef((props: MultiSelectProps, currentRef) => {
+const MultiSelectComponent: MultiSelectProps = React.forwardRef((props, currentRef) => {
   const orientation = useDeviceOrientation();
   const {
     onChange,

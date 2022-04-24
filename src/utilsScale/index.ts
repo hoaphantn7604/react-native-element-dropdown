@@ -1,5 +1,5 @@
 import { Platform, PixelRatio, Dimensions } from 'react-native';
-import { UseDetectDevice } from './type';
+import { UseDetectDevice } from './model';
 
 const { width, height } = Dimensions.get('window');
 

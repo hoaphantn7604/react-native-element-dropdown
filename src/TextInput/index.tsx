@@ -4,7 +4,7 @@ import {
   TouchableOpacity, View,
   TouchableWithoutFeedback
 } from 'react-native';
-import { CTextInput } from './type';
+import { CTextInput } from './model';
 import { styles } from './styles';
 
 const ic_close = require('./icon/close.png');
