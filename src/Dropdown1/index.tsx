@@ -9,9 +9,9 @@ import {
   KeyboardEvent,
   I18nManager
 } from 'react-native';
-import CInput from '../TextInput';
+import CInput from '../TextInput1';
 import { useDeviceOrientation } from '../useDeviceOrientation';
-import { useDetectDevice } from '../Toolkits';
+import { useDetectDevice } from '../Toolkits1';
 import { styles } from './styles';
 import { DropdownProps } from './model';
 import _ from 'lodash';
