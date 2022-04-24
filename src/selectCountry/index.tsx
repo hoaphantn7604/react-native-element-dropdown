@@ -1,15 +1,11 @@
 import React, { useImperativeHandle, useMemo, useRef } from 'react';
-import { Image, View, Text, ImageStyle } from 'react-native';
+import { Image, View, Text } from 'react-native';
 import Dropdown from '../Dropdown';
-import { IProps } from '../Dropdown/model';
+import { SelectCountryProps } from './model';
 import { styles } from './styles';
 
-interface Props extends IProps {
-  imageField: string;
-  imageStyle?: ImageStyle;
-}
 
-const CountrySelectConponent = React.forwardRef((props: Props, currentRef) => {
+const SelectCountryConponent: SelectCountryProps = React.forwardRef((props, currentRef) => {
   const { data, value, valueField, labelField, imageField, selectedTextStyle, imageStyle } = props;
   const ref: any = useRef(null);
 
@@ -58,4 +54,4 @@ const CountrySelectConponent = React.forwardRef((props: Props, currentRef) => {
   );
 });
 
-export default CountrySelectConponent;
+export default SelectCountryConponent;
