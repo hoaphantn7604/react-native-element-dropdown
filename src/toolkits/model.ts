@@ -1,4 +1,4 @@
-export interface UseDetectDevice {  
+export interface UseDetectDeviceProps {  
     isAndroid: boolean;
     isIOS: boolean;
     isTablet: boolean;

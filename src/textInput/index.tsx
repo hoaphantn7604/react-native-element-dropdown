@@ -27,7 +27,7 @@ const TextInputComponent: CTextInput = (props) => {
     showIcon,
     inputStyle,
     iconStyle,
-    onChangeText = (value: string) => { },
+    onChangeText = (_value: string) => { },
     renderLeftIcon,
     renderRightIcon,
   } = props;
