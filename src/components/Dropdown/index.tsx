@@ -265,7 +265,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRe
   }
 
   const _renderListTop = () => {
-    return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
+    return <TouchableWithoutFeedback><View style={{ flexShrink: 1 }}>
       <FlatList
         {...flatListProps}
         keyboardShouldPersistTaps="handled"
@@ -282,7 +282,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRe
   };
 
   const _renderListBottom = () => {
-    return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
+    return <TouchableWithoutFeedback><View style={{ flexShrink: 1 }}>
       {renderSearch()}
       <FlatList
         {...flatListProps}

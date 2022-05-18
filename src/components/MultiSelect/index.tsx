@@ -263,7 +263,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
   }
 
   const _renderListTop = () => {
-    return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
+    return <TouchableWithoutFeedback><View style={{ flexShrink: 1 }}>
       <FlatList
         {...flatListProps}
         keyboardShouldPersistTaps="handled"
@@ -279,7 +279,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
 
 
   const _renderListBottom = () => {
-    return <TouchableWithoutFeedback><View style={{ flex: 1 }}>
+    return <TouchableWithoutFeedback><View style={{ flexShrink: 1 }}>
       {renderSearch()}
       <FlatList
         {...flatListProps}
