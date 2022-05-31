@@ -29,6 +29,7 @@ const defaultProps = {
 const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, currentRef) => {
   const orientation = useDeviceOrientation();
   const {
+    testID,
     onChange,
     data,
     value,
@@ -442,7 +443,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
 
   return (
     <>
-      <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
+      <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure} testID={testID}>
         {_renderDropdown()}
         {_renderModal()}
       </View>

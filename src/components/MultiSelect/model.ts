@@ -7,6 +7,7 @@ export interface IMultiSelectRef {
 }
 
 interface IProps {
+  testID?: string;
   style?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
   placeholderStyle?: StyleProp<TextStyle>

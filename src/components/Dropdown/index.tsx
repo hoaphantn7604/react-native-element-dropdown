@@ -30,6 +30,7 @@ const defaultProps = {
 const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRef) => {
   const orientation = useDeviceOrientation();
   const {
+    testID,
     onChange,
     style,
     containerStyle,
@@ -380,7 +381,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRe
   };
 
   return (
-    <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
+    <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure} testID={testID}>
       {_renderDropdown()}
       {_renderModal()}
     </View>
