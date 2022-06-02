@@ -31,6 +31,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRe
   const orientation = useDeviceOrientation();
   const {
     testID,
+    itemTestIDField,
     onChange,
     style,
     containerStyle,
@@ -220,7 +221,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRe
   const _renderDropdown = () => {
     const isSelected = currentValue && _.get(currentValue, valueField);
     return (
-      <TouchableWithoutFeedback onPress={showOrClose}>
+      <TouchableWithoutFeedback testID={testID} onPress={showOrClose}>
         <View style={styles.dropdown}>
           {renderLeftIcon?.()}
           <Text style={[styles.textItem, isSelected !== null ? selectedTextStyle : placeholderStyle, font()]} {...selectedTextProps}>
@@ -235,7 +236,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRe
   const _renderItem = ({ item, index }: { item: any; index: number }) => {
     const isSelected = currentValue && _.get(currentValue, valueField);
     return (
-      <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[_.isEqual(_.get(item, valueField), isSelected) && { backgroundColor: activeColor }]}>
+      <TouchableOpacity testID={_.get(item, itemTestIDField)} key={index} onPress={() => onSelect(item)} style={[_.isEqual(_.get(item, valueField), isSelected) && { backgroundColor: activeColor }]}>
         {renderItem ? renderItem(item) : <View style={styles.item}>
           <Text style={[styles.textItem, selectedTextStyle, font()]}>{_.get(item, labelField)}</Text>
         </View>}
@@ -249,6 +250,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRe
         return renderInputSearch((text) => { onSearch(text) });
       } else {
         return <CInput
+          testID={testID+ " input"}
           style={[styles.input, inputSearchStyle]}
           inputStyle={[inputSearchStyle, font()]}
           autoCorrect={false}
@@ -268,6 +270,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRe
   const _renderListTop = () => {
     return <TouchableWithoutFeedback><View style={{ flexShrink: 1 }}>
       <FlatList
+        testID={testID+ " flatlist"}
         {...flatListProps}
         keyboardShouldPersistTaps="handled"
         ref={refList}
@@ -286,6 +289,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRe
     return <TouchableWithoutFeedback><View style={{ flexShrink: 1 }}>
       {renderSearch()}
       <FlatList
+        testID={testID+ " flatlist"}
         {...flatListProps}
         keyboardShouldPersistTaps="handled"
         ref={refList}
@@ -381,7 +385,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRe
   };
 
   return (
-    <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure} testID={testID}>
+    <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
       {_renderDropdown()}
       {_renderModal()}
     </View>

@@ -30,6 +30,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
   const orientation = useDeviceOrientation();
   const {
     testID,
+    itemTestIDField,
     onChange,
     data,
     value,
@@ -191,7 +192,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
 
   const _renderDropdown = () => {
     return (
-      <TouchableWithoutFeedback onPress={showOrClose}>
+      <TouchableWithoutFeedback testID={testID} onPress={showOrClose}>
         <View style={styles.dropdown}>
           {renderLeftIcon?.()}
           <Text style={[styles.textItem, placeholderStyle, font()]}>
@@ -210,7 +211,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
 
   const _renderItem = ({ item, index }: { item: any; index: number }) => {
     return (
-      <TouchableOpacity key={index} onPress={() => onSelect(item)} style={[checkSelected(item) && { backgroundColor: activeColor, marginBottom: 0.5 }]}>
+      <TouchableOpacity testID={_.get(item, itemTestIDField)} key={index} onPress={() => onSelect(item)} style={[checkSelected(item) && { backgroundColor: activeColor, marginBottom: 0.5 }]}>
         {renderItem ? renderItem(item) : <View style={styles.item}>
           <Text style={[styles.textItem, placeholderStyle, font()]}>{_.get(item, labelField)}</Text>
         </View>}
@@ -247,6 +248,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
         return renderInputSearch((text) => { onSearch(text) });
       } else {
         return <CInput
+          testID={testID + " input"}
           style={[styles.input, inputSearchStyle]}
           inputStyle={[inputSearchStyle, font()]}
           autoCorrect={false}
@@ -266,6 +268,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
   const _renderListTop = () => {
     return <TouchableWithoutFeedback><View style={{ flexShrink: 1 }}>
       <FlatList
+        testID={testID + " flatlist"}
         {...flatListProps}
         keyboardShouldPersistTaps="handled"
         data={listData}
@@ -283,6 +286,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
     return <TouchableWithoutFeedback><View style={{ flexShrink: 1 }}>
       {renderSearch()}
       <FlatList
+        testID={testID + " flatlist"}
         {...flatListProps}
         keyboardShouldPersistTaps="handled"
         data={listData}
@@ -393,6 +397,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
         {list.map(e => {
           if (renderSelectedItem) {
             return <TouchableOpacity
+              testID={_.get(e, itemTestIDField)}
               key={_.get(e, labelField)}
               onPress={() => unSelect(e)}
             >
@@ -401,6 +406,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
           } else {
             return (
               <TouchableOpacity
+                testID={_.get(e, itemTestIDField)}
                 key={_.get(e, labelField)}
                 style={[styles.selectedItem, selectedStyle]}
                 onPress={() => unSelect(e)}
@@ -424,7 +430,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
 
   const _renderDropdownInside = () => {
     return (
-      <TouchableWithoutFeedback onPress={showOrClose}>
+      <TouchableWithoutFeedback testID={testID} onPress={showOrClose}>
         <View style={styles.dropdownInside}>
           {renderLeftIcon?.()}
           {value && value?.length > 0 ? _renderItemSelected(true) :
@@ -443,7 +449,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
 
   return (
     <>
-      <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure} testID={testID}>
+      <View style={[{ justifyContent: 'center' }, style]} ref={ref} onLayout={_measure}>
         {_renderDropdown()}
         {_renderModal()}
       </View>

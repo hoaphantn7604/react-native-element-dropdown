@@ -6,7 +6,7 @@ import { styles } from './styles';
 
 
 const SelectCountryConponent = React.forwardRef<any, SelectCountryProps>((props, currentRef) => {
-  const { testID, data, value, valueField, labelField, imageField, selectedTextStyle, imageStyle } = props;
+  const { testID, itemTestIDField, data, value, valueField, labelField, imageField, selectedTextStyle, imageStyle } = props;
   const ref: any = useRef(null);
 
   useImperativeHandle(currentRef, () => {
@@ -20,7 +20,6 @@ const SelectCountryConponent = React.forwardRef<any, SelectCountryProps>((props,
   const eventClose = () => {
     ref.current.close();
   }
-
 
   const _renderItem = (item: any) => {
     return (
@@ -41,6 +40,7 @@ const SelectCountryConponent = React.forwardRef<any, SelectCountryProps>((props,
   return (
     <Dropdown
       testID={testID}
+      itemTestIDField={itemTestIDField}
       ref={ref}
       {...props}
       renderItem={_renderItem}
