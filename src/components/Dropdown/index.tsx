@@ -118,7 +118,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRe
 
   const onKeyboardDidShow = (e: KeyboardEvent) => {
     _measure();
-    setKeyboardHeight(e.endCoordinates.height + (isIOS ? 0 : 50));
+    setKeyboardHeight(e.endCoordinates.height);
   };
 
   const onKeyboardDidHide = () => {
@@ -202,7 +202,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>((props, currentRe
     if (autoScroll && data.length > 0 && listData.length == data.length) {
       setTimeout(() => {
         if (refList && refList?.current) {
-          const index = _.findIndex(listData, e => _.isEqual(value, _.get(e, valueField)));
+          const index = _.findIndex(listData, (e:any) => _.isEqual(value, _.get(e, valueField)));
           if (index > -1 && index <= listData.length - 1) {
             refList?.current?.scrollToIndex({ index: index, animated: false });
           }

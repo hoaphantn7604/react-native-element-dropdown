@@ -118,7 +118,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>((props, cur
 
   const onKeyboardDidShow = (e: KeyboardEvent) => {
     _measure();
-    setKeyboardHeight(e.endCoordinates.height + (isIOS ? 0 : 50));
+    setKeyboardHeight(e.endCoordinates.height);
   };
 
   const onKeyboardDidHide = () => {
