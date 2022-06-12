@@ -1,12 +1,17 @@
-import React from 'react';
-import { StyleProp, TextStyle, ViewStyle, TextProps, ImageStyle } from 'react-native';
+import type {
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+  TextProps,
+  ImageStyle,
+} from 'react-native';
 
-export interface IDropdownRef {
+export type IDropdownRef = {
   open: () => void;
   close: () => void;
-}
+};
 
-export interface IProps {
+export type DropdownProps = {
   testID?: string;
   itemTestIDField?: string;
   style?: StyleProp<ViewStyle>;
@@ -33,14 +38,15 @@ export interface IProps {
   dropdownPosition?: 'auto' | 'top' | 'bottom';
   flatListProps?: any;
   keyboardAvoiding?: boolean;
+  statusBarIsTranslucent?: boolean;
   onChange: (item: any) => void;
-  renderLeftIcon?: () => React.ReactNode | null | undefined;
-  renderRightIcon?: () => React.ReactNode | null | undefined;
-  renderItem?: (item: any) => React.ReactNode | null | undefined;
-  renderInputSearch?: (onSearch: (text: string) => void) => React.ReactNode | null | undefined;
+  renderLeftIcon?: () => JSX.Element | null | undefined;
+  renderRightIcon?: () => JSX.Element | null | undefined;
+  renderItem?: (item: any) => JSX.Element | null | undefined;
+  renderInputSearch?: (
+    onSearch: (text: string) => void
+  ) => JSX.Element | null | undefined;
   onFocus?: () => void;
   onBlur?: () => void;
   searchQuery?: (keyword: string, labelValue: string) => boolean;
 };
-
-export type DropdownProps = IProps;

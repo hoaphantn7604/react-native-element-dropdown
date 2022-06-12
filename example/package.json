@@ -1,31 +1,30 @@
 {
-  "name": "example",
+  "name": "react-native-element-dropdown-example",
+  "description": "Example app for react-native-element-dropdown",
   "version": "0.0.1",
   "private": true,
+  "main": "index",
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint ."
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "start": "expo start",
+    "test": "jest"
   },
   "dependencies": {
-    "react": "17.0.1",
-    "react-native": "0.64.2",
-    "react-native-element-dropdown": "file:../",
-    "react-native-vector-icons": "^9.0.0"
+    "expo": "^42.0.0",
+    "expo-splash-screen": "~0.11.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "0.63.4",
+    "react-native-unimodules": "~0.14.5",
+    "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@babel/runtime": "^7.12.5",
-    "@react-native-community/eslint-config": "^2.0.0",
-    "babel-jest": "^26.6.3",
-    "eslint": "7.14.0",
-    "jest": "^26.6.3",
-    "metro-react-native-babel-preset": "^0.64.0",
-    "react-test-renderer": "17.0.1"
-  },
-  "jest": {
-    "preset": "react-native"
+    "@babel/core": "~7.9.0",
+    "@babel/runtime": "^7.9.6",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-preset-expo": "8.3.0",
+    "expo-cli": "^4.0.13"
   }
 }

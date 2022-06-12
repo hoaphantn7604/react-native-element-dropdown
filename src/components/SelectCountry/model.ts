@@ -1,11 +1,9 @@
-import { ImageStyle } from 'react-native';
-import { IProps } from "../Dropdown/model";
+import type { ImageStyle } from 'react-native';
+import type { DropdownProps } from '../Dropdown/model';
 
-interface Props extends IProps {
+export interface SelectCountryProps extends DropdownProps {
   testID?: string;
   itemTestIDField?: string;
   imageField: string;
   imageStyle?: ImageStyle;
 }
-
-export type SelectCountryProps = Props;

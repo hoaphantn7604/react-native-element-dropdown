@@ -1,10 +1,10 @@
-import React from 'react';
-import {
+import type React from 'react';
+import type {
   ImageStyle,
   StyleProp,
-  TextInputProps, 
+  TextInputProps,
   TextStyle,
-  ViewStyle
+  ViewStyle,
 } from 'react-native';
 
 interface Props extends TextInputProps {
@@ -13,8 +13,8 @@ interface Props extends TextInputProps {
   inputStyle?: StyleProp<TextStyle>;
   iconStyle?: StyleProp<ImageStyle>;
   showIcon?: boolean;
-  renderRightIcon?: () => React.ReactNode | null | undefined;
-  renderLeftIcon?: () => React.ReactNode | null | undefined;
+  renderRightIcon?: () => JSX.Element | null | undefined;
+  renderLeftIcon?: () => JSX.Element | null | undefined;
 }
 
-export type CTextInput = React.FC<Props>
+export type CTextInput = React.FC<Props>;

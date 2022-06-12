@@ -1,10 +1,13 @@
+/* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import {
-  Image, TextInput,
-  TouchableOpacity, View,
-  TouchableWithoutFeedback
+  Image,
+  TextInput,
+  TouchableOpacity,
+  View,
+  TouchableWithoutFeedback,
 } from 'react-native';
-import { CTextInput } from './model';
+import type { CTextInput } from './model';
 import { styles } from './styles';
 
 const ic_close = require('../../assets/close.png');
@@ -27,7 +30,7 @@ const TextInputComponent: CTextInput = (props) => {
     showIcon,
     inputStyle,
     iconStyle,
-    onChangeText = (_value: string) => { },
+    onChangeText = (_value: string) => {},
     renderLeftIcon,
     renderRightIcon,
   } = props;
@@ -48,15 +51,14 @@ const TextInputComponent: CTextInput = (props) => {
   const _renderRightIcon = () => {
     if (showIcon) {
       if (renderRightIcon) {
-        return (
-          renderRightIcon()
-        );
+        return renderRightIcon();
       }
       if (text.length > 0) {
         return (
           <TouchableOpacity onPress={() => onChange('')}>
             <Image source={ic_close} style={[styles.icon, iconStyle]} />
-          </TouchableOpacity>)
+          </TouchableOpacity>
+        );
       }
       return null;
     }
@@ -66,12 +68,12 @@ const TextInputComponent: CTextInput = (props) => {
   const font = () => {
     if (fontFamily) {
       return {
-        fontFamily: fontFamily
-      }
+        fontFamily: fontFamily,
+      };
     } else {
-      return {}
+      return {};
     }
-  }
+  };
 
   return (
     <TouchableWithoutFeedback>

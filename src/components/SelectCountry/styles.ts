@@ -18,10 +18,10 @@ export const styles = StyleSheet.create({
     width: 20,
     height: 20,
     marginRight: 3,
-    marginVertical: 4
+    marginVertical: 4,
   },
   selectedTextStyle: {
-    flex:1,
+    flex: 1,
     fontSize: 12,
   },
 });

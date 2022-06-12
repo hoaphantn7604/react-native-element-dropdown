@@ -1,17 +1,16 @@
-import React from 'react';
-import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import type { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
-export interface IMultiSelectRef {
+export type IMultiSelectRef = {
   open: () => void;
   close: () => void;
-}
+};
 
-interface IProps {
+export type MultiSelectProps = {
   testID?: string;
   itemTestIDField?: string;
   style?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
-  placeholderStyle?: StyleProp<TextStyle>
+  placeholderStyle?: StyleProp<TextStyle>;
   inputSearchStyle?: StyleProp<TextStyle>;
   selectedStyle?: StyleProp<ViewStyle>;
   selectedTextStyle?: StyleProp<TextStyle>;
@@ -19,7 +18,7 @@ interface IProps {
   maxHeight?: number;
   maxSelect?: number;
   fontFamily?: string;
-  iconColor?: string
+  iconColor?: string;
   activeColor?: string;
   data: any[];
   value?: any[] | null;
@@ -29,21 +28,25 @@ interface IProps {
   search?: boolean;
   disable?: boolean;
   showsVerticalScrollIndicator?: boolean;
-  searchPlaceholder?: string
+  searchPlaceholder?: string;
   dropdownPosition?: 'auto' | 'top' | 'bottom';
   flatListProps?: any;
   alwaysRenderItemSelected?: boolean;
   keyboardAvoiding?: boolean;
   inside?: boolean;
+  statusBarIsTranslucent?: boolean;
   onChange: (item: any) => void;
-  renderLeftIcon?: () => React.ReactNode | null | undefined;
-  renderRightIcon?: () => React.ReactNode | null | undefined;
-  renderItem?: (item: any) => React.ReactNode | null | undefined;
-  renderSelectedItem?: (item: any, unSelect?: (item: any) => void) => React.ReactNode | null | undefined;
-  renderInputSearch?: (onSearch: (text:string) => void) => React.ReactNode | null | undefined;
-  onFocus?:() => void;
-  onBlur?:() => void;
+  renderLeftIcon?: () => JSX.Element | null | undefined;
+  renderRightIcon?: () => JSX.Element | null | undefined;
+  renderItem?: (item: any) => JSX.Element | null | undefined;
+  renderSelectedItem?: (
+    item: any,
+    unSelect?: (item: any) => void
+  ) => JSX.Element | null | undefined;
+  renderInputSearch?: (
+    onSearch: (text: string) => void
+  ) => JSX.Element | null | undefined;
+  onFocus?: () => void;
+  onBlur?: () => void;
   searchQuery?: (keyword: string, labelValue: string) => boolean;
 };
-
-export type MultiSelectProps = IProps;

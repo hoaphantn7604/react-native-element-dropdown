@@ -1,4 +1,22 @@
 {
-  "name": "example",
-  "displayName": "example"
+  "name": "react-native-element-dropdown-example",
+  "displayName": "ElementDropdown Example",
+  "expo": {
+    "name": "react-native-element-dropdown-example",
+    "slug": "react-native-element-dropdown-example",
+    "description": "Example app for react-native-element-dropdown",
+    "privacy": "public",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
 }

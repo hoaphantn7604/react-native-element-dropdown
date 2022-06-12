@@ -1,5 +1,5 @@
-export interface IUseDetectDevice {  
-    isAndroid: boolean;
-    isIOS: boolean;
-    isTablet: boolean;
+export interface IUseDetectDevice {
+  isAndroid: boolean;
+  isIOS: boolean;
+  isTablet: boolean;
 }

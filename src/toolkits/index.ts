@@ -1,5 +1,5 @@
 import { Platform, PixelRatio, Dimensions } from 'react-native';
-import { IUseDetectDevice } from './model';
+import type { IUseDetectDevice } from './model';
 
 const { width, height } = Dimensions.get('window');
 
@@ -17,9 +17,9 @@ const isTablet = () => {
 };
 
 const useDetectDevice: IUseDetectDevice = {
-    isAndroid: Platform.OS === 'android',
-    isIOS: Platform.OS === 'ios',
-    isTablet: isTablet()
-}
+  isAndroid: Platform.OS === 'android',
+  isIOS: Platform.OS === 'ios',
+  isTablet: isTablet(),
+};
 
 export { useDetectDevice };

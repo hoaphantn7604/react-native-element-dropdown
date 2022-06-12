@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  mainWrap: {
+    justifyContent: 'center',
+  },
   container: {
     flexShrink: 1,
     borderWidth: 0.5,
@@ -14,6 +17,15 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
     elevation: 2,
+  },
+  flex1: {
+    flex: 1,
+  },
+  flexShrink: {
+    flexShrink: 1,
+  },
+  wrapTop: {
+    justifyContent: 'flex-end',
   },
   dropdown: {
     flexDirection: 'row',
@@ -50,6 +62,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 8,
     marginBottom: 8,
     margin: 6,
-    height: 45
+    height: 45,
   },
 });
