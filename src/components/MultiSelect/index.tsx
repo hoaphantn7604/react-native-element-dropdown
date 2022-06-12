@@ -451,7 +451,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
           const styleVertical: ViewStyle = { left: left, maxHeight: maxHeight };
           const isTopPosition =
             dropdownPosition === 'auto'
-              ? bottom < (isIOS ? 200 : 300)
+              ? bottom < maxHeight
               : dropdownPosition === 'top'
               ? true
               : false;
