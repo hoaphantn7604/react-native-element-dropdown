@@ -550,6 +550,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       position,
       maxHeight,
       dropdownPosition,
+      search,
       keyboardAvoiding,
       statusBarIsTranslucent,
       showOrClose,

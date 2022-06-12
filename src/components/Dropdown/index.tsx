@@ -572,6 +572,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       position,
       maxHeight,
       dropdownPosition,
+      search,
       keyboardAvoiding,
       statusBarIsTranslucent,
       showOrClose,
