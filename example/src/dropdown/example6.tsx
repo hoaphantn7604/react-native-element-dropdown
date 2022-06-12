@@ -20,6 +20,7 @@ const MultiSelectComponent = () => {
   return (
     <View style={styles.container}>
       <MultiSelect
+        inside
         statusBarIsTranslucent={true}
         ref={ref}
         style={styles.dropdown}
@@ -48,7 +49,6 @@ export default MultiSelectComponent;
 const styles = StyleSheet.create({
   container: { padding: 16 },
   dropdown: {
-    height: 50,
     backgroundColor: 'transparent',
     borderBottomColor: 'gray',
     borderBottomWidth: 0.5,

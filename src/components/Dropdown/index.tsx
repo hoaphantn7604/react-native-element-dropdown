@@ -77,6 +77,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       flatListProps,
       searchQuery,
       statusBarIsTranslucent,
+      backgroundColor,
     } = props;
 
     const ref = useRef<View>(null);
@@ -96,7 +97,11 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       };
     }, []);
     const styleHorizontal: ViewStyle = useMemo(() => {
-      return { marginBottom: 20, width: W / 2, alignSelf: 'center' };
+      return {
+        marginBottom: 20,
+        width: W / 2,
+        alignSelf: 'center',
+      };
     }, [W]);
 
     useImperativeHandle(currentRef, () => {
@@ -326,22 +331,23 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
     const _renderItem = useCallback(
       ({ item, index }: { item: any; index: number }) => {
         const isSelected = currentValue && _.get(currentValue, valueField);
+        const selected = _.isEqual(_.get(item, valueField), isSelected);
         return (
           <TouchableOpacity
             testID={_.get(item, itemTestIDField || labelField)}
             key={index}
             onPress={() => onSelect(item)}
             style={[
-              _.isEqual(_.get(item, valueField), isSelected) && {
+              selected && {
                 backgroundColor: activeColor,
               },
             ]}
           >
             {renderItem ? (
-              renderItem(item)
+              renderItem(item, selected)
             ) : (
               <View style={styles.item}>
-                <Text style={[styles.textItem, selectedTextStyle, font()]}>
+                <Text style={[styles.textItem, font()]}>
                   {_.get(item, labelField)}
                 </Text>
               </View>
@@ -357,7 +363,6 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
         labelField,
         onSelect,
         renderItem,
-        selectedTextStyle,
         valueField,
       ]
     );
@@ -514,6 +519,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
                   style={[
                     styles.flex1,
                     isFull && styleContainerVertical,
+                    backgroundColor && { backgroundColor: backgroundColor },
                     keyboardStyle,
                   ]}
                 >
@@ -570,6 +576,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       statusBarIsTranslucent,
       showOrClose,
       styleContainerVertical,
+      backgroundColor,
       containerStyle,
       styleHorizontal,
       _renderListTop,

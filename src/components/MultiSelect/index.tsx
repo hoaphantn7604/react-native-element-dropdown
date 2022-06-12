@@ -33,7 +33,6 @@ const ic_down = require('../../assets/down.png');
 const defaultProps = {
   placeholder: 'Select item',
   activeColor: '#F6F7F8',
-  backgroundColor: 'white',
   data: [],
   style: {},
 };
@@ -80,6 +79,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       alwaysRenderItemSelected = false,
       searchQuery,
       statusBarIsTranslucent,
+      backgroundColor,
     } = props;
 
     const ref = useRef<View>(null);
@@ -315,20 +315,21 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
 
     const _renderItem = useCallback(
       ({ item, index }: { item: any; index: number }) => {
+        const selected = checkSelected(item);
         return (
           <TouchableOpacity
             testID={_.get(item, itemTestIDField || labelField)}
             key={index}
             onPress={() => onSelect(item)}
             style={[
-              checkSelected(item) && {
+              selected && {
                 backgroundColor: activeColor,
                 ...styles.wrapItem,
               },
             ]}
           >
             {renderItem ? (
-              renderItem(item)
+              renderItem(item, selected)
             ) : (
               <View style={styles.item}>
                 <Text style={[styles.textItem, placeholderStyle, font()]}>
@@ -496,6 +497,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
                   style={[
                     styles.flex1,
                     isFull && styleContainerVertical,
+                    backgroundColor && { backgroundColor: backgroundColor },
                     keyboardStyle,
                   ]}
                 >
@@ -552,6 +554,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       statusBarIsTranslucent,
       showOrClose,
       styleContainerVertical,
+      backgroundColor,
       containerStyle,
       styleHorizontal,
       _renderListTop,

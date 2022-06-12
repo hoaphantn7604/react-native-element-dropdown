@@ -35,10 +35,14 @@ export type MultiSelectProps = {
   keyboardAvoiding?: boolean;
   inside?: boolean;
   statusBarIsTranslucent?: boolean;
+  backgroundColor?: string;
   onChange: (item: any) => void;
   renderLeftIcon?: () => JSX.Element | null | undefined;
   renderRightIcon?: () => JSX.Element | null | undefined;
-  renderItem?: (item: any) => JSX.Element | null | undefined;
+  renderItem?: (
+    item: any,
+    selected?: boolean
+  ) => JSX.Element | null | undefined;
   renderSelectedItem?: (
     item: any,
     unSelect?: (item: any) => void

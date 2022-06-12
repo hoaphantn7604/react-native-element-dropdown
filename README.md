@@ -54,11 +54,13 @@ or
 | showsVerticalScrollIndicator | Boolean                               | No        | When true, shows a vertical scroll indicator, default is true       |
 | renderLeftIcon     | () => JSX.Element                               | No        | Customize left icon for dropdown                                    |
 | renderRightIcon    | () => JSX.Element                               | No        | Customize right icon for dropdown                                   |
-| renderItem         | (item: object) => JSX.Element                   | No        | Takes an item from data and renders it into the list                |
+| renderItem         | (item: object, selected: Boolean) => JSX.Element| No        | Takes an item from data and renders it into the list                |
 | flatListProps      | FlatListProps                                   | No        | Customize FlastList element                                         |
 | onFocus            | () => void                                      | No        | Callback that is called when the dropdown is focused                |
 | onBlur             | () => void                                      | No        | Callback that is called when the dropdown is blurred                |
-| keyboardAvoiding   | Boolean                                         | No        | keyboardAvoiding default is true                                    |  
+| keyboardAvoiding   | Boolean                                         | No        | keyboardAvoiding default is true                                    |
+| backgroundColor    | String                                          | No        | Set background color                                                |
+| statusBarIsTranslucent| Boolean                                      | No        | Only Android, set true when StatusBar set Translucent is true       |  
 
 
 #### MultiSelect Props
@@ -93,12 +95,14 @@ or
 | showsVerticalScrollIndicator | Boolean                                    | No        | When true, shows a vertical scroll indicator, default is true       |
 | renderLeftIcon     | () => JSX.Element                                    | No        | Customize left icon for dropdown                                    |
 | renderRightIcon    | () => JSX.Element                                    | No        | Customize right icon for dropdown                                   |
-| renderItem         | (item: object) => JSX.Element                        | No        | Takes an item from data and renders it into the list                |
+| renderItem         | (item: object, selected: Boolean) => JSX.Element     | No        | Takes an item from data and renders it into the list                |
 | flatListProps      | FlatListProps                                        | No        | Customize FlastList element                                         |
 | onFocus            | () => void                                           | No        | Callback that is called when the dropdown is focused                |
 | onBlur             | () => void                                           | No        | Callback that is called when the dropdown is blurred                |
 | keyboardAvoiding   | Boolean                                              | No        | keyboardAvoiding default is true                                    |
 | inside             | Boolean                                              | No        | inside default is false                                             |
+| backgroundColor    | String                                               | No        | Set background color                                                |
+| statusBarIsTranslucent| Boolean                                           | No        | Only Android, set true when StatusBar set Translucent is true       |
 
 
 #### SelectCountry extends Dropdown 
