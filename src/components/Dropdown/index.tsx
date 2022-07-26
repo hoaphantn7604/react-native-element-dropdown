@@ -201,9 +201,13 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
     }, [onKeyboardDidShow]);
 
     const getValue = useCallback(() => {
+      const defaultValue =
+        typeof value === 'object' ? _.get(value, valueField) : value;
+
       const getItem = data.filter((e) =>
-        _.isEqual(value, _.get(e, valueField))
+        _.isEqual(defaultValue, _.get(e, valueField))
       );
+
       if (getItem.length > 0) {
         setCurrentValue(getItem[0]);
       } else {

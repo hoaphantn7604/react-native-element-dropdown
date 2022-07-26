@@ -32,7 +32,6 @@
     "bootstrap": "yarn example && yarn && yarn pods"
   },
   "keywords": [
-    "react",
     "react-native",
     "elements",
     "components",
