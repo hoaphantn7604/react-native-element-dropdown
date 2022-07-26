@@ -223,8 +223,11 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       if (autoScroll && data.length > 0 && listData.length === data.length) {
         setTimeout(() => {
           if (refList && refList?.current) {
+            const defaultValue =
+              typeof value === 'object' ? _.get(value, valueField) : value;
+
             const index = _.findIndex(listData, (e: any) =>
-              _.isEqual(value, _.get(e, valueField))
+              _.isEqual(defaultValue, _.get(e, valueField))
             );
             if (index > -1 && index <= listData.length - 1) {
               refList?.current?.scrollToIndex({
