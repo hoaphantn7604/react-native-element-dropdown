@@ -267,8 +267,6 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
 
     const onSearch = useCallback(
       (text: string) => {
-        setSearchText(text);
-
         if (text.length > 0) {
           const defaultFilterFunction = (e: any) => {
             const item = _.get(e, labelField)
@@ -304,12 +302,15 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
 
     const onSelect = useCallback(
       (item: any) => {
+        if (onChangeText) {
+          setSearchText('');
+        }
         onSearch('');
         setCurrentValue(item);
         onChange(item);
         eventClose();
       },
-      [eventClose, onChange, onSearch]
+      [eventClose, onChange, onChangeText, onSearch]
     );
 
     const _renderDropdown = () => {
@@ -387,6 +388,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
         if (renderInputSearch) {
           return renderInputSearch((text) => {
             if (onChangeText) {
+              setSearchText(text);
               onChangeText(text);
             }
             onSearch(text);
@@ -402,6 +404,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
               placeholder={searchPlaceholder}
               onChangeText={(e) => {
                 if (onChangeText) {
+                  setSearchText(e);
                   onChangeText(e);
                 }
                 onSearch(e);

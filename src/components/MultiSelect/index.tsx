@@ -232,7 +232,6 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
 
     const onSearch = useCallback(
       (text: string) => {
-        setSearchText(text);
         if (text.length > 0) {
           const defaultFilterFunction = (e: any) => {
             const item = _.get(e, labelField)
@@ -268,8 +267,6 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
 
     const onSelect = useCallback(
       (item: any) => {
-        onSearch('');
-
         const index = currentValue.findIndex(
           (e) => e === _.get(item, valueField)
         );
@@ -287,7 +284,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
         onChange(currentValue);
         setKey(Math.random());
       },
-      [currentValue, maxSelect, onChange, onSearch, valueField]
+      [currentValue, maxSelect, onChange, onChangeText, onSearch, valueField]
     );
 
     const _renderDropdown = () => {
@@ -365,6 +362,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
         if (renderInputSearch) {
           return renderInputSearch((text) => {
             if (onChangeText) {
+              setSearchText(text);
               onChangeText(text);
             }
             onSearch(text);
@@ -380,6 +378,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
               placeholder={searchPlaceholder}
               onChangeText={(e) => {
                 if (onChangeText) {
+                  setSearchText(e);
                   onChangeText(e);
                 }
                 onSearch(e);
