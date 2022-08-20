@@ -53,4 +53,5 @@ export type MultiSelectProps = {
   onFocus?: () => void;
   onBlur?: () => void;
   searchQuery?: (keyword: string, labelValue: string) => boolean;
+  onChangeText?: (search: string) => void;
 };

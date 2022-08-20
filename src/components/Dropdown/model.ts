@@ -53,4 +53,5 @@ export type DropdownProps = {
   onFocus?: () => void;
   onBlur?: () => void;
   searchQuery?: (keyword: string, labelValue: string) => boolean;
+  onChangeText?: (search: string) => void;
 };

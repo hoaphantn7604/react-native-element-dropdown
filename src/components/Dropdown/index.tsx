@@ -78,6 +78,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       searchQuery,
       statusBarIsTranslucent,
       backgroundColor,
+      onChangeText,
     } = props;
 
     const ref = useRef<View>(null);
@@ -88,6 +89,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
     const [position, setPosition] = useState<any>();
     const [focus, setFocus] = useState<boolean>(false);
     const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
+    const [searchText, setSearchText] = useState('');
 
     const { width: W, height: H } = Dimensions.get('window');
     const styleContainerVertical: ViewStyle = useMemo(() => {
@@ -110,7 +112,11 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
 
     useEffect(() => {
       setListData([...data]);
-    }, [data]);
+      if (searchText) {
+        onSearch(searchText);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data, searchText]);
 
     const eventOpen = () => {
       if (!disable) {
@@ -261,6 +267,8 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
 
     const onSearch = useCallback(
       (text: string) => {
+        setSearchText(text);
+
         if (text.length > 0) {
           const defaultFilterFunction = (e: any) => {
             const item = _.get(e, labelField)
@@ -378,6 +386,9 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       if (search) {
         if (renderInputSearch) {
           return renderInputSearch((text) => {
+            if (onChangeText) {
+              onChangeText(text);
+            }
             onSearch(text);
           });
         } else {
@@ -389,7 +400,12 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
               autoCorrect={false}
               keyboardType={isIOS ? 'default' : 'visible-password'}
               placeholder={searchPlaceholder}
-              onChangeText={onSearch}
+              onChangeText={(e) => {
+                if (onChangeText) {
+                  onChangeText(e);
+                }
+                onSearch(e);
+              }}
               placeholderTextColor="gray"
               iconStyle={[{ tintColor: iconColor }, iconStyle]}
               onFocus={() => setFocus(true)}
@@ -406,6 +422,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       iconColor,
       iconStyle,
       inputSearchStyle,
+      onChangeText,
       onSearch,
       renderInputSearch,
       search,

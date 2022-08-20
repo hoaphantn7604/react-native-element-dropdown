@@ -80,6 +80,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       searchQuery,
       statusBarIsTranslucent,
       backgroundColor,
+      onChangeText,
     } = props;
 
     const ref = useRef<View>(null);
@@ -90,6 +91,8 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
     const [position, setPosition] = useState<any>();
     const [focus, setFocus] = useState<boolean>(false);
     const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
+    const [searchText, setSearchText] = useState('');
+
     const { width: W, height: H } = Dimensions.get('window');
     const styleContainerVertical: ViewStyle = useMemo(() => {
       return {
@@ -107,7 +110,11 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
 
     useEffect(() => {
       setListData([...data]);
-    }, [data]);
+      if (searchText) {
+        onSearch(searchText);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data, searchText]);
 
     const eventOpen = () => {
       if (!disable) {
@@ -225,6 +232,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
 
     const onSearch = useCallback(
       (text: string) => {
+        setSearchText(text);
         if (text.length > 0) {
           const defaultFilterFunction = (e: any) => {
             const item = _.get(e, labelField)
@@ -356,6 +364,9 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       if (search) {
         if (renderInputSearch) {
           return renderInputSearch((text) => {
+            if (onChangeText) {
+              onChangeText(text);
+            }
             onSearch(text);
           });
         } else {
@@ -367,7 +378,12 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
               autoCorrect={false}
               keyboardType={isIOS ? 'default' : 'visible-password'}
               placeholder={searchPlaceholder}
-              onChangeText={onSearch}
+              onChangeText={(e) => {
+                if (onChangeText) {
+                  onChangeText(e);
+                }
+                onSearch(e);
+              }}
               placeholderTextColor="gray"
               iconStyle={[{ tintColor: iconColor }, iconStyle]}
               onFocus={() => setFocus(true)}
@@ -384,6 +400,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       iconColor,
       iconStyle,
       inputSearchStyle,
+      onChangeText,
       onSearch,
       renderInputSearch,
       search,

@@ -33,6 +33,7 @@ or
 | labelField         | String                                          | Yes       | Extract the label from the data item                                |
 | valueField         | String                                          | Yes       | Extract the primary key from the data item                          |
 | onChange           | (item: object) => void                          | Yes       | Selection callback                                                  |
+| onChangeText       | (search: string) => void                        | Yes       | Callback that is called when the text input's text changes          |
 | value              | Item                                            | No        | Selected value                                                      |
 | placeholder        | String                                          | No        | The string that will be rendered before dropdown has been selected  |
 | placeholderStyle   | TextStyle                                       | No        | Styling for text placeholder                                        |
@@ -71,7 +72,8 @@ or
 | data               | Array                                                | Yes       | Data is a plain array                                               |
 | labelField         | String                                               | Yes       | Extract the label from the data item                                |
 | valueField         | String                                               | Yes       | Extract the primary key from the data item                          |
-| onChange           | (value[]) => void                                    | Yes       | Selection callback. A array containing the "valueField".           |
+| onChange           | (value[]) => void                                    | Yes       | Selection callback. A array containing the "valueField".            |
+| onChangeText       | (search: string) => void                             | Yes       | Callback that is called when the text input's text changes          |
 | value              | Item[]                                               | No        | Selected value. A array containing the "valueField".                |
 | placeholder        | String                                               | No        | The string that will be rendered before dropdown has been selected  |
 | placeholderStyle   | TextStyle                                            | No        | Styling for text placeholder                                        |
