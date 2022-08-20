@@ -284,7 +284,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
         onChange(currentValue);
         setKey(Math.random());
       },
-      [currentValue, maxSelect, onChange, onChangeText, onSearch, valueField]
+      [currentValue, maxSelect, onChange, valueField]
     );
 
     const _renderDropdown = () => {
