@@ -21,6 +21,7 @@ export type DropdownProps = {
   selectedTextProps?: TextProps;
   inputSearchStyle?: StyleProp<TextStyle>;
   iconStyle?: StyleProp<ImageStyle>;
+  textStyle?: StyleProp<TextStyle>;
   maxHeight?: number;
   fontFamily?: string;
   iconColor?: string;

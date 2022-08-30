@@ -51,6 +51,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       selectedTextStyle,
       inputSearchStyle,
       iconStyle,
+      textStyle,
       selectedTextProps,
       data,
       labelField,
