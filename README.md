@@ -18,8 +18,6 @@ or
     yarn add react-native-element-dropdown
 ```
 
-<br><p><a href="https://www.buymeacoffee.com/hoaphantn"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="fateh999" /></a></p><br><br><br>
-
 #### Source code demo
 [react-native-template-components](https://github.com/hoaphantn7604/react-native-template-components) A beautiful template for React Native.
 #### Demo
@@ -862,3 +860,10 @@ or
     },
   });
 ```
+
+## Donate
+
+Support maintainers with a donation and help them continue with activities.
+Buy me a coffee and you can request quick processing of tickets.
+
+<br><p><a href="https://www.buymeacoffee.com/hoaphantn"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="fateh999" /></a></p><br><br><br>
