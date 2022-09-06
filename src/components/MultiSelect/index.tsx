@@ -51,6 +51,8 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       valueField,
       selectedStyle,
       selectedTextStyle,
+      itemContainerStyle,
+      itemTextStyle,
       iconStyle,
       activeColor,
       containerStyle,
@@ -327,6 +329,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
             key={index}
             onPress={() => onSelect(item)}
             style={[
+              itemContainerStyle,
               selected && {
                 backgroundColor: activeColor,
                 ...styles.wrapItem,
@@ -337,7 +340,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
               renderItem(item, selected)
             ) : (
               <View style={styles.item}>
-                <Text style={[styles.textItem, placeholderStyle, font()]}>
+                <Text style={[styles.textItem, itemTextStyle, font()]}>
                   {_.get(item, labelField)}
                 </Text>
               </View>
@@ -349,10 +352,11 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
         activeColor,
         checkSelected,
         font,
+        itemContainerStyle,
         itemTestIDField,
+        itemTextStyle,
         labelField,
         onSelect,
-        placeholderStyle,
         renderItem,
       ]
     );

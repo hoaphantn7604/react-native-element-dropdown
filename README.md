@@ -45,6 +45,8 @@ or
 | fontFamily         | String                                          | No        | Customize font style                                                |
 | iconStyle          | ImageStyle                                      | No        | Styling for icon                                                    |
 | iconColor          | String                                          | No        | Color of icons                                                      |
+| itemContainerStyle | TextStyle                                       | No        | Styling for item container in list                                  |
+| itemTextStyle      | TextStyle                                       | No        | Styling for text item in list                                       |
 | activeColor        | String                                          | No        | Background color for item selected in container list                |
 | search             | Boolean                                         | No        | Show or hide input search                                           |
 | searchQuery        | (keyword: string, labelValue: string) => Boolean| No        | Callback used to filter the list of items                           |
@@ -63,7 +65,7 @@ or
 | onBlur             | () => void                                      | No        | Callback that is called when the dropdown is blurred                |
 | keyboardAvoiding   | Boolean                                         | No        | keyboardAvoiding default is true                                    |
 | backgroundColor    | String                                          | No        | Set background color                                                |
-| statusBarIsTranslucent| Boolean                                      | No        | Only Android, set true when StatusBar set Translucent is true       |  
+| statusBarIsTranslucent| Boolean                                      | No        | Only Android, set true when StatusBar set Translucent is true       |
 
 
 #### MultiSelect Props
@@ -85,6 +87,8 @@ or
 | iconStyle          | ImageStyle                                           | No        | Styling for icon                                                    |
 | iconColor          | String                                               | No        | Color of icons                                                      |
 | activeColor        | String                                               | No        | Background color for item selected in container list                |
+| itemContainerStyle | TextStyle                                            | No        | Styling for item container in list                                  |
+| itemTextStyle      | TextStyle                                            | No        | Styling for text item in list                                       |
 | selectedStyle      | ViewStyle                                            | No        | Styling for selected view                                           |
 | selectedTextStyle  | TextStyle                                            | No        | Styling for selected text                                           |
 | renderSelectedItem | (item: object, unSelect?: () => void) => JSX.Element | No        | Takes an item from data and renders it into the list selected       |
@@ -109,7 +113,7 @@ or
 | statusBarIsTranslucent| Boolean                                           | No        | Only Android, set true when StatusBar set Translucent is true       |
 
 
-#### SelectCountry extends Dropdown 
+#### SelectCountry extends Dropdown
 | Props              | Params               | isRequire | Description                          |
 | ------------------ | -------------------- | --------- | ------------------------------------ |
 | imageField         | String               | Yes       | Extract the image from the data item |
@@ -117,7 +121,7 @@ or
 
 
 #### Method
-| API         | Params      | Description          | 
+| API         | Params      | Description          |
 | ----------- | ------------| ---------------------|
 | open        | () => void  | Open dropdown list   |
 | close       | () => void  | Close dropdown list  |

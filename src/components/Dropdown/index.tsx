@@ -49,6 +49,8 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       containerStyle,
       placeholderStyle,
       selectedTextStyle,
+      itemContainerStyle,
+      itemTextStyle,
       inputSearchStyle,
       iconStyle,
       selectedTextProps,
@@ -354,6 +356,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
             key={index}
             onPress={() => onSelect(item)}
             style={[
+              itemContainerStyle,
               selected && {
                 backgroundColor: activeColor,
               },
@@ -363,7 +366,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
               renderItem(item, selected)
             ) : (
               <View style={styles.item}>
-                <Text style={[styles.textItem, font()]}>
+                <Text style={[styles.textItem, itemTextStyle, font()]}>
                   {_.get(item, labelField)}
                 </Text>
               </View>
@@ -375,7 +378,9 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
         activeColor,
         currentValue,
         font,
+        itemContainerStyle,
         itemTestIDField,
+        itemTextStyle,
         labelField,
         onSelect,
         renderItem,
