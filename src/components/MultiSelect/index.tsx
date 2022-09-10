@@ -411,6 +411,11 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       testID,
     ]);
 
+    const keyExtractor =
+      (forList: string) =>
+      ({ item }: any, index: number) =>
+        `${forList}_${item.value}_${index}_`;
+
     const _renderListTop = useCallback(() => {
       return (
         <TouchableWithoutFeedback>
@@ -422,7 +427,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
               data={listData}
               inverted
               renderItem={_renderItem}
-              keyExtractor={(_item, index) => index.toString()}
+              keyExtractor={keyExtractor('toplist_multi')}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
             {renderSearch()}
@@ -449,7 +454,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
               keyboardShouldPersistTaps="handled"
               data={listData}
               renderItem={_renderItem}
-              keyExtractor={(_item, index) => index.toString()}
+              keyExtractor={keyExtractor('toplist_multi')}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
           </View>
