@@ -326,7 +326,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
         return (
           <TouchableOpacity
             testID={_.get(item, itemTestIDField || labelField)}
-            key={index}
+            key={index.toString()}
             onPress={() => onSelect(item)}
             style={[
               itemContainerStyle,

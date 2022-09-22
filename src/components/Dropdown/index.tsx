@@ -353,7 +353,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
         return (
           <TouchableOpacity
             testID={_.get(item, itemTestIDField || labelField)}
-            key={index}
+            key={index.toString()}
             onPress={() => onSelect(item)}
             style={[
               itemContainerStyle,
