@@ -179,9 +179,10 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       [_measure]
     );
 
-    const onKeyboardDidHide = () => {
+    const onKeyboardDidHide = useCallback(() => {
       setKeyboardHeight(0);
-    };
+      _measure();
+    }, [_measure]);
 
     useEffect(() => {
       const susbcriptionKeyboardDidShow = Keyboard.addListener(
@@ -206,7 +207,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
           Keyboard.removeListener('keyboardDidHide', onKeyboardDidHide);
         }
       };
-    }, [onKeyboardDidShow]);
+    }, [onKeyboardDidHide, onKeyboardDidShow]);
 
     const getValue = useCallback(() => {
       const defaultValue =

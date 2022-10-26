@@ -8,7 +8,7 @@ import Example5 from './dropdown/example5';
 import Example6 from './dropdown/example6';
 import Example7 from './dropdown/example7';
 
-const DropdownScreen = (_props: any) => {
+const DropdownScreen = (_props) => {
   return (
     <View style={styles.container}>
       <ScrollView keyboardShouldPersistTaps="handled">

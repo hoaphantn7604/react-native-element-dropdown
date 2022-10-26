@@ -181,9 +181,10 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       [_measure]
     );
 
-    const onKeyboardDidHide = () => {
+    const onKeyboardDidHide = useCallback(() => {
       setKeyboardHeight(0);
-    };
+      _measure();
+    }, [_measure]);
 
     useEffect(() => {
       const susbcriptionKeyboardDidShow = Keyboard.addListener(
@@ -208,7 +209,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
           Keyboard.removeListener('keyboardDidHide', onKeyboardDidHide);
         }
       };
-    }, [onKeyboardDidShow]);
+    }, [onKeyboardDidHide, onKeyboardDidShow]);
 
     useEffect(() => {
       getValue();
