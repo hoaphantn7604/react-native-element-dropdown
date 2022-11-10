@@ -1,4 +1,10 @@
-import type { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import type {
+  FlatListProps,
+  ImageStyle,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 
 export type IMultiSelectRef = {
   open: () => void;
@@ -32,7 +38,7 @@ export type MultiSelectProps = {
   showsVerticalScrollIndicator?: boolean;
   searchPlaceholder?: string;
   dropdownPosition?: 'auto' | 'top' | 'bottom';
-  flatListProps?: any;
+  flatListProps?: Omit<FlatListProps<any>, 'renderItem' | 'data'>;
   alwaysRenderItemSelected?: boolean;
   keyboardAvoiding?: boolean;
   inside?: boolean;

@@ -4,6 +4,7 @@ import type {
   ViewStyle,
   TextProps,
   ImageStyle,
+  FlatListProps,
 } from 'react-native';
 
 export type IDropdownRef = {
@@ -38,7 +39,7 @@ export type DropdownProps = {
   autoScroll?: boolean;
   showsVerticalScrollIndicator?: boolean;
   dropdownPosition?: 'auto' | 'top' | 'bottom';
-  flatListProps?: any;
+  flatListProps?: Omit<FlatListProps<any>, 'renderItem' | 'data'>;
   keyboardAvoiding?: boolean;
   statusBarIsTranslucent?: boolean;
   backgroundColor?: string;
