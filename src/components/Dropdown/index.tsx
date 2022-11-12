@@ -76,6 +76,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       autoScroll = true,
       showsVerticalScrollIndicator = true,
       dropdownPosition = 'auto',
+      invertedList = true,
       flatListProps,
       searchQuery,
       statusBarIsTranslucent,
@@ -450,7 +451,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
               ref={refList}
               onScrollToIndexFailed={scrollIndex}
               data={listData}
-              inverted
+              inverted={invertedList}
               renderItem={_renderItem}
               keyExtractor={(_item, index) => index.toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
