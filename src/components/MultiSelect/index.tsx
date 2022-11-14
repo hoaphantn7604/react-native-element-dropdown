@@ -83,6 +83,9 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       statusBarIsTranslucent,
       backgroundColor,
       onChangeText,
+      confirmSelectItem,
+      confirmUnSelectItem,
+      onConfirmSelectItem,
     } = props;
 
     const ref = useRef<View>(null);
@@ -270,24 +273,51 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
 
     const onSelect = useCallback(
       (item: any) => {
-        const index = currentValue.findIndex(
+        const newCurrentValue = [...currentValue];
+        const index = newCurrentValue.findIndex(
           (e) => e === _.get(item, valueField)
         );
         if (index > -1) {
-          currentValue.splice(index, 1);
+          newCurrentValue.splice(index, 1);
         } else {
           if (maxSelect) {
-            if (currentValue.length < maxSelect) {
-              currentValue.push(_.get(item, valueField));
+            if (newCurrentValue.length < maxSelect) {
+              newCurrentValue.push(_.get(item, valueField));
             }
           } else {
-            currentValue.push(_.get(item, valueField));
+            newCurrentValue.push(_.get(item, valueField));
           }
         }
-        onChange(currentValue);
+
+        if (onConfirmSelectItem) {
+          if (index > -1) {
+            if (confirmUnSelectItem) {
+              onConfirmSelectItem(newCurrentValue);
+            } else {
+              onChange(newCurrentValue);
+            }
+          } else {
+            if (confirmSelectItem) {
+              onConfirmSelectItem(newCurrentValue);
+            } else {
+              onChange(newCurrentValue);
+            }
+          }
+        } else {
+          onChange(newCurrentValue);
+        }
+
         setKey(Math.random());
       },
-      [currentValue, maxSelect, onChange, valueField]
+      [
+        confirmSelectItem,
+        confirmUnSelectItem,
+        currentValue,
+        maxSelect,
+        onChange,
+        onConfirmSelectItem,
+        valueField,
+      ]
     );
 
     const _renderDropdown = () => {

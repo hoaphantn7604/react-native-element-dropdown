@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { MultiSelect } from 'react-native-element-dropdown';
 
 const data = [
@@ -51,6 +51,22 @@ const MultiSelectComponent = () => {
             </View>
           </TouchableOpacity>
         )}
+        confirmSelectItem
+        confirmUnSelectItem
+        onConfirmSelectItem={(item) => {
+          Alert.alert('Confirm', 'Message confirm', [
+            {
+              text: 'Cancel',
+              onPress: () => {},
+            },
+            {
+              text: 'Confirm',
+              onPress: () => {
+                setSelected(item);
+              },
+            },
+          ]);
+        }}
       />
     </View>
   );

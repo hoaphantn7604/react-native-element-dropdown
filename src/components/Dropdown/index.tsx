@@ -81,6 +81,8 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       statusBarIsTranslucent,
       backgroundColor,
       onChangeText,
+      confirmSelectItem,
+      onConfirmSelectItem,
     } = props;
 
     const ref = useRef<View>(null);
@@ -305,6 +307,10 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
 
     const onSelect = useCallback(
       (item: any) => {
+        if (confirmSelectItem && onConfirmSelectItem) {
+          return onConfirmSelectItem(item);
+        }
+
         if (onChangeText) {
           setSearchText('');
         }
@@ -313,7 +319,14 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
         onChange(item);
         eventClose();
       },
-      [eventClose, onChange, onChangeText, onSearch]
+      [
+        confirmSelectItem,
+        eventClose,
+        onChange,
+        onChangeText,
+        onConfirmSelectItem,
+        onSearch,
+      ]
     );
 
     const _renderDropdown = () => {

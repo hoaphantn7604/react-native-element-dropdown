@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import React, { RefObject, useRef, useState } from 'react';
+import { StyleSheet, View, Text, Alert } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 
 const data = [
@@ -15,6 +15,7 @@ const data = [
 
 const DropdownComponent = () => {
   const [value, setValue] = useState(null);
+  const ref: RefObject<any> = useRef(null);
 
   const renderItem = (item: any) => {
     return (
@@ -26,6 +27,7 @@ const DropdownComponent = () => {
 
   return (
     <Dropdown
+      ref={ref}
       statusBarIsTranslucent={true}
       style={styles.dropdown}
       placeholderStyle={styles.placeholderStyle}
@@ -44,6 +46,22 @@ const DropdownComponent = () => {
         setValue(item.value);
       }}
       renderItem={renderItem}
+      confirmSelectItem
+      onConfirmSelectItem={(item) => {
+        Alert.alert('Confirm', 'Message confirm', [
+          {
+            text: 'Cancel',
+            onPress: () => {},
+          },
+          {
+            text: 'Confirm',
+            onPress: () => {
+              setValue(item.value);
+              ref.current.close();
+            },
+          },
+        ]);
+      }}
     />
   );
 };

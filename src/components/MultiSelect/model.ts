@@ -44,6 +44,8 @@ export type MultiSelectProps = {
   inside?: boolean;
   statusBarIsTranslucent?: boolean;
   backgroundColor?: string;
+  confirmSelectItem?: boolean;
+  confirmUnSelectItem?: boolean;
   onChange: (item: any) => void;
   renderLeftIcon?: () => JSX.Element | null | undefined;
   renderRightIcon?: () => JSX.Element | null | undefined;
@@ -62,4 +64,5 @@ export type MultiSelectProps = {
   onBlur?: () => void;
   searchQuery?: (keyword: string, labelValue: string) => boolean;
   onChangeText?: (search: string) => void;
+  onConfirmSelectItem?: (item: any) => void;
 };

@@ -43,6 +43,7 @@ export type DropdownProps = {
   keyboardAvoiding?: boolean;
   statusBarIsTranslucent?: boolean;
   backgroundColor?: string;
+  confirmSelectItem?: boolean;
   onChange: (item: any) => void;
   renderLeftIcon?: () => JSX.Element | null | undefined;
   renderRightIcon?: () => JSX.Element | null | undefined;
@@ -57,4 +58,5 @@ export type DropdownProps = {
   onBlur?: () => void;
   searchQuery?: (keyword: string, labelValue: string) => boolean;
   onChangeText?: (search: string) => void;
+  onConfirmSelectItem?: (item: any) => void;
 };
