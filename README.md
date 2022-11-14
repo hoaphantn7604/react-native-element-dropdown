@@ -63,9 +63,9 @@ or
 | onBlur             | () => void                                      | No        | Callback that is called when the dropdown is blurred                |
 | keyboardAvoiding   | Boolean                                         | No        | keyboardAvoiding default is true                                    |
 | backgroundColor    | String                                          | No        | Set background color                                                |
-| statusBarIsTranslucent| Boolean                                      | No        | Only Android, set true when StatusBar set Translucent is true       |
+| statusBarIsTranslucent | Boolean                                     | No        | Only Android, set true when StatusBar set Translucent is true       |
 | confirmSelectItem  | Boolean                                         | No        | Turn On confirm select item. Refer example/src/dropdown/example3    |
-| onConfirmSelectItem| (item: object) => void                          | No        | Selection callback. Refer example/src/dropdown/example3             |
+| onConfirmSelectItem | (item: object) => void                         | No        | Selection callback. Refer example/src/dropdown/example3             |
 
 
 
