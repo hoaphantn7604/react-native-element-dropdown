@@ -11,7 +11,7 @@ const isTablet = () => {
     return true;
   } else {
     return (
-      pixelDensity === 2 && (adjustedWidth >= 1920 || adjustedHeight >= 1920)
+      pixelDensity === 2 && (adjustedWidth >= 1824 || adjustedHeight >= 1824)
     );
   }
 };
