@@ -313,6 +313,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
 
         if (onChangeText) {
           setSearchText('');
+          onChangeText('');
         }
         onSearch('');
         setCurrentValue(item);
