@@ -44,7 +44,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
     const {
       testID,
       itemTestIDField,
-      underlayColor = 'gray',
+      underlayColor = '#fff',
       onChange,
       style,
       containerStyle,
