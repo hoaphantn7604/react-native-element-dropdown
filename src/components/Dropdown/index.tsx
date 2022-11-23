@@ -13,6 +13,7 @@ import {
   Keyboard,
   Modal,
   Text,
+  TouchableHighlight,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
@@ -366,7 +367,8 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
         const isSelected = currentValue && _.get(currentValue, valueField);
         const selected = _.isEqual(_.get(item, valueField), isSelected);
         return (
-          <TouchableOpacity
+          <TouchableHighlight
+            underlayColor = {'#F4D2D4'}
             testID={_.get(item, itemTestIDField || labelField)}
             key={index.toString()}
             onPress={() => onSelect(item)}
@@ -386,7 +388,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
                 </Text>
               </View>
             )}
-          </TouchableOpacity>
+          </TouchableHighlight>
         );
       },
       [
