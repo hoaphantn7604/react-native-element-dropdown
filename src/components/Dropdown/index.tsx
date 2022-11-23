@@ -14,7 +14,6 @@ import {
   Modal,
   Text,
   TouchableHighlight,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
