@@ -14,6 +14,7 @@ export type IDropdownRef = {
 
 export type DropdownProps = {
   testID?: string;
+  underlayColor? : string;
   itemTestIDField?: string;
   style?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
