@@ -45,6 +45,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
     const {
       testID,
       itemTestIDField,
+      underlayColor = 'gray',
       onChange,
       style,
       containerStyle,
@@ -368,7 +369,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
         const selected = _.isEqual(_.get(item, valueField), isSelected);
         return (
           <TouchableHighlight
-            underlayColor = {'#F4D2D4'}
+            underlayColor = {underlayColor}
             testID={_.get(item, itemTestIDField || labelField)}
             key={index.toString()}
             onPress={() => onSelect(item)}
@@ -402,6 +403,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
         onSelect,
         renderItem,
         valueField,
+        underlayColor,
       ]
     );
 
