@@ -17,7 +17,8 @@ or
 ```js
     yarn add react-native-element-dropdown
 ```
-
+#### Video tutorial
+Youtube: https://youtu.be/_dz3mYUEUNw
 #### Source code demo
 [react-native-template-components](https://github.com/hoaphantn7604/react-native-template-components) A beautiful template for React Native.
 #### Demo
