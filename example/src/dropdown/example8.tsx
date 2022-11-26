@@ -1,121 +1,145 @@
-import React, { useEffect, useState } from 'react';
-import { RefreshControl, StyleSheet } from 'react-native';
+import React, { RefObject, useEffect, useRef, useState } from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  RefreshControl,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
+
+const RenderEmpty = () => {
+  return (
+    <View style={styles.emptyContainer}>
+      <Text>List Empty!</Text>
+    </View>
+  );
+};
+
+const RenderFooter = ({ isLoading }: { isLoading: boolean }) => {
+  if (!isLoading) {
+    return null;
+  }
+  return (
+    <View style={styles.footerContaier}>
+      <ActivityIndicator color={'gray'} size={'large'} />
+    </View>
+  );
+};
 
 const DropdownComponent = () => {
   const [data, setData] = useState<any[]>([]);
+  const [nextPage, setNextPage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [value, setValue] = useState(null);
-  const [nextApi, setNextApi] = useState('');
   const [isSearch, setIsSearch] = useState(false);
+  const ref: RefObject<any> = useRef(null);
 
-  const fetchApi = async (apiUrl: string) => {
+  const fetchApi = async (url: string, isRefresh: boolean = false) => {
     try {
-      const response = await fetch(apiUrl);
+      const response = await fetch(url);
       const json = await response.json();
 
-      setData((pre: any) => [...pre, ...json.results]);
-      setNextApi(json.next);
+      if (json) {
+        if (isRefresh) {
+          setData([]);
+        }
+
+        setNextPage(json?.next);
+        setData((pre: any) => [...pre, ...json?.results]);
+
+        setIsLoading(false);
+      }
     } catch (error) {
-      console.error(error);
+      console.log('Error: ', error);
+    }
+  };
+
+  const onRefresh = () => {
+    fetchApi('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0', true);
+  };
+
+  const onLoadMore = () => {
+    if (!isSearch) {
+      setIsLoading(true);
+      fetchApi(nextPage);
     }
   };
 
   useEffect(() => {
-    fetchApi(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=0`);
+    fetchApi('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0');
   }, []);
-
-  const reFreshData = () => {
-    setData([]);
-    fetchApi(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=0`);
-  };
 
   return (
     <Dropdown
-      statusBarIsTranslucent={true}
+      ref={ref}
       style={styles.dropdown}
-      placeholderStyle={styles.placeholderStyle}
-      selectedTextStyle={styles.selectedTextStyle}
-      inputSearchStyle={styles.inputSearchStyle}
-      iconStyle={styles.iconStyle}
+      containerStyle={styles.container}
+      backgroundColor={'rgba(0,0,0,0.2)'}
       data={data}
-      search
-      maxHeight={300}
+      value={value}
       labelField="name"
       valueField="url"
-      placeholder="Select item"
+      search
+      maxHeight={250}
       searchPlaceholder="Search..."
-      value={value}
-      autoScroll={false}
       onChange={(item) => {
         setValue(item);
+        setIsSearch(false);
+      }}
+      onChangeText={(keyword) => {
+        setIsSearch(keyword.length > 0);
       }}
       flatListProps={{
+        ListEmptyComponent: <RenderEmpty />,
+        ListFooterComponent: <RenderFooter isLoading={isLoading} />,
         refreshControl: (
-          <RefreshControl
-            refreshing={false}
-            onRefresh={() => {
-              reFreshData();
-            }}
-          />
+          <RefreshControl refreshing={false} onRefresh={onRefresh} />
         ),
         onEndReachedThreshold: 0.5,
-        onEndReached: () => {
-          if (!isSearch) {
-            fetchApi(nextApi);
-          }
-        },
+        onEndReached: onLoadMore,
       }}
-      onChangeText={(keyword: string) => {
-        setIsSearch(keyword.length > 0);
+      confirmSelectItem
+      onConfirmSelectItem={(item) => {
+        Alert.alert('Confirm', 'Message', [
+          {
+            text: 'Cancel',
+            onPress: () => {},
+          },
+          {
+            text: 'Ok',
+            onPress: () => {
+              setValue(item);
+              setIsSearch(false);
+              ref.current?.close();
+            },
+          },
+        ]);
       }}
     />
   );
 };
 
-export default DropdownComponent;
-
 const styles = StyleSheet.create({
   dropdown: {
+    backgroundColor: '#DDDDDD',
     margin: 16,
-    height: 50,
-    backgroundColor: 'white',
-    borderRadius: 12,
-    padding: 12,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-
-    elevation: 2,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 8,
   },
-  icon: {
-    marginRight: 5,
+  container: {
+    marginTop: 4,
   },
-  item: {
-    padding: 17,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  emptyContainer: {
+    padding: 16,
     alignItems: 'center',
   },
-  textItem: {
-    flex: 1,
-    fontSize: 16,
-  },
-  placeholderStyle: {
-    fontSize: 16,
-  },
-  selectedTextStyle: {
-    fontSize: 16,
-  },
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
+  footerContaier: {
+    padding: 16,
+    alignItems: 'center',
   },
 });
+
+export default DropdownComponent;

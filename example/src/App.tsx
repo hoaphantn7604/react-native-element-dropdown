@@ -6,7 +6,7 @@ import DropdownWithConfirm from './dropdown/example3';
 import CountrySelect1 from './dropdown/example4';
 import CountrySelect2 from './dropdown/example5';
 import MultiSelect1 from './dropdown/example6';
-import MultiSelect2 from './dropdown/example7';
+import MultiSelectWithConfirm from './dropdown/example7';
 import DropdownLazyLoad from './dropdown/example8';
 
 const DropdownScreen = (_props: any) => {
@@ -19,7 +19,7 @@ const DropdownScreen = (_props: any) => {
         <CountrySelect1 />
         <CountrySelect2 />
         <MultiSelect1 />
-        <MultiSelect2 />
+        <MultiSelectWithConfirm />
         <DropdownLazyLoad />
       </ScrollView>
     </View>
