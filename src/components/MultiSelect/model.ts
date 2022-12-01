@@ -39,7 +39,8 @@ export type MultiSelectProps = {
   searchPlaceholder?: string;
   dropdownPosition?: 'auto' | 'top' | 'bottom';
   flatListProps?: Omit<FlatListProps<any>, 'renderItem' | 'data'>;
-  alwaysRenderItemSelected?: boolean;
+  alwaysRenderSelectedItem?: boolean;
+  visibleSelectedItem?: boolean;
   keyboardAvoiding?: boolean;
   inside?: boolean;
   statusBarIsTranslucent?: boolean;

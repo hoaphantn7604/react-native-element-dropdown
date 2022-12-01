@@ -102,6 +102,7 @@ or
 | selectedTextStyle  | TextStyle                                            | No        | Styling for selected text                                           |
 | renderSelectedItem | (item: object, unSelect?: () => void) => JSX.Element | No        | Takes an item from data and renders it into the list selected       |
 | alwaysRenderSelectedItem | Boolean                                        | No        | Always show the list of selected items                              |
+| visibleSelectedItem | Boolean                                             | No        | Option to hide selected item list, Ẽx: visibleSelectedItem={false}  |
 | search             | Boolean                                              | No        | Show or hide input search                                           |
 | searchQuery        | (keyword: string, labelValue: string) => Boolean     | No        | Callback used to filter the list of items                           |
 | inputSearchStyle   | ViewStyle                                            | No        | Styling for input search                                            |

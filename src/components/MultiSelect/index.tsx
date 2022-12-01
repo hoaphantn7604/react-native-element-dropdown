@@ -78,7 +78,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       showsVerticalScrollIndicator = true,
       dropdownPosition = 'auto',
       flatListProps,
-      alwaysRenderItemSelected = false,
+      alwaysRenderSelectedItem = false,
       searchQuery,
       statusBarIsTranslucent,
       backgroundColor,
@@ -88,6 +88,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       onConfirmSelectItem,
       accessibilityLabel,
       itemAccessibilityLabelField,
+      visibleSelectedItem = true,
     } = props;
 
     const ref = useRef<View>(null);
@@ -754,7 +755,9 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
           {_renderDropdown()}
           {_renderModal()}
         </View>
-        {(!visible || alwaysRenderItemSelected) && _renderItemSelected(false)}
+        {(!visible || alwaysRenderSelectedItem) &&
+          visibleSelectedItem &&
+          _renderItemSelected(false)}
       </>
     );
   }
