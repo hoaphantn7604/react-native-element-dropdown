@@ -68,9 +68,9 @@ or
 | confirmSelectItem  | Boolean                                         | No        | Turn On confirm select item. Refer example/src/dropdown/example3    |
 | onConfirmSelectItem | (item: object) => void                         | No        | Selection callback. Refer example/src/dropdown/example3             |
 | testID             | String                                          | No        | Used to locate this view in end-to-end tests                        |
-| itemTestIDField    | String                                          | No        | Add more this field to input data. Ex: DATA = [{itemTestIDField: '', label: '', value:: ''}]|
+| itemTestIDField    | String                                          | No        | Add this field to the input data. Ex: DATA = [{itemTestIDField: '', label: '', value:: ''}]|
 | accessibilityLabel | String     | No    | Set an accessibilityLabel on the view, so that people who use VoiceOver know what element they have selected |
-| itemAccessibilityLabelField | String                                 | No        | Add more this field to input data. Ex: DATA = [{itemAccessibilityLabelField: '', label: '', value:: ''}]|
+| itemAccessibilityLabelField | String                                 | No        | Add this field to the input data. Ex: DATA = [{itemAccessibilityLabelField: '', label: '', value:: ''}]|
 
 
 
@@ -124,9 +124,9 @@ or
 | confirmUnSelectItem | Boolean                                             | No        | Turn On confirm un-select item. Refer example/src/dropdown/example7 |
 | onConfirmSelectItem | (item: any) => void                                 | No        | Selection callback. Refer example/src/dropdown/example7             |
 | testID             | String                                               | No        | Used to locate this view in end-to-end tests                        |
-| itemTestIDField    | String                                               | No        | Add more this field to input data. Ex: DATA = [{itemTestIDField: '', label: '', value:: ''}]|
+| itemTestIDField    | String                                               | No        | Add this field to the input data. Ex: DATA = [{itemTestIDField: '', label: '', value:: ''}]|
 | accessibilityLabel | String          | No    | Set an accessibilityLabel on the view, so that people who use VoiceOver know what element they have selected |
-| itemAccessibilityLabelField | String                                      | No        | Add more this field to input data. Ex: DATA = [{itemAccessibilityLabelField: '', label: '', value:: ''}]|
+| itemAccessibilityLabelField | String                                      | No        | Add this field to the input data. Ex: DATA = [{itemAccessibilityLabelField: '', label: '', value:: ''}]|
 
 
 
