@@ -83,6 +83,8 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       onChangeText,
       confirmSelectItem,
       onConfirmSelectItem,
+      accessibilityLabel,
+      itemAccessibilityLabelField,
     } = props;
 
     const ref = useRef<View>(null);
@@ -333,7 +335,12 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
     const _renderDropdown = () => {
       const isSelected = currentValue && _.get(currentValue, valueField);
       return (
-        <TouchableWithoutFeedback testID={testID} onPress={showOrClose}>
+        <TouchableWithoutFeedback
+          testID={testID}
+          accessible={!!accessibilityLabel}
+          accessibilityLabel={accessibilityLabel}
+          onPress={showOrClose}
+        >
           <View style={styles.dropdown}>
             {renderLeftIcon?.()}
             <Text
@@ -368,6 +375,11 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
         return (
           <TouchableOpacity
             testID={_.get(item, itemTestIDField || labelField)}
+            accessible={!!accessibilityLabel}
+            accessibilityLabel={_.get(
+              item,
+              itemAccessibilityLabelField || labelField
+            )}
             key={index.toString()}
             onPress={() => onSelect(item)}
             style={[
@@ -390,9 +402,11 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
         );
       },
       [
+        accessibilityLabel,
         activeColor,
         currentValue,
         font,
+        itemAccessibilityLabelField,
         itemContainerStyle,
         itemTestIDField,
         itemTextStyle,
@@ -417,6 +431,8 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
           return (
             <CInput
               testID={testID + ' input'}
+              accessible={!!accessibilityLabel}
+              accessibilityLabel={accessibilityLabel + ' input'}
               style={[styles.input, inputSearchStyle]}
               inputStyle={[inputSearchStyle, font()]}
               autoCorrect={false}
@@ -441,6 +457,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       }
       return null;
     }, [
+      accessibilityLabel,
       font,
       iconColor,
       iconStyle,
@@ -459,6 +476,8 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
           <View style={styles.flexShrink}>
             <FlatList
               testID={testID + ' flatlist'}
+              accessible={!!accessibilityLabel}
+              accessibilityLabel={accessibilityLabel + ' flatlist'}
               {...flatListProps}
               keyboardShouldPersistTaps="handled"
               ref={refList}
@@ -475,6 +494,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       );
     }, [
       _renderItem,
+      accessibilityLabel,
       flatListProps,
       listData,
       renderSearch,
@@ -490,6 +510,8 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
             {renderSearch()}
             <FlatList
               testID={testID + ' flatlist'}
+              accessible={!!accessibilityLabel}
+              accessibilityLabel={accessibilityLabel + ' flatlist'}
               {...flatListProps}
               keyboardShouldPersistTaps="handled"
               ref={refList}
@@ -504,6 +526,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       );
     }, [
       _renderItem,
+      accessibilityLabel,
       flatListProps,
       listData,
       renderSearch,

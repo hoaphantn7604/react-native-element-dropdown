@@ -46,6 +46,8 @@ export type MultiSelectProps = {
   backgroundColor?: string;
   confirmSelectItem?: boolean;
   confirmUnSelectItem?: boolean;
+  accessibilityLabel?: string;
+  itemAccessibilityLabelField?: string;
   onChange: (item: any) => void;
   renderLeftIcon?: () => JSX.Element | null | undefined;
   renderRightIcon?: () => JSX.Element | null | undefined;

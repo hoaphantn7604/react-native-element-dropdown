@@ -86,6 +86,8 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       confirmSelectItem,
       confirmUnSelectItem,
       onConfirmSelectItem,
+      accessibilityLabel,
+      itemAccessibilityLabelField,
     } = props;
 
     const ref = useRef<View>(null);
@@ -322,7 +324,12 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
 
     const _renderDropdown = () => {
       return (
-        <TouchableWithoutFeedback testID={testID} onPress={showOrClose}>
+        <TouchableWithoutFeedback
+          testID={testID}
+          accessible={!!accessibilityLabel}
+          accessibilityLabel={accessibilityLabel}
+          onPress={showOrClose}
+        >
           <View style={styles.dropdown}>
             {renderLeftIcon?.()}
             <Text style={[styles.textItem, placeholderStyle, font()]}>
@@ -357,6 +364,11 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
         return (
           <TouchableOpacity
             testID={_.get(item, itemTestIDField || labelField)}
+            accessible={!!accessibilityLabel}
+            accessibilityLabel={_.get(
+              item,
+              itemAccessibilityLabelField || labelField
+            )}
             key={index.toString()}
             onPress={() => onSelect(item)}
             style={[
@@ -380,9 +392,11 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
         );
       },
       [
+        accessibilityLabel,
         activeColor,
         checkSelected,
         font,
+        itemAccessibilityLabelField,
         itemContainerStyle,
         itemTestIDField,
         itemTextStyle,
@@ -406,6 +420,8 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
           return (
             <CInput
               testID={testID + ' input'}
+              accessible={!!accessibilityLabel}
+              accessibilityLabel={accessibilityLabel + ' input'}
               style={[styles.input, inputSearchStyle]}
               inputStyle={[inputSearchStyle, font()]}
               autoCorrect={false}
@@ -430,6 +446,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       }
       return null;
     }, [
+      accessibilityLabel,
       font,
       iconColor,
       iconStyle,
@@ -448,6 +465,8 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
           <View style={styles.flexShrink}>
             <FlatList
               testID={testID + ' flatlist'}
+              accessible={!!accessibilityLabel}
+              accessibilityLabel={accessibilityLabel + ' flatlist'}
               {...flatListProps}
               keyboardShouldPersistTaps="handled"
               data={listData}
@@ -462,6 +481,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       );
     }, [
       _renderItem,
+      accessibilityLabel,
       flatListProps,
       listData,
       renderSearch,
@@ -476,6 +496,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
             {renderSearch()}
             <FlatList
               testID={testID + ' flatlist'}
+              accessibilityLabel={testID + ' flatlist'}
               {...flatListProps}
               keyboardShouldPersistTaps="handled"
               data={listData}
@@ -638,6 +659,11 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
               return (
                 <TouchableOpacity
                   testID={_.get(e, itemTestIDField || labelField)}
+                  accessible={!!accessibilityLabel}
+                  accessibilityLabel={_.get(
+                    e,
+                    itemAccessibilityLabelField || labelField
+                  )}
                   key={_.get(e, labelField)}
                   onPress={() => unSelect(e)}
                 >
@@ -650,6 +676,11 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
               return (
                 <TouchableOpacity
                   testID={_.get(e, itemTestIDField || labelField)}
+                  accessible={!!accessibilityLabel}
+                  accessibilityLabel={_.get(
+                    e,
+                    itemAccessibilityLabelField || labelField
+                  )}
                   key={_.get(e, labelField)}
                   style={[styles.selectedItem, selectedStyle]}
                   onPress={() => unSelect(e)}
@@ -685,7 +716,12 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
 
     const _renderDropdownInside = () => {
       return (
-        <TouchableWithoutFeedback testID={testID} onPress={showOrClose}>
+        <TouchableWithoutFeedback
+          testID={testID}
+          accessible={!!accessibilityLabel}
+          accessibilityLabel={accessibilityLabel}
+          onPress={showOrClose}
+        >
           <View style={styles.dropdownInside}>
             {renderLeftIcon?.()}
             {value && value?.length > 0 ? (
