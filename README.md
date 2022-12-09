@@ -1,14 +1,6 @@
 ## react-native-element-dropdown
 A React Native dropdown component easy to customize for both iOS and Android.
 
-![React Native Element Dropdown License](https://img.shields.io/github/license/hoaphantn7604/react-native-element-dropdown)
-![React Native Element Dropdown Version](https://flat.badgen.net/npm/v/@hoaphantn7604/react-native-element-dropdown)
-![React Native Element Dropdown Release Date](https://img.shields.io/github/release-date/hoaphantn7604/react-native-element-dropdown)
-![React Native Element Dropdown Download](https://flat.badgen.net/npm/dt/@hoaphantn7604/react-native-element-dropdown)
-![React Native Element Dropdown Stars](https://img.shields.io/github/stars/hoaphantn7604/react-native-element-dropdown)
-![React Native Element Dropdown Top Language](https://img.shields.io/github/languages/top/hoaphantn7604/react-native-element-dropdown)
-![React Native Element Dropdown TypeScript](https://badgen.net/npm/types/tslib)
-
 ## Features
 * Dropdown and Multiselect in one package
 * Easy to use
