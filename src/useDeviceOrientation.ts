@@ -36,5 +36,5 @@ export function useDeviceOrientation() {
     };
   }, []);
 
-  return orientation.portrait === true ? 'PORTRAIT' : 'LANDSCAPE';
+  return orientation.portrait ? 'PORTRAIT' : 'LANDSCAPE';
 }
