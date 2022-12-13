@@ -15,6 +15,7 @@ import {
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  TouchableHighlight,
   View,
   ViewStyle,
   KeyboardEvent,
@@ -363,14 +364,15 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       ({ item, index }: { item: any; index: number }) => {
         const selected = checkSelected(item);
         return (
-          <TouchableOpacity
+          <TouchableHighlight
+            key={index.toString()}
             testID={_.get(item, itemTestIDField || labelField)}
             accessible={!!accessibilityLabel}
             accessibilityLabel={_.get(
               item,
               itemAccessibilityLabelField || labelField
             )}
-            key={index.toString()}
+            underlayColor={activeColor}
             onPress={() => onSelect(item)}
             style={[
               itemContainerStyle,
@@ -389,7 +391,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
                 </Text>
               </View>
             )}
-          </TouchableOpacity>
+          </TouchableHighlight>
         );
       },
       [

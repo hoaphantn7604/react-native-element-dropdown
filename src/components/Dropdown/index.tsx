@@ -13,8 +13,8 @@ import {
   Keyboard,
   Modal,
   Text,
-  TouchableOpacity,
   TouchableWithoutFeedback,
+  TouchableHighlight,
   View,
   ViewStyle,
   KeyboardEvent,
@@ -373,14 +373,15 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
         const isSelected = currentValue && _.get(currentValue, valueField);
         const selected = _.isEqual(_.get(item, valueField), isSelected);
         return (
-          <TouchableOpacity
+          <TouchableHighlight
+            key={index.toString()}
             testID={_.get(item, itemTestIDField || labelField)}
             accessible={!!accessibilityLabel}
             accessibilityLabel={_.get(
               item,
               itemAccessibilityLabelField || labelField
             )}
-            key={index.toString()}
+            underlayColor={activeColor}
             onPress={() => onSelect(item)}
             style={[
               itemContainerStyle,
@@ -398,7 +399,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
                 </Text>
               </View>
             )}
-          </TouchableOpacity>
+          </TouchableHighlight>
         );
       },
       [
