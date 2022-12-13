@@ -383,22 +383,25 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
             )}
             underlayColor={activeColor}
             onPress={() => onSelect(item)}
-            style={[
-              itemContainerStyle,
-              selected && {
-                backgroundColor: activeColor,
-              },
-            ]}
           >
-            {renderItem ? (
-              renderItem(item, selected)
-            ) : (
-              <View style={styles.item}>
-                <Text style={[styles.textItem, itemTextStyle, font()]}>
-                  {_.get(item, labelField)}
-                </Text>
-              </View>
-            )}
+            <View
+              style={[
+                itemContainerStyle,
+                selected && {
+                  backgroundColor: activeColor,
+                },
+              ]}
+            >
+              {renderItem ? (
+                renderItem(item, selected)
+              ) : (
+                <View style={styles.item}>
+                  <Text style={[styles.textItem, itemTextStyle, font()]}>
+                    {_.get(item, labelField)}
+                  </Text>
+                </View>
+              )}
+            </View>
           </TouchableHighlight>
         );
       },

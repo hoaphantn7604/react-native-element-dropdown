@@ -373,23 +373,26 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
             )}
             underlayColor={activeColor}
             onPress={() => onSelect(item)}
-            style={[
-              itemContainerStyle,
-              selected && {
-                backgroundColor: activeColor,
-                ...styles.wrapItem,
-              },
-            ]}
           >
-            {renderItem ? (
-              renderItem(item, selected)
-            ) : (
-              <View style={styles.item}>
-                <Text style={[styles.textItem, itemTextStyle, font()]}>
-                  {_.get(item, labelField)}
-                </Text>
-              </View>
-            )}
+            <View
+              style={[
+                itemContainerStyle,
+                selected && {
+                  backgroundColor: activeColor,
+                  ...styles.wrapItem,
+                },
+              ]}
+            >
+              {renderItem ? (
+                renderItem(item, selected)
+              ) : (
+                <View style={styles.item}>
+                  <Text style={[styles.textItem, itemTextStyle, font()]}>
+                    {_.get(item, labelField)}
+                  </Text>
+                </View>
+              )}
+            </View>
           </TouchableHighlight>
         );
       },
