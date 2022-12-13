@@ -663,7 +663,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
           {list.map((e) => {
             if (renderSelectedItem) {
               return (
-                <View
+                <TouchableWithoutFeedback
                   testID={_.get(e, itemTestIDField || labelField)}
                   accessible={!!accessibilityLabel}
                   accessibilityLabel={_.get(
@@ -671,11 +671,12 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
                     itemAccessibilityLabelField || labelField
                   )}
                   key={_.get(e, labelField)}
+                  onPress={() => unSelect(e)}
                 >
                   {renderSelectedItem(e, () => {
                     unSelect(e);
                   })}
-                </View>
+                </TouchableWithoutFeedback>
               );
             } else {
               return (
