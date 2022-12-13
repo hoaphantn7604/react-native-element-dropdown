@@ -13,7 +13,6 @@ import {
   Keyboard,
   Modal,
   Text,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   TouchableHighlight,
   View,
@@ -661,7 +660,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
           {list.map((e) => {
             if (renderSelectedItem) {
               return (
-                <TouchableOpacity
+                <View
                   testID={_.get(e, itemTestIDField || labelField)}
                   accessible={!!accessibilityLabel}
                   accessibilityLabel={_.get(
@@ -669,16 +668,15 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
                     itemAccessibilityLabelField || labelField
                   )}
                   key={_.get(e, labelField)}
-                  onPress={() => unSelect(e)}
                 >
                   {renderSelectedItem(e, () => {
                     unSelect(e);
                   })}
-                </TouchableOpacity>
+                </View>
               );
             } else {
               return (
-                <TouchableOpacity
+                <TouchableWithoutFeedback
                   testID={_.get(e, itemTestIDField || labelField)}
                   accessible={!!accessibilityLabel}
                   accessibilityLabel={_.get(
@@ -686,22 +684,23 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
                     itemAccessibilityLabelField || labelField
                   )}
                   key={_.get(e, labelField)}
-                  style={[styles.selectedItem, selectedStyle]}
                   onPress={() => unSelect(e)}
                 >
-                  <Text
-                    style={[
-                      styles.selectedTextLeftItem,
-                      selectedTextStyle,
-                      font(),
-                    ]}
-                  >
-                    {_.get(e, labelField)}
-                  </Text>
-                  <Text style={[styles.selectedTextItem, selectedTextStyle]}>
-                    ⓧ
-                  </Text>
-                </TouchableOpacity>
+                  <View style={[styles.selectedItem, selectedStyle]}>
+                    <Text
+                      style={[
+                        styles.selectedTextLeftItem,
+                        selectedTextStyle,
+                        font(),
+                      ]}
+                    >
+                      {_.get(e, labelField)}
+                    </Text>
+                    <Text style={[styles.selectedTextItem, selectedTextStyle]}>
+                      ⓧ
+                    </Text>
+                  </View>
+                </TouchableWithoutFeedback>
               );
             }
           })}
