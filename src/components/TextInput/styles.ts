@@ -27,9 +27,4 @@ export const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
-  textError: {
-    color: 'red',
-    fontSize: 14,
-    marginTop: 10,
-  },
 });

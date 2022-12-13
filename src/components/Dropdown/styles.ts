@@ -51,11 +51,6 @@ export const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
-  textError: {
-    color: 'red',
-    fontSize: 14,
-    marginTop: 10,
-  },
   input: {
     borderWidth: 0.5,
     borderColor: '#DDDDDD',
