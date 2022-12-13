@@ -647,6 +647,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       }
     };
 
+    // eslint-disable-next-line no-shadow
     const _renderItemSelected = (inside: boolean) => {
       const list = data.filter((e: any) => {
         const check = value?.indexOf(_.get(e, valueField));
