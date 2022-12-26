@@ -19,6 +19,7 @@ import {
   ViewStyle,
   KeyboardEvent,
   I18nManager,
+  StyleSheet,
 } from 'react-native';
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../../useDeviceOrientation';
@@ -333,7 +334,13 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
         >
           <View style={styles.dropdown}>
             {renderLeftIcon?.()}
-            <Text style={[styles.textItem, placeholderStyle, font()]}>
+            <Text
+              style={StyleSheet.flatten([
+                styles.textItem,
+                placeholderStyle,
+                font(),
+              ])}
+            >
               {placeholder}
             </Text>
             {renderRightIcon ? (
@@ -341,7 +348,11 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
             ) : (
               <Image
                 source={ic_down}
-                style={[styles.icon, { tintColor: iconColor }, iconStyle]}
+                style={StyleSheet.flatten([
+                  styles.icon,
+                  { tintColor: iconColor },
+                  iconStyle,
+                ])}
               />
             )}
           </View>
@@ -375,19 +386,25 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
             onPress={() => onSelect(item)}
           >
             <View
-              style={[
+              style={StyleSheet.flatten([
                 itemContainerStyle,
                 selected && {
                   backgroundColor: activeColor,
                   ...styles.wrapItem,
                 },
-              ]}
+              ])}
             >
               {renderItem ? (
                 renderItem(item, selected)
               ) : (
                 <View style={styles.item}>
-                  <Text style={[styles.textItem, itemTextStyle, font()]}>
+                  <Text
+                    style={StyleSheet.flatten([
+                      styles.textItem,
+                      itemTextStyle,
+                      font(),
+                    ])}
+                  >
                     {_.get(item, labelField)}
                   </Text>
                 </View>
@@ -425,7 +442,6 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
           return (
             <CInput
               testID={testID + ' input'}
-              accessible={!!accessibilityLabel}
               accessibilityLabel={accessibilityLabel + ' input'}
               style={[styles.input, inputSearchStyle]}
               inputStyle={[inputSearchStyle, font()]}
@@ -470,7 +486,6 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
           <View style={styles.flexShrink}>
             <FlatList
               testID={testID + ' flatlist'}
-              accessible={!!accessibilityLabel}
               accessibilityLabel={accessibilityLabel + ' flatlist'}
               {...flatListProps}
               keyboardShouldPersistTaps="handled"
@@ -571,30 +586,30 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
             >
               <TouchableWithoutFeedback onPress={showOrClose}>
                 <View
-                  style={[
+                  style={StyleSheet.flatten([
                     styles.flex1,
                     isFull && styleContainerVertical,
                     backgroundColor && { backgroundColor: backgroundColor },
                     keyboardStyle,
-                  ]}
+                  ])}
                 >
                   <View
-                    style={[
+                    style={StyleSheet.flatten([
                       styles.wrapTop,
                       {
                         height: topHeight,
                         width: w,
                       },
-                    ]}
+                    ])}
                   >
                     {isTopPosition && (
                       <View
-                        style={[
+                        style={StyleSheet.flatten([
                           { width: w },
                           styles.container,
                           containerStyle,
                           isFull ? styleHorizontal : styleVertical,
-                        ]}
+                        ])}
                       >
                         {_renderListTop()}
                       </View>
@@ -603,12 +618,12 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
                   <View style={styles.flex1}>
                     {!isTopPosition && (
                       <View
-                        style={[
+                        style={StyleSheet.flatten([
                           { width: w },
                           styles.container,
                           containerStyle,
                           isFull ? styleHorizontal : styleVertical,
-                        ]}
+                        ])}
                       >
                         {_renderListBottom()}
                       </View>
@@ -659,7 +674,12 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       });
 
       return (
-        <View style={[styles.rowSelectedItem, inside && styles.flex1]}>
+        <View
+          style={StyleSheet.flatten([
+            styles.rowSelectedItem,
+            inside && styles.flex1,
+          ])}
+        >
           {list.map((e) => {
             if (renderSelectedItem) {
               return (
@@ -690,17 +710,27 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
                   key={_.get(e, labelField)}
                   onPress={() => unSelect(e)}
                 >
-                  <View style={[styles.selectedItem, selectedStyle]}>
+                  <View
+                    style={StyleSheet.flatten([
+                      styles.selectedItem,
+                      selectedStyle,
+                    ])}
+                  >
                     <Text
-                      style={[
+                      style={StyleSheet.flatten([
                         styles.selectedTextLeftItem,
                         selectedTextStyle,
                         font(),
-                      ]}
+                      ])}
                     >
                       {_.get(e, labelField)}
                     </Text>
-                    <Text style={[styles.selectedTextItem, selectedTextStyle]}>
+                    <Text
+                      style={StyleSheet.flatten([
+                        styles.selectedTextItem,
+                        selectedTextStyle,
+                      ])}
+                    >
                       ⓧ
                     </Text>
                   </View>
@@ -714,7 +744,11 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
 
     const _renderInside = () => {
       return (
-        <View style={[styles.mainWrap, style]} ref={ref} onLayout={_measure}>
+        <View
+          style={StyleSheet.flatten([styles.mainWrap, style])}
+          ref={ref}
+          onLayout={_measure}
+        >
           {_renderDropdownInside()}
           {_renderModal()}
         </View>
@@ -734,7 +768,13 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
             {value && value?.length > 0 ? (
               _renderItemSelected(true)
             ) : (
-              <Text style={[styles.textItem, placeholderStyle, font()]}>
+              <Text
+                style={StyleSheet.flatten([
+                  styles.textItem,
+                  placeholderStyle,
+                  font(),
+                ])}
+              >
                 {placeholder}
               </Text>
             )}
@@ -743,7 +783,11 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
             ) : (
               <Image
                 source={ic_down}
-                style={[styles.icon, { tintColor: iconColor }, iconStyle]}
+                style={StyleSheet.flatten([
+                  styles.icon,
+                  { tintColor: iconColor },
+                  iconStyle,
+                ])}
               />
             )}
           </View>
@@ -757,7 +801,11 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
 
     return (
       <>
-        <View style={[styles.mainWrap, style]} ref={ref} onLayout={_measure}>
+        <View
+          style={StyleSheet.flatten([styles.mainWrap, style])}
+          ref={ref}
+          onLayout={_measure}
+        >
           {_renderDropdown()}
           {_renderModal()}
         </View>

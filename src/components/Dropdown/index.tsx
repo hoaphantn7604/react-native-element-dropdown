@@ -19,6 +19,7 @@ import {
   ViewStyle,
   KeyboardEvent,
   I18nManager,
+  StyleSheet,
 } from 'react-native';
 import CInput from '../TextInput';
 import { useDeviceOrientation } from '../../useDeviceOrientation';
@@ -360,7 +361,11 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
             ) : (
               <Image
                 source={ic_down}
-                style={[styles.icon, { tintColor: iconColor }, iconStyle]}
+                style={StyleSheet.flatten([
+                  styles.icon,
+                  { tintColor: iconColor },
+                  iconStyle,
+                ])}
               />
             )}
           </View>
@@ -385,18 +390,24 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
             onPress={() => onSelect(item)}
           >
             <View
-              style={[
+              style={StyleSheet.flatten([
                 itemContainerStyle,
                 selected && {
                   backgroundColor: activeColor,
                 },
-              ]}
+              ])}
             >
               {renderItem ? (
                 renderItem(item, selected)
               ) : (
                 <View style={styles.item}>
-                  <Text style={[styles.textItem, itemTextStyle, font()]}>
+                  <Text
+                    style={StyleSheet.flatten([
+                      styles.textItem,
+                      itemTextStyle,
+                      font(),
+                    ])}
+                  >
                     {_.get(item, labelField)}
                   </Text>
                 </View>
@@ -435,7 +446,6 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
           return (
             <CInput
               testID={testID + ' input'}
-              accessible={!!accessibilityLabel}
               accessibilityLabel={accessibilityLabel + ' input'}
               style={[styles.input, inputSearchStyle]}
               inputStyle={[inputSearchStyle, font()]}
@@ -480,7 +490,6 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
           <View style={styles.flexShrink}>
             <FlatList
               testID={testID + ' flatlist'}
-              accessible={!!accessibilityLabel}
               accessibilityLabel={accessibilityLabel + ' flatlist'}
               {...flatListProps}
               keyboardShouldPersistTaps="handled"
@@ -514,7 +523,6 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
             {renderSearch()}
             <FlatList
               testID={testID + ' flatlist'}
-              accessible={!!accessibilityLabel}
               accessibilityLabel={accessibilityLabel + ' flatlist'}
               {...flatListProps}
               keyboardShouldPersistTaps="handled"
@@ -590,30 +598,30 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
             >
               <TouchableWithoutFeedback onPress={showOrClose}>
                 <View
-                  style={[
+                  style={StyleSheet.flatten([
                     styles.flex1,
                     isFull && styleContainerVertical,
                     backgroundColor && { backgroundColor: backgroundColor },
                     keyboardStyle,
-                  ]}
+                  ])}
                 >
                   <View
-                    style={[
+                    style={StyleSheet.flatten([
                       styles.wrapTop,
                       {
                         height: topHeight,
                         width: w,
                       },
-                    ]}
+                    ])}
                   >
                     {isTopPosition && (
                       <View
-                        style={[
+                        style={StyleSheet.flatten([
                           { width: w },
                           styles.container,
                           containerStyle,
                           isFull ? styleHorizontal : styleVertical,
-                        ]}
+                        ])}
                       >
                         {_renderListTop()}
                       </View>
@@ -622,12 +630,12 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
                   <View style={styles.flex1}>
                     {!isTopPosition && (
                       <View
-                        style={[
+                        style={StyleSheet.flatten([
                           { width: w },
                           styles.container,
                           containerStyle,
                           isFull ? styleHorizontal : styleVertical,
-                        ]}
+                        ])}
                       >
                         {_renderListBottom()}
                       </View>
@@ -663,7 +671,11 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
     ]);
 
     return (
-      <View style={[styles.mainWrap, style]} ref={ref} onLayout={_measure}>
+      <View
+        style={StyleSheet.flatten([styles.mainWrap, style])}
+        ref={ref}
+        onLayout={_measure}
+      >
         {_renderDropdown()}
         {_renderModal()}
       </View>

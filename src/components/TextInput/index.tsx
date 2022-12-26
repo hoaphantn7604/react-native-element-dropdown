@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   TouchableWithoutFeedback,
+  StyleSheet,
 } from 'react-native';
 import type { CTextInput } from './model';
 import { styles } from './styles';
@@ -56,7 +57,10 @@ const TextInputComponent: CTextInput = (props) => {
       if (text.length > 0) {
         return (
           <TouchableOpacity onPress={() => onChange('')}>
-            <Image source={ic_close} style={[styles.icon, iconStyle]} />
+            <Image
+              source={ic_close}
+              style={StyleSheet.flatten([styles.icon, iconStyle])}
+            />
           </TouchableOpacity>
         );
       }
@@ -82,7 +86,7 @@ const TextInputComponent: CTextInput = (props) => {
           {renderLeftIcon?.()}
           <TextInput
             {...props}
-            style={[styles.input, inputStyle, font()]}
+            style={StyleSheet.flatten([styles.input, inputStyle, font()])}
             value={text}
             placeholder={placeholder}
             placeholderTextColor={placeholderTextColor}
