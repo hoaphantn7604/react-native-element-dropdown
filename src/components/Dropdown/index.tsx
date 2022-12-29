@@ -377,6 +377,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       ({ item, index }: { item: any; index: number }) => {
         const isSelected = currentValue && _.get(currentValue, valueField);
         const selected = _.isEqual(_.get(item, valueField), isSelected);
+        _.assign(item, { _index: index });
         return (
           <TouchableHighlight
             key={index.toString()}

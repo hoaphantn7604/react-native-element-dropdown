@@ -373,6 +373,7 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
     const _renderItem = useCallback(
       ({ item, index }: { item: any; index: number }) => {
         const selected = checkSelected(item);
+        _.assign(item, { _index: index });
         return (
           <TouchableHighlight
             key={index.toString()}
