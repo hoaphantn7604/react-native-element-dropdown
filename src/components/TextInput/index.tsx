@@ -85,7 +85,6 @@ const TextInputComponent: CTextInput = (props) => {
         <View style={styles.textInput}>
           {renderLeftIcon?.()}
           <TextInput
-            {...props}
             style={StyleSheet.flatten([styles.input, inputStyle, font()])}
             value={text}
             placeholder={placeholder}
