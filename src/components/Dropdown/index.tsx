@@ -451,7 +451,6 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
               style={[styles.input, inputSearchStyle]}
               inputStyle={[inputSearchStyle, font()]}
               autoCorrect={false}
-              keyboardType={isIOS ? 'default' : 'visible-password'}
               placeholder={searchPlaceholder}
               onChangeText={(e) => {
                 if (onChangeText) {
