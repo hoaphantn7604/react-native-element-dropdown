@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { MultiSelect } from 'react-native-element-dropdown';
 
 const data = [
@@ -14,8 +14,32 @@ const data = [
 ];
 
 const MultiSelectComponent = () => {
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState<string[]>([]);
   const ref = useRef(null);
+
+  const onSelectAll = (isSelectAll = true) => {
+    const selectItem: string[] = [];
+    if (isSelectAll) {
+      data.map((item) => {
+        selectItem.push(item.value);
+      });
+    }
+    setSelected(selectItem);
+  };
+
+  const renderSelectAllIcon = () => {
+    const isSelectAll = selected.length === data.length;
+    return (
+      <TouchableOpacity
+        style={styles.wrapSelectAll}
+        onPress={() => onSelectAll(!isSelectAll)}
+      >
+        <Text style={styles.txtSelectAll}>
+          {isSelectAll ? `UnSelect All` : 'Select All'}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -32,13 +56,14 @@ const MultiSelectComponent = () => {
         data={data}
         labelField="label"
         valueField="value"
-        placeholder="Select item"
+        placeholder="Multiselect All"
         searchPlaceholder="Search..."
         value={selected}
         onChange={(item) => {
           setSelected(item);
         }}
         selectedStyle={styles.selectedStyle}
+        flatListProps={{ ListHeaderComponent: renderSelectAllIcon }}
       />
     </View>
   );
@@ -72,5 +97,13 @@ const styles = StyleSheet.create({
   },
   selectedStyle: {
     borderRadius: 12,
+  },
+  wrapSelectAll: {
+    alignItems: 'flex-end',
+    marginHorizontal: 16,
+    marginVertical: 8,
+  },
+  txtSelectAll: {
+    color: 'blue',
   },
 });

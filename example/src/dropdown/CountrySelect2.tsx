@@ -41,7 +41,7 @@ const local_data = [
 ];
 
 const SelectCountryScreen = () => {
-  const [country, setCountry] = useState('1');
+  const [country, setCountry] = useState();
 
   return (
     <SelectCountry
@@ -57,7 +57,7 @@ const SelectCountryScreen = () => {
       valueField="value"
       labelField="lable"
       imageField="image"
-      placeholder="Select country"
+      placeholder="Select country 2"
       searchPlaceholder="Search..."
       onChange={(e) => {
         setCountry(e.value);
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   dropdown: {
     margin: 16,
     height: 50,
-    width: 150,
+    width: 160,
     backgroundColor: '#EEEEEE',
     borderRadius: 22,
     paddingHorizontal: 8,

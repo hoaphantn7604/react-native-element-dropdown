@@ -36,7 +36,7 @@ const MultiSelectComponent = () => {
         data={data}
         labelField="label"
         valueField="value"
-        placeholder="Select item"
+        placeholder="Multiselect Confirm"
         value={selected}
         search
         searchPlaceholder="Search..."

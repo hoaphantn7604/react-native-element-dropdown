@@ -81,6 +81,7 @@ const DropdownComponent = () => {
       value={value}
       labelField="name"
       valueField="url"
+      placeholder="Lazy Load Dropdown"
       search
       maxHeight={250}
       searchPlaceholder="Search..."

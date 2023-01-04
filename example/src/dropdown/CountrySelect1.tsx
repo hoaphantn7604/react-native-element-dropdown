@@ -41,7 +41,7 @@ const local_data = [
 ];
 
 const SelectCountryScreen = () => {
-  const [country, setCountry] = useState('1');
+  const [country, setCountry] = useState();
 
   return (
     <SelectCountry
@@ -59,7 +59,7 @@ const SelectCountryScreen = () => {
       valueField="value"
       labelField="lable"
       imageField="image"
-      placeholder="Select country"
+      placeholder="Select country 1"
       searchPlaceholder="Search..."
       onChange={(e) => {
         setCountry(e.value);

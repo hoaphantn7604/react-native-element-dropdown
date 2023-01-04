@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import DropdownExample1 from './dropdown/example1';
-import DropdownExample2 from './dropdown/example2';
-import DropdownWithConfirm from './dropdown/example3';
-import CountrySelect1 from './dropdown/example4';
-import CountrySelect2 from './dropdown/example5';
-import MultiSelect1 from './dropdown/example6';
-import MultiSelectWithConfirm from './dropdown/example7';
-import DropdownLazyLoad from './dropdown/example8';
+import DropdownExample1 from './dropdown/Dropdown1';
+import DropdownExample2 from './dropdown/Dropdown2';
+import DropdownWithConfirm from './dropdown/DropdownWithConfirm';
+import CountrySelect1 from './dropdown/CountrySelect1';
+import CountrySelect2 from './dropdown/CountrySelect2';
+import MultiSelectAll from './dropdown/MultiSelectAll';
+import MultiSelectWithConfirm from './dropdown/MultiSelectWithConfirm';
+import DropdownLazyLoad from './dropdown/DropdownLazyLoad';
 
 const DropdownScreen = (_props: any) => {
   return (
@@ -16,11 +16,11 @@ const DropdownScreen = (_props: any) => {
         <DropdownExample1 />
         <DropdownExample2 />
         <DropdownWithConfirm />
+        <DropdownLazyLoad />
         <CountrySelect1 />
         <CountrySelect2 />
-        <MultiSelect1 />
+        <MultiSelectAll />
         <MultiSelectWithConfirm />
-        <DropdownLazyLoad />
       </ScrollView>
     </View>
   );
