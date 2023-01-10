@@ -484,6 +484,11 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       testID,
     ]);
 
+    const keyExtractor =
+      (forList: string) =>
+      ({ item }: any, index: number) =>
+        `${forList}_${item.value}_${index}_`;
+
     const _renderListTop = useCallback(() => {
       return (
         <TouchableWithoutFeedback>
@@ -498,7 +503,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
               data={listData}
               inverted
               renderItem={_renderItem}
-              keyExtractor={(_item, index) => index.toString()}
+              keyExtractor={keyExtractor('toplist')}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
             {renderSearch()}
@@ -530,7 +535,7 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
               onScrollToIndexFailed={scrollIndex}
               data={listData}
               renderItem={_renderItem}
-              keyExtractor={(_item, index) => index.toString()}
+              keyExtractor={keyExtractor('bottomlist')}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
           </View>
