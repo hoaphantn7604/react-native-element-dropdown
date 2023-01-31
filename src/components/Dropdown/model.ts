@@ -12,7 +12,7 @@ export type IDropdownRef = {
   close: () => void;
 };
 
-export type DropdownProps = {
+export interface DropdownProps<T> {
   testID?: string;
   itemTestIDField?: string;
   style?: StyleProp<ViewStyle>;
@@ -28,8 +28,8 @@ export type DropdownProps = {
   fontFamily?: string;
   iconColor?: string;
   activeColor?: string;
-  data: any[];
-  value?: any | null;
+  data: T[];
+  value?: T | string | null | undefined;
   placeholder?: string;
   labelField: string;
   valueField: string;
@@ -46,13 +46,10 @@ export type DropdownProps = {
   confirmSelectItem?: boolean;
   accessibilityLabel?: string;
   itemAccessibilityLabelField?: string;
-  onChange: (item: any) => void;
+  onChange: (item: T) => void;
   renderLeftIcon?: () => JSX.Element | null | undefined;
   renderRightIcon?: () => JSX.Element | null | undefined;
-  renderItem?: (
-    item: any,
-    selected?: boolean
-  ) => JSX.Element | null | undefined;
+  renderItem?: (item: T, selected?: boolean) => JSX.Element | null | undefined;
   renderInputSearch?: (
     onSearch: (text: string) => void
   ) => JSX.Element | null | undefined;
@@ -60,5 +57,5 @@ export type DropdownProps = {
   onBlur?: () => void;
   searchQuery?: (keyword: string, labelValue: string) => boolean;
   onChangeText?: (search: string) => void;
-  onConfirmSelectItem?: (item: any) => void;
-};
+  onConfirmSelectItem?: (item: T) => void;
+}

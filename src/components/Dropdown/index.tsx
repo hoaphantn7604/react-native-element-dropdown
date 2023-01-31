@@ -1,4 +1,7 @@
+import _ from 'lodash';
 import React, {
+  JSXElementConstructor,
+  ReactElement,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -9,44 +12,37 @@ import React, {
 import {
   Dimensions,
   FlatList,
+  I18nManager,
   Image,
   Keyboard,
+  KeyboardEvent,
   Modal,
+  StyleSheet,
   Text,
-  TouchableWithoutFeedback,
   TouchableHighlight,
+  TouchableWithoutFeedback,
   View,
   ViewStyle,
-  KeyboardEvent,
-  I18nManager,
-  StyleSheet,
 } from 'react-native';
-import CInput from '../TextInput';
-import { useDeviceOrientation } from '../../useDeviceOrientation';
 import { useDetectDevice } from '../../toolkits';
-import { styles } from './styles';
+import { useDeviceOrientation } from '../../useDeviceOrientation';
+import CInput from '../TextInput';
 import type { DropdownProps } from './model';
-import _ from 'lodash';
+import { styles } from './styles';
 
 const { isTablet, isIOS } = useDetectDevice;
 const ic_down = require('../../assets/down.png');
 
-const defaultProps = {
-  placeholder: 'Select item',
-  activeColor: '#F6F7F8',
-  data: [],
-  style: {},
-  selectedTextProps: {},
-};
-
-const DropdownComponent = React.forwardRef<any, DropdownProps>(
-  (props, currentRef) => {
+const DropdownComponent: <T>(
+  props: DropdownProps<T>
+) => ReactElement<any, string | JSXElementConstructor<any>> | null =
+  React.forwardRef((props, currentRef) => {
     const orientation = useDeviceOrientation();
     const {
       testID,
       itemTestIDField,
       onChange,
-      style,
+      style = {},
       containerStyle,
       placeholderStyle,
       selectedTextStyle,
@@ -54,16 +50,16 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
       itemTextStyle,
       inputSearchStyle,
       iconStyle,
-      selectedTextProps,
-      data,
+      selectedTextProps = {},
+      data = [],
       labelField,
       valueField,
       value,
-      activeColor,
+      activeColor = '#F6F7F8',
       fontFamily,
       iconColor = 'gray',
       searchPlaceholder,
-      placeholder,
+      placeholder = 'Select item',
       search = false,
       maxHeight = 340,
       disable = false,
@@ -680,9 +676,6 @@ const DropdownComponent = React.forwardRef<any, DropdownProps>(
         {_renderModal()}
       </View>
     );
-  }
-);
-
-DropdownComponent.defaultProps = defaultProps;
+  });
 
 export default DropdownComponent;

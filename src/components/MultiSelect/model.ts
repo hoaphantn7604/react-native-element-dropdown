@@ -6,12 +6,12 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-export type IMultiSelectRef = {
+export interface IMultiSelectRef {
   open: () => void;
   close: () => void;
-};
+}
 
-export type MultiSelectProps = {
+export interface MultiSelectProps<T> {
   testID?: string;
   itemTestIDField?: string;
   style?: StyleProp<ViewStyle>;
@@ -28,8 +28,8 @@ export type MultiSelectProps = {
   fontFamily?: string;
   iconColor?: string;
   activeColor?: string;
-  data: any[];
-  value?: any[] | null;
+  data: T[];
+  value?: string[] | null | undefined;
   placeholder?: string;
   labelField: string;
   valueField: string;
@@ -49,16 +49,13 @@ export type MultiSelectProps = {
   confirmUnSelectItem?: boolean;
   accessibilityLabel?: string;
   itemAccessibilityLabelField?: string;
-  onChange: (item: any) => void;
+  onChange: (value: string[]) => void;
   renderLeftIcon?: () => JSX.Element | null | undefined;
   renderRightIcon?: () => JSX.Element | null | undefined;
-  renderItem?: (
-    item: any,
-    selected?: boolean
-  ) => JSX.Element | null | undefined;
+  renderItem?: (item: T, selected?: boolean) => JSX.Element | null | undefined;
   renderSelectedItem?: (
-    item: any,
-    unSelect?: (item: any) => void
+    item: T,
+    unSelect?: (item: T) => void
   ) => JSX.Element | null | undefined;
   renderInputSearch?: (
     onSearch: (text: string) => void
@@ -68,4 +65,4 @@ export type MultiSelectProps = {
   searchQuery?: (keyword: string, labelValue: string) => boolean;
   onChangeText?: (search: string) => void;
   onConfirmSelectItem?: (item: any) => void;
-};
+}

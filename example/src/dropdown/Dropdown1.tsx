@@ -15,7 +15,7 @@ const data = [
 ];
 
 const DropdownComponent = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string>();
   const [isFocus, setIsFocus] = useState(false);
 
   const renderLabel = () => {

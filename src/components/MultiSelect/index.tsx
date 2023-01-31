@@ -1,4 +1,7 @@
+import _ from 'lodash';
 import React, {
+  JSXElementConstructor,
+  ReactElement,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -9,45 +12,39 @@ import React, {
 import {
   Dimensions,
   FlatList,
+  I18nManager,
   Image,
   Keyboard,
+  KeyboardEvent,
   Modal,
+  StyleSheet,
   Text,
-  TouchableWithoutFeedback,
   TouchableHighlight,
+  TouchableWithoutFeedback,
   View,
   ViewStyle,
-  KeyboardEvent,
-  I18nManager,
-  StyleSheet,
 } from 'react-native';
-import CInput from '../TextInput';
-import { useDeviceOrientation } from '../../useDeviceOrientation';
 import { useDetectDevice } from '../../toolkits';
-import { styles } from './styles';
+import { useDeviceOrientation } from '../../useDeviceOrientation';
+import CInput from '../TextInput';
 import type { MultiSelectProps } from './model';
-import _ from 'lodash';
+import { styles } from './styles';
 
 const { isTablet, isIOS } = useDetectDevice;
 const ic_down = require('../../assets/down.png');
 
-const defaultProps = {
-  placeholder: 'Select item',
-  activeColor: '#F6F7F8',
-  data: [],
-  style: {},
-};
-
-const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
-  (props, currentRef) => {
+const MultiSelectComponent: <T>(
+  props: MultiSelectProps<T>
+) => ReactElement<any, string | JSXElementConstructor<any>> | null =
+  React.forwardRef((props, currentRef) => {
     const orientation = useDeviceOrientation();
     const {
       testID,
       itemTestIDField,
       onChange,
-      data,
+      data = [],
       value,
-      style,
+      style = {},
       labelField,
       valueField,
       selectedStyle,
@@ -55,14 +52,14 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
       itemContainerStyle,
       itemTextStyle,
       iconStyle,
-      activeColor,
+      activeColor = '#F6F7F8',
       containerStyle,
       fontFamily,
       placeholderStyle,
       iconColor = 'gray',
       inputSearchStyle,
       searchPlaceholder,
-      placeholder,
+      placeholder = 'Select item',
       search = false,
       maxHeight = 340,
       maxSelect,
@@ -814,9 +811,6 @@ const MultiSelectComponent = React.forwardRef<any, MultiSelectProps>(
           _renderItemSelected(false)}
       </>
     );
-  }
-);
-
-MultiSelectComponent.defaultProps = defaultProps;
+  });
 
 export default MultiSelectComponent;
