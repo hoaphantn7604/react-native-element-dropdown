@@ -52,8 +52,8 @@ export interface DropdownProps<T> {
   accessibilityLabel?: string;
   itemAccessibilityLabelField?: string;
   onChange: (item: T) => void;
-  renderLeftIcon?: () => JSX.Element | null | undefined;
-  renderRightIcon?: () => JSX.Element | null | undefined;
+  renderLeftIcon?: (visible?: boolean) => JSX.Element | null | undefined;
+  renderRightIcon?: (visible?: boolean) => JSX.Element | null | undefined;
   renderItem?: (item: T, selected?: boolean) => JSX.Element | null | undefined;
   renderInputSearch?: (
     onSearch: (text: string) => void

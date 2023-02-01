@@ -339,7 +339,7 @@ const DropdownComponent: <T>(
           onPress={showOrClose}
         >
           <View style={styles.dropdown}>
-            {renderLeftIcon?.()}
+            {renderLeftIcon?.(visible)}
             <Text
               style={[
                 styles.textItem,
@@ -353,7 +353,7 @@ const DropdownComponent: <T>(
                 : placeholder}
             </Text>
             {renderRightIcon ? (
-              renderRightIcon()
+              renderRightIcon(visible)
             ) : (
               <Image
                 source={ic_down}

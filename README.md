@@ -56,8 +56,8 @@ or
 | dropdownPosition   | 'auto' or 'top' or 'bottom'                     | No        | Dropdown list position. Default is 'auto'                           |
 | autoScroll         | Boolean                                         | No        | Auto scroll to index item selected, default is true                 |
 | showsVerticalScrollIndicator | Boolean                               | No        | When true, shows a vertical scroll indicator, default is true       |
-| renderLeftIcon     | () => JSX.Element                               | No        | Customize left icon for dropdown                                    |
-| renderRightIcon    | () => JSX.Element                               | No        | Customize right icon for dropdown                                   |
+| renderLeftIcon     | (visible?: boolean) => JSX.Element              | No        | Customize left icon for dropdown                                    |
+| renderRightIcon    | (visible?: boolean) => JSX.Element              | No        | Customize right icon for dropdown                                   |
 | renderItem         | (item: object, selected: Boolean) => JSX.Element| No        | Takes an item from data and renders it into the list                |
 | flatListProps      | FlatListProps                                   | No        | Customize FlastList element                                         |
 | onFocus            | () => void                                      | No        | Callback that is called when the dropdown is focused                |
@@ -111,8 +111,8 @@ or
 | disable            | Boolean                                              | No        | Specifies the disabled state of the Dropdown                        |
 | dropdownPosition   | 'auto' or 'top' or 'bottom'                          | No        | Dropdown list position. Default is 'auto'                           |
 | showsVerticalScrollIndicator | Boolean                                    | No        | When true, shows a vertical scroll indicator, default is true       |
-| renderLeftIcon     | () => JSX.Element                                    | No        | Customize left icon for dropdown                                    |
-| renderRightIcon    | () => JSX.Element                                    | No        | Customize right icon for dropdown                                   |
+| renderLeftIcon     | (visible?: boolean) => JSX.Element                   | No        | Customize left icon for dropdown                                    |
+| renderRightIcon    | (visible?: boolean) => JSX.Element                   | No        | Customize right icon for dropdown                                   |
 | renderItem         | (item: object, selected: Boolean) => JSX.Element     | No        | Takes an item from data and renders it into the list                |
 | flatListProps      | FlatListProps                                        | No        | Customize FlastList element                                         |
 | onFocus            | () => void                                           | No        | Callback that is called when the dropdown is focused                |
