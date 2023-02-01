@@ -13,6 +13,11 @@ export type IDropdownRef = {
 };
 
 export interface DropdownProps<T> {
+  ref?:
+    | React.RefObject<IDropdownRef>
+    | React.MutableRefObject<IDropdownRef>
+    | null
+    | undefined;
   testID?: string;
   itemTestIDField?: string;
   style?: StyleProp<ViewStyle>;

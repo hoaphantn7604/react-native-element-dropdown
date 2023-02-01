@@ -12,6 +12,11 @@ export interface IMultiSelectRef {
 }
 
 export interface MultiSelectProps<T> {
+  ref?:
+    | React.RefObject<IMultiSelectRef>
+    | React.MutableRefObject<IMultiSelectRef>
+    | null
+    | undefined;
   testID?: string;
   itemTestIDField?: string;
   style?: StyleProp<ViewStyle>;
