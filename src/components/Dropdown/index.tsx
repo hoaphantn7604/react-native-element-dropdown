@@ -127,6 +127,11 @@ const DropdownComponent: <T>(
         if (onFocus) {
           onFocus();
         }
+
+        if (searchText.length > 0) {
+          onSearch(searchText);
+        }
+        scrollIndex();
       }
     };
 
@@ -265,9 +270,13 @@ const DropdownComponent: <T>(
             onBlur();
           }
         }
+        if (searchText.length > 0) {
+          onSearch(searchText);
+        }
+        scrollIndex();
       }
-      scrollIndex();
-    }, [_measure, data, disable, onBlur, onFocus, scrollIndex, visible]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [disable, scrollIndex, _measure, visible, data, onFocus, onBlur]);
 
     const onSearch = useCallback(
       (text: string) => {
@@ -446,6 +455,7 @@ const DropdownComponent: <T>(
               accessibilityLabel={accessibilityLabel + ' input'}
               style={[styles.input, inputSearchStyle]}
               inputStyle={[inputSearchStyle, font()]}
+              value={searchText}
               autoCorrect={false}
               placeholder={searchPlaceholder}
               onChangeText={(e) => {
@@ -478,6 +488,7 @@ const DropdownComponent: <T>(
       search,
       searchPlaceholder,
       testID,
+      searchText,
     ]);
 
     const _renderListTop = useCallback(() => {

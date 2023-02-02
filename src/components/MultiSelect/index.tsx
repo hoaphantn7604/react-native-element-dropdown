@@ -128,6 +128,10 @@ const MultiSelectComponent: <T>(
         if (onFocus) {
           onFocus();
         }
+
+        if (searchText.length > 0) {
+          onSearch(searchText);
+        }
       }
     };
 
@@ -234,7 +238,12 @@ const MultiSelectComponent: <T>(
             onBlur();
           }
         }
+
+        if (searchText.length > 0) {
+          onSearch(searchText);
+        }
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [_measure, data, disable, onBlur, onFocus, visible]);
 
     const onSearch = useCallback(
