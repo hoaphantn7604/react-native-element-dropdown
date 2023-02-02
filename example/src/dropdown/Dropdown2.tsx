@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
-import { Dropdown } from 'react-native-element-dropdown';
+import React, { useRef, useState } from 'react';
+import { Button, StyleSheet, View } from 'react-native';
+import { Dropdown, IDropdownRef } from 'react-native-element-dropdown';
 
 const data = [
   { label: 'Item 1', value: '1' },
@@ -14,28 +14,39 @@ const data = [
 ];
 
 const DropdownComponent = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string>();
+  const ref = useRef<IDropdownRef>(null);
 
   return (
-    <Dropdown
-      statusBarIsTranslucent={true}
-      style={styles.dropdown}
-      placeholderStyle={styles.placeholderStyle}
-      selectedTextStyle={styles.selectedTextStyle}
-      inputSearchStyle={styles.inputSearchStyle}
-      iconStyle={styles.iconStyle}
-      data={data}
-      search
-      maxHeight={300}
-      labelField="label"
-      valueField="value"
-      placeholder="Dropdown 2"
-      searchPlaceholder="Search..."
-      value={value}
-      onChange={(item) => {
-        setValue(item.value);
-      }}
-    />
+    <View>
+      <Dropdown
+        ref={ref}
+        statusBarIsTranslucent={true}
+        style={styles.dropdown}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        inputSearchStyle={styles.inputSearchStyle}
+        iconStyle={styles.iconStyle}
+        data={data}
+        search
+        maxHeight={300}
+        labelField="label"
+        valueField="value"
+        placeholder="Dropdown 2"
+        searchPlaceholder="Search..."
+        value={value}
+        onChange={(item) => {
+          setValue(item.value);
+        }}
+        onChangeText={() => {}} // Keep search keyword
+      />
+      <Button
+        title="Title"
+        onPress={() => {
+          ref.current?.open();
+        }}
+      />
+    </View>
   );
 };
 

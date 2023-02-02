@@ -27,7 +27,7 @@ import {
 import { useDetectDevice } from '../../toolkits';
 import { useDeviceOrientation } from '../../useDeviceOrientation';
 import CInput from '../TextInput';
-import type { MultiSelectProps } from './model';
+import { MultiSelectProps } from './model';
 import { styles } from './styles';
 
 const { isTablet, isIOS } = useDetectDevice;

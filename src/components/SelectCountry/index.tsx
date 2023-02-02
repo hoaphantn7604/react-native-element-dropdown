@@ -1,14 +1,20 @@
-import React, { useImperativeHandle, useMemo, useRef } from 'react';
+import React, {
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  ReactElement,
+  JSXElementConstructor,
+} from 'react';
 import { Image, View, Text } from 'react-native';
 import Dropdown from '../Dropdown';
-import type { SelectCountryProps } from './model';
+import { SelectCountryProps } from './model';
 import { styles } from './styles';
 
-const SelectCountryConponent = React.forwardRef<any, SelectCountryProps>(
-  (props, currentRef) => {
+const SelectCountryComponent: <T>(
+  props: SelectCountryProps<T>
+) => ReactElement<any, string | JSXElementConstructor<any>> | null =
+  React.forwardRef((props, currentRef) => {
     const {
-      testID,
-      itemTestIDField,
       data,
       value,
       valueField,
@@ -42,15 +48,13 @@ const SelectCountryConponent = React.forwardRef<any, SelectCountryProps>(
       );
     };
 
-    const selectItem = useMemo(() => {
-      const index = data.findIndex((e) => e[valueField] === value);
+    const selectItem: any = useMemo(() => {
+      const index = data.findIndex((e: any) => e[valueField] === value);
       return data[index];
     }, [data, valueField, value]);
 
     return (
       <Dropdown
-        testID={testID}
-        itemTestIDField={itemTestIDField}
         ref={ref}
         {...props}
         renderItem={_renderItem}
@@ -68,7 +72,6 @@ const SelectCountryConponent = React.forwardRef<any, SelectCountryProps>(
         }}
       />
     );
-  }
-);
+  });
 
-export default SelectCountryConponent;
+export default SelectCountryComponent;

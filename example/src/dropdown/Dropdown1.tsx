@@ -53,7 +53,6 @@ const DropdownComponent = () => {
           setValue(item.value);
           setIsFocus(false);
         }}
-        onChangeText={() => {}} // Keep search keyword
       />
     </View>
   );
