@@ -881,13 +881,5 @@ or
   });
 ```
 
-## Donate ✨
-
-Support maintainers with a donation and help them continue with activities.
-
-<br><p><a href="https://www.buymeacoffee.com/hoaphantn"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="fateh999" /></a></p><br><br><br>
-
-
-### Please Subscribe My Channel! ✨
 [<img src="https://github.com/hoaphantn7604/file-upload/blob/master/document/profile/hoa_phan_dev_banner.png">](https://www.youtube.com/channel/UClwDARgTpIwOOugYtgEW1Uw?sub_confirmation=1)
 
