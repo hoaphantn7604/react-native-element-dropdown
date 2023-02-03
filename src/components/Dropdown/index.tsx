@@ -555,16 +555,25 @@ const DropdownComponent: <T>(
     ]);
 
     const _renderModal = useCallback(() => {
+      const getBottomThreshold = () => {
+        const { height } = position;
+        if (isIOS) {
+          return keyboardHeight + height + maxHeight;
+        } else if (search) {
+          return 310;
+        } else {
+          return 300;
+        }
+      };
+
       if (visible && position) {
         const { isFull, w, top, bottom, left, height } = position;
         if (w && top && bottom) {
           const styleVertical: ViewStyle = { left: left, maxHeight: maxHeight };
           const isTopPosition =
             dropdownPosition === 'auto'
-              ? bottom < (isIOS ? 200 : search ? 310 : 300)
-              : dropdownPosition === 'top'
-              ? true
-              : false;
+              ? bottom < getBottomThreshold()
+              : dropdownPosition === 'top';
           let topHeight = isTopPosition ? top - height : top;
 
           let keyboardStyle: ViewStyle = {};
