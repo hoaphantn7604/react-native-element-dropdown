@@ -41,7 +41,7 @@ const DropdownComponent = () => {
         onChangeText={() => {}} // Keep search keyword
       />
       <Button
-        title="Title"
+        title="Open Dropdown2"
         onPress={() => {
           ref.current?.open();
         }}

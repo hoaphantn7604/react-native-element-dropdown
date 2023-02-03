@@ -505,7 +505,7 @@ const DropdownComponent: <T>(
               data={listData}
               inverted
               renderItem={_renderItem}
-              keyExtractor={(_item, index) => index.toString()}
+              keyExtractor={(item, _index) => item[valueField].toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
             {renderSearch()}
@@ -521,6 +521,7 @@ const DropdownComponent: <T>(
       scrollIndex,
       showsVerticalScrollIndicator,
       testID,
+      valueField,
     ]);
 
     const _renderListBottom = useCallback(() => {
@@ -537,7 +538,7 @@ const DropdownComponent: <T>(
               onScrollToIndexFailed={scrollIndex}
               data={listData}
               renderItem={_renderItem}
-              keyExtractor={(_item, index) => index.toString()}
+              keyExtractor={(item, _index) => item[valueField].toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
           </View>
@@ -552,6 +553,7 @@ const DropdownComponent: <T>(
       scrollIndex,
       showsVerticalScrollIndicator,
       testID,
+      valueField,
     ]);
 
     const _renderModal = useCallback(() => {
