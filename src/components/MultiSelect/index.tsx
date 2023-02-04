@@ -498,7 +498,7 @@ const MultiSelectComponent: <T>(
               data={listData}
               inverted
               renderItem={_renderItem}
-              keyExtractor={(_item, index) => index.toString()}
+              keyExtractor={(item, _index) => item[valueField].toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
             {renderSearch()}
@@ -513,6 +513,7 @@ const MultiSelectComponent: <T>(
       renderSearch,
       showsVerticalScrollIndicator,
       testID,
+      valueField,
     ]);
 
     const _renderListBottom = useCallback(() => {
@@ -527,7 +528,7 @@ const MultiSelectComponent: <T>(
               keyboardShouldPersistTaps="handled"
               data={listData}
               renderItem={_renderItem}
-              keyExtractor={(_item, index) => index.toString()}
+              keyExtractor={(item, _index) => item[valueField].toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
           </View>
@@ -540,6 +541,7 @@ const MultiSelectComponent: <T>(
       renderSearch,
       showsVerticalScrollIndicator,
       testID,
+      valueField,
     ]);
 
     const _renderModal = useCallback(() => {

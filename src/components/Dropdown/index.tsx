@@ -505,7 +505,7 @@ const DropdownComponent: <T>(
               data={listData}
               inverted={isTopPosition}
               renderItem={_renderItem}
-              keyExtractor={(_item, index) => index.toString()}
+              keyExtractor={(item, _index) => item[valueField].toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
           );
@@ -532,6 +532,7 @@ const DropdownComponent: <T>(
         testID,
       ]
     );
+
 
     const _renderModal = useCallback(() => {
       const getBottomThreshold = () => {
