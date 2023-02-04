@@ -530,13 +530,12 @@ const DropdownComponent: <T>(
         scrollIndex,
         showsVerticalScrollIndicator,
         testID,
+        valueField,
       ]
     );
 
-
     const _renderModal = useCallback(() => {
       const getBottomThreshold = () => {
-        const { height } = position;
         if (isIOS) {
           return keyboardHeight + maxHeight * 0.5;
         } else if (search) {
