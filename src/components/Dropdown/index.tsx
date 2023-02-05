@@ -73,6 +73,7 @@ const DropdownComponent: <T>(
       autoScroll = true,
       showsVerticalScrollIndicator = true,
       dropdownPosition = 'auto',
+      invertedList = true,
       flatListProps,
       searchQuery,
       statusBarIsTranslucent,
@@ -503,7 +504,7 @@ const DropdownComponent: <T>(
               ref={refList}
               onScrollToIndexFailed={scrollIndex}
               data={listData}
-              inverted
+              inverted={invertedList}
               renderItem={_renderItem}
               keyExtractor={(item, _index) => item[valueField].toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}

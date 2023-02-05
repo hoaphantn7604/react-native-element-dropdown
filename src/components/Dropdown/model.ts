@@ -44,6 +44,7 @@ export interface DropdownProps<T> {
   autoScroll?: boolean;
   showsVerticalScrollIndicator?: boolean;
   dropdownPosition?: 'auto' | 'top' | 'bottom';
+  invertedList?: boolean;
   flatListProps?: Omit<FlatListProps<any>, 'renderItem' | 'data'>;
   keyboardAvoiding?: boolean;
   statusBarIsTranslucent?: boolean;
