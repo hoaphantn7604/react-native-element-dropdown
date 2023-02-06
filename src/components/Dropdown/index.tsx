@@ -30,7 +30,7 @@ import CInput from '../TextInput';
 import { DropdownProps } from './model';
 import { styles } from './styles';
 
-const { isTablet, isIOS } = useDetectDevice;
+const { isTablet } = useDetectDevice;
 const ic_down = require('../../assets/down.png');
 
 const DropdownComponent: <T>(
@@ -90,7 +90,6 @@ const DropdownComponent: <T>(
     const [currentValue, setCurrentValue] = useState<any>(null);
     const [listData, setListData] = useState<any[]>(data);
     const [position, setPosition] = useState<any>();
-    const [focus, setFocus] = useState<boolean>(false);
     const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
     const [searchText, setSearchText] = useState('');
 
@@ -257,6 +256,10 @@ const DropdownComponent: <T>(
 
     const showOrClose = useCallback(() => {
       if (!disable) {
+        if (keyboardHeight > 0 && visible) {
+          return Keyboard.dismiss();
+        }
+
         _measure();
         setVisible(!visible);
         setListData(data);
@@ -276,7 +279,17 @@ const DropdownComponent: <T>(
         scrollIndex();
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [disable, scrollIndex, _measure, visible, data, onFocus, onBlur]);
+    }, [
+      disable,
+      keyboardHeight,
+      visible,
+      _measure,
+      data,
+      searchText,
+      scrollIndex,
+      onFocus,
+      onBlur,
+    ]);
 
     const onSearch = useCallback(
       (text: string) => {
@@ -467,10 +480,6 @@ const DropdownComponent: <T>(
               }}
               placeholderTextColor="gray"
               iconStyle={[{ tintColor: iconColor }, iconStyle]}
-              onFocus={() => setFocus(true)}
-              onBlur={() => {
-                setFocus(false);
-              }}
             />
           );
         }
@@ -491,10 +500,10 @@ const DropdownComponent: <T>(
       searchText,
     ]);
 
-    const _renderListTop = useCallback(() => {
-      return (
-        <TouchableWithoutFeedback>
-          <View style={styles.flexShrink}>
+    const _renderList = useCallback(
+      (isTopPosition: boolean) => {
+        const _renderListHelper = () => {
+          return (
             <FlatList
               testID={testID + ' flatlist'}
               accessibilityLabel={accessibilityLabel + ' flatlist'}
@@ -503,98 +512,57 @@ const DropdownComponent: <T>(
               ref={refList}
               onScrollToIndexFailed={scrollIndex}
               data={listData}
-              inverted
+              inverted={isTopPosition}
               renderItem={_renderItem}
               keyExtractor={(item, _index) => item[valueField].toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
-            {renderSearch()}
-          </View>
-        </TouchableWithoutFeedback>
-      );
-    }, [
-      _renderItem,
-      accessibilityLabel,
-      flatListProps,
-      listData,
-      renderSearch,
-      scrollIndex,
-      showsVerticalScrollIndicator,
-      testID,
-      valueField,
-    ]);
+          );
+        };
 
-    const _renderListBottom = useCallback(() => {
-      return (
-        <TouchableWithoutFeedback>
-          <View style={styles.flexShrink}>
-            {renderSearch()}
-            <FlatList
-              testID={testID + ' flatlist'}
-              accessibilityLabel={accessibilityLabel + ' flatlist'}
-              {...flatListProps}
-              keyboardShouldPersistTaps="handled"
-              ref={refList}
-              onScrollToIndexFailed={scrollIndex}
-              data={listData}
-              renderItem={_renderItem}
-              keyExtractor={(item, _index) => item[valueField].toString()}
-              showsVerticalScrollIndicator={showsVerticalScrollIndicator}
-            />
-          </View>
-        </TouchableWithoutFeedback>
-      );
-    }, [
-      _renderItem,
-      accessibilityLabel,
-      flatListProps,
-      listData,
-      renderSearch,
-      scrollIndex,
-      showsVerticalScrollIndicator,
-      testID,
-      valueField,
-    ]);
+        return (
+          <TouchableWithoutFeedback>
+            <View style={styles.flexShrink}>
+              {isTopPosition && _renderListHelper()}
+              {renderSearch()}
+              {!isTopPosition && _renderListHelper()}
+            </View>
+          </TouchableWithoutFeedback>
+        );
+      },
+      [
+        _renderItem,
+        accessibilityLabel,
+        flatListProps,
+        listData,
+        renderSearch,
+        scrollIndex,
+        showsVerticalScrollIndicator,
+        testID,
+        valueField,
+      ]
+    );
 
     const _renderModal = useCallback(() => {
       if (visible && position) {
         const { isFull, w, top, bottom, left, height } = position;
+
+        const onAutoPosition = () => {
+          return bottom < keyboardHeight + height;
+        };
+
         if (w && top && bottom) {
           const styleVertical: ViewStyle = { left: left, maxHeight: maxHeight };
           const isTopPosition =
             dropdownPosition === 'auto'
-              ? bottom < (isIOS ? 200 : search ? 310 : 300)
-              : dropdownPosition === 'top'
-              ? true
-              : false;
-          let topHeight = isTopPosition ? top - height : top;
+              ? onAutoPosition()
+              : dropdownPosition === 'top';
 
           let keyboardStyle: ViewStyle = {};
 
-          if (keyboardAvoiding) {
-            if (renderInputSearch) {
-              if (keyboardHeight > 0 && bottom < keyboardHeight + height) {
-                if (isTopPosition) {
-                  topHeight = H - keyboardHeight;
-                } else {
-                  keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
-                  topHeight = H - keyboardHeight - 55;
-                }
-              }
-            } else {
-              if (
-                focus &&
-                keyboardHeight > 0 &&
-                bottom < keyboardHeight + height
-              ) {
-                if (isTopPosition) {
-                  topHeight = H - keyboardHeight;
-                } else {
-                  keyboardStyle = { backgroundColor: 'rgba(0,0,0,0.1)' };
-                  topHeight = H - keyboardHeight - 55;
-                }
-              }
-            }
+          let extendHeight = !isTopPosition ? top : bottom + height;
+          if (keyboardAvoiding && isTopPosition) {
+            extendHeight = keyboardHeight;
           }
 
           return (
@@ -616,39 +584,27 @@ const DropdownComponent: <T>(
                 >
                   <View
                     style={StyleSheet.flatten([
-                      styles.wrapTop,
+                      styles.flex1,
                       {
-                        height: topHeight,
                         width: w,
                       },
+                      !isTopPosition
+                        ? { paddingTop: extendHeight }
+                        : {
+                            justifyContent: 'flex-end',
+                            paddingBottom: extendHeight,
+                          },
                     ])}
                   >
-                    {isTopPosition && (
-                      <View
-                        style={StyleSheet.flatten([
-                          { width: w },
-                          styles.container,
-                          containerStyle,
-                          isFull ? styleHorizontal : styleVertical,
-                        ])}
-                      >
-                        {_renderListTop()}
-                      </View>
-                    )}
-                  </View>
-                  <View style={styles.flex1}>
-                    {!isTopPosition && (
-                      <View
-                        style={StyleSheet.flatten([
-                          { width: w },
-                          styles.container,
-                          containerStyle,
-                          isFull ? styleHorizontal : styleVertical,
-                        ])}
-                      >
-                        {_renderListBottom()}
-                      </View>
-                    )}
+                    <View
+                      style={StyleSheet.flatten([
+                        styles.container,
+                        containerStyle,
+                        isFull ? styleHorizontal : styleVertical,
+                      ])}
+                    >
+                      {_renderList(isTopPosition)}
+                    </View>
                   </View>
                 </View>
               </TouchableWithoutFeedback>
@@ -661,9 +617,9 @@ const DropdownComponent: <T>(
     }, [
       visible,
       position,
+      keyboardHeight,
       maxHeight,
       dropdownPosition,
-      search,
       keyboardAvoiding,
       statusBarIsTranslucent,
       showOrClose,
@@ -671,12 +627,7 @@ const DropdownComponent: <T>(
       backgroundColor,
       containerStyle,
       styleHorizontal,
-      _renderListTop,
-      _renderListBottom,
-      renderInputSearch,
-      keyboardHeight,
-      H,
-      focus,
+      _renderList,
     ]);
 
     return (
