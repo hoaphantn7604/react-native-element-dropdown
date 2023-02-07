@@ -41,7 +41,7 @@ const local_data = [
 ];
 
 const SelectCountryScreen = () => {
-  const [country, setCountry] = useState();
+  const [country, setCountry] = useState<string>();
 
   return (
     <SelectCountry

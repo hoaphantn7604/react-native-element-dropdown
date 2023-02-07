@@ -14,7 +14,7 @@ const data = [
 ];
 
 const DropdownComponent = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string>();
   const ref: RefObject<any> = useRef(null);
 
   const renderItem = (item: any) => {

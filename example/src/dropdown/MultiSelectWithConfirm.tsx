@@ -14,7 +14,7 @@ const data = [
 ];
 
 const MultiSelectComponent = () => {
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState<string[]>([]);
 
   const renderItem = (item: any) => {
     return (
