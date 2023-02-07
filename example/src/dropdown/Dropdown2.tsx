@@ -40,12 +40,14 @@ const DropdownComponent = () => {
         }}
         onChangeText={() => {}} // Keep search keyword
       />
-      <Button
-        title="Open Dropdown2"
-        onPress={() => {
-          ref.current?.open();
-        }}
-      />
+      <View style={styles.button}>
+        <Button
+          title="Open Dropdown2"
+          onPress={() => {
+            ref.current?.open();
+          }}
+        />
+      </View>
     </View>
   );
 };
@@ -75,5 +77,8 @@ const styles = StyleSheet.create({
   inputSearchStyle: {
     height: 40,
     fontSize: 16,
+  },
+  button: {
+    marginHorizontal: 16,
   },
 });

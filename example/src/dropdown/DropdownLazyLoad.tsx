@@ -22,7 +22,7 @@ const RenderFooter = ({ isLoading }: { isLoading: boolean }) => {
     return null;
   }
   return (
-    <View style={styles.footerContaier}>
+    <View style={styles.footerContainer}>
       <ActivityIndicator color={'gray'} size={'large'} />
     </View>
   );
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     padding: 16,
     alignItems: 'center',
   },
-  footerContaier: {
+  footerContainer: {
     padding: 16,
     alignItems: 'center',
   },

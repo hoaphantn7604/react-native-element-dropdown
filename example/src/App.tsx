@@ -17,10 +17,10 @@ const DropdownScreen = (_props: any) => {
         <DropdownExample2 />
         <DropdownWithConfirm />
         <DropdownLazyLoad />
+        <CountrySelect1 />
         <CountrySelect2 />
         <MultiSelectAll />
         <MultiSelectWithConfirm />
-        <CountrySelect1 />
       </ScrollView>
     </View>
   );
