@@ -105,9 +105,6 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 16,
   },
-  icon: {
-    marginRight: 5,
-  },
   item: {
     padding: 17,
     flexDirection: 'row',

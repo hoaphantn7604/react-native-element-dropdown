@@ -1,3 +1,5 @@
+[<img src="https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-element-dropdown-demo.png">](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-element-dropdown-demo.png)
+
 ## react-native-element-dropdown
 A React Native dropdown component easy to customize for both iOS and Android.
 
@@ -356,7 +358,7 @@ or
   const DropdownComponent = () => {
     const [value, setValue] = useState(null);
 
-    const renderItem = (item: any) => {
+    const renderItem = item => {
       return (
         <View style={styles.item}>
           <Text style={styles.textItem}>{item.label}</Text>
@@ -556,7 +558,7 @@ or
   const MultiSelectComponent = () => {
     const [selected, setSelected] = useState([]);
 
-    const renderItem = (item: any) => {
+    const renderItem = item => {
       return (
         <View style={styles.item}>
           <Text style={styles.selectedTextStyle}>{item.label}</Text>
@@ -719,9 +721,7 @@ or
     },
   ];
 
-  export interface Props {}
-
-  const SelectCountryScreen: React.FC<Props> = _props => {
+  const SelectCountryScreen = _props => {
     const [country, setCountry] = useState('1');
 
     return (
@@ -824,9 +824,7 @@ or
     },
   ];
 
-  export interface Props {}
-
-  const SelectCountryScreen: React.FC<Props> = _props => {
+  const SelectCountryScreen = _props => {
     const [country, setCountry] = useState('1');
 
     return (

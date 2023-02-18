@@ -72,9 +72,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 8,
   },
-  icon: {
-    marginRight: 5,
-  },
   label: {
     position: 'absolute',
     backgroundColor: 'white',

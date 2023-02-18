@@ -85,9 +85,6 @@ const styles = StyleSheet.create({
 
     elevation: 2,
   },
-  icon: {
-    marginRight: 5,
-  },
   item: {
     padding: 17,
     flexDirection: 'row',

@@ -61,9 +61,6 @@ const styles = StyleSheet.create({
     borderBottomColor: 'gray',
     borderBottomWidth: 0.5,
   },
-  icon: {
-    marginRight: 5,
-  },
   placeholderStyle: {
     fontSize: 16,
   },
