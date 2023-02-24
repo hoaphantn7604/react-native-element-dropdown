@@ -65,6 +65,7 @@ const DropdownComponent: <T>(
       minHeight = 0,
       disable = false,
       keyboardAvoiding = true,
+      inverted = true,
       renderLeftIcon,
       renderRightIcon,
       renderItem,
@@ -503,6 +504,8 @@ const DropdownComponent: <T>(
 
     const _renderList = useCallback(
       (isTopPosition: boolean) => {
+        const isInverted = !inverted ? false : isTopPosition;
+
         const _renderListHelper = () => {
           return (
             <FlatList
@@ -513,7 +516,7 @@ const DropdownComponent: <T>(
               ref={refList}
               onScrollToIndexFailed={scrollIndex}
               data={listData}
-              inverted={isTopPosition}
+              inverted={inverted}
               renderItem={_renderItem}
               keyExtractor={(_item, index) => index.toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
@@ -524,9 +527,9 @@ const DropdownComponent: <T>(
         return (
           <TouchableWithoutFeedback>
             <View style={styles.flexShrink}>
-              {isTopPosition && _renderListHelper()}
+              {isInverted && _renderListHelper()}
               {renderSearch()}
-              {!isTopPosition && _renderListHelper()}
+              {!isInverted && _renderListHelper()}
             </View>
           </TouchableWithoutFeedback>
         );
@@ -536,6 +539,7 @@ const DropdownComponent: <T>(
         accessibilityLabel,
         flatListProps,
         listData,
+        inverted,
         renderSearch,
         scrollIndex,
         showsVerticalScrollIndicator,
@@ -548,7 +552,11 @@ const DropdownComponent: <T>(
         const { isFull, w, top, bottom, left, height } = position;
 
         const onAutoPosition = () => {
-          return bottom < keyboardHeight + height;
+          if (keyboardHeight > 0) {
+            return bottom < keyboardHeight + height;
+          }
+
+          return bottom < (search ? 150 : 100);
         };
 
         if (w && top && bottom) {
@@ -565,7 +573,7 @@ const DropdownComponent: <T>(
           let keyboardStyle: ViewStyle = {};
 
           let extendHeight = !isTopPosition ? top : bottom + height;
-          if (keyboardAvoiding && isTopPosition) {
+          if (keyboardAvoiding && keyboardHeight > 0 && isTopPosition) {
             extendHeight = keyboardHeight;
           }
 
@@ -620,6 +628,7 @@ const DropdownComponent: <T>(
       return null;
     }, [
       visible,
+      search,
       position,
       keyboardHeight,
       maxHeight,

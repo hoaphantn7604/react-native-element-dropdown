@@ -67,6 +67,7 @@ const MultiSelectComponent: <T>(
       disable = false,
       keyboardAvoiding = true,
       inside = false,
+      inverted = true,
       renderItem,
       renderLeftIcon,
       renderRightIcon,
@@ -497,6 +498,8 @@ const MultiSelectComponent: <T>(
 
     const _renderList = useCallback(
       (isTopPosition: boolean) => {
+        const isInverted = !inverted ? false : isTopPosition;
+
         const _renderListHelper = () => {
           return (
             <FlatList
@@ -505,7 +508,7 @@ const MultiSelectComponent: <T>(
               {...flatListProps}
               keyboardShouldPersistTaps="handled"
               data={listData}
-              inverted={isTopPosition}
+              inverted={inverted}
               renderItem={_renderItem}
               keyExtractor={(_item, index) => index.toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
@@ -516,9 +519,9 @@ const MultiSelectComponent: <T>(
         return (
           <TouchableWithoutFeedback>
             <View style={styles.flexShrink}>
-              {isTopPosition && _renderListHelper()}
+              {isInverted && _renderListHelper()}
               {renderSearch()}
-              {!isTopPosition && _renderListHelper()}
+              {!isInverted && _renderListHelper()}
             </View>
           </TouchableWithoutFeedback>
         );
@@ -528,6 +531,7 @@ const MultiSelectComponent: <T>(
         accessibilityLabel,
         flatListProps,
         listData,
+        inverted,
         renderSearch,
         showsVerticalScrollIndicator,
         testID,
@@ -539,7 +543,11 @@ const MultiSelectComponent: <T>(
         const { isFull, w, top, bottom, left, height } = position;
 
         const onAutoPosition = () => {
-          return bottom < keyboardHeight + height;
+          if (keyboardHeight > 0) {
+            return bottom < keyboardHeight + height;
+          }
+
+          return bottom < (search ? 150 : 100);
         };
 
         if (w && top && bottom) {
@@ -556,7 +564,7 @@ const MultiSelectComponent: <T>(
           let keyboardStyle: ViewStyle = {};
 
           let extendHeight = !isTopPosition ? top : bottom + height;
-          if (keyboardAvoiding && isTopPosition) {
+          if (keyboardAvoiding && keyboardHeight > 0 && isTopPosition) {
             extendHeight = keyboardHeight;
           }
 
@@ -611,6 +619,7 @@ const MultiSelectComponent: <T>(
       return null;
     }, [
       visible,
+      search,
       position,
       keyboardHeight,
       maxHeight,

@@ -55,6 +55,7 @@ export interface MultiSelectProps<T> {
   confirmUnSelectItem?: boolean;
   accessibilityLabel?: string;
   itemAccessibilityLabelField?: string;
+  inverted?: boolean;
   onChange: (value: string[]) => void;
   renderLeftIcon?: (visible?: boolean) => JSX.Element | null | undefined;
   renderRightIcon?: (visible?: boolean) => JSX.Element | null | undefined;

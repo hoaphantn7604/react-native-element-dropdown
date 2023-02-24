@@ -80,6 +80,7 @@ const DropdownComponent = () => {
       backgroundColor={'rgba(0,0,0,0.2)'}
       data={data}
       value={value}
+      inverted={false}
       labelField="name"
       valueField="url"
       placeholder="Lazy Load Dropdown"

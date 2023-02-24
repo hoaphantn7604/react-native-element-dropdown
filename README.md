@@ -62,7 +62,8 @@ or
 | renderLeftIcon     | (visible?: boolean) => JSX.Element              | No        | Customize left icon for dropdown                                    |
 | renderRightIcon    | (visible?: boolean) => JSX.Element              | No        | Customize right icon for dropdown                                   |
 | renderItem         | (item: object, selected: Boolean) => JSX.Element| No        | Takes an item from data and renders it into the list                |
-| flatListProps      | FlatListProps                                   | No        | Customize FlastList element                                         |
+| flatListProps      | FlatListProps                                   | No        | Customize FlatList element                                          |
+| inverted           | Boolean                                         | No        | Reverses the direction of scroll on top position mode. Default is true|
 | onFocus            | () => void                                      | No        | Callback that is called when the dropdown is focused                |
 | onBlur             | () => void                                      | No        | Callback that is called when the dropdown is blurred                |
 | keyboardAvoiding   | Boolean                                         | No        | keyboardAvoiding default is true                                    |
@@ -118,7 +119,8 @@ or
 | renderLeftIcon     | (visible?: boolean) => JSX.Element                   | No        | Customize left icon for dropdown                                    |
 | renderRightIcon    | (visible?: boolean) => JSX.Element                   | No        | Customize right icon for dropdown                                   |
 | renderItem         | (item: object, selected: Boolean) => JSX.Element     | No        | Takes an item from data and renders it into the list                |
-| flatListProps      | FlatListProps                                        | No        | Customize FlastList element                                         |
+| flatListProps      | FlatListProps                                        | No        | Customize FlatList element                                          |
+| inverted           | Boolean                                              | No        | Reverses the direction of scroll on top position mode. Default is true|
 | onFocus            | () => void                                           | No        | Callback that is called when the dropdown is focused                |
 | onBlur             | () => void                                           | No        | Callback that is called when the dropdown is blurred                |
 | keyboardAvoiding   | Boolean                                              | No        | keyboardAvoiding default is true                                    |
