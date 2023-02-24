@@ -514,7 +514,7 @@ const DropdownComponent: <T>(
               data={listData}
               inverted={isTopPosition}
               renderItem={_renderItem}
-              keyExtractor={(item, _index) => item[valueField].toString()}
+              keyExtractor={(_item, index) => index.toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
           );
@@ -539,7 +539,6 @@ const DropdownComponent: <T>(
         scrollIndex,
         showsVerticalScrollIndicator,
         testID,
-        valueField,
       ]
     );
 

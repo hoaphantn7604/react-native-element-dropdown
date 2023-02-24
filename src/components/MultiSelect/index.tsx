@@ -506,7 +506,7 @@ const MultiSelectComponent: <T>(
               data={listData}
               inverted={isTopPosition}
               renderItem={_renderItem}
-              keyExtractor={(item, _index) => item[valueField].toString()}
+              keyExtractor={(_item, index) => index.toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
           );
@@ -530,7 +530,6 @@ const MultiSelectComponent: <T>(
         renderSearch,
         showsVerticalScrollIndicator,
         testID,
-        valueField,
       ]
     );
 
