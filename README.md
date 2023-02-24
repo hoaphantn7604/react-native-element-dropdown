@@ -35,20 +35,21 @@ or
 | valueField         | String                                          | Yes       | Extract the primary key from the data item                          |
 | onChange           | (item: object) => void                          | Yes       | Selection callback                                                  |
 | onChangeText       | (search: string) => void                        | Yes       | Callback that is called when the text input's text changes          |
-| value              | Item                                            | No        | Selected value                                                      |
+| value              | Item                                            | No        | Set default value                                                   |
 | placeholder        | String                                          | No        | The string that will be rendered before dropdown has been selected  |
 | placeholderStyle   | TextStyle                                       | No        | Styling for text placeholder                                        |
 | selectedTextStyle  | TextStyle                                       | No        | Styling for selected text                                           |
 | selectedTextProps  | TextProps                                       | No        | Text Props for selected text. Ex: numberOfLines={1}                 |
-| style              | ViewStyle                                       | No        | Styling for container view                                          |
-| containerStyle     | ViewStyle                                       | No        | Styling for container list                                          |
-| maxHeight          | Number                                          | No        | Customize height for container list                                 |
+| style              | ViewStyle                                       | No        | Styling for view container                                          |
+| containerStyle     | ViewStyle                                       | No        | Styling for list container                                          |
+| maxHeight          | Number                                          | No        | Customize max height for list container                             |
+| minHeight          | Number                                          | No        | Customize min height for list container                             |
 | fontFamily         | String                                          | No        | Customize font style                                                |
 | iconStyle          | ImageStyle                                      | No        | Styling for icon                                                    |
 | iconColor          | String                                          | No        | Color of icons                                                      |
 | itemContainerStyle | TextStyle                                       | No        | Styling for item container in list                                  |
 | itemTextStyle      | TextStyle                                       | No        | Styling for text item in list                                       |
-| activeColor        | String                                          | No        | Background color for item selected in container list                |
+| activeColor        | String                                          | No        | Background color for item selected in list container                |
 | search             | Boolean                                         | No        | Show or hide input search                                           |
 | searchQuery        | (keyword: string, labelValue: string) => Boolean| No        | Callback used to filter the list of items                           |
 | inputSearchStyle   | ViewStyle                                       | No        | Styling for input search                                            |
@@ -87,17 +88,18 @@ or
 | valueField         | String                                               | Yes       | Extract the primary key from the data item                          |
 | onChange           | (value[]) => void                                    | Yes       | Selection callback. A array containing the "valueField".            |
 | onChangeText       | (search: string) => void                             | Yes       | Callback that is called when the text input's text changes          |
-| value              | Item[]                                               | No        | Selected value. A array containing the "valueField".                |
+| value              | Item[]                                               | No        | Set default value. A array containing the "valueField".             |
 | placeholder        | String                                               | No        | The string that will be rendered before dropdown has been selected  |
 | placeholderStyle   | TextStyle                                            | No        | Styling for text placeholder                                        |
-| style              | ViewStyle                                            | No        | Styling for container view                                          |
-| containerStyle     | ViewStyle                                            | No        | Styling for container list                                          |
-| maxHeight          | Number                                               | No        | Customize height for container list                                 |
+| style              | ViewStyle                                            | No        | Styling for view container                                          |
+| containerStyle     | ViewStyle                                            | No        | Styling for list container                                          |
+| maxHeight          | Number                                               | No        | Customize max height for list container                             |
+| minHeight          | Number                                               | No        | Customize min height for list container                             |
 | maxSelect          | Number                                               | No        | maximum number of items that can be selected                        |
 | fontFamily         | String                                               | No        | Customize font style                                                |
 | iconStyle          | ImageStyle                                           | No        | Styling for icon                                                    |
 | iconColor          | String                                               | No        | Color of icons                                                      |
-| activeColor        | String                                               | No        | Background color for item selected in container list                |
+| activeColor        | String                                               | No        | Background color for item selected in list container                |
 | itemContainerStyle | TextStyle                                            | No        | Styling for item container in list                                  |
 | itemTextStyle      | TextStyle                                            | No        | Styling for text item in list                                       |
 | selectedStyle      | ViewStyle                                            | No        | Styling for selected view                                           |

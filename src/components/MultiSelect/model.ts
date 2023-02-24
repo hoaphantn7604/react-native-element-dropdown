@@ -29,6 +29,7 @@ export interface MultiSelectProps<T> {
   itemTextStyle?: StyleProp<TextStyle>;
   iconStyle?: StyleProp<ImageStyle>;
   maxHeight?: number;
+  minHeight?: number;
   maxSelect?: number;
   fontFamily?: string;
   iconColor?: string;

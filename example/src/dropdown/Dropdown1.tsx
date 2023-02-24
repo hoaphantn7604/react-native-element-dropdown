@@ -42,6 +42,7 @@ const DropdownComponent = () => {
         data={data}
         search
         maxHeight={300}
+        minHeight={100}
         labelField="label"
         valueField="value"
         placeholder={!isFocus ? 'Dropdown 1' : '...'}
@@ -64,6 +65,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     padding: 16,
+    marginTop: 30,
   },
   dropdown: {
     height: 50,

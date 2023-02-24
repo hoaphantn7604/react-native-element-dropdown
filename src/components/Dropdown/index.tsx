@@ -62,6 +62,7 @@ const DropdownComponent: <T>(
       placeholder = 'Select item',
       search = false,
       maxHeight = 340,
+      minHeight = 0,
       disable = false,
       keyboardAvoiding = true,
       renderLeftIcon,
@@ -551,7 +552,11 @@ const DropdownComponent: <T>(
         };
 
         if (w && top && bottom) {
-          const styleVertical: ViewStyle = { left: left, maxHeight: maxHeight };
+          const styleVertical: ViewStyle = {
+            left: left,
+            maxHeight: maxHeight,
+            minHeight: minHeight,
+          };
           const isTopPosition =
             dropdownPosition === 'auto'
               ? onAutoPosition()
@@ -618,6 +623,7 @@ const DropdownComponent: <T>(
       position,
       keyboardHeight,
       maxHeight,
+      minHeight,
       dropdownPosition,
       keyboardAvoiding,
       statusBarIsTranslucent,

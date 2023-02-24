@@ -62,6 +62,7 @@ const MultiSelectComponent: <T>(
       placeholder = 'Select item',
       search = false,
       maxHeight = 340,
+      minHeight = 0,
       maxSelect,
       disable = false,
       keyboardAvoiding = true,
@@ -542,7 +543,11 @@ const MultiSelectComponent: <T>(
         };
 
         if (w && top && bottom) {
-          const styleVertical: ViewStyle = { left: left, maxHeight: maxHeight };
+          const styleVertical: ViewStyle = {
+            left: left,
+            maxHeight: maxHeight,
+            minHeight: minHeight,
+          };
           const isTopPosition =
             dropdownPosition === 'auto'
               ? onAutoPosition()
@@ -609,6 +614,7 @@ const MultiSelectComponent: <T>(
       position,
       keyboardHeight,
       maxHeight,
+      minHeight,
       dropdownPosition,
       keyboardAvoiding,
       statusBarIsTranslucent,
