@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import DropdownExample1 from './dropdown/Dropdown1';
 import DropdownExample2 from './dropdown/Dropdown2';
+import Menu from './dropdown/Menu';
 import DropdownWithConfirm from './dropdown/DropdownWithConfirm';
 import CountrySelect1 from './dropdown/CountrySelect1';
 import CountrySelect2 from './dropdown/CountrySelect2';
@@ -13,6 +14,7 @@ const DropdownScreen = (_props: any) => {
   return (
     <View style={styles.container}>
       <ScrollView keyboardShouldPersistTaps="handled">
+        <Menu />
         <DropdownExample1 />
         <DropdownExample2 />
         <DropdownWithConfirm />
