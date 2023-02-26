@@ -516,7 +516,7 @@ const DropdownComponent: <T>(
               ref={refList}
               onScrollToIndexFailed={scrollIndex}
               data={listData}
-              inverted={inverted}
+              inverted={isTopPosition ? inverted : false}
               renderItem={_renderItem}
               keyExtractor={(_item, index) => index.toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}

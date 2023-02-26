@@ -508,7 +508,7 @@ const MultiSelectComponent: <T>(
               {...flatListProps}
               keyboardShouldPersistTaps="handled"
               data={listData}
-              inverted={inverted}
+              inverted={isTopPosition ? inverted : false}
               renderItem={_renderItem}
               keyExtractor={(_item, index) => index.toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
