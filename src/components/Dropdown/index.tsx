@@ -157,7 +157,7 @@ const DropdownComponent: <T>(
 
     const _measure = useCallback(() => {
       if (ref && ref?.current) {
-        ref.current.measure((_width, _height, px, py, fx, fy) => {
+        ref.current.measureInWindow((fx, fy, px, py) => {
           const isFull = orientation === 'LANDSCAPE' && !isTablet;
           const w = Math.floor(px);
           const top = isFull ? 20 : Math.floor(py) + Math.floor(fy) + 2;
@@ -603,9 +603,9 @@ const DropdownComponent: <T>(
                       !isTopPosition
                         ? { paddingTop: extendHeight }
                         : {
-                            justifyContent: 'flex-end',
-                            paddingBottom: extendHeight,
-                          },
+                          justifyContent: 'flex-end',
+                          paddingBottom: extendHeight,
+                        },
                     ])}
                   >
                     <View
