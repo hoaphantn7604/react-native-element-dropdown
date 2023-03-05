@@ -33,7 +33,6 @@ const DropdownComponent = () => {
     <View style={styles.container}>
       {renderLabel()}
       <Dropdown
-        statusBarIsTranslucent={true}
         style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}

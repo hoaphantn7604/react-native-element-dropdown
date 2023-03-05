@@ -47,7 +47,6 @@ export interface DropdownProps<T> {
   dropdownPosition?: 'auto' | 'top' | 'bottom';
   flatListProps?: Omit<FlatListProps<any>, 'renderItem' | 'data'>;
   keyboardAvoiding?: boolean;
-  statusBarIsTranslucent?: boolean;
   backgroundColor?: string;
   confirmSelectItem?: boolean;
   accessibilityLabel?: string;

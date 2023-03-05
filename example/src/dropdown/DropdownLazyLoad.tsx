@@ -75,7 +75,6 @@ const DropdownComponent = () => {
     <Dropdown
       ref={ref}
       style={styles.dropdown}
-      statusBarIsTranslucent={true}
       containerStyle={styles.container}
       backgroundColor={'rgba(0,0,0,0.2)'}
       data={data}

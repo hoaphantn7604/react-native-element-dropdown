@@ -27,7 +27,6 @@ const MultiSelectComponent = () => {
   return (
     <View style={styles.container}>
       <MultiSelect
-        statusBarIsTranslucent={true}
         style={styles.dropdown}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}

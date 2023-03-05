@@ -68,7 +68,6 @@ or
 | onBlur             | () => void                                      | No        | Callback that is called when the dropdown is blurred                |
 | keyboardAvoiding   | Boolean                                         | No        | keyboardAvoiding default is true                                    |
 | backgroundColor    | String                                          | No        | Set background color                                                |
-| statusBarIsTranslucent | Boolean                                     | No        | Only Android, set true when StatusBar set Translucent is true       |
 | confirmSelectItem  | Boolean                                         | No        | Turn On confirm select item. Refer example/src/dropdown/example3    |
 | onConfirmSelectItem | (item: object) => void                         | No        | Selection callback. Refer example/src/dropdown/example3             |
 | testID             | String                                          | No        | Used to locate this view in end-to-end tests                        |
@@ -126,7 +125,6 @@ or
 | keyboardAvoiding   | Boolean                                              | No        | keyboardAvoiding default is true                                    |
 | inside             | Boolean                                              | No        | inside default is false                                             |
 | backgroundColor    | String                                               | No        | Set background color                                                |
-| statusBarIsTranslucent| Boolean                                           | No        | Only Android, set true when StatusBar set Translucent is true       |
 | confirmSelectItem  | Boolean                                              | No        | Turn On confirm select item. Refer example/src/dropdown/example7    |
 | confirmUnSelectItem | Boolean                                             | No        | Turn On confirm un-select item. Refer example/src/dropdown/example7 |
 | onConfirmSelectItem | (item: any) => void                                 | No        | Selection callback. Refer example/src/dropdown/example7             |

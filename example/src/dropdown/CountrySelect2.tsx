@@ -46,7 +46,6 @@ const SelectCountryScreen = () => {
   return (
     <SelectCountry
       search
-      statusBarIsTranslucent={true}
       style={styles.dropdown}
       selectedTextStyle={styles.selectedTextStyle}
       placeholderStyle={styles.placeholderStyle}

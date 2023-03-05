@@ -23,6 +23,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
+  StatusBar,
 } from 'react-native';
 import { useDetectDevice } from '../../toolkits';
 import { useDeviceOrientation } from '../../useDeviceOrientation';
@@ -32,6 +33,7 @@ import { styles } from './styles';
 
 const { isTablet } = useDetectDevice;
 const ic_down = require('../../assets/down.png');
+const statusBarHeight: number = StatusBar.currentHeight || 0;
 
 const MultiSelectComponent: <T>(
   props: MultiSelectProps<T>
@@ -80,7 +82,6 @@ const MultiSelectComponent: <T>(
       flatListProps,
       alwaysRenderSelectedItem = false,
       searchQuery,
-      statusBarIsTranslucent,
       backgroundColor,
       onChangeText,
       confirmSelectItem,
@@ -161,17 +162,17 @@ const MultiSelectComponent: <T>(
 
     const _measure = useCallback(() => {
       if (ref && ref?.current) {
-        ref.current.measure((_x, _y, width, height, pageX, pageY) => {
+        ref.current.measureInWindow((pageX, pageY, width, height) => {
           const isFull = orientation === 'LANDSCAPE' && !isTablet;
           const top = isFull ? 20 : height + pageY + 2;
-          const bottom = H - top;
+          const bottom = H - top + height;
           const left = I18nManager.isRTL ? W - width - pageX : pageX;
 
           setPosition({
             isFull,
             width: Math.floor(width),
-            top: Math.floor(top),
-            bottom: Math.floor(bottom),
+            top: Math.floor(top + statusBarHeight),
+            bottom: Math.floor(bottom - statusBarHeight),
             left: Math.floor(left),
             height: Math.floor(height),
           });
@@ -560,15 +561,20 @@ const MultiSelectComponent: <T>(
 
           let keyboardStyle: ViewStyle = {};
 
-          let extendHeight = !isTopPosition ? top : bottom + height;
-          if (keyboardAvoiding && keyboardHeight > 0 && isTopPosition) {
+          let extendHeight = !isTopPosition ? top : bottom;
+          if (
+            keyboardAvoiding &&
+            keyboardHeight > 0 &&
+            isTopPosition &&
+            dropdownPosition === 'auto'
+          ) {
             extendHeight = keyboardHeight;
           }
 
           return (
             <Modal
               transparent
-              statusBarTranslucent={statusBarIsTranslucent}
+              statusBarTranslucent
               visible={visible}
               supportedOrientations={['landscape', 'portrait']}
               onRequestClose={showOrClose}
@@ -623,7 +629,6 @@ const MultiSelectComponent: <T>(
       minHeight,
       dropdownPosition,
       keyboardAvoiding,
-      statusBarIsTranslucent,
       showOrClose,
       styleContainerVertical,
       backgroundColor,

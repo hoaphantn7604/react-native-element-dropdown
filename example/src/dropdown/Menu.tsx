@@ -30,7 +30,6 @@ const DropdownComponent = () => {
   return (
     <Dropdown
       ref={ref}
-      statusBarIsTranslucent={true}
       style={styles.dropdown}
       containerStyle={styles.containerStyle}
       iconStyle={styles.iconStyle}

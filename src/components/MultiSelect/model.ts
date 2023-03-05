@@ -49,7 +49,6 @@ export interface MultiSelectProps<T> {
   visibleSelectedItem?: boolean;
   keyboardAvoiding?: boolean;
   inside?: boolean;
-  statusBarIsTranslucent?: boolean;
   backgroundColor?: string;
   confirmSelectItem?: boolean;
   confirmUnSelectItem?: boolean;

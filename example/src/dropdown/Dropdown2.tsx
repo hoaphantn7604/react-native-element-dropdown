@@ -21,7 +21,6 @@ const DropdownComponent = () => {
     <View>
       <Dropdown
         ref={ref}
-        statusBarIsTranslucent={true}
         style={styles.dropdown}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
