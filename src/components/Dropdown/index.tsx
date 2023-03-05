@@ -157,22 +157,19 @@ const DropdownComponent: <T>(
 
     const _measure = useCallback(() => {
       if (ref && ref?.current) {
-        ref.current.measure((_width, _height, px, py, fx, fy) => {
+        ref.current.measure((_x, _y, width, height, pageX, pageY) => {
           const isFull = orientation === 'LANDSCAPE' && !isTablet;
-          const w = Math.floor(px);
-          const top = isFull ? 20 : Math.floor(py) + Math.floor(fy) + 2;
+          const top = isFull ? 20 : height + pageY + 2;
           const bottom = H - top;
-          const left = I18nManager.isRTL
-            ? W - Math.floor(px) - Math.floor(fx)
-            : Math.floor(fx);
+          const left = I18nManager.isRTL ? W - width - pageX : pageX;
 
           setPosition({
             isFull,
-            w,
-            top,
+            width: Math.floor(width),
+            top: Math.floor(top),
             bottom: Math.floor(bottom),
-            left,
-            height: Math.floor(py),
+            left: Math.floor(left),
+            height: Math.floor(height),
           });
         });
       }
@@ -549,7 +546,7 @@ const DropdownComponent: <T>(
 
     const _renderModal = useCallback(() => {
       if (visible && position) {
-        const { isFull, w, top, bottom, left, height } = position;
+        const { isFull, width, height, top, bottom, left } = position;
 
         const onAutoPosition = () => {
           if (keyboardHeight > 0) {
@@ -559,7 +556,7 @@ const DropdownComponent: <T>(
           return bottom < (search ? 150 : 100);
         };
 
-        if (w && top && bottom) {
+        if (width && top && bottom) {
           const styleVertical: ViewStyle = {
             left: left,
             maxHeight: maxHeight,
@@ -598,7 +595,7 @@ const DropdownComponent: <T>(
                     style={StyleSheet.flatten([
                       styles.flex1,
                       {
-                        width: w,
+                        width,
                       },
                       !isTopPosition
                         ? { paddingTop: extendHeight }
