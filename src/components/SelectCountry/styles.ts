@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   dropdown: {
@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     width: 60,
   },
   item: {
-    flexDirection: 'row',
+    flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
     padding: 6,
     alignItems: 'center',
   },
@@ -23,5 +23,6 @@ export const styles = StyleSheet.create({
   selectedTextStyle: {
     flex: 1,
     fontSize: 12,
+    writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
   },
 });

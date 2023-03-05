@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textItem: {
-    flex: 1,
     fontSize: 16,
   },
   placeholderStyle: {

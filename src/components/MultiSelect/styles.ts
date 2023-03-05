@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   mainWrap: {
@@ -28,13 +28,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   dropdown: {
-    flexDirection: 'row',
+    flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 35,
   },
   dropdownInside: {
-    flexDirection: 'row',
+    flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     minHeight: 35,
@@ -42,19 +42,21 @@ export const styles = StyleSheet.create({
   title: {
     marginVertical: 5,
     fontSize: 16,
+    writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
   },
   wrapItem: {
     marginBottom: 0.5,
   },
   item: {
     padding: 17,
-    flexDirection: 'row',
+    flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   textItem: {
     flex: 1,
     fontSize: 16,
+    writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
   },
   icon: {
     width: 20,
@@ -69,7 +71,7 @@ export const styles = StyleSheet.create({
     height: 45,
   },
   rowSelectedItem: {
-    flexDirection: 'row',
+    flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
     flexWrap: 'wrap',
   },
   selectedItem: {
@@ -81,15 +83,17 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 8,
     marginVertical: 6,
     marginRight: 8,
-    flexDirection: 'row',
+    flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
   },
   selectedTextItem: {
     marginLeft: 5,
     color: 'gray',
     fontSize: 16,
+    writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
   },
   selectedTextLeftItem: {
     fontSize: 12,
     color: 'gray',
+    writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
   },
 });
