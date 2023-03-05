@@ -39,6 +39,7 @@ export interface MultiSelectProps<T> {
   placeholder?: string;
   labelField: string;
   valueField: string;
+  searchField?: string;
   search?: boolean;
   disable?: boolean;
   showsVerticalScrollIndicator?: boolean;

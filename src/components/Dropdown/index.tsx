@@ -57,6 +57,7 @@ const DropdownComponent: <T>(
       data = [],
       labelField,
       valueField,
+      searchField,
       value,
       activeColor = '#F6F7F8',
       fontFamily,
@@ -296,7 +297,7 @@ const DropdownComponent: <T>(
       (text: string) => {
         if (text.length > 0) {
           const defaultFilterFunction = (e: any) => {
-            const item = _.get(e, labelField)
+            const item = _.get(e, searchField || labelField)
               ?.toLowerCase()
               .replace(' ', '')
               .normalize('NFD')
@@ -311,7 +312,7 @@ const DropdownComponent: <T>(
           };
 
           const propSearchFunction = (e: any) => {
-            const labelText = _.get(e, labelField);
+            const labelText = _.get(e, searchField || labelField);
 
             return searchQuery?.(text, labelText);
           };
@@ -324,7 +325,7 @@ const DropdownComponent: <T>(
           setListData(data);
         }
       },
-      [data, labelField, searchQuery]
+      [data, searchField, labelField, searchQuery]
     );
 
     const onSelect = useCallback(

@@ -49,6 +49,7 @@ const MultiSelectComponent: <T>(
       style = {},
       labelField,
       valueField,
+      searchField,
       selectedStyle,
       selectedTextStyle,
       itemContainerStyle,
@@ -262,7 +263,7 @@ const MultiSelectComponent: <T>(
       (text: string) => {
         if (text.length > 0) {
           const defaultFilterFunction = (e: any) => {
-            const item = _.get(e, labelField)
+            const item = _.get(e, searchField || labelField)
               ?.toLowerCase()
               .replace(' ', '')
               .normalize('NFD')
@@ -277,7 +278,7 @@ const MultiSelectComponent: <T>(
           };
 
           const propSearchFunction = (e: any) => {
-            const labelText = _.get(e, labelField);
+            const labelText = _.get(e, searchField || labelField);
 
             return searchQuery?.(text, labelText);
           };
@@ -290,7 +291,7 @@ const MultiSelectComponent: <T>(
           setListData(data);
         }
       },
-      [data, labelField, searchQuery]
+      [data, searchField, labelField, searchQuery]
     );
 
     const onSelect = useCallback(

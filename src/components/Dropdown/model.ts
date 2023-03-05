@@ -39,6 +39,7 @@ export interface DropdownProps<T> {
   placeholder?: string;
   labelField: string;
   valueField: string;
+  searchField?: string;
   search?: boolean;
   searchPlaceholder?: string;
   disable?: boolean;

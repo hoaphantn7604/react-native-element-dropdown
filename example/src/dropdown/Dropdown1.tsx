@@ -4,14 +4,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 
 const data = [
-  { label: 'Item 1', value: '1' },
-  { label: 'Item 2', value: '2' },
-  { label: 'Item 3', value: '3' },
-  { label: 'Item 4', value: '4' },
-  { label: 'Item 5', value: '5' },
-  { label: 'Item 6', value: '6' },
-  { label: 'Item 7', value: '7' },
-  { label: 'Item 8', value: '8' },
+  { label: 'Item 1', value: '1', search: 'a' },
+  { label: 'Item 2', value: '2', search: 'b' },
+  { label: 'Item 3', value: '3', search: 'c' },
+  { label: 'Item 4', value: '4', search: 'd' },
+  { label: 'Item 5', value: '5', search: 'e' },
+  { label: 'Item 6', value: '6', search: 'f' },
+  { label: 'Item 7', value: '7', search: 'g' },
+  { label: 'Item 8', value: '8', search: 'h' },
 ];
 
 const DropdownComponent = () => {
@@ -44,6 +44,7 @@ const DropdownComponent = () => {
         minHeight={100}
         labelField="label"
         valueField="value"
+        searchField="search"
         placeholder={!isFocus ? 'Dropdown 1' : '...'}
         searchPlaceholder="Search..."
         value={value}
