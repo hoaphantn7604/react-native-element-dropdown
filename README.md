@@ -1,6 +1,6 @@
 [<img src="https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-element-dropdown-demo.png">](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-element-dropdown-demo.png)
 
-## react-native-element-dropdown
+# react-native-element-dropdown
 A React Native dropdown component easy to customize for both iOS and Android.
 
 ## Features
