@@ -1,6 +1,6 @@
 [<img src="https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-element-dropdown-demo.png">](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-element-dropdown-demo.png)
 
-## react-native-element-dropdown
+# react-native-element-dropdown
 A React Native dropdown component easy to customize for both iOS and Android.
 
 ## Features
@@ -14,6 +14,9 @@ A React Native dropdown component easy to customize for both iOS and Android.
 If you love this library, give us a star, you will be a ray of sunshine in our lives :)
 ```
 
+### Free React Native Boilerplate
+[React Native Boilerplate](https://github.com/hoaphantn7604/react-native-template-components) is a beautiful template for React Native.
+
 ## Getting started
 ```js
     npm install react-native-element-dropdown --save
@@ -23,20 +26,17 @@ or
 ```js
     yarn add react-native-element-dropdown
 ```
-#### Video tutorial
-* Youtube: [Dropdown List In React Native Tutorial](https://youtu.be/_dz3mYUEUNw)
-#### Source code demo
-[react-native-template-components](https://github.com/hoaphantn7604/react-native-template-components) A beautiful template for React Native.
-#### Demo
+### Demo
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-drpdown.gif)
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-multiselect.gif)
 
-#### Dropdown Props
+### Dropdown Props
 | Props              | Params                                          | isRequire | Description                                                         |
 | ------------------ | ----------------------------------------------- | --------- | ------------------------------------------------------------------- |
 | data               | Array                                           | Yes       | Data is a plain array                                               |
 | labelField         | String                                          | Yes       | Extract the label from the data item                                |
 | valueField         | String                                          | Yes       | Extract the primary key from the data item                          |
+| searchField        | String                                          | Yes       | Specify the field of data list you want to search                   |
 | onChange           | (item: object) => void                          | Yes       | Selection callback                                                  |
 | onChangeText       | (search: string) => void                        | Yes       | Callback that is called when the text input's text changes          |
 | value              | Item                                            | No        | Set default value                                                   |
@@ -81,15 +81,13 @@ or
 
 
 
-
-
-
-#### MultiSelect Props
+### MultiSelect Props
 | Props              | Params                                               | isRequire | Description                                                         |
 | ------------------ | -----------------------------------------------------| --------- | ------------------------------------------------------------------- |
 | data               | Array                                                | Yes       | Data is a plain array                                               |
 | labelField         | String                                               | Yes       | Extract the label from the data item                                |
 | valueField         | String                                               | Yes       | Extract the primary key from the data item                          |
+| searchField        | String                                               | Yes       | Specify the field of data list you want to search                   |
 | onChange           | (value[]) => void                                    | Yes       | Selection callback. A array containing the "valueField".            |
 | onChangeText       | (search: string) => void                             | Yes       | Callback that is called when the text input's text changes          |
 | value              | Item[]                                               | No        | Set default value. A array containing the "valueField".             |
@@ -139,14 +137,14 @@ or
 
 
 
-#### SelectCountry extends Dropdown
+### SelectCountry extends Dropdown
 | Props              | Params               | isRequire | Description                          |
 | ------------------ | -------------------- | --------- | ------------------------------------ |
 | imageField         | String               | Yes       | Extract the image from the data item |
 | imageStyle         | ImageStyle           | No        | Styling for image                    |
 
 
-#### Method
+### Method
 | API         | Params      | Description          |
 | ----------- | ------------| ---------------------|
 | open        | () => void  | Open dropdown list   |
@@ -159,7 +157,7 @@ or
   import React, { useState } from 'react';
   import { StyleSheet, Text, View } from 'react-native';
   import { Dropdown } from 'react-native-element-dropdown';
-  import AntDesign from 'react-native-vector-icons/AntDesign';
+  import AntDesign from '@expo/vector-icons/AntDesign';
 
   const data = [
     { label: 'Item 1', value: '1' },
@@ -272,7 +270,7 @@ or
   import React, { useState } from 'react';
   import { StyleSheet } from 'react-native';
   import { Dropdown } from 'react-native-element-dropdown';
-  import AntDesign from 'react-native-vector-icons/AntDesign';
+  import AntDesign from '@expo/vector-icons/AntDesign';
 
   const data = [
     { label: 'Item 1', value: '1' },
@@ -348,7 +346,7 @@ or
   import React, { useState } from 'react';
   import { StyleSheet, View, Text } from 'react-native';
   import { Dropdown } from 'react-native-element-dropdown';
-  import AntDesign from 'react-native-vector-icons/AntDesign';
+  import AntDesign from '@expo/vector-icons/AntDesign';
 
   const data = [
     { label: 'Item 1', value: '1' },
@@ -461,7 +459,7 @@ or
   import React, { useState } from 'react';
   import { StyleSheet, View } from 'react-native';
   import { MultiSelect } from 'react-native-element-dropdown';
-  import AntDesign from 'react-native-vector-icons/AntDesign';
+  import AntDesign from '@expo/vector-icons/AntDesign';
 
   const data = [
     { label: 'Item 1', value: '1' },
@@ -548,7 +546,7 @@ or
   import React, { useState } from 'react';
   import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
   import { MultiSelect } from 'react-native-element-dropdown';
-  import AntDesign from 'react-native-vector-icons/AntDesign';
+  import AntDesign from '@expo/vector-icons/AntDesign';
 
   const data = [
     { label: 'Item 1', value: '1' },
@@ -884,6 +882,8 @@ or
     },
   });
 ```
+
+<br/>
 
 [<img src="https://github.com/hoaphantn7604/file-upload/blob/master/document/profile/hoa_phan_dev_banner.png">](https://www.youtube.com/channel/UCemCdKGzUgbfsLeGFOvbVEw?sub_confirmation=1)
 
