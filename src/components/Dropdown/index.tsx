@@ -204,14 +204,10 @@ const DropdownComponent: <T>(
       return () => {
         if (typeof susbcriptionKeyboardDidShow?.remove === 'function') {
           susbcriptionKeyboardDidShow.remove();
-        } else {
-          Keyboard.removeListener('keyboardDidShow', onKeyboardDidShow);
         }
 
         if (typeof susbcriptionKeyboardDidHide?.remove === 'function') {
           susbcriptionKeyboardDidHide.remove();
-        } else {
-          Keyboard.removeListener('keyboardDidHide', onKeyboardDidHide);
         }
       };
     }, [onKeyboardDidHide, onKeyboardDidShow]);

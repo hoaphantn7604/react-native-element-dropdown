@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import { useEffect, useState } from 'react';
 import { Dimensions, ScaledSize } from 'react-native';
 
@@ -29,9 +28,6 @@ export function useDeviceOrientation() {
     return () => {
       if (typeof subscription?.remove === 'function') {
         subscription.remove();
-      } else {
-        // React Native < 0.65
-        Dimensions.removeEventListener('change', onChange);
       }
     };
   }, []);

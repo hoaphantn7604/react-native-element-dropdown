@@ -1,22 +1,30 @@
 {
-  "name": "react-native-element-dropdown-example",
-  "displayName": "ElementDropdown Example",
   "expo": {
-    "name": "react-native-element-dropdown-example",
-    "slug": "react-native-element-dropdown-example",
-    "description": "Example app for react-native-element-dropdown",
-    "privacy": "public",
+    "name": "example",
+    "slug": "example",
     "version": "1.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
     ],
     "ios": {
       "supportsTablet": true
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
   }
 }

@@ -207,14 +207,10 @@ const MultiSelectComponent: <T>(
       return () => {
         if (typeof susbcriptionKeyboardDidShow?.remove === 'function') {
           susbcriptionKeyboardDidShow.remove();
-        } else {
-          Keyboard.removeListener('keyboardDidShow', onKeyboardDidShow);
         }
 
         if (typeof susbcriptionKeyboardDidHide?.remove === 'function') {
           susbcriptionKeyboardDidHide.remove();
-        } else {
-          Keyboard.removeListener('keyboardDidHide', onKeyboardDidHide);
         }
       };
     }, [onKeyboardDidHide, onKeyboardDidShow]);
@@ -644,7 +640,6 @@ const MultiSelectComponent: <T>(
       }
     };
 
-    // eslint-disable-next-line no-shadow
     const _renderItemSelected = (inside: boolean) => {
       const list = data.filter((e: any) => {
         const check = value?.indexOf(_.get(e, valueField));

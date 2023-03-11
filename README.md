@@ -1,6 +1,6 @@
 [<img src="https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-element-dropdown-demo.png">](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-element-dropdown-demo.png)
 
-# react-native-element-dropdown
+## react-native-element-dropdown
 A React Native dropdown component easy to customize for both iOS and Android.
 
 ## Features
@@ -9,6 +9,10 @@ A React Native dropdown component easy to customize for both iOS and Android.
 * Consistent look and feel on iOS and Android
 * Customizable font size, colors and animation duration
 * Implemented with typescript
+
+```js
+If you love this library, give us a star, you will be a ray of sunshine in our lives :)
+```
 
 ## Getting started
 ```js
