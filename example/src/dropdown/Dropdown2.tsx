@@ -18,7 +18,7 @@ const DropdownComponent = () => {
   const ref = useRef<IDropdownRef>(null);
 
   return (
-    <View>
+    <View style={styles.row}>
       <Dropdown
         ref={ref}
         style={styles.dropdown}
@@ -41,7 +41,7 @@ const DropdownComponent = () => {
       />
       <View style={styles.button}>
         <Button
-          title="Open Dropdown2"
+          title="Open"
           onPress={() => {
             ref.current?.open();
           }}
@@ -54,7 +54,12 @@ const DropdownComponent = () => {
 export default DropdownComponent;
 
 const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   dropdown: {
+    flex: 1,
     margin: 16,
     height: 50,
     borderBottomColor: 'gray',

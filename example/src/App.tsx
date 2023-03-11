@@ -13,7 +13,10 @@ import DropdownLazyLoad from './dropdown/DropdownLazyLoad';
 const DropdownScreen = (_props: any) => {
   return (
     <View style={styles.container}>
-      <ScrollView keyboardShouldPersistTaps="handled">
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
         <Menu />
         <DropdownExample1 />
         <DropdownExample2 />
@@ -34,6 +37,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    marginTop: 50,
+    paddingVertical: 50,
   },
 });

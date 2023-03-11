@@ -2,16 +2,17 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 const data = [
-  { label: 'Item 1', value: '1', search: 'a' },
-  { label: 'Item 2', value: '2', search: 'b' },
-  { label: 'Item 3', value: '3', search: 'c' },
-  { label: 'Item 4', value: '4', search: 'd' },
-  { label: 'Item 5', value: '5', search: 'e' },
-  { label: 'Item 6', value: '6', search: 'f' },
-  { label: 'Item 7', value: '7', search: 'g' },
-  { label: 'Item 8', value: '8', search: 'h' },
+  { label: 'Item 1', value: '1', search: 'Item 1' },
+  { label: 'Item 2', value: '2', search: 'Item 2' },
+  { label: 'Item 3', value: '3', search: 'Item 3' },
+  { label: 'Item 4', value: '4', search: 'Item 4' },
+  { label: 'Item 5', value: '5', search: 'Item 5' },
+  { label: 'Item 6', value: '6', search: 'Item 6' },
+  { label: 'Item 7', value: '7', search: 'Item 7' },
+  { label: 'Item 8', value: '8', search: 'Item 8' },
 ];
 
 const DropdownComponent = () => {
@@ -54,6 +55,14 @@ const DropdownComponent = () => {
           setValue(item.value);
           setIsFocus(false);
         }}
+        renderLeftIcon={() => (
+          <AntDesign
+            style={styles.icon}
+            color={isFocus ? 'blue' : 'black'}
+            name="folderopen"
+            size={20}
+          />
+        )}
       />
     </View>
   );
@@ -72,6 +81,9 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 8,
     paddingHorizontal: 8,
+  },
+  icon: {
+    marginRight: 5,
   },
   label: {
     position: 'absolute',

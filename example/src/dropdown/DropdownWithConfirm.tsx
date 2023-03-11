@@ -1,6 +1,7 @@
 import React, { RefObject, useRef, useState } from 'react';
 import { StyleSheet, View, Text, Alert } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 const data = [
   { label: 'Item 1', value: '1' },
@@ -20,6 +21,7 @@ const DropdownComponent = () => {
   const renderItem = (item: any) => {
     return (
       <View style={styles.item}>
+        <AntDesign style={styles.icon} name="user" size={20} />
         <Text style={styles.textItem}>{item.label}</Text>
       </View>
     );
@@ -61,6 +63,9 @@ const DropdownComponent = () => {
           },
         ]);
       }}
+      renderLeftIcon={() => (
+        <AntDesign style={styles.icon} name="addusergroup" size={20} />
+      )}
     />
   );
 };
@@ -84,6 +89,9 @@ const styles = StyleSheet.create({
 
     elevation: 2,
   },
+  icon: {
+    marginRight: 5,
+  },
   item: {
     padding: 17,
     flexDirection: 'row',
@@ -91,6 +99,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textItem: {
+    flex: 1,
     fontSize: 16,
   },
   placeholderStyle: {

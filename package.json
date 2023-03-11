@@ -1,7 +1,7 @@
 {
   "name": "react-native-element-dropdown",
   "version": "2.8.0",
-  "description": "A React Native dropdown component easy to customize for both iOS and Android.",
+  "description": "React Native Element Dropdown is a library that provides a customizable dropdown component for React Native applications.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",

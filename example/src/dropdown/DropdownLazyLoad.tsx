@@ -5,9 +5,9 @@ import {
   Text,
   RefreshControl,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 const RenderEmpty = () => {
   return (
@@ -102,23 +102,9 @@ const DropdownComponent = () => {
         onEndReachedThreshold: 0.5,
         onEndReached: onLoadMore,
       }}
-      confirmSelectItem
-      onConfirmSelectItem={(item) => {
-        Alert.alert('Confirm', 'Message', [
-          {
-            text: 'Cancel',
-            onPress: () => {},
-          },
-          {
-            text: 'Ok',
-            onPress: () => {
-              setValue(item);
-              setIsSearch(false);
-              ref.current?.close();
-            },
-          },
-        ]);
-      }}
+      renderLeftIcon={() => (
+        <AntDesign style={styles.icon} name="dribbble" size={20} />
+      )}
     />
   );
 };
@@ -130,6 +116,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,
+  },
+  icon: {
+    marginRight: 5,
   },
   container: {
     marginTop: 4,

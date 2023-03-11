@@ -51,6 +51,7 @@ const MultiSelectComponent = () => {
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
+        backgroundColor={'rgba(0,0,0,0.2)'}
         search
         data={data}
         labelField="label"

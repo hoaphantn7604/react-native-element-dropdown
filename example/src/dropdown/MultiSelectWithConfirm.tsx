@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { MultiSelect } from 'react-native-element-dropdown';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 const data = [
   { label: 'Item 1', value: '1' },
@@ -20,6 +21,7 @@ const MultiSelectComponent = () => {
     return (
       <View style={styles.item}>
         <Text style={styles.selectedTextStyle}>{item.label}</Text>
+        <AntDesign style={styles.icon} name="bulb1" size={20} />
       </View>
     );
   };
@@ -32,6 +34,7 @@ const MultiSelectComponent = () => {
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
+        backgroundColor={'rgba(0,0,0,0.2)'}
         data={data}
         labelField="label"
         valueField="value"
@@ -47,6 +50,7 @@ const MultiSelectComponent = () => {
           <TouchableOpacity onPress={() => unSelect && unSelect(item)}>
             <View style={styles.selectedStyle}>
               <Text style={styles.textSelectedStyle}>{item.label}</Text>
+              <AntDesign style={styles.icon} name="Safety" size={20} />
             </View>
           </TouchableOpacity>
         )}
@@ -66,6 +70,9 @@ const MultiSelectComponent = () => {
             },
           ]);
         }}
+        renderLeftIcon={() => (
+          <AntDesign style={styles.icon} name="rocket1" size={20} />
+        )}
       />
     </View>
   );
@@ -89,6 +96,9 @@ const styles = StyleSheet.create({
     shadowRadius: 1.41,
 
     elevation: 2,
+  },
+  icon: {
+    marginRight: 5,
   },
   placeholderStyle: {
     fontSize: 16,
