@@ -19,12 +19,12 @@ If you love this library, give us a star, you will be a ray of sunshine in our l
 
 ## Getting started
 ```js
-    npm install react-native-element-dropdown --save
+npm install react-native-element-dropdown --save
 ```
 or
 
 ```js
-    yarn add react-native-element-dropdown
+yarn add react-native-element-dropdown
 ```
 ### Demo
 
