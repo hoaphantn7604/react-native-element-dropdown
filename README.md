@@ -28,7 +28,7 @@ yarn add react-native-element-dropdown
 ```
 ### Demo
 
-[<img src="https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-element-dropdown-thumbnal.jpg">](https://youtu.be/FhTDR_Ad_14)
+[<img src="https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-element-dropdown-thumbnal.jpg">](https://youtube.com/shorts/36_SdDVHPHM?feature=share)
 
 
 <br />
