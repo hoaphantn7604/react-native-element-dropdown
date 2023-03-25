@@ -96,4 +96,8 @@ export const styles = StyleSheet.create({
     color: 'gray',
     writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
   },
+  fullScreen: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

@@ -56,6 +56,7 @@ export interface MultiSelectProps<T> {
   accessibilityLabel?: string;
   itemAccessibilityLabelField?: string;
   inverted?: boolean;
+  mode?: 'default' | 'modal';
   onChange: (value: string[]) => void;
   renderLeftIcon?: (visible?: boolean) => JSX.Element | null | undefined;
   renderRightIcon?: (visible?: boolean) => JSX.Element | null | undefined;

@@ -61,4 +61,8 @@ export const styles = StyleSheet.create({
     margin: 6,
     height: 45,
   },
+  fullScreen: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

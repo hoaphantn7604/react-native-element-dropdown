@@ -87,6 +87,7 @@ const DropdownComponent: <T>(
       onConfirmSelectItem,
       accessibilityLabel,
       itemAccessibilityLabelField,
+      mode = 'default',
     } = props;
 
     const ref = useRef<View>(null);
@@ -107,11 +108,10 @@ const DropdownComponent: <T>(
     }, []);
     const styleHorizontal: ViewStyle = useMemo(() => {
       return {
-        marginBottom: 20,
-        width: W / 2,
+        width: orientation === 'LANDSCAPE' ? W / 2 : '100%',
         alignSelf: 'center',
       };
-    }, [W]);
+    }, [W, orientation]);
 
     useImperativeHandle(currentRef, () => {
       return { open: eventOpen, close: eventClose };
@@ -161,7 +161,9 @@ const DropdownComponent: <T>(
     const _measure = useCallback(() => {
       if (ref && ref?.current) {
         ref.current.measureInWindow((pageX, pageY, width, height) => {
-          const isFull = orientation === 'LANDSCAPE' && !isTablet;
+          const isFull = isTablet
+            ? false
+            : mode === 'modal' || orientation === 'LANDSCAPE';
           const top = isFull ? 20 : height + pageY + 2;
           const bottom = H - top + height;
           const left = I18nManager.isRTL ? W - width - pageX : pageX;
@@ -176,7 +178,7 @@ const DropdownComponent: <T>(
           });
         });
       }
-    }, [H, W, orientation]);
+    }, [H, W, orientation, mode]);
 
     const onKeyboardDidShow = useCallback(
       (e: KeyboardEvent) => {
@@ -607,13 +609,14 @@ const DropdownComponent: <T>(
                             justifyContent: 'flex-end',
                             paddingBottom: extendHeight,
                           },
+                      isFull && styles.fullScreen,
                     ])}
                   >
                     <View
                       style={StyleSheet.flatten([
                         styles.container,
-                        containerStyle,
                         isFull ? styleHorizontal : styleVertical,
+                        containerStyle,
                       ])}
                     >
                       {_renderList(isTopPosition)}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import React, { useEffect, useState } from 'react';
 import {
   Image,
