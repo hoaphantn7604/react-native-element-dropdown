@@ -25,7 +25,9 @@ export interface MultiSelectProps<T> {
   inputSearchStyle?: StyleProp<TextStyle>;
   selectedStyle?: StyleProp<ViewStyle>;
   selectedTextStyle?: StyleProp<TextStyle>;
+  itemTouchableStyle?: StyleProp<ViewStyle>;
   itemContainerStyle?: StyleProp<ViewStyle>;
+  itemTextContainerStyle?: StyleProp<ViewStyle>;
   itemTextStyle?: StyleProp<TextStyle>;
   iconStyle?: StyleProp<ImageStyle>;
   maxHeight?: number;

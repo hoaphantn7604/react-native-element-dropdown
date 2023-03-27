@@ -53,7 +53,9 @@ const MultiSelectComponent: <T>(
       searchField,
       selectedStyle,
       selectedTextStyle,
+      itemTouchableStyle,
       itemContainerStyle,
+      itemTextContainerStyle,
       itemTextStyle,
       iconStyle,
       activeColor = '#F6F7F8',
@@ -407,6 +409,7 @@ const MultiSelectComponent: <T>(
             )}
             underlayColor={activeColor}
             onPress={() => onSelect(item)}
+            style={itemTouchableStyle}
           >
             <View
               style={StyleSheet.flatten([
@@ -420,7 +423,12 @@ const MultiSelectComponent: <T>(
               {renderItem ? (
                 renderItem(item, selected)
               ) : (
-                <View style={styles.item}>
+                <View
+                  style={StyleSheet.flatten([
+                    styles.item,
+                    itemTextContainerStyle,
+                  ])}
+                >
                   <Text
                     style={StyleSheet.flatten([
                       styles.textItem,
@@ -442,8 +450,10 @@ const MultiSelectComponent: <T>(
         checkSelected,
         font,
         itemAccessibilityLabelField,
+        itemTouchableStyle,
         itemContainerStyle,
         itemTestIDField,
+        itemTextContainerStyle,
         itemTextStyle,
         labelField,
         onSelect,
