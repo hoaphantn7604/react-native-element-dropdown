@@ -118,6 +118,11 @@ const DropdownComponent: <T>(
     });
 
     useEffect(() => {
+      return eventClose;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
       setListData([...data]);
       if (searchText) {
         onSearch(searchText);
