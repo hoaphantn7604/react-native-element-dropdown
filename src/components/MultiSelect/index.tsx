@@ -559,7 +559,6 @@ const MultiSelectComponent: <T>(
 
         if (width && top && bottom) {
           const styleVertical: ViewStyle = {
-            left: left,
             maxHeight: maxHeight,
             minHeight: minHeight,
           };
@@ -602,6 +601,7 @@ const MultiSelectComponent: <T>(
                       styles.flex1,
                       {
                         width,
+                        left
                       },
                       !isTopPosition
                         ? { paddingTop: extendHeight }
