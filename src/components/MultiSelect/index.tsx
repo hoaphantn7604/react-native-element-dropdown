@@ -192,6 +192,7 @@ const MultiSelectComponent: <T>(
               left: Math.floor(left),
               height: Math.floor(height),
             });
+
             if (calledFrom === 'showOrClose' && !onOpenPositionCalculated) {
               setOnOpenPositionCalculated(true);
             }
