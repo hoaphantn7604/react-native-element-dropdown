@@ -103,6 +103,8 @@ const MultiSelectComponent: <T>(
     const [position, setPosition] = useState<any>();
     const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
     const [searchText, setSearchText] = useState('');
+    const [onOpenPositionCalculated, setOnOpenPositionCalculated] =
+      useState<boolean>(false);
 
     const { width: W, height: H } = Dimensions.get('window');
     const styleContainerVertical: ViewStyle = useMemo(() => {
@@ -171,27 +173,33 @@ const MultiSelectComponent: <T>(
       setCurrentValue(value ? [...value] : []);
     }, [value]);
 
-    const _measure = useCallback(() => {
-      if (ref && ref?.current) {
-        ref.current.measureInWindow((pageX, pageY, width, height) => {
-          const isFull = isTablet
-            ? false
-            : mode === 'modal' || orientation === 'LANDSCAPE';
-          const top = isFull ? 20 : height + pageY + 2;
-          const bottom = H - top + height;
-          const left = I18nManager.isRTL ? W - width - pageX : pageX;
+    const _measure = useCallback(
+      (calledFrom?) => {
+        if (ref && ref?.current) {
+          ref.current.measureInWindow((pageX, pageY, width, height) => {
+            const isFull = isTablet
+              ? false
+              : mode === 'modal' || orientation === 'LANDSCAPE';
+            const top = isFull ? 20 : height + pageY + 2;
+            const bottom = H - top + height;
+            const left = I18nManager.isRTL ? W - width - pageX : pageX;
 
-          setPosition({
-            isFull,
-            width: Math.floor(width),
-            top: Math.floor(top + statusBarHeight),
-            bottom: Math.floor(bottom - statusBarHeight),
-            left: Math.floor(left),
-            height: Math.floor(height),
+            setPosition({
+              isFull,
+              width: Math.floor(width + pageX),
+              top: Math.floor(top + statusBarHeight),
+              bottom: Math.floor(bottom - statusBarHeight),
+              left: Math.floor(left),
+              height: Math.floor(height),
+            });
+            if (calledFrom === 'showOrClose' && !onOpenPositionCalculated) {
+              setOnOpenPositionCalculated(true);
+            }
           });
-        });
-      }
-    }, [H, W, orientation, mode]);
+        }
+      },
+      [H, W, orientation, mode, onOpenPositionCalculated]
+    );
 
     const onKeyboardDidShow = useCallback(
       (e: KeyboardEvent) => {
@@ -237,9 +245,9 @@ const MultiSelectComponent: <T>(
           return Keyboard.dismiss();
         }
 
-        _measure();
         setVisible(!visible);
         setListData(data);
+        _measure('showOrClose');
 
         if (!visible) {
           if (onFocus) {
@@ -546,7 +554,7 @@ const MultiSelectComponent: <T>(
     );
 
     const _renderModal = useCallback(() => {
-      if (visible && position) {
+      if (visible && position && onOpenPositionCalculated) {
         const { isFull, width, height, top, bottom, left } = position;
 
         const onAutoPosition = () => {
