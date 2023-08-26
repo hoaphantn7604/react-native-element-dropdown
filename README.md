@@ -39,7 +39,7 @@ yarn add react-native-element-dropdown
 ### Dropdown Props
 | Props              | Params                                          | isRequire | Description                                                         |
 | ------------------ | ----------------------------------------------- | --------- | ------------------------------------------------------------------- |
-| mode               | 'default' or 'modal'                            | No        | Mode 'modal' is show the dropdown in the middle of the screen.      |
+| mode               | 'default' or 'modal' of 'auto'                  | No        | Mode 'modal' is show the dropdown in the middle of the screen.      |
 | data               | Array                                           | Yes       | Data is a plain array                                               |
 | labelField         | String                                          | Yes       | Extract the label from the data item                                |
 | valueField         | String                                          | Yes       | Extract the primary key from the data item                          |
@@ -91,6 +91,7 @@ yarn add react-native-element-dropdown
 ### MultiSelect Props
 | Props              | Params                                               | isRequire | Description                                                         |
 | ------------------ | -----------------------------------------------------| --------- | ------------------------------------------------------------------- |
+| mode               | 'default' or 'modal' of 'auto'                       | No        | Mode 'modal' is show the dropdown in the middle of the screen.      |
 | data               | Array                                                | Yes       | Data is a plain array                                               |
 | labelField         | String                                               | Yes       | Extract the label from the data item                                |
 | valueField         | String                                               | Yes       | Extract the primary key from the data item                          |
