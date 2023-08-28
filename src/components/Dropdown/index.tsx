@@ -569,7 +569,6 @@ const DropdownComponent: <T>(
 
         if (width && top && bottom) {
           const styleVertical: ViewStyle = {
-            left: left,
             maxHeight: maxHeight,
             minHeight: minHeight,
           };
@@ -612,6 +611,7 @@ const DropdownComponent: <T>(
                       styles.flex1,
                       {
                         width,
+                        left
                       },
                       !isTopPosition
                         ? { paddingTop: extendHeight }
