@@ -610,9 +610,6 @@ const DropdownComponent: <T>(
                   <View
                     style={StyleSheet.flatten([
                       styles.flex1,
-                      {
-                        width,
-                      },
                       !isTopPosition
                         ? { paddingTop: extendHeight }
                         : {
@@ -624,6 +621,7 @@ const DropdownComponent: <T>(
                   >
                     <View
                       style={StyleSheet.flatten([
+                        { width },
                         styles.container,
                         isFull ? styleHorizontal : styleVertical,
                         containerStyle,
