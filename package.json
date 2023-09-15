@@ -161,9 +161,14 @@
     "source": "src",
     "output": "lib",
     "targets": [
-            ["commonjs", { "configFile": true }],
-            ["module", { "configFile": true }],
-            "typescript"
-          ]
+      "commonjs",
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
   }
 }
