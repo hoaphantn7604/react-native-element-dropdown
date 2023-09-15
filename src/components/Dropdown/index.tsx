@@ -368,6 +368,7 @@ const DropdownComponent: <T>(
           testID={testID}
           accessible={!!accessibilityLabel}
           accessibilityLabel={accessibilityLabel}
+          accessibilityRole={'button'}
           onPress={showOrClose}
         >
           <View style={styles.dropdown}>
@@ -411,6 +412,7 @@ const DropdownComponent: <T>(
             key={index.toString()}
             testID={_.get(item, itemTestIDField || labelField)}
             accessible={!!accessibilityLabel}
+            accessibilityRole={'button'}
             accessibilityLabel={_.get(
               item,
               itemAccessibilityLabelField || labelField
@@ -533,7 +535,7 @@ const DropdownComponent: <T>(
         };
 
         return (
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback accessibilityRole="button">
             <View style={styles.flexShrink}>
               {isInverted && _renderListHelper()}
               {renderSearch()}
