@@ -88,6 +88,7 @@ const DropdownComponent: <T>(
       accessibilityLabel,
       itemAccessibilityLabelField,
       mode = 'default',
+      keyboardType
     } = props;
 
     const ref = useRef<View>(null);
@@ -490,6 +491,7 @@ const DropdownComponent: <T>(
               }}
               placeholderTextColor="gray"
               iconStyle={[{ tintColor: iconColor }, iconStyle]}
+              keyboardType={keyboardType}
             />
           );
         }
@@ -508,6 +510,7 @@ const DropdownComponent: <T>(
       searchPlaceholder,
       testID,
       searchText,
+      keyboardType
     ]);
 
     const _renderList = useCallback(
