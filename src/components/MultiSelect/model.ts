@@ -33,6 +33,7 @@ export interface MultiSelectProps<T> {
   maxSelect?: number;
   fontFamily?: string;
   iconColor?: string;
+  searchPlaceholderTextColor?: string;
   activeColor?: string;
   data: T[];
   value?: string[] | null | undefined;

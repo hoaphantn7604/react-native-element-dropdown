@@ -33,6 +33,7 @@ export interface DropdownProps<T> {
   minHeight?: number;
   fontFamily?: string;
   iconColor?: string;
+  searchPlaceholderTextColor?: string;
   activeColor?: string;
   data: T[];
   value?: T | string | null | undefined;
