@@ -605,9 +605,6 @@ const MultiSelectComponent: <T>(
                   <View
                     style={StyleSheet.flatten([
                       styles.flex1,
-                      {
-                        width,
-                      },
                       !isTopPosition
                         ? { paddingTop: extendHeight }
                         : {
@@ -621,6 +618,9 @@ const MultiSelectComponent: <T>(
                       style={StyleSheet.flatten([
                         styles.container,
                         isFull ? styleHorizontal : styleVertical,
+                        {
+                          width,
+                        },
                         containerStyle,
                       ])}
                     >
