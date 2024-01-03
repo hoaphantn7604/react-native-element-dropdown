@@ -520,11 +520,13 @@ const MultiSelectComponent: <T>(
               accessibilityLabel={accessibilityLabel + ' flatlist'}
               {...flatListProps}
               keyboardShouldPersistTaps="handled"
-              data={selectedToTop
+              data={
+                selectedToTop
                   ? listData
                       .filter((item) => checkSelected(item))
                       .concat(listData.filter((item) => !checkSelected(item)))
-                  : listData}
+                  : listData
+              }
               inverted={isTopPosition ? inverted : false}
               renderItem={_renderItem}
               keyExtractor={(_item, index) => index.toString()}
