@@ -35,6 +35,7 @@ export interface MultiSelectProps<T> {
   iconColor?: string;
   activeColor?: string;
   data: T[];
+  selectedToTop?: boolean;
   value?: string[] | null | undefined;
   placeholder?: string;
   labelField: keyof T;
