@@ -142,9 +142,9 @@ yarn add react-native-element-dropdown
 | itemTestIDField    | String                                               | No        | Add this field to the input data. Ex: DATA = [{itemTestIDField: '', label: '', value:: ''}]|
 | accessibilityLabel | String          | No    | Set an accessibilityLabel on the view, so that people who use VoiceOver know what element they have selected |
 | itemAccessibilityLabelField | String                                      | No        | Add this field to the input data. Ex: DATA = [{itemAccessibilityLabelField: '', label: '', value:: ''}]|
-|-----------------------------|---------------------------------------------|-----------|--------------------------------------------------------------------------------------------------------|
+|------|------|------|------|
 | selectedToTop      | Boolean                                              | No        | Put selected items on top of the list                                                                  |
-|-----------------------------|---------------------------------------------|-----------|--------------------------------------------------------------------------------------------------------|
+|------|------|------|------|
 
 
 
