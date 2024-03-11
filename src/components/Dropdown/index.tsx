@@ -307,12 +307,12 @@ const DropdownComponent: <T>(
           const defaultFilterFunction = (e: any) => {
             const item = _.get(e, searchField || labelField)
               ?.toLowerCase()
-              .replace(' ', '')
+              .replace(/\s/g, '')
               .normalize('NFD')
               .replace(/[\u0300-\u036f]/g, '');
             const key = text
               .toLowerCase()
-              .replace(' ', '')
+              .replace(/\s/g, '')
               .normalize('NFD')
               .replace(/[\u0300-\u036f]/g, '');
 
