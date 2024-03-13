@@ -93,6 +93,7 @@ const MultiSelectComponent: <T>(
       itemAccessibilityLabelField,
       visibleSelectedItem = true,
       mode = 'default',
+      selectedToTop = false,
     } = props;
 
     const ref = useRef<View>(null);
@@ -519,7 +520,13 @@ const MultiSelectComponent: <T>(
               accessibilityLabel={accessibilityLabel + ' flatlist'}
               {...flatListProps}
               keyboardShouldPersistTaps="handled"
-              data={listData}
+              data={
+                selectedToTop
+                  ? listData
+                      .filter((item) => checkSelected(item))
+                      .concat(listData.filter((item) => !checkSelected(item)))
+                  : listData
+              }
               inverted={isTopPosition ? inverted : false}
               renderItem={_renderItem}
               keyExtractor={(_item, index) => index.toString()}
