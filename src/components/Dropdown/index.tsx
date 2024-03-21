@@ -49,7 +49,9 @@ const DropdownComponent: <T>(
       containerStyle,
       placeholderStyle,
       selectedTextStyle,
+      itemTouchableStyle,
       itemContainerStyle,
+      itemTextContainerStyle,
       itemTextStyle,
       inputSearchStyle,
       iconStyle,
@@ -417,6 +419,7 @@ const DropdownComponent: <T>(
             )}
             underlayColor={activeColor}
             onPress={() => onSelect(item)}
+            style={itemTouchableStyle}
           >
             <View
               style={StyleSheet.flatten([
@@ -429,7 +432,12 @@ const DropdownComponent: <T>(
               {renderItem ? (
                 renderItem(item, selected)
               ) : (
-                <View style={styles.item}>
+                <View
+                  style={StyleSheet.flatten([
+                    styles.item,
+                    itemTextContainerStyle,
+                  ])}
+                >
                   <Text
                     style={StyleSheet.flatten([
                       styles.textItem,
@@ -451,8 +459,10 @@ const DropdownComponent: <T>(
         currentValue,
         font,
         itemAccessibilityLabelField,
+        itemTouchableStyle,
         itemContainerStyle,
         itemTestIDField,
+        itemTextContainerStyle,
         itemTextStyle,
         labelField,
         onSelect,
