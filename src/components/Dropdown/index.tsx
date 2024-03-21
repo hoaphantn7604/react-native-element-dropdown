@@ -85,6 +85,7 @@ const DropdownComponent: <T>(
       onChangeText,
       confirmSelectItem,
       onConfirmSelectItem,
+      onEndReached,
       accessibilityLabel,
       itemAccessibilityLabelField,
       mode = 'default',
@@ -527,6 +528,8 @@ const DropdownComponent: <T>(
               inverted={isTopPosition ? inverted : false}
               renderItem={_renderItem}
               keyExtractor={(_item, index) => index.toString()}
+              onEndReachedThreshold={0.5}
+              onEndReached={onEndReached}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
           );
@@ -551,6 +554,7 @@ const DropdownComponent: <T>(
         renderSearch,
         scrollIndex,
         showsVerticalScrollIndicator,
+        onEndReached,
         testID,
       ]
     );
@@ -613,9 +617,9 @@ const DropdownComponent: <T>(
                       !isTopPosition
                         ? { paddingTop: extendHeight }
                         : {
-                            justifyContent: 'flex-end',
-                            paddingBottom: extendHeight,
-                          },
+                          justifyContent: 'flex-end',
+                          paddingBottom: extendHeight,
+                        },
                       isFull && styles.fullScreen,
                     ])}
                   >
