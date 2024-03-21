@@ -64,6 +64,7 @@ yarn add react-native-element-dropdown
 | search             | Boolean                                         | No        | Show or hide input search                                           |
 | searchQuery        | (keyword: string, labelValue: string) => Boolean| No        | Callback used to filter the list of items                           |
 | inputSearchStyle   | ViewStyle                                       | No        | Styling for input search                                            |
+| searchPlaceholderTextColor   | String                                | No        | Search placeholder color                                            |
 | searchPlaceholder  | String                                          | No        | The string that will be rendered before text input has been entered |
 | renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element| No        | Customize TextInput search                                          |
 | disable            | Boolean                                         | No        | Specifies the disabled state of the Dropdown                        |
@@ -120,6 +121,7 @@ yarn add react-native-element-dropdown
 | search             | Boolean                                              | No        | Show or hide input search                                           |
 | searchQuery        | (keyword: string, labelValue: string) => Boolean     | No        | Callback used to filter the list of items                           |
 | inputSearchStyle   | ViewStyle                                            | No        | Styling for input search                                            |
+| searchPlaceholderTextColor   | String                                     | No        | Search placeholder color                                            |
 | searchPlaceholder  | String                                               | No        | The string that will be rendered before text input has been entered |
 | renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element     | No        | Customize TextInput search                                          |
 | disable            | Boolean                                              | No        | Specifies the disabled state of the Dropdown                        |

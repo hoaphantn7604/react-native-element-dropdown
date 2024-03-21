@@ -62,6 +62,7 @@ const DropdownComponent: <T>(
       activeColor = '#F6F7F8',
       fontFamily,
       iconColor = 'gray',
+      searchPlaceholderTextColor = 'gray',
       searchPlaceholder,
       placeholder = 'Select item',
       search = false,
@@ -488,7 +489,7 @@ const DropdownComponent: <T>(
                 }
                 onSearch(e);
               }}
-              placeholderTextColor="gray"
+              placeholderTextColor={searchPlaceholderTextColor}
               iconStyle={[{ tintColor: iconColor }, iconStyle]}
             />
           );
@@ -499,6 +500,7 @@ const DropdownComponent: <T>(
       accessibilityLabel,
       font,
       iconColor,
+      searchPlaceholderTextColor,
       iconStyle,
       inputSearchStyle,
       onChangeText,
