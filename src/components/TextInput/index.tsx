@@ -34,6 +34,7 @@ const TextInputComponent: CTextInput = (props) => {
     onChangeText = (_value: string) => {},
     renderLeftIcon,
     renderRightIcon,
+    keyboardType
   } = props;
 
   const [text, setText] = useState<string>('');
@@ -91,6 +92,7 @@ const TextInputComponent: CTextInput = (props) => {
             placeholder={placeholder}
             placeholderTextColor={placeholderTextColor}
             onChangeText={onChange}
+            keyboardType={keyboardType}
           />
           {_renderRightIcon()}
         </View>
