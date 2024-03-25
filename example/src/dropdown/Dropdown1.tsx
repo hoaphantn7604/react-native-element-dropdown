@@ -40,6 +40,7 @@ const DropdownComponent = () => {
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
         data={data}
+        autoScroll
         search
         maxHeight={300}
         minHeight={100}

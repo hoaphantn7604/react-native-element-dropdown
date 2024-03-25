@@ -254,7 +254,7 @@ const DropdownComponent: <T>(
               _.isEqual(defaultValue, _.get(e, valueField))
             );
             if (
-              !_.isEmpty(listData.length) &&
+              listData.length > 0 &&
               index > -1 &&
               index <= listData.length - 1
             ) {
