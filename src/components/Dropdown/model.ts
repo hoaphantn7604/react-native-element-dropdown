@@ -5,6 +5,7 @@ import type {
   TextProps,
   ImageStyle,
   FlatListProps,
+  KeyboardType
 } from 'react-native';
 
 export type IDropdownRef = {
@@ -66,4 +67,5 @@ export interface DropdownProps<T> {
   searchQuery?: (keyword: string, labelValue: string) => boolean;
   onChangeText?: (search: string) => void;
   onConfirmSelectItem?: (item: T) => void;
+  keyboardType?: KeyboardType;
 }
