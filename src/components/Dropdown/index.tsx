@@ -481,7 +481,7 @@ const DropdownComponent: <T>(
               testID={testID + ' input'}
               accessibilityLabel={accessibilityLabel + ' input'}
               style={[styles.input, inputSearchStyle]}
-              inputStyle={[inputSearchStyle, font()]}
+              inputStyle={font()}
               value={searchText}
               autoCorrect={false}
               placeholder={searchPlaceholder}
