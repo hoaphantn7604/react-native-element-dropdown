@@ -85,6 +85,7 @@ yarn add react-native-element-dropdown
 | itemTestIDField    | String                                          | No        | Add this field to the input data. Ex: DATA = [{itemTestIDField: '', label: '', value:: ''}]|
 | accessibilityLabel | String     | No    | Set an accessibilityLabel on the view, so that people who use VoiceOver know what element they have selected |
 | itemAccessibilityLabelField | String                                 | No        | Add this field to the input data. Ex: DATA = [{itemAccessibilityLabelField: '', label: '', value:: ''}]|
+| closeModalWhenSelectedItem | Boolean                                 | No        | By default, closeModalWhenSelectedItem is set to true. When closeModalWhenSelectedItem is set to false, the Modal won't close when an item is selected. |
 
 
 
