@@ -34,6 +34,7 @@ const DropdownComponent = () => {
         placeholder="Dropdown 2"
         searchPlaceholder="Search..."
         value={value}
+        closeModalWhenSelectedItem={false}
         onChange={(item) => {
           setValue(item.value);
         }}

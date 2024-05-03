@@ -88,6 +88,7 @@ const DropdownComponent: <T>(
       accessibilityLabel,
       itemAccessibilityLabelField,
       mode = 'default',
+      closeModalWhenSelectedItem = true,
     } = props;
 
     const ref = useRef<View>(null);
@@ -353,7 +354,9 @@ const DropdownComponent: <T>(
         onSearch('');
         setCurrentValue(item);
         onChange(item);
-        eventClose();
+        if (closeModalWhenSelectedItem) {
+          eventClose();
+        }
       },
       [
         confirmSelectItem,
@@ -362,6 +365,7 @@ const DropdownComponent: <T>(
         onChangeText,
         onConfirmSelectItem,
         onSearch,
+        closeModalWhenSelectedItem,
       ]
     );
 
