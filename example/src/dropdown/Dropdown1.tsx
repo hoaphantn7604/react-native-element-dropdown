@@ -15,6 +15,11 @@ const data = [
   { label: 'Item 8', value: '8', search: 'Item 8' },
 ];
 
+const excludeItem = [
+  { label: 'Item 7', value: '7', search: 'Item 7' },
+  { label: 'Item 8', value: '8', search: 'Item 8' },
+];
+
 const DropdownComponent = () => {
   const [value, setValue] = useState<string>();
   const [isFocus, setIsFocus] = useState(false);
@@ -40,6 +45,7 @@ const DropdownComponent = () => {
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
         data={data}
+        excludeSearchItems={excludeItem}
         autoScroll
         search
         maxHeight={300}

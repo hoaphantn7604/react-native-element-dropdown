@@ -93,6 +93,8 @@ const MultiSelectComponent: <T>(
       itemAccessibilityLabelField,
       visibleSelectedItem = true,
       mode = 'default',
+      excludeItems = [],
+      excludeSearchItems = [],
     } = props;
 
     const ref = useRef<View>(null);
@@ -127,8 +129,26 @@ const MultiSelectComponent: <T>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const excludeData = useCallback(
+      (data: any[]) => {
+        if (excludeItems.length > 0) {
+          const getData = _.differenceWith(
+            data,
+            excludeItems,
+            (obj1, obj2) => _.get(obj1, valueField) === _.get(obj2, valueField)
+          );
+          return getData || [];
+        } else {
+          return data || [];
+        }
+      },
+      [excludeItems, valueField]
+    );
+
     useEffect(() => {
-      setListData([...data]);
+      const filterData = excludeData(data);
+      setListData([...filterData]);
+
       if (searchText) {
         onSearch(searchText);
       }
@@ -244,7 +264,8 @@ const MultiSelectComponent: <T>(
 
         _measure();
         setVisible(!visible);
-        setListData(data);
+        const filterData = excludeData(data);
+        setListData(filterData);
 
         if (!visible) {
           if (onFocus) {
@@ -299,12 +320,35 @@ const MultiSelectComponent: <T>(
           const dataSearch = data.filter(
             searchQuery ? propSearchFunction : defaultFilterFunction
           );
-          setListData(dataSearch);
+
+          if (excludeSearchItems.length > 0 || excludeItems.length > 0) {
+            const excludeSearchData = _.differenceWith(
+              dataSearch,
+              excludeSearchItems,
+              (obj1, obj2) =>
+                _.get(obj1, valueField) === _.get(obj2, valueField)
+            );
+
+            const filterData = excludeData(excludeSearchData);
+            setListData(filterData);
+          } else {
+            setListData(dataSearch);
+          }
         } else {
-          setListData(data);
+          const filterData = excludeData(data);
+          setListData(filterData);
         }
       },
-      [data, searchField, labelField, searchQuery]
+      [
+        data,
+        searchQuery,
+        excludeSearchItems,
+        excludeItems,
+        searchField,
+        labelField,
+        valueField,
+        excludeData,
+      ]
     );
 
     const onSelect = useCallback(

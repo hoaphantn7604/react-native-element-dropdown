@@ -55,6 +55,8 @@ export interface DropdownProps<T> {
   inverted?: boolean;
   mode?: 'default' | 'modal' | 'auto';
   closeModalWhenSelectedItem?: boolean;
+  excludeItems?: T[];
+  excludeSearchItems?: T[];
   onChange: (item: T) => void;
   renderLeftIcon?: (visible?: boolean) => JSX.Element | null | undefined;
   renderRightIcon?: (visible?: boolean) => JSX.Element | null | undefined;

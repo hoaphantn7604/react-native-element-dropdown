@@ -13,6 +13,11 @@ const data = [
   { label: 'Item 8', value: '8' },
 ];
 
+const excludeItem = [
+  { label: 'Item 7', value: '7', search: 'Item 7' },
+  { label: 'Item 8', value: '8', search: 'Item 8' },
+];
+
 const MultiSelectComponent = () => {
   const [selected, setSelected] = useState<string[]>([]);
   const ref = useRef(null);
@@ -54,6 +59,7 @@ const MultiSelectComponent = () => {
         backgroundColor={'rgba(0,0,0,0.2)'}
         search
         data={data}
+        excludeItems={excludeItem}
         labelField="label"
         valueField="value"
         placeholder="Multiselect All"
