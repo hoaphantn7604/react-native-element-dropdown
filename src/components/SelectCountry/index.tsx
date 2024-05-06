@@ -22,6 +22,7 @@ const SelectCountryComponent: <T>(
       imageField,
       selectedTextStyle,
       imageStyle,
+      selectedImageStyle,
     } = props;
     const ref: any = useRef(null);
 
@@ -63,7 +64,7 @@ const SelectCountryComponent: <T>(
             return (
               <Image
                 source={selectItem.image}
-                style={[styles.image, imageStyle]}
+                style={[styles.image, imageStyle, selectedImageStyle]}
               />
             );
           } else {
