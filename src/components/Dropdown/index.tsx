@@ -92,6 +92,7 @@ const DropdownComponent: <T>(
       closeModalWhenSelectedItem = true,
       excludeItems = [],
       excludeSearchItems = [],
+      selectedVal
     } = props;
 
     const ref = useRef<View>(null);
@@ -424,7 +425,8 @@ const DropdownComponent: <T>(
         >
           <View style={styles.dropdown}>
             {renderLeftIcon?.(visible)}
-            <Text
+            {__renderSelectedVal()}
+            {!selectedVal && <Text
               style={[
                 styles.textItem,
                 isSelected !== null ? selectedTextStyle : placeholderStyle,
@@ -435,7 +437,7 @@ const DropdownComponent: <T>(
               {isSelected !== null
                 ? _.get(currentValue, labelField)
                 : placeholder}
-            </Text>
+            </Text>}
             {renderRightIcon ? (
               renderRightIcon(visible)
             ) : (
@@ -451,6 +453,13 @@ const DropdownComponent: <T>(
           </View>
         </TouchableWithoutFeedback>
       );
+    };
+
+    const __renderSelectedVal = () => {
+      if (selectedVal) {
+        return selectedVal;
+      }
+      return null;
     };
 
     const _renderItem = useCallback(
