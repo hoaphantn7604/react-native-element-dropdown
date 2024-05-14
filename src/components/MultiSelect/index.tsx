@@ -57,6 +57,7 @@ const MultiSelectComponent: <T>(
       itemTextStyle,
       iconStyle,
       activeColor = '#F6F7F8',
+      activeItemTextStyle,
       containerStyle,
       fontFamily,
       placeholderStyle,
@@ -479,6 +480,7 @@ const MultiSelectComponent: <T>(
                     style={StyleSheet.flatten([
                       styles.textItem,
                       itemTextStyle,
+                      selected && activeItemTextStyle,
                       font(),
                     ])}
                   >
@@ -493,6 +495,7 @@ const MultiSelectComponent: <T>(
       [
         accessibilityLabel,
         activeColor,
+        activeItemTextStyle,
         checkSelected,
         font,
         itemAccessibilityLabelField,

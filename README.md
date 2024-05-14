@@ -61,6 +61,7 @@ yarn add react-native-element-dropdown
 | itemContainerStyle | TextStyle                                       | No        | Styling for item container in list                                  |
 | itemTextStyle      | TextStyle                                       | No        | Styling for text item in list                                       |
 | activeColor        | String                                          | No        | Background color for item selected in list container                |
+| activeItemTextStyle | TextStyle                                      | No        | Text style for item selected in list container                      |
 | search             | Boolean                                         | No        | Show or hide input search                                           |
 | searchQuery        | (keyword: string, labelValue: string) => Boolean| No        | Callback used to filter the list of items                           |
 | inputSearchStyle   | ViewStyle                                       | No        | Styling for input search                                            |
@@ -113,6 +114,7 @@ yarn add react-native-element-dropdown
 | iconStyle          | ImageStyle                                           | No        | Styling for icon                                                    |
 | iconColor          | String                                               | No        | Color of icons                                                      |
 | activeColor        | String                                               | No        | Background color for item selected in list container                |
+| activeItemTextStyle | TextStyle                                           | No        | Text style for item selected in list container                      |
 | itemContainerStyle | TextStyle                                            | No        | Styling for item container in list                                  |
 | itemTextStyle      | TextStyle                                            | No        | Styling for text item in list                                       |
 | selectedStyle      | ViewStyle                                            | No        | Styling for selected view                                           |

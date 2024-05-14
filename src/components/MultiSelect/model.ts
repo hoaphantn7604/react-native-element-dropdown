@@ -34,6 +34,7 @@ export interface MultiSelectProps<T> {
   fontFamily?: string;
   iconColor?: string;
   activeColor?: string;
+  activeItemTextStyle?: StyleProp<TextStyle>;
   data: T[];
   value?: string[] | null | undefined;
   placeholder?: string;
