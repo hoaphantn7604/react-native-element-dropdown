@@ -225,22 +225,22 @@ const DropdownComponent: <T>(
     }, [_measure]);
 
     useEffect(() => {
-      const susbcriptionKeyboardDidShow = Keyboard.addListener(
+      const subscriptionKeyboardDidShow = Keyboard.addListener(
         'keyboardDidShow',
         onKeyboardDidShow
       );
-      const susbcriptionKeyboardDidHide = Keyboard.addListener(
+      const subscriptionKeyboardDidHide = Keyboard.addListener(
         'keyboardDidHide',
         onKeyboardDidHide
       );
 
       return () => {
-        if (typeof susbcriptionKeyboardDidShow?.remove === 'function') {
-          susbcriptionKeyboardDidShow.remove();
+        if (typeof subscriptionKeyboardDidShow?.remove === 'function') {
+          subscriptionKeyboardDidShow.remove();
         }
 
-        if (typeof susbcriptionKeyboardDidHide?.remove === 'function') {
-          susbcriptionKeyboardDidHide.remove();
+        if (typeof subscriptionKeyboardDidHide?.remove === 'function') {
+          subscriptionKeyboardDidHide.remove();
         }
       };
     }, [onKeyboardDidHide, onKeyboardDidShow]);
