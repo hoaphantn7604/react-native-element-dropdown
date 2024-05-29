@@ -275,7 +275,11 @@ const DropdownComponent: <T>(
               _.isEqual(defaultValue, _.get(e, valueField))
             );
 
-            if (index > -1 && index < listData.length) {
+            if (
+              index > -1 &&
+              !_.isEmpty(listData.length) &&
+              index <= listData.length - 1
+            ) {
               try {
                 refList.current.scrollToIndex({
                   index: index,
