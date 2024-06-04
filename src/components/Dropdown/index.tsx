@@ -673,6 +673,7 @@ const DropdownComponent: <T>(
                   >
                     <View
                       style={StyleSheet.flatten([
+                        { width },
                         styles.container,
                         isFull ? styleHorizontal : styleVertical,
                         {
