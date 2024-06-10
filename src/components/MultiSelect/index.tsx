@@ -53,6 +53,7 @@ const MultiSelectComponent: <T>(
       searchField,
       selectedStyle,
       selectedTextStyle,
+      selectedTextProps = {},
       itemContainerStyle,
       itemTextStyle,
       iconStyle,
@@ -416,6 +417,7 @@ const MultiSelectComponent: <T>(
                 placeholderStyle,
                 font(),
               ])}
+              {...selectedTextProps}
             >
               {placeholder}
             </Text>
