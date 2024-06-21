@@ -55,6 +55,7 @@ const MultiSelectComponent: <T>(
       searchField,
       selectedStyle,
       selectedTextStyle,
+      selectedTextProps = {},
       itemContainerStyle,
       itemTextStyle,
       iconStyle,
