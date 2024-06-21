@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import _ from 'lodash';
+import _assign from 'lodash/assign';
+import _differenceWith from 'lodash/differenceWith';
+import _get from 'lodash/get';
 import React, {
   JSXElementConstructor,
   ReactElement,
@@ -56,6 +58,7 @@ const MultiSelectComponent: <T>(
       itemContainerStyle,
       itemTextStyle,
       iconStyle,
+      selectedTextProps = {},
       activeColor = '#F6F7F8',
       containerStyle,
       fontFamily,
@@ -132,10 +135,10 @@ const MultiSelectComponent: <T>(
     const excludeData = useCallback(
       (data: any[]) => {
         if (excludeItems.length > 0) {
-          const getData = _.differenceWith(
+          const getData = _differenceWith(
             data,
             excludeItems,
-            (obj1, obj2) => _.get(obj1, valueField) === _.get(obj2, valueField)
+            (obj1, obj2) => _get(obj1, valueField) === _get(obj2, valueField)
           );
           return getData || [];
         } else {
@@ -258,16 +261,18 @@ const MultiSelectComponent: <T>(
 
     const showOrClose = useCallback(() => {
       if (!disable) {
-        if (keyboardHeight > 0 && visible) {
+        const visibleStatus = !visible;
+
+        if (keyboardHeight > 0 && !visibleStatus) {
           return Keyboard.dismiss();
         }
 
         _measure();
-        setVisible(!visible);
+        setVisible(visibleStatus);
         const filterData = excludeData(data);
         setListData(filterData);
 
-        if (!visible) {
+        if (visibleStatus) {
           if (onFocus) {
             onFocus();
           }
@@ -297,7 +302,7 @@ const MultiSelectComponent: <T>(
       (text: string) => {
         if (text.length > 0) {
           const defaultFilterFunction = (e: any) => {
-            const item = _.get(e, searchField || labelField)
+            const item = _get(e, searchField || labelField)
               ?.toLowerCase()
               .replace(/\s/g, '')
               .normalize('NFD')
@@ -312,7 +317,7 @@ const MultiSelectComponent: <T>(
           };
 
           const propSearchFunction = (e: any) => {
-            const labelText = _.get(e, searchField || labelField);
+            const labelText = _get(e, searchField || labelField);
 
             return searchQuery?.(text, labelText);
           };
@@ -322,11 +327,10 @@ const MultiSelectComponent: <T>(
           );
 
           if (excludeSearchItems.length > 0 || excludeItems.length > 0) {
-            const excludeSearchData = _.differenceWith(
+            const excludeSearchData = _differenceWith(
               dataSearch,
               excludeSearchItems,
-              (obj1, obj2) =>
-                _.get(obj1, valueField) === _.get(obj2, valueField)
+              (obj1, obj2) => _get(obj1, valueField) === _get(obj2, valueField)
             );
 
             const filterData = excludeData(excludeSearchData);
@@ -355,17 +359,17 @@ const MultiSelectComponent: <T>(
       (item: any) => {
         const newCurrentValue = [...currentValue];
         const index = newCurrentValue.findIndex(
-          (e) => e === _.get(item, valueField)
+          (e) => e === _get(item, valueField)
         );
         if (index > -1) {
           newCurrentValue.splice(index, 1);
         } else {
           if (maxSelect) {
             if (newCurrentValue.length < maxSelect) {
-              newCurrentValue.push(_.get(item, valueField));
+              newCurrentValue.push(_get(item, valueField));
             }
           } else {
-            newCurrentValue.push(_.get(item, valueField));
+            newCurrentValue.push(_get(item, valueField));
           }
         }
 
@@ -416,6 +420,7 @@ const MultiSelectComponent: <T>(
                 placeholderStyle,
                 font(),
               ])}
+              {...selectedTextProps}
             >
               {placeholder}
             </Text>
@@ -439,7 +444,7 @@ const MultiSelectComponent: <T>(
     const checkSelected = useCallback(
       (item: any) => {
         const index = currentValue.findIndex(
-          (e) => e === _.get(item, valueField)
+          (e) => e === _get(item, valueField)
         );
         return index > -1;
       },
@@ -449,13 +454,13 @@ const MultiSelectComponent: <T>(
     const _renderItem = useCallback(
       ({ item, index }: { item: any; index: number }) => {
         const selected = checkSelected(item);
-        _.assign(item, { _index: index });
+        _assign(item, { _index: index });
         return (
           <TouchableHighlight
             key={index.toString()}
-            testID={_.get(item, itemTestIDField || labelField)}
+            testID={_get(item, itemTestIDField || labelField)}
             accessible={!!accessibilityLabel}
-            accessibilityLabel={_.get(
+            accessibilityLabel={_get(
               item,
               itemAccessibilityLabelField || labelField
             )}
@@ -482,7 +487,7 @@ const MultiSelectComponent: <T>(
                       font(),
                     ])}
                   >
-                    {_.get(item, labelField)}
+                    {_get(item, labelField)}
                   </Text>
                 </View>
               )}
@@ -704,7 +709,7 @@ const MultiSelectComponent: <T>(
 
     const _renderItemSelected = (inside: boolean) => {
       const list = data.filter((e: any) => {
-        const check = value?.indexOf(_.get(e, valueField));
+        const check = value?.indexOf(_get(e, valueField));
         if (check !== -1) {
           return e;
         }
@@ -721,13 +726,13 @@ const MultiSelectComponent: <T>(
             if (renderSelectedItem) {
               return (
                 <TouchableWithoutFeedback
-                  testID={_.get(e, itemTestIDField || labelField)}
+                  testID={_get(e, itemTestIDField || labelField)}
                   accessible={!!accessibilityLabel}
-                  accessibilityLabel={_.get(
+                  accessibilityLabel={_get(
                     e,
                     itemAccessibilityLabelField || labelField
                   )}
-                  key={_.get(e, labelField)}
+                  key={_get(e, labelField)}
                   onPress={() => unSelect(e)}
                 >
                   {renderSelectedItem(e, () => {
@@ -738,13 +743,13 @@ const MultiSelectComponent: <T>(
             } else {
               return (
                 <TouchableWithoutFeedback
-                  testID={_.get(e, itemTestIDField || labelField)}
+                  testID={_get(e, itemTestIDField || labelField)}
                   accessible={!!accessibilityLabel}
-                  accessibilityLabel={_.get(
+                  accessibilityLabel={_get(
                     e,
                     itemAccessibilityLabelField || labelField
                   )}
-                  key={_.get(e, labelField)}
+                  key={_get(e, labelField)}
                   onPress={() => unSelect(e)}
                 >
                   <View
@@ -760,7 +765,7 @@ const MultiSelectComponent: <T>(
                         font(),
                       ])}
                     >
-                      {_.get(e, labelField)}
+                      {_get(e, labelField)}
                     </Text>
                     <Text
                       style={StyleSheet.flatten([

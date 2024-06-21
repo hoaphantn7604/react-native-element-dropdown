@@ -13,14 +13,6 @@ import { styles } from './styles';
 
 const ic_close = require('../../assets/close.png');
 
-const defaultProps = {
-  style: {},
-  value: '',
-  showIcon: true,
-  currency: false,
-  numeric: false,
-};
-
 const TextInputComponent: CTextInput = (props) => {
   const {
     fontFamily,
@@ -98,7 +90,5 @@ const TextInputComponent: CTextInput = (props) => {
     </TouchableWithoutFeedback>
   );
 };
-
-TextInputComponent.defaultProps = defaultProps;
 
 export default TextInputComponent;

@@ -117,6 +117,7 @@ yarn add react-native-element-dropdown
 | itemTextStyle      | TextStyle                                            | No        | Styling for text item in list                                       |
 | selectedStyle      | ViewStyle                                            | No        | Styling for selected view                                           |
 | selectedTextStyle  | TextStyle                                            | No        | Styling for selected text                                           |
+| selectedTextProps  | TextProps                                            | No        | Text Props for selected text. Ex: numberOfLines={1}                 |
 | renderSelectedItem | (item: object, unSelect?: () => void) => JSX.Element | No        | Takes an item from data and renders it into the list selected       |
 | alwaysRenderSelectedItem | Boolean                                        | No        | Always show the list of selected items                              |
 | visibleSelectedItem | Boolean                                             | No        | Option to hide selected item list, Ẽx: visibleSelectedItem={false}  |

@@ -5,6 +5,7 @@ import type {
   TextStyle,
   ViewStyle,
 } from 'react-native';
+import { TextProps } from 'react-native';
 
 export interface IMultiSelectRef {
   open: () => void;
@@ -24,6 +25,7 @@ export interface MultiSelectProps<T> {
   placeholderStyle?: StyleProp<TextStyle>;
   inputSearchStyle?: StyleProp<TextStyle>;
   selectedStyle?: StyleProp<ViewStyle>;
+  selectedTextProps?: TextProps;
   selectedTextStyle?: StyleProp<TextStyle>;
   itemContainerStyle?: StyleProp<ViewStyle>;
   itemTextStyle?: StyleProp<TextStyle>;

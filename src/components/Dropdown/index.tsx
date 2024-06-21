@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import _ from 'lodash';
+import _assign from 'lodash/assign';
+import _differenceWith from 'lodash/differenceWith';
+import _findIndex from 'lodash/findIndex';
+import _get from 'lodash/get';
+import _isEqual from 'lodash/isEqual';
+
 import React, {
   JSXElementConstructor,
   ReactElement,
@@ -129,10 +134,10 @@ const DropdownComponent: <T>(
     const excludeData = useCallback(
       (data: any[]) => {
         if (excludeItems.length > 0) {
-          const getData = _.differenceWith(
+          const getData = _differenceWith(
             data,
             excludeItems,
-            (obj1, obj2) => _.get(obj1, valueField) === _.get(obj2, valueField)
+            (obj1, obj2) => _get(obj1, valueField) === _get(obj2, valueField)
           );
           return getData || [];
         } else {
@@ -247,10 +252,10 @@ const DropdownComponent: <T>(
 
     const getValue = useCallback(() => {
       const defaultValue =
-        typeof value === 'object' ? _.get(value, valueField) : value;
+        typeof value === 'object' ? _get(value, valueField) : value;
 
       const getItem = data.filter((e) =>
-        _.isEqual(defaultValue, _.get(e, valueField))
+        _isEqual(defaultValue, _get(e, valueField))
       );
 
       if (getItem.length > 0) {
@@ -265,24 +270,28 @@ const DropdownComponent: <T>(
     }, [value, data, getValue]);
 
     const scrollIndex = useCallback(() => {
-      if (autoScroll && data.length > 0 && listData.length === data.length) {
+      if (autoScroll && data?.length > 0 && listData?.length === data?.length) {
         setTimeout(() => {
           if (refList && refList?.current) {
             const defaultValue =
-              typeof value === 'object' ? _.get(value, valueField) : value;
+              typeof value === 'object' ? _get(value, valueField) : value;
 
-            const index = _.findIndex(listData, (e: any) =>
-              _.isEqual(defaultValue, _.get(e, valueField))
+            const index = _findIndex(listData, (e) =>
+              _isEqual(defaultValue, _get(e, valueField))
             );
             if (
-              listData.length > 0 &&
+              listData?.length > 0 &&
               index > -1 &&
-              index <= listData.length - 1
+              index <= listData?.length - 1
             ) {
-              refList?.current?.scrollToIndex({
-                index: index,
-                animated: false,
-              });
+              try {
+                refList.current.scrollToIndex({
+                  index: index,
+                  animated: false,
+                });
+              } catch (error) {
+                console.warn(`scrollToIndex error: ${error}`);
+              }
             }
           }
         }, 200);
@@ -291,16 +300,26 @@ const DropdownComponent: <T>(
 
     const showOrClose = useCallback(() => {
       if (!disable) {
-        if (keyboardHeight > 0 && visible) {
+        const visibleStatus = !visible;
+
+        if (keyboardHeight > 0 && !visibleStatus) {
           return Keyboard.dismiss();
         }
 
+        if (!visibleStatus) {
+          if (onChangeText) {
+            onChangeText('');
+          }
+          setSearchText('');
+          onSearch('');
+        }
+
         _measure();
-        setVisible(!visible);
+        setVisible(visibleStatus);
         const filterData = excludeData(data);
         setListData(filterData);
 
-        if (!visible) {
+        if (visibleStatus) {
           if (onFocus) {
             onFocus();
           }
@@ -309,6 +328,7 @@ const DropdownComponent: <T>(
             onBlur();
           }
         }
+
         if (searchText.length > 0) {
           onSearch(searchText);
         }
@@ -331,7 +351,7 @@ const DropdownComponent: <T>(
       (text: string) => {
         if (text.length > 0) {
           const defaultFilterFunction = (e: any) => {
-            const item = _.get(e, searchField || labelField)
+            const item = _get(e, searchField || labelField)
               ?.toLowerCase()
               .replace(/\s/g, '')
               .normalize('NFD')
@@ -346,7 +366,7 @@ const DropdownComponent: <T>(
           };
 
           const propSearchFunction = (e: any) => {
-            const labelText = _.get(e, searchField || labelField);
+            const labelText = _get(e, searchField || labelField);
 
             return searchQuery?.(text, labelText);
           };
@@ -356,11 +376,10 @@ const DropdownComponent: <T>(
           );
 
           if (excludeSearchItems.length > 0 || excludeItems.length > 0) {
-            const excludeSearchData = _.differenceWith(
+            const excludeSearchData = _differenceWith(
               dataSearch,
               excludeSearchItems,
-              (obj1, obj2) =>
-                _.get(obj1, valueField) === _.get(obj2, valueField)
+              (obj1, obj2) => _get(obj1, valueField) === _get(obj2, valueField)
             );
 
             const filterData = excludeData(excludeSearchData);
@@ -391,14 +410,15 @@ const DropdownComponent: <T>(
           return onConfirmSelectItem(item);
         }
 
-        if (onChangeText) {
-          setSearchText('');
-          onChangeText('');
-        }
-        onSearch('');
         setCurrentValue(item);
         onChange(item);
+
         if (closeModalWhenSelectedItem) {
+          if (onChangeText) {
+            onChangeText('');
+          }
+          setSearchText('');
+          onSearch('');
           eventClose();
         }
       },
@@ -414,7 +434,7 @@ const DropdownComponent: <T>(
     );
 
     const _renderDropdown = () => {
-      const isSelected = currentValue && _.get(currentValue, valueField);
+      const isSelected = currentValue && _get(currentValue, valueField);
       return (
         <TouchableWithoutFeedback
           testID={testID}
@@ -433,7 +453,7 @@ const DropdownComponent: <T>(
               {...selectedTextProps}
             >
               {isSelected !== null
-                ? _.get(currentValue, labelField)
+                ? _get(currentValue, labelField)
                 : placeholder}
             </Text>
             {renderRightIcon ? (
@@ -455,15 +475,15 @@ const DropdownComponent: <T>(
 
     const _renderItem = useCallback(
       ({ item, index }: { item: any; index: number }) => {
-        const isSelected = currentValue && _.get(currentValue, valueField);
-        const selected = _.isEqual(_.get(item, valueField), isSelected);
-        _.assign(item, { _index: index });
+        const isSelected = currentValue && _get(currentValue, valueField);
+        const selected = _isEqual(_get(item, valueField), isSelected);
+        _assign(item, { _index: index });
         return (
           <TouchableHighlight
             key={index.toString()}
-            testID={_.get(item, itemTestIDField || labelField)}
+            testID={_get(item, itemTestIDField || labelField)}
             accessible={!!accessibilityLabel}
-            accessibilityLabel={_.get(
+            accessibilityLabel={_get(
               item,
               itemAccessibilityLabelField || labelField
             )}
@@ -489,7 +509,7 @@ const DropdownComponent: <T>(
                       font(),
                     ])}
                   >
-                    {_.get(item, labelField)}
+                    {_get(item, labelField)}
                   </Text>
                 </View>
               )}
