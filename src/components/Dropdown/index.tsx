@@ -636,7 +636,7 @@ const DropdownComponent: <T>(
             return bottom < keyboardHeight + height;
           }
 
-          return bottom < (search ? 150 : 100);
+          return bottom < (H * 0.5);
         };
 
         if (width && top && bottom) {
@@ -713,8 +713,8 @@ const DropdownComponent: <T>(
       }
       return null;
     }, [
+      H,
       visible,
-      search,
       position,
       keyboardHeight,
       maxHeight,

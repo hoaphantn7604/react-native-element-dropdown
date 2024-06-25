@@ -608,7 +608,7 @@ const MultiSelectComponent: <T>(
             return bottom < keyboardHeight + height;
           }
 
-          return bottom < (search ? 150 : 100);
+          return bottom < (H * 0.5);
         };
 
         if (width && top && bottom) {
@@ -685,8 +685,8 @@ const MultiSelectComponent: <T>(
       }
       return null;
     }, [
+      H,
       visible,
-      search,
       position,
       keyboardHeight,
       maxHeight,
