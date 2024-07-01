@@ -66,6 +66,7 @@ const DropdownComponent: <T>(
       searchField,
       value,
       activeColor = '#F6F7F8',
+      activeItemTextStyle,
       fontFamily,
       iconColor = 'gray',
       searchPlaceholder,
@@ -506,6 +507,7 @@ const DropdownComponent: <T>(
                     style={StyleSheet.flatten([
                       styles.textItem,
                       itemTextStyle,
+                      selected && activeItemTextStyle,
                       font(),
                     ])}
                   >
@@ -520,6 +522,7 @@ const DropdownComponent: <T>(
       [
         accessibilityLabel,
         activeColor,
+        activeItemTextStyle,
         currentValue,
         font,
         itemAccessibilityLabelField,
