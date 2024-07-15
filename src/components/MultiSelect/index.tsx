@@ -64,6 +64,7 @@ const MultiSelectComponent: <T>(
       fontFamily,
       placeholderStyle,
       iconColor = 'gray',
+      searchPlaceholderTextColor = 'gray',
       inputSearchStyle,
       searchPlaceholder,
       placeholder = 'Select item',
@@ -536,7 +537,7 @@ const MultiSelectComponent: <T>(
                 }
                 onSearch(e);
               }}
-              placeholderTextColor="gray"
+              placeholderTextColor={searchPlaceholderTextColor}
               iconStyle={[{ tintColor: iconColor }, iconStyle]}
             />
           );
@@ -547,6 +548,7 @@ const MultiSelectComponent: <T>(
       accessibilityLabel,
       font,
       iconColor,
+      searchPlaceholderTextColor,
       iconStyle,
       inputSearchStyle,
       onChangeText,
