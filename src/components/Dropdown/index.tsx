@@ -97,6 +97,7 @@ const DropdownComponent: <T>(
       closeModalWhenSelectedItem = true,
       excludeItems = [],
       excludeSearchItems = [],
+      renderValue,
     } = props;
 
     const ref = useRef<View>(null);
@@ -444,18 +445,22 @@ const DropdownComponent: <T>(
         >
           <View style={styles.dropdown}>
             {renderLeftIcon?.(visible)}
-            <Text
-              style={[
-                styles.textItem,
-                isSelected !== null ? selectedTextStyle : placeholderStyle,
-                font(),
-              ]}
-              {...selectedTextProps}
-            >
-              {isSelected !== null
-                ? _get(currentValue, labelField)
-                : placeholder}
-            </Text>
+            {__renderValue()}
+            {!renderValue && (
+              <Text
+                style={[
+                  styles.textItem,
+                  isSelected !== null ? selectedTextStyle : placeholderStyle,
+                  font(),
+                ]}
+                {...selectedTextProps}
+              >
+                {isSelected !== null
+                  ? _get(currentValue, labelField)
+                  : placeholder}
+              </Text>
+            )}
+
             {renderRightIcon ? (
               renderRightIcon(visible)
             ) : (
@@ -470,6 +475,25 @@ const DropdownComponent: <T>(
             )}
           </View>
         </TouchableWithoutFeedback>
+      );
+    };
+
+    const __renderValue = () => {
+      const isSelected = currentValue && _get(currentValue, valueField);
+      if (renderValue && currentValue) {
+        return renderValue(currentValue);
+      }
+      return (
+        <Text
+          style={[
+            styles.textItem,
+            isSelected !== null ? selectedTextStyle : placeholderStyle,
+            font(),
+          ]}
+          {...selectedTextProps}
+        >
+          {isSelected !== null ? _get(currentValue, labelField) : placeholder}
+        </Text>
       );
     };
 

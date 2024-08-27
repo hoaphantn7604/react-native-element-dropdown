@@ -9,7 +9,7 @@ import CountrySelect2 from './dropdown/CountrySelect2';
 import MultiSelectAll from './dropdown/MultiSelectAll';
 import MultiSelectWithConfirm from './dropdown/MultiSelectWithConfirm';
 import DropdownLazyLoad from './dropdown/DropdownLazyLoad';
-
+import DropDowCustomValue from './dropdown/DropDowCustomValue.';
 const DropdownScreen = (_props: any) => {
   return (
     <View style={styles.container}>
@@ -18,6 +18,7 @@ const DropdownScreen = (_props: any) => {
         showsVerticalScrollIndicator={false}
       >
         <Menu />
+        <DropDowCustomValue />
         <DropdownExample1 />
         <DropdownExample2 />
         <DropdownWithConfirm />

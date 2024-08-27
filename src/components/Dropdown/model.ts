@@ -69,4 +69,5 @@ export interface DropdownProps<T> {
   searchQuery?: (keyword: string, labelValue: string) => boolean;
   onChangeText?: (search: string) => void;
   onConfirmSelectItem?: (item: T) => void;
+  renderValue?: (item: T) => JSX.Element | null | undefined;
 }

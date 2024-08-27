@@ -1,5 +1,5 @@
 {
-  "name": "react-native-element-dropdown",
+  "name": "stations-cloud-react-native-element-dropdown",
   "version": "2.12.1",
   "description": "React Native Element Dropdown is a library that provides a customizable dropdown component for React Native applications.",
   "main": "lib/commonjs/index",
