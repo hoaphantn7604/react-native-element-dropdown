@@ -20,6 +20,7 @@ const SelectCountryComponent: <T>(
       valueField,
       labelField,
       imageField,
+      iconField,
       selectedTextStyle,
       imageStyle,
     } = props;
@@ -59,10 +60,10 @@ const SelectCountryComponent: <T>(
         {...props}
         renderItem={_renderItem}
         renderLeftIcon={() => {
-          if (selectItem?.image) {
+          if (selectItem && selectItem[iconField]) {
             return (
               <Image
-                source={selectItem.image}
+                source={selectItem[iconField]}
                 style={[styles.image, imageStyle]}
               />
             );
