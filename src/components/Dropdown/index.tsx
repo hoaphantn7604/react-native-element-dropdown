@@ -181,8 +181,12 @@ const DropdownComponent: <T>(
         if (onBlur) {
           onBlur();
         }
+
+        if (keyboardHeight > 0) {
+          return Keyboard.dismiss();
+        }
       }
-    }, [disable, onBlur]);
+    }, [disable, keyboardHeight, onBlur]);
 
     const font = useCallback(() => {
       if (fontFamily) {

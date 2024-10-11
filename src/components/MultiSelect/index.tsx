@@ -181,6 +181,10 @@ const MultiSelectComponent: <T>(
         if (onBlur) {
           onBlur();
         }
+
+        if (keyboardHeight > 0) {
+          return Keyboard.dismiss();
+        }
       }
     };
 
