@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { MultiSelect } from 'react-native-element-dropdown';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { IMultiSelectRef, MultiSelect } from 'react-native-element-dropdown';
 
 const data = [
   { label: 'Item 1', value: '1' },
@@ -20,7 +20,7 @@ const excludeItem = [
 
 const MultiSelectComponent = () => {
   const [selected, setSelected] = useState<string[]>([]);
-  const ref = useRef(null);
+  const ref = useRef<IMultiSelectRef>(null);
 
   const onSelectAll = (isSelectAll = true) => {
     const selectItem: string[] = [];
@@ -71,6 +71,14 @@ const MultiSelectComponent = () => {
         selectedStyle={styles.selectedStyle}
         flatListProps={{ ListHeaderComponent: renderSelectAllIcon }}
       />
+      <View style={styles.button}>
+        <Button
+          title="Open"
+          onPress={() => {
+            ref.current?.open();
+          }}
+        />
+      </View>
     </View>
   );
 };
@@ -78,8 +86,9 @@ const MultiSelectComponent = () => {
 export default MultiSelectComponent;
 
 const styles = StyleSheet.create({
-  container: { padding: 16 },
+  container: { padding: 16, flexDirection: 'row' },
   dropdown: {
+    flex: 1,
     backgroundColor: 'transparent',
     borderBottomColor: 'gray',
     borderBottomWidth: 0.5,
@@ -108,5 +117,8 @@ const styles = StyleSheet.create({
   },
   txtSelectAll: {
     color: 'blue',
+  },
+  button: {
+    marginHorizontal: 16,
   },
 });

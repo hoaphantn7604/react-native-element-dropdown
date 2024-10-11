@@ -45,7 +45,7 @@ const DropdownComponent = () => {
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
         data={data}
-        excludeSearchItems={excludeItem}
+        excludeItems={excludeItem}
         autoScroll
         search
         maxHeight={300}

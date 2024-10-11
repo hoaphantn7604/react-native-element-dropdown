@@ -65,6 +65,7 @@ yarn add react-native-element-dropdown
 | searchQuery        | (keyword: string, labelValue: string) => Boolean| No        | Callback used to filter the list of items                           |
 | inputSearchStyle   | ViewStyle                                       | No        | Styling for input search                                            |
 | searchPlaceholder  | String                                          | No        | The string that will be rendered before text input has been entered |
+| searchPlaceholderTextColor  | String                                 | No        | The text color of the placeholder string                            |
 | renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element| No        | Customize TextInput search                                          |
 | disable            | Boolean                                         | No        | Specifies the disabled state of the Dropdown                        |
 | dropdownPosition   | 'auto' or 'top' or 'bottom'                     | No        | Dropdown list position. Default is 'auto'                           |
@@ -125,6 +126,7 @@ yarn add react-native-element-dropdown
 | searchQuery        | (keyword: string, labelValue: string) => Boolean     | No        | Callback used to filter the list of items                           |
 | inputSearchStyle   | ViewStyle                                            | No        | Styling for input search                                            |
 | searchPlaceholder  | String                                               | No        | The string that will be rendered before text input has been entered |
+| searchPlaceholderTextColor  | String                                      | No        | The text color of the placeholder string                            |
 | renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element     | No        | Customize TextInput search                                          |
 | disable            | Boolean                                              | No        | Specifies the disabled state of the Dropdown                        |
 | dropdownPosition   | 'auto' or 'top' or 'bottom'                          | No        | Dropdown list position. Default is 'auto'                           |

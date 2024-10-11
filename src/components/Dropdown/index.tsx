@@ -69,6 +69,7 @@ const DropdownComponent: <T>(
       fontFamily,
       iconColor = 'gray',
       searchPlaceholder,
+      searchPlaceholderTextColor = 'gray',
       placeholder = 'Select item',
       search = false,
       maxHeight = 340,
@@ -148,8 +149,11 @@ const DropdownComponent: <T>(
     );
 
     useEffect(() => {
-      const filterData = excludeData(data);
-      setListData([...filterData]);
+      if (data && searchText.length === 0) {
+        const filterData = excludeData(data);
+        setListData([...filterData]);
+      }
+
       if (searchText) {
         onSearch(searchText);
       }
@@ -158,6 +162,7 @@ const DropdownComponent: <T>(
 
     const eventOpen = () => {
       if (!disable) {
+        _measure();
         setVisible(true);
         if (onFocus) {
           onFocus();
@@ -316,8 +321,11 @@ const DropdownComponent: <T>(
 
         _measure();
         setVisible(visibleStatus);
-        const filterData = excludeData(data);
-        setListData(filterData);
+
+        if (data) {
+          const filterData = excludeData(data);
+          setListData(filterData);
+        }
 
         if (visibleStatus) {
           if (onFocus) {
@@ -560,7 +568,8 @@ const DropdownComponent: <T>(
                 }
                 onSearch(e);
               }}
-              placeholderTextColor="gray"
+              placeholderTextColor={searchPlaceholderTextColor}
+              showIcon
               iconStyle={[{ tintColor: iconColor }, iconStyle]}
             />
           );
@@ -578,6 +587,7 @@ const DropdownComponent: <T>(
       renderInputSearch,
       search,
       searchPlaceholder,
+      searchPlaceholderTextColor,
       testID,
       searchText,
     ]);

@@ -46,6 +46,7 @@ export interface MultiSelectProps<T> {
   disable?: boolean;
   showsVerticalScrollIndicator?: boolean;
   searchPlaceholder?: string;
+  searchPlaceholderTextColor?: string;
   dropdownPosition?: 'auto' | 'top' | 'bottom';
   flatListProps?: Omit<FlatListProps<any>, 'renderItem' | 'data'>;
   alwaysRenderSelectedItem?: boolean;

@@ -66,6 +66,7 @@ const MultiSelectComponent: <T>(
       iconColor = 'gray',
       inputSearchStyle,
       searchPlaceholder,
+      searchPlaceholderTextColor = 'gray',
       placeholder = 'Select item',
       search = false,
       maxHeight = 340,
@@ -149,8 +150,10 @@ const MultiSelectComponent: <T>(
     );
 
     useEffect(() => {
-      const filterData = excludeData(data);
-      setListData([...filterData]);
+      if (data && searchText.length === 0) {
+        const filterData = excludeData(data);
+        setListData([...filterData]);
+      }
 
       if (searchText) {
         onSearch(searchText);
@@ -160,6 +163,7 @@ const MultiSelectComponent: <T>(
 
     const eventOpen = () => {
       if (!disable) {
+        _measure();
         setVisible(true);
         if (onFocus) {
           onFocus();
@@ -269,8 +273,11 @@ const MultiSelectComponent: <T>(
 
         _measure();
         setVisible(visibleStatus);
-        const filterData = excludeData(data);
-        setListData(filterData);
+
+        if (data) {
+          const filterData = excludeData(data);
+          setListData(filterData);
+        }
 
         if (visibleStatus) {
           if (onFocus) {
@@ -536,7 +543,8 @@ const MultiSelectComponent: <T>(
                 }
                 onSearch(e);
               }}
-              placeholderTextColor="gray"
+              showIcon
+              placeholderTextColor={searchPlaceholderTextColor}
               iconStyle={[{ tintColor: iconColor }, iconStyle]}
             />
           );
@@ -554,6 +562,7 @@ const MultiSelectComponent: <T>(
       renderInputSearch,
       search,
       searchPlaceholder,
+      searchPlaceholderTextColor,
       testID,
     ]);
 
