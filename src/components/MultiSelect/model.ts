@@ -2,6 +2,7 @@ import type {
   FlatListProps,
   ImageStyle,
   StyleProp,
+  TextProps,
   TextStyle,
   ViewStyle,
 } from 'react-native';
@@ -27,6 +28,7 @@ export interface MultiSelectProps<T> {
   selectedStyle?: StyleProp<ViewStyle>;
   selectedTextProps?: TextProps;
   selectedTextStyle?: StyleProp<TextStyle>;
+  selectedTextProps?: TextProps;
   itemContainerStyle?: StyleProp<ViewStyle>;
   itemTextStyle?: StyleProp<TextStyle>;
   iconStyle?: StyleProp<ImageStyle>;
