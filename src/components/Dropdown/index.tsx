@@ -72,6 +72,7 @@ const DropdownComponent: <T>(
       searchPlaceholderTextColor = 'gray',
       placeholder = 'Select item',
       search = false,
+      searchBothFields = false,
       maxHeight = 340,
       minHeight = 0,
       disable = false,
@@ -373,6 +374,30 @@ const DropdownComponent: <T>(
             return item.indexOf(key) >= 0;
           };
 
+          const searchBothFieldFunction = (e: any) => {
+            const item = _get(e, labelField)
+              ?.toLowerCase()
+              .replace(/\s/g, '')
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '');
+            const key = text
+              .toLowerCase()
+              .replace(/\s/g, '')
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '');
+
+            const item1 = _get(e, valueField)
+              ?.toLowerCase()
+              .replace(/\s/g, '')
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '');
+
+              const isLabelMatch = item.indexOf(key) >= 0;
+              const isValueMatch = item1.indexOf(key) >= 0;
+
+            return isLabelMatch || isValueMatch;
+          };
+
           const propSearchFunction = (e: any) => {
             const labelText = _get(e, searchField || labelField);
 
@@ -380,7 +405,7 @@ const DropdownComponent: <T>(
           };
 
           const dataSearch = data.filter(
-            searchQuery ? propSearchFunction : defaultFilterFunction
+            searchQuery ? propSearchFunction : searchBothFields ? searchBothFieldFunction: defaultFilterFunction
           );
 
           if (excludeSearchItems.length > 0 || excludeItems.length > 0) {
@@ -403,6 +428,7 @@ const DropdownComponent: <T>(
       [
         data,
         searchQuery,
+        searchBothFields,
         excludeSearchItems,
         excludeItems,
         searchField,
