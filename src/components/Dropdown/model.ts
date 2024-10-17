@@ -41,6 +41,7 @@ export interface DropdownProps<T> {
   valueField: keyof T;
   searchField?: keyof T;
   search?: boolean;
+  searchBothFields?: boolean;
   searchPlaceholder?: string;
   searchPlaceholderTextColor?: string;
   disable?: boolean;
