@@ -62,6 +62,7 @@ yarn add react-native-element-dropdown
 | itemTextStyle      | TextStyle                                       | No        | Styling for text item in list                                       |
 | activeColor        | String                                          | No        | Background color for item selected in list container                |
 | search             | Boolean                                         | No        | Show or hide input search                                           |
+| searchBothFields   | Boolean                                         | No        | Search by valueField and labelField                                 |
 | searchQuery        | (keyword: string, labelValue: string) => Boolean| No        | Callback used to filter the list of items                           |
 | inputSearchStyle   | ViewStyle                                       | No        | Styling for input search                                            |
 | searchPlaceholder  | String                                          | No        | The string that will be rendered before text input has been entered |
