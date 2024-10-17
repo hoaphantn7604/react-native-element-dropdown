@@ -632,6 +632,19 @@ const DropdownComponent: <T>(
               ref={refList}
               onScrollToIndexFailed={scrollIndex}
               data={listData}
+              ListEmptyComponent={
+                <View style={styles.item}>
+                <Text
+                  style={StyleSheet.flatten([
+                    styles.textItem,
+                    itemTextStyle,
+                    font(),
+                  ])}
+                >
+                No Result Found
+                </Text>
+              </View>
+              }
               inverted={isTopPosition ? inverted : false}
               renderItem={_renderItem}
               keyExtractor={(_item, index) => index.toString()}
