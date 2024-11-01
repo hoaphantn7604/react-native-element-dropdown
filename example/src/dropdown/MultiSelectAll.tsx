@@ -70,6 +70,7 @@ const MultiSelectComponent = () => {
         }}
         selectedStyle={styles.selectedStyle}
         flatListProps={{ ListHeaderComponent: renderSelectAllIcon }}
+        closeModalWhenSelectedItem={false}
       />
       <View style={styles.button}>
         <Button
