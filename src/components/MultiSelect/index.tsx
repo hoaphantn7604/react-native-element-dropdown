@@ -99,6 +99,7 @@ const MultiSelectComponent: <T>(
       mode = 'default',
       excludeItems = [],
       excludeSearchItems = [],
+      closeModalWhenSelectedItem = false,
     } = props;
 
     const ref = useRef<View>(null);
@@ -396,6 +397,15 @@ const MultiSelectComponent: <T>(
           }
         } else {
           onChange(newCurrentValue);
+        }
+
+        if (closeModalWhenSelectedItem) {
+          if (onChangeText) {
+            onChangeText('');
+          }
+          setSearchText('');
+          onSearch('');
+          eventClose();
         }
 
         setKey(Math.random());
