@@ -30,6 +30,7 @@ import {
   View,
   ViewStyle,
   StatusBar,
+  TextInput,
 } from 'react-native';
 import { useDetectDevice } from '../../toolkits';
 import { useDeviceOrientation } from '../../useDeviceOrientation';
@@ -557,11 +558,13 @@ const DropdownComponent: <T>(
             onSearch(text);
           });
         } else {
+          const { height } = position;
+
           return (
             <CInput
               testID={testID + ' input'}
               accessibilityLabel={accessibilityLabel + ' input'}
-              style={[styles.input, inputSearchStyle]}
+              style={[styles.input, inputSearchStyle, { height: height }]}
               inputStyle={[inputSearchStyle, font()]}
               value={searchText}
               autoCorrect={false}
@@ -623,7 +626,7 @@ const DropdownComponent: <T>(
           <TouchableWithoutFeedback>
             <View style={styles.flexShrink}>
               {isInverted && _renderListHelper()}
-              {renderSearch()}
+              {/* {renderSearch()} */}
               {!isInverted && _renderListHelper()}
             </View>
           </TouchableWithoutFeedback>
@@ -635,7 +638,7 @@ const DropdownComponent: <T>(
         flatListProps,
         listData,
         inverted,
-        renderSearch,
+        // renderSearch,
         scrollIndex,
         showsVerticalScrollIndicator,
         testID,
@@ -645,6 +648,7 @@ const DropdownComponent: <T>(
     const _renderModal = useCallback(() => {
       if (visible && position) {
         const { isFull, width, height, top, bottom, left } = position;
+        // console.log(position);
 
         const onAutoPosition = () => {
           if (keyboardHeight > 0) {
@@ -668,6 +672,10 @@ const DropdownComponent: <T>(
           let keyboardStyle: ViewStyle = {};
 
           let extendHeight = !isTopPosition ? top : bottom;
+          if (search) {
+            extendHeight = !isTopPosition ? top - height - 2 : bottom - (height * .5);
+          } 
+
           if (
             keyboardAvoiding &&
             keyboardHeight > 0 &&
@@ -703,9 +711,21 @@ const DropdownComponent: <T>(
                             justifyContent: 'flex-end',
                             paddingBottom: extendHeight,
                           },
-                      isFull && styles.fullScreen,
+                      isFull && styles.fullScreen
                     ])}
                   >
+                    <View
+                      style={StyleSheet.flatten([
+                        // styles.container,
+                        // isFull ? styleHorizontal : styleVertical,
+                        {
+                          left: left,
+                          width: width,
+                        }
+                      ])}
+                    >
+                      { renderSearch() }
+                    </View>
                     <View
                       style={StyleSheet.flatten([
                         styles.container,
