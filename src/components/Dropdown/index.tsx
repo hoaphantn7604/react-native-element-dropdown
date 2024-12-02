@@ -79,6 +79,7 @@ const DropdownComponent: <T>(
       inverted = true,
       renderLeftIcon,
       renderRightIcon,
+      renderSelectedItem,
       renderItem,
       renderInputSearch,
       onFocus,
@@ -450,33 +451,37 @@ const DropdownComponent: <T>(
           accessibilityLabel={accessibilityLabel}
           onPress={showOrClose}
         >
-          <View style={styles.dropdown}>
-            {renderLeftIcon?.(visible)}
-            <Text
-              style={[
-                styles.textItem,
-                isSelected !== null ? selectedTextStyle : placeholderStyle,
-                font(),
-              ]}
-              {...selectedTextProps}
-            >
-              {isSelected !== null
-                ? _get(currentValue, labelField)
-                : placeholder}
-            </Text>
-            {renderRightIcon ? (
-              renderRightIcon(visible)
-            ) : (
-              <Image
-                source={ic_down}
-                style={StyleSheet.flatten([
-                  styles.icon,
-                  { tintColor: iconColor },
-                  iconStyle,
-                ])}
-              />
-            )}
-          </View>
+          {
+            renderSelectedItem ? 
+            renderSelectedItem(visible) :
+            <View style={styles.dropdown}>
+              {renderLeftIcon?.(visible)}
+              <Text
+                style={[
+                  styles.textItem,
+                  isSelected !== null ? selectedTextStyle : placeholderStyle,
+                  font(),
+                ]}
+                {...selectedTextProps}
+              >
+                {isSelected !== null
+                  ? _get(currentValue, labelField)
+                  : placeholder}
+              </Text>
+              {renderRightIcon ? (
+                renderRightIcon(visible)
+              ) : (
+                <Image
+                  source={ic_down}
+                  style={StyleSheet.flatten([
+                    styles.icon,
+                    { tintColor: iconColor },
+                    iconStyle,
+                  ])}
+                />
+              )}
+            </View>
+          }
         </TouchableWithoutFeedback>
       );
     };
