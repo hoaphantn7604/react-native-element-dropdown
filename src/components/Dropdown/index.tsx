@@ -79,6 +79,7 @@ const DropdownComponent: <T>(
       inverted = true,
       renderLeftIcon,
       renderRightIcon,
+      renderSelectedItem,
       renderItem,
       renderInputSearch,
       onFocus,
@@ -450,33 +451,37 @@ const DropdownComponent: <T>(
           accessibilityLabel={accessibilityLabel}
           onPress={showOrClose}
         >
-          <View style={styles.dropdown}>
-            {renderLeftIcon?.(visible)}
-            <Text
-              style={[
-                styles.textItem,
-                isSelected !== null ? selectedTextStyle : placeholderStyle,
-                font(),
-              ]}
-              {...selectedTextProps}
-            >
-              {isSelected !== null
-                ? _get(currentValue, labelField)
-                : placeholder}
-            </Text>
-            {renderRightIcon ? (
-              renderRightIcon(visible)
-            ) : (
-              <Image
-                source={ic_down}
-                style={StyleSheet.flatten([
-                  styles.icon,
-                  { tintColor: iconColor },
-                  iconStyle,
-                ])}
-              />
-            )}
-          </View>
+          {renderSelectedItem ? (
+            renderSelectedItem(visible)
+          ) : (
+            <View style={styles.dropdown}>
+              {renderLeftIcon?.(visible)}
+              <Text
+                style={[
+                  styles.textItem,
+                  isSelected !== null ? selectedTextStyle : placeholderStyle,
+                  font(),
+                ]}
+                {...selectedTextProps}
+              >
+                {isSelected !== null
+                  ? _get(currentValue, labelField)
+                  : placeholder}
+              </Text>
+              {renderRightIcon ? (
+                renderRightIcon(visible)
+              ) : (
+                <Image
+                  source={ic_down}
+                  style={StyleSheet.flatten([
+                    styles.icon,
+                    { tintColor: iconColor },
+                    iconStyle,
+                  ])}
+                />
+              )}
+            </View>
+          )}
         </TouchableWithoutFeedback>
       );
     };
@@ -552,11 +557,13 @@ const DropdownComponent: <T>(
             onSearch(text);
           });
         } else {
+          const { height } = position;
+
           return (
             <CInput
               testID={testID + ' input'}
               accessibilityLabel={accessibilityLabel + ' input'}
-              style={[styles.input, inputSearchStyle]}
+              style={[styles.input, inputSearchStyle, { height: height }]}
               inputStyle={[inputSearchStyle, font()]}
               value={searchText}
               autoCorrect={false}
@@ -590,6 +597,7 @@ const DropdownComponent: <T>(
       searchPlaceholderTextColor,
       testID,
       searchText,
+      position,
     ]);
 
     const _renderList = useCallback(
@@ -597,6 +605,15 @@ const DropdownComponent: <T>(
         const isInverted = !inverted ? false : isTopPosition;
 
         const _renderListHelper = () => {
+          let customList = listData;
+          if (customList.length === 0) {
+            let customNotFound: any = { _index: 0 };
+            customNotFound[valueField] = null;
+            customNotFound[labelField] = 'Not Found';
+
+            customList.push(customNotFound);
+          }
+
           return (
             <FlatList
               testID={testID + ' flatlist'}
@@ -605,7 +622,7 @@ const DropdownComponent: <T>(
               keyboardShouldPersistTaps="handled"
               ref={refList}
               onScrollToIndexFailed={scrollIndex}
-              data={listData}
+              data={customList}
               inverted={isTopPosition ? inverted : false}
               renderItem={_renderItem}
               keyExtractor={(_item, index) => index.toString()}
@@ -618,7 +635,7 @@ const DropdownComponent: <T>(
           <TouchableWithoutFeedback>
             <View style={styles.flexShrink}>
               {isInverted && _renderListHelper()}
-              {renderSearch()}
+              {/* {renderSearch()} */}
               {!isInverted && _renderListHelper()}
             </View>
           </TouchableWithoutFeedback>
@@ -630,16 +647,19 @@ const DropdownComponent: <T>(
         flatListProps,
         listData,
         inverted,
-        renderSearch,
+        // renderSearch,
         scrollIndex,
         showsVerticalScrollIndicator,
         testID,
+        labelField,
+        valueField,
       ]
     );
 
     const _renderModal = useCallback(() => {
       if (visible && position) {
         const { isFull, width, height, top, bottom, left } = position;
+        // console.log(position);
 
         const onAutoPosition = () => {
           if (keyboardHeight > 0) {
@@ -663,6 +683,12 @@ const DropdownComponent: <T>(
           let keyboardStyle: ViewStyle = {};
 
           let extendHeight = !isTopPosition ? top : bottom;
+          if (search) {
+            extendHeight = !isTopPosition
+              ? top - height - 2
+              : bottom - height * 0.5;
+          }
+
           if (
             keyboardAvoiding &&
             keyboardHeight > 0 &&
@@ -703,6 +729,18 @@ const DropdownComponent: <T>(
                   >
                     <View
                       style={StyleSheet.flatten([
+                        // styles.container,
+                        // isFull ? styleHorizontal : styleVertical,
+                        {
+                          left: left,
+                          width: width,
+                        },
+                      ])}
+                    >
+                      {renderSearch()}
+                    </View>
+                    <View
+                      style={StyleSheet.flatten([
                         styles.container,
                         isFull ? styleHorizontal : styleVertical,
                         {
@@ -737,6 +775,7 @@ const DropdownComponent: <T>(
       containerStyle,
       styleHorizontal,
       _renderList,
+      renderSearch,
     ]);
 
     return (

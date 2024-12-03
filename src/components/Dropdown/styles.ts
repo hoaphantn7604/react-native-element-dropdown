@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
     flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    columnGap: 10,
   },
   title: {
     marginVertical: 5,
@@ -53,11 +54,13 @@ export const styles = StyleSheet.create({
     height: 20,
   },
   input: {
-    borderWidth: 0.5,
-    borderColor: '#DDDDDD',
+    borderColor: 'gray', 
+    borderWidth: 1, 
+    borderRadius: 8,
     paddingHorizontal: 8,
     marginBottom: 8,
-    margin: 6,
+    // margin: 6,
+    backgroundColor: 'white',
     height: 45,
   },
   fullScreen: {

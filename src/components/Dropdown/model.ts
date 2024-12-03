@@ -59,6 +59,7 @@ export interface DropdownProps<T> {
   excludeItems?: T[];
   excludeSearchItems?: T[];
   onChange: (item: T) => void;
+  renderSelectedItem?: (visible?: boolean) => JSX.Element | null | undefined;
   renderLeftIcon?: (visible?: boolean) => JSX.Element | null | undefined;
   renderRightIcon?: (visible?: boolean) => JSX.Element | null | undefined;
   renderItem?: (item: T, selected?: boolean) => JSX.Element | null | undefined;
