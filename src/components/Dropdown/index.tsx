@@ -30,7 +30,6 @@ import {
   View,
   ViewStyle,
   StatusBar,
-  TextInput,
 } from 'react-native';
 import { useDetectDevice } from '../../toolkits';
 import { useDeviceOrientation } from '../../useDeviceOrientation';
@@ -452,9 +451,9 @@ const DropdownComponent: <T>(
           accessibilityLabel={accessibilityLabel}
           onPress={showOrClose}
         >
-          {
-            renderSelectedItem ? 
-            renderSelectedItem(visible) :
+          {renderSelectedItem ? (
+            renderSelectedItem(visible)
+          ) : (
             <View style={styles.dropdown}>
               {renderLeftIcon?.(visible)}
               <Text
@@ -482,7 +481,7 @@ const DropdownComponent: <T>(
                 />
               )}
             </View>
-          }
+          )}
         </TouchableWithoutFeedback>
       );
     };
@@ -598,6 +597,7 @@ const DropdownComponent: <T>(
       searchPlaceholderTextColor,
       testID,
       searchText,
+      position,
     ]);
 
     const _renderList = useCallback(
@@ -609,11 +609,11 @@ const DropdownComponent: <T>(
           if (customList.length === 0) {
             let customNotFound: any = { _index: 0 };
             customNotFound[valueField] = null;
-            customNotFound[labelField] = "Not Found";
+            customNotFound[labelField] = 'Not Found';
 
             customList.push(customNotFound);
           }
-          
+
           return (
             <FlatList
               testID={testID + ' flatlist'}
@@ -651,6 +651,8 @@ const DropdownComponent: <T>(
         scrollIndex,
         showsVerticalScrollIndicator,
         testID,
+        labelField,
+        valueField,
       ]
     );
 
@@ -682,8 +684,10 @@ const DropdownComponent: <T>(
 
           let extendHeight = !isTopPosition ? top : bottom;
           if (search) {
-            extendHeight = !isTopPosition ? top - height - 2 : bottom - (height * .5);
-          } 
+            extendHeight = !isTopPosition
+              ? top - height - 2
+              : bottom - height * 0.5;
+          }
 
           if (
             keyboardAvoiding &&
@@ -720,7 +724,7 @@ const DropdownComponent: <T>(
                             justifyContent: 'flex-end',
                             paddingBottom: extendHeight,
                           },
-                      isFull && styles.fullScreen
+                      isFull && styles.fullScreen,
                     ])}
                   >
                     <View
@@ -730,10 +734,10 @@ const DropdownComponent: <T>(
                         {
                           left: left,
                           width: width,
-                        }
+                        },
                       ])}
                     >
-                      { renderSearch() }
+                      {renderSearch()}
                     </View>
                     <View
                       style={StyleSheet.flatten([
@@ -771,6 +775,7 @@ const DropdownComponent: <T>(
       containerStyle,
       styleHorizontal,
       _renderList,
+      renderSearch,
     ]);
 
     return (
