@@ -605,6 +605,15 @@ const DropdownComponent: <T>(
         const isInverted = !inverted ? false : isTopPosition;
 
         const _renderListHelper = () => {
+          let customList = listData;
+          if (customList.length === 0) {
+            let customNotFound: any = { _index: 0 };
+            customNotFound[valueField] = null;
+            customNotFound[labelField] = "Not Found";
+
+            customList.push(customNotFound);
+          }
+          
           return (
             <FlatList
               testID={testID + ' flatlist'}
@@ -613,7 +622,7 @@ const DropdownComponent: <T>(
               keyboardShouldPersistTaps="handled"
               ref={refList}
               onScrollToIndexFailed={scrollIndex}
-              data={listData}
+              data={customList}
               inverted={isTopPosition ? inverted : false}
               renderItem={_renderItem}
               keyExtractor={(_item, index) => index.toString()}
