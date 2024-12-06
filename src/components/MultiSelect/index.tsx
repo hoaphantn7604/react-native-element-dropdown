@@ -815,7 +815,7 @@ const MultiSelectComponent: <T>(
           onPress={showOrClose}
         >
           <View style={styles.dropdownInside}>
-            {renderLeftIcon?.()}
+            {renderLeftIcon?.(visible)}
             {value && value?.length > 0 ? (
               _renderItemSelected(true)
             ) : (
@@ -830,7 +830,7 @@ const MultiSelectComponent: <T>(
               </Text>
             )}
             {renderRightIcon ? (
-              renderRightIcon()
+              renderRightIcon(visible)
             ) : (
               <Image
                 source={ic_down}
