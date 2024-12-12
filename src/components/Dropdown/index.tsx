@@ -30,6 +30,7 @@ import {
   View,
   ViewStyle,
   StatusBar,
+  Animated,
 } from 'react-native';
 import { useDetectDevice } from '../../toolkits';
 import { useDeviceOrientation } from '../../useDeviceOrientation';
@@ -98,6 +99,7 @@ const DropdownComponent: <T>(
       closeModalWhenSelectedItem = true,
       excludeItems = [],
       excludeSearchItems = [],
+      animationDuration = 300,
     } = props;
 
     const ref = useRef<View>(null);
@@ -108,6 +110,7 @@ const DropdownComponent: <T>(
     const [position, setPosition] = useState<any>();
     const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
     const [searchText, setSearchText] = useState('');
+    const [modalAnimatedHeight] = useState(new Animated.Value(0));
 
     const { width: W, height: H } = Dimensions.get('window');
     const styleContainerVertical: ViewStyle = useMemo(() => {
@@ -164,6 +167,11 @@ const DropdownComponent: <T>(
       if (!disable) {
         _measure();
         setVisible(true);
+        Animated.timing(modalAnimatedHeight, {
+          toValue: 1,
+          duration: animationDuration,
+          useNativeDriver: false,
+        }).start();
         if (onFocus) {
           onFocus();
         }
@@ -177,12 +185,18 @@ const DropdownComponent: <T>(
 
     const eventClose = useCallback(() => {
       if (!disable) {
-        setVisible(false);
+        Animated.timing(modalAnimatedHeight, {
+          toValue: 0,
+          duration: animationDuration,
+          useNativeDriver: false,
+        }).start(() => {
+          setVisible(false);
+        });
         if (onBlur) {
           onBlur();
         }
       }
-    }, [disable, onBlur]);
+    }, [disable, modalAnimatedHeight, animationDuration, onBlur]);
 
     const font = useCallback(() => {
       if (fontFamily) {
@@ -320,7 +334,6 @@ const DropdownComponent: <T>(
         }
 
         _measure();
-        setVisible(visibleStatus);
 
         if (data) {
           const filterData = excludeData(data);
@@ -328,10 +341,23 @@ const DropdownComponent: <T>(
         }
 
         if (visibleStatus) {
+          setVisible(true);
+          Animated.timing(modalAnimatedHeight, {
+            toValue: 1,
+            duration: animationDuration,
+            useNativeDriver: false,
+          }).start();
           if (onFocus) {
             onFocus();
           }
         } else {
+          Animated.timing(modalAnimatedHeight, {
+            toValue: 0,
+            duration: animationDuration,
+            useNativeDriver: false,
+          }).start(() => {
+            setVisible(false);
+          });
           if (onBlur) {
             onBlur();
           }
@@ -347,6 +373,7 @@ const DropdownComponent: <T>(
       disable,
       keyboardHeight,
       visible,
+      modalAnimatedHeight,
       _measure,
       data,
       searchText,
@@ -701,18 +728,22 @@ const DropdownComponent: <T>(
                       isFull && styles.fullScreen,
                     ])}
                   >
-                    <View
+                    <Animated.View
                       style={StyleSheet.flatten([
                         styles.container,
                         isFull ? styleHorizontal : styleVertical,
                         {
                           width,
+                          height: modalAnimatedHeight.interpolate({
+                            inputRange: [0, 1],
+                            outputRange: [0, maxHeight],
+                          }),
                         },
                         containerStyle,
                       ])}
                     >
                       {_renderList(isTopPosition)}
-                    </View>
+                    </Animated.View>
                   </View>
                 </View>
               </TouchableWithoutFeedback>
@@ -727,6 +758,7 @@ const DropdownComponent: <T>(
       search,
       position,
       keyboardHeight,
+      modalAnimatedHeight,
       maxHeight,
       minHeight,
       dropdownPosition,
