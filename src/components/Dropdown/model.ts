@@ -58,6 +58,7 @@ export interface DropdownProps<T> {
   closeModalWhenSelectedItem?: boolean;
   excludeItems?: T[];
   excludeSearchItems?: T[];
+  animationDuration?: number;
   onChange: (item: T) => void;
   renderLeftIcon?: (visible?: boolean) => JSX.Element | null | undefined;
   renderRightIcon?: (visible?: boolean) => JSX.Element | null | undefined;
