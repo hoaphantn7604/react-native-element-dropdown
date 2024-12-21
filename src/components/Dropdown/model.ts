@@ -5,6 +5,7 @@ import type {
   TextProps,
   ImageStyle,
   FlatListProps,
+  KeyboardTypeOptions,
 } from 'react-native';
 
 export type IDropdownRef = {
@@ -45,6 +46,7 @@ export interface DropdownProps<T> {
   searchPlaceholderTextColor?: string;
   disable?: boolean;
   autoScroll?: boolean;
+  searchKeyboardType? : KeyboardTypeOptions | 'default';
   showsVerticalScrollIndicator?: boolean;
   dropdownPosition?: 'auto' | 'top' | 'bottom';
   flatListProps?: Omit<FlatListProps<any>, 'renderItem' | 'data'>;
