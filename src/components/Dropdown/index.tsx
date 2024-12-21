@@ -64,6 +64,7 @@ const DropdownComponent: <T>(
       labelField,
       valueField,
       searchField,
+      searchKeyboardType,
       value,
       activeColor = '#F6F7F8',
       fontFamily,
@@ -560,6 +561,7 @@ const DropdownComponent: <T>(
               inputStyle={[inputSearchStyle, font()]}
               value={searchText}
               autoCorrect={false}
+              keyboardType={searchKeyboardType || 'default'}
               placeholder={searchPlaceholder}
               onChangeText={(e) => {
                 if (onChangeText) {
