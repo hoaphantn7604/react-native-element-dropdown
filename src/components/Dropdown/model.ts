@@ -1,3 +1,4 @@
+import type React from 'react';
 import type {
   StyleProp,
   TextStyle,
@@ -59,12 +60,12 @@ export interface DropdownProps<T> {
   excludeItems?: T[];
   excludeSearchItems?: T[];
   onChange: (item: T) => void;
-  renderLeftIcon?: (visible?: boolean) => JSX.Element | null | undefined;
-  renderRightIcon?: (visible?: boolean) => JSX.Element | null | undefined;
-  renderItem?: (item: T, selected?: boolean) => JSX.Element | null | undefined;
+  renderLeftIcon?: (visible?: boolean) => React.ReactElement | null;
+  renderRightIcon?: (visible?: boolean) => React.ReactElement | null;
+  renderItem?: (item: T, selected?: boolean) => React.ReactElement | null;
   renderInputSearch?: (
     onSearch: (text: string) => void
-  ) => JSX.Element | null | undefined;
+  ) => React.ReactElement | null;
   onFocus?: () => void;
   onBlur?: () => void;
   searchQuery?: (keyword: string, labelValue: string) => boolean;

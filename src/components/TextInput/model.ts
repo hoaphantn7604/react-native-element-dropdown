@@ -13,8 +13,8 @@ interface Props extends TextInputProps {
   inputStyle?: StyleProp<TextStyle>;
   iconStyle?: StyleProp<ImageStyle>;
   showIcon?: boolean;
-  renderRightIcon?: () => JSX.Element | null | undefined;
-  renderLeftIcon?: () => JSX.Element | null | undefined;
+  renderRightIcon?: () => React.ReactElement | null;
+  renderLeftIcon?: () => React.ReactElement | null;
 }
 
 export type CTextInput = React.FC<Props>;
