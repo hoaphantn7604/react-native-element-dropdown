@@ -33,7 +33,7 @@ import {
 import { useDetectDevice } from '../../toolkits';
 import { useDeviceOrientation } from '../../useDeviceOrientation';
 import CInput from '../TextInput';
-import { DropdownProps } from './model';
+import { DropdownProps, IDropdownRef } from './model';
 import { styles } from './styles';
 
 const { isTablet } = useDetectDevice;
@@ -41,709 +41,715 @@ const ic_down = require('../../assets/down.png');
 
 const statusBarHeight: number = StatusBar.currentHeight || 0;
 
-const DropdownComponent: <T>(
-  props: DropdownProps<T>
-) => React.ReactElement | null = React.forwardRef((props, currentRef) => {
-  const orientation = useDeviceOrientation();
-  const {
-    testID,
-    itemTestIDField,
-    onChange,
-    style = {},
-    containerStyle,
-    placeholderStyle,
-    selectedTextStyle,
-    itemContainerStyle,
-    itemTextStyle,
-    inputSearchStyle,
-    iconStyle,
-    selectedTextProps = {},
-    data = [],
-    labelField,
-    valueField,
-    searchField,
-    value,
-    activeColor = '#F6F7F8',
-    fontFamily,
-    iconColor = 'gray',
-    searchPlaceholder,
-    searchPlaceholderTextColor = 'gray',
-    placeholder = 'Select item',
-    search = false,
-    maxHeight = 340,
-    minHeight = 0,
-    disable = false,
-    keyboardAvoiding = true,
-    inverted = true,
-    renderLeftIcon,
-    renderRightIcon,
-    renderItem,
-    renderInputSearch,
-    onFocus,
-    onBlur,
-    autoScroll = true,
-    showsVerticalScrollIndicator = true,
-    dropdownPosition = 'auto',
-    flatListProps,
-    searchQuery,
-    backgroundColor,
-    onChangeText,
-    confirmSelectItem,
-    onConfirmSelectItem,
-    accessibilityLabel,
-    itemAccessibilityLabelField,
-    mode = 'default',
-    closeModalWhenSelectedItem = true,
-    excludeItems = [],
-    excludeSearchItems = [],
-  } = props;
+const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
+  (props, currentRef) => {
+    const orientation = useDeviceOrientation();
+    const {
+      testID,
+      itemTestIDField,
+      onChange,
+      style = {},
+      containerStyle,
+      placeholderStyle,
+      selectedTextStyle,
+      itemContainerStyle,
+      itemTextStyle,
+      inputSearchStyle,
+      iconStyle,
+      selectedTextProps = {},
+      data = [],
+      labelField,
+      valueField,
+      searchField,
+      value,
+      activeColor = '#F6F7F8',
+      fontFamily,
+      iconColor = 'gray',
+      searchPlaceholder,
+      searchPlaceholderTextColor = 'gray',
+      placeholder = 'Select item',
+      search = false,
+      maxHeight = 340,
+      minHeight = 0,
+      disable = false,
+      keyboardAvoiding = true,
+      inverted = true,
+      renderLeftIcon,
+      renderRightIcon,
+      renderItem,
+      renderInputSearch,
+      onFocus,
+      onBlur,
+      autoScroll = true,
+      showsVerticalScrollIndicator = true,
+      dropdownPosition = 'auto',
+      flatListProps,
+      searchQuery,
+      backgroundColor,
+      onChangeText,
+      confirmSelectItem,
+      onConfirmSelectItem,
+      accessibilityLabel,
+      itemAccessibilityLabelField,
+      mode = 'default',
+      closeModalWhenSelectedItem = true,
+      excludeItems = [],
+      excludeSearchItems = [],
+    } = props;
 
-  const ref = useRef<View>(null);
-  const refList = useRef<FlatList>(null);
-  const [visible, setVisible] = useState<boolean>(false);
-  const [currentValue, setCurrentValue] = useState<any>(null);
-  const [listData, setListData] = useState<any[]>(data);
-  const [position, setPosition] = useState<any>();
-  const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
-  const [searchText, setSearchText] = useState('');
+    const ref = useRef<View>(null);
+    const refList = useRef<FlatList>(null);
+    const [visible, setVisible] = useState<boolean>(false);
+    const [currentValue, setCurrentValue] = useState<any>(null);
+    const [listData, setListData] = useState<any[]>(data);
+    const [position, setPosition] = useState<any>();
+    const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
+    const [searchText, setSearchText] = useState('');
 
-  const { width: W, height: H } = Dimensions.get('window');
-  const styleContainerVertical: ViewStyle = useMemo(() => {
-    return {
-      backgroundColor: 'rgba(0,0,0,0.1)',
-      alignItems: 'center',
-    };
-  }, []);
-  const styleHorizontal: ViewStyle = useMemo(() => {
-    return {
-      width: orientation === 'LANDSCAPE' ? W / 2 : '100%',
-      alignSelf: 'center',
-    };
-  }, [W, orientation]);
+    const { width: W, height: H } = Dimensions.get('window');
+    const styleContainerVertical: ViewStyle = useMemo(() => {
+      return {
+        backgroundColor: 'rgba(0,0,0,0.1)',
+        alignItems: 'center',
+      };
+    }, []);
+    const styleHorizontal: ViewStyle = useMemo(() => {
+      return {
+        width: orientation === 'LANDSCAPE' ? W / 2 : '100%',
+        alignSelf: 'center',
+      };
+    }, [W, orientation]);
 
-  useImperativeHandle(currentRef, () => {
-    return { open: eventOpen, close: eventClose };
-  });
+    useImperativeHandle(currentRef, () => {
+      return { open: eventOpen, close: eventClose };
+    });
 
-  useEffect(() => {
-    return eventClose;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    useEffect(() => {
+      return eventClose;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-  const excludeData = useCallback(
-    (data: any[]) => {
-      if (excludeItems.length > 0) {
-        const getData = _differenceWith(
-          data,
-          excludeItems,
-          (obj1, obj2) => _get(obj1, valueField) === _get(obj2, valueField)
-        );
-        return getData || [];
-      } else {
-        return data || [];
-      }
-    },
-    [excludeItems, valueField]
-  );
+    const excludeData = useCallback(
+      (data: any[]) => {
+        if (excludeItems.length > 0) {
+          const getData = _differenceWith(
+            data,
+            excludeItems,
+            (obj1, obj2) => _get(obj1, valueField) === _get(obj2, valueField)
+          );
+          return getData || [];
+        } else {
+          return data || [];
+        }
+      },
+      [excludeItems, valueField]
+    );
 
-  useEffect(() => {
-    if (data && searchText.length === 0) {
-      const filterData = excludeData(data);
-      setListData([...filterData]);
-    }
-
-    if (searchText) {
-      onSearch(searchText);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, searchText]);
-
-  const eventOpen = () => {
-    if (!disable) {
-      _measure();
-      setVisible(true);
-      if (onFocus) {
-        onFocus();
+    useEffect(() => {
+      if (data && searchText.length === 0) {
+        const filterData = excludeData(data);
+        setListData([...filterData]);
       }
 
-      if (searchText.length > 0) {
+      if (searchText) {
         onSearch(searchText);
       }
-    }
-  };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data, searchText]);
 
-  const eventClose = useCallback(() => {
-    if (!disable) {
-      setVisible(false);
-      if (onBlur) {
-        onBlur();
-      }
-    }
-  }, [disable, onBlur]);
-
-  const font = useCallback(() => {
-    if (fontFamily) {
-      return {
-        fontFamily: fontFamily,
-      };
-    } else {
-      return {};
-    }
-  }, [fontFamily]);
-
-  const _measure = useCallback(() => {
-    if (ref && ref?.current) {
-      ref.current.measureInWindow((pageX, pageY, width, height) => {
-        let isFull = isTablet
-          ? false
-          : mode === 'modal' || orientation === 'LANDSCAPE';
-
-        if (mode === 'auto') {
-          isFull = false;
-        }
-
-        const top = isFull ? 20 : height + pageY + 2;
-        const bottom = H - top + height;
-        const left = I18nManager.isRTL ? W - width - pageX : pageX;
-
-        setPosition({
-          isFull,
-          width: Math.floor(width),
-          top: Math.floor(top + statusBarHeight),
-          bottom: Math.floor(bottom - statusBarHeight),
-          left: Math.floor(left),
-          height: Math.floor(height),
-        });
-      });
-    }
-  }, [H, W, orientation, mode]);
-
-  const onKeyboardDidShow = useCallback(
-    (e: KeyboardEvent) => {
-      _measure();
-      setKeyboardHeight(e.endCoordinates.height);
-    },
-    [_measure]
-  );
-
-  const onKeyboardDidHide = useCallback(() => {
-    setKeyboardHeight(0);
-    _measure();
-  }, [_measure]);
-
-  useEffect(() => {
-    const susbcriptionKeyboardDidShow = Keyboard.addListener(
-      'keyboardDidShow',
-      onKeyboardDidShow
-    );
-    const susbcriptionKeyboardDidHide = Keyboard.addListener(
-      'keyboardDidHide',
-      onKeyboardDidHide
-    );
-
-    return () => {
-      if (typeof susbcriptionKeyboardDidShow?.remove === 'function') {
-        susbcriptionKeyboardDidShow.remove();
-      }
-
-      if (typeof susbcriptionKeyboardDidHide?.remove === 'function') {
-        susbcriptionKeyboardDidHide.remove();
-      }
-    };
-  }, [onKeyboardDidHide, onKeyboardDidShow]);
-
-  const getValue = useCallback(() => {
-    const defaultValue =
-      typeof value === 'object' ? _get(value, valueField) : value;
-
-    const getItem = data.filter((e) =>
-      _isEqual(defaultValue, _get(e, valueField))
-    );
-
-    if (getItem.length > 0) {
-      setCurrentValue(getItem[0]);
-    } else {
-      setCurrentValue(null);
-    }
-  }, [data, value, valueField]);
-
-  useEffect(() => {
-    getValue();
-  }, [value, data, getValue]);
-
-  const scrollIndex = debounce(
-    useCallback(() => {
-      if (autoScroll && data?.length > 0 && listData?.length === data?.length) {
-        if (refList && refList?.current) {
-          const defaultValue =
-            typeof value === 'object' ? _get(value, valueField) : value;
-
-          const index = _findIndex(listData, (e) =>
-            _isEqual(defaultValue, _get(e, valueField))
-          );
-          if (
-            listData?.length > 0 &&
-            index > -1 &&
-            index <= listData?.length - 1
-          ) {
-            try {
-              refList.current.scrollToIndex({
-                index: index,
-                animated: false,
-              });
-            } catch (error) {
-              console.warn(`scrollToIndex error: ${error}`);
-            }
-          }
-        }
-      }
-    }, [autoScroll, data.length, listData, value, valueField]),
-    200
-  );
-
-  const showOrClose = useCallback(() => {
-    if (!disable) {
-      const visibleStatus = !visible;
-
-      if (keyboardHeight > 0 && !visibleStatus) {
-        return Keyboard.dismiss();
-      }
-
-      if (!visibleStatus) {
-        if (onChangeText) {
-          onChangeText('');
-        }
-        setSearchText('');
-        onSearch('');
-      }
-
-      _measure();
-      setVisible(visibleStatus);
-
-      if (data) {
-        const filterData = excludeData(data);
-        setListData(filterData);
-      }
-
-      if (visibleStatus) {
+    const eventOpen = () => {
+      if (!disable) {
+        _measure();
+        setVisible(true);
         if (onFocus) {
           onFocus();
         }
-      } else {
+
+        if (searchText.length > 0) {
+          onSearch(searchText);
+        }
+      }
+    };
+
+    const eventClose = useCallback(() => {
+      if (!disable) {
+        setVisible(false);
         if (onBlur) {
           onBlur();
         }
       }
+    }, [disable, onBlur]);
 
-      if (searchText.length > 0) {
-        onSearch(searchText);
+    const font = useCallback(() => {
+      if (fontFamily) {
+        return {
+          fontFamily: fontFamily,
+        };
+      } else {
+        return {};
       }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    disable,
-    keyboardHeight,
-    visible,
-    _measure,
-    data,
-    searchText,
-    onFocus,
-    onBlur,
-  ]);
+    }, [fontFamily]);
 
-  const onSearch = useCallback(
-    (text: string) => {
-      if (text.length > 0) {
-        const defaultFilterFunction = (e: any) => {
-          const item = _get(e, searchField || labelField)
-            ?.toLowerCase()
-            .replace(/\s/g, '')
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '');
-          const key = text
-            .toLowerCase()
-            .replace(/\s/g, '')
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '');
+    const _measure = useCallback(() => {
+      if (ref && ref?.current) {
+        ref.current.measureInWindow((pageX, pageY, width, height) => {
+          let isFull = isTablet
+            ? false
+            : mode === 'modal' || orientation === 'LANDSCAPE';
 
-          return item.indexOf(key) >= 0;
-        };
+          if (mode === 'auto') {
+            isFull = false;
+          }
 
-        const propSearchFunction = (e: any) => {
-          const labelText = _get(e, searchField || labelField);
+          const top = isFull ? 20 : height + pageY + 2;
+          const bottom = H - top + height;
+          const left = I18nManager.isRTL ? W - width - pageX : pageX;
 
-          return searchQuery?.(text, labelText);
-        };
+          setPosition({
+            isFull,
+            width: Math.floor(width),
+            top: Math.floor(top + statusBarHeight),
+            bottom: Math.floor(bottom - statusBarHeight),
+            left: Math.floor(left),
+            height: Math.floor(height),
+          });
+        });
+      }
+    }, [H, W, orientation, mode]);
 
-        const dataSearch = data.filter(
-          searchQuery ? propSearchFunction : defaultFilterFunction
-        );
+    const onKeyboardDidShow = useCallback(
+      (e: KeyboardEvent) => {
+        _measure();
+        setKeyboardHeight(e.endCoordinates.height);
+      },
+      [_measure]
+    );
 
-        if (excludeSearchItems.length > 0 || excludeItems.length > 0) {
-          const excludeSearchData = _differenceWith(
-            dataSearch,
-            excludeSearchItems,
-            (obj1, obj2) => _get(obj1, valueField) === _get(obj2, valueField)
+    const onKeyboardDidHide = useCallback(() => {
+      setKeyboardHeight(0);
+      _measure();
+    }, [_measure]);
+
+    useEffect(() => {
+      const susbcriptionKeyboardDidShow = Keyboard.addListener(
+        'keyboardDidShow',
+        onKeyboardDidShow
+      );
+      const susbcriptionKeyboardDidHide = Keyboard.addListener(
+        'keyboardDidHide',
+        onKeyboardDidHide
+      );
+
+      return () => {
+        if (typeof susbcriptionKeyboardDidShow?.remove === 'function') {
+          susbcriptionKeyboardDidShow.remove();
+        }
+
+        if (typeof susbcriptionKeyboardDidHide?.remove === 'function') {
+          susbcriptionKeyboardDidHide.remove();
+        }
+      };
+    }, [onKeyboardDidHide, onKeyboardDidShow]);
+
+    const getValue = useCallback(() => {
+      const defaultValue =
+        typeof value === 'object' ? _get(value, valueField) : value;
+
+      const getItem = data.filter((e) =>
+        _isEqual(defaultValue, _get(e, valueField))
+      );
+
+      if (getItem.length > 0) {
+        setCurrentValue(getItem[0]);
+      } else {
+        setCurrentValue(null);
+      }
+    }, [data, value, valueField]);
+
+    useEffect(() => {
+      getValue();
+    }, [value, data, getValue]);
+
+    const scrollIndex = debounce(
+      useCallback(() => {
+        if (
+          autoScroll &&
+          data?.length > 0 &&
+          listData?.length === data?.length
+        ) {
+          if (refList && refList?.current) {
+            const defaultValue =
+              typeof value === 'object' ? _get(value, valueField) : value;
+
+            const index = _findIndex(listData, (e) =>
+              _isEqual(defaultValue, _get(e, valueField))
+            );
+            if (
+              listData?.length > 0 &&
+              index > -1 &&
+              index <= listData?.length - 1
+            ) {
+              try {
+                refList.current.scrollToIndex({
+                  index: index,
+                  animated: false,
+                });
+              } catch (error) {
+                console.warn(`scrollToIndex error: ${error}`);
+              }
+            }
+          }
+        }
+      }, [autoScroll, data.length, listData, value, valueField]),
+      200
+    );
+
+    const showOrClose = useCallback(() => {
+      if (!disable) {
+        const visibleStatus = !visible;
+
+        if (keyboardHeight > 0 && !visibleStatus) {
+          return Keyboard.dismiss();
+        }
+
+        if (!visibleStatus) {
+          if (onChangeText) {
+            onChangeText('');
+          }
+          setSearchText('');
+          onSearch('');
+        }
+
+        _measure();
+        setVisible(visibleStatus);
+
+        if (data) {
+          const filterData = excludeData(data);
+          setListData(filterData);
+        }
+
+        if (visibleStatus) {
+          if (onFocus) {
+            onFocus();
+          }
+        } else {
+          if (onBlur) {
+            onBlur();
+          }
+        }
+
+        if (searchText.length > 0) {
+          onSearch(searchText);
+        }
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [
+      disable,
+      keyboardHeight,
+      visible,
+      _measure,
+      data,
+      searchText,
+      onFocus,
+      onBlur,
+    ]);
+
+    const onSearch = useCallback(
+      (text: string) => {
+        if (text.length > 0) {
+          const defaultFilterFunction = (e: any) => {
+            const item = _get(e, searchField || labelField)
+              ?.toLowerCase()
+              .replace(/\s/g, '')
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '');
+            const key = text
+              .toLowerCase()
+              .replace(/\s/g, '')
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '');
+
+            return item.indexOf(key) >= 0;
+          };
+
+          const propSearchFunction = (e: any) => {
+            const labelText = _get(e, searchField || labelField);
+
+            return searchQuery?.(text, labelText);
+          };
+
+          const dataSearch = data.filter(
+            searchQuery ? propSearchFunction : defaultFilterFunction
           );
 
-          const filterData = excludeData(excludeSearchData);
-          setListData(filterData);
-        } else {
-          setListData(dataSearch);
-        }
-      } else {
-        const filterData = excludeData(data);
-        setListData(filterData);
-      }
-    },
-    [
-      data,
-      searchQuery,
-      excludeSearchItems,
-      excludeItems,
-      searchField,
-      labelField,
-      valueField,
-      excludeData,
-    ]
-  );
+          if (excludeSearchItems.length > 0 || excludeItems.length > 0) {
+            const excludeSearchData = _differenceWith(
+              dataSearch,
+              excludeSearchItems,
+              (obj1, obj2) => _get(obj1, valueField) === _get(obj2, valueField)
+            );
 
-  const onSelect = useCallback(
-    (item: any) => {
-      if (confirmSelectItem && onConfirmSelectItem) {
-        return onConfirmSelectItem(item);
-      }
-
-      setCurrentValue(item);
-      onChange(item);
-
-      if (closeModalWhenSelectedItem) {
-        if (onChangeText) {
-          onChangeText('');
-        }
-        setSearchText('');
-        onSearch('');
-        eventClose();
-      }
-    },
-    [
-      confirmSelectItem,
-      eventClose,
-      onChange,
-      onChangeText,
-      onConfirmSelectItem,
-      onSearch,
-      closeModalWhenSelectedItem,
-    ]
-  );
-
-  const _renderDropdown = () => {
-    const isSelected = currentValue && _get(currentValue, valueField);
-    return (
-      <TouchableWithoutFeedback
-        testID={testID}
-        accessible={!!accessibilityLabel}
-        accessibilityLabel={accessibilityLabel}
-        onPress={showOrClose}
-      >
-        <View style={styles.dropdown}>
-          {renderLeftIcon?.(visible)}
-          <Text
-            style={[
-              styles.textItem,
-              isSelected !== null ? selectedTextStyle : placeholderStyle,
-              font(),
-            ]}
-            {...selectedTextProps}
-          >
-            {isSelected !== null ? _get(currentValue, labelField) : placeholder}
-          </Text>
-          {renderRightIcon ? (
-            renderRightIcon(visible)
-          ) : (
-            <Image
-              source={ic_down}
-              style={StyleSheet.flatten([
-                styles.icon,
-                { tintColor: iconColor },
-                iconStyle,
-              ])}
-            />
-          )}
-        </View>
-      </TouchableWithoutFeedback>
-    );
-  };
-
-  const _renderItem = useCallback(
-    ({ item, index }: { item: any; index: number }) => {
-      const isSelected = currentValue && _get(currentValue, valueField);
-      const selected = _isEqual(_get(item, valueField), isSelected);
-      _assign(item, { _index: index });
-      return (
-        <TouchableHighlight
-          key={index.toString()}
-          testID={_get(item, itemTestIDField || labelField)}
-          accessible={!!accessibilityLabel}
-          accessibilityLabel={_get(
-            item,
-            itemAccessibilityLabelField || labelField
-          )}
-          underlayColor={activeColor}
-          onPress={() => onSelect(item)}
-        >
-          <View
-            style={StyleSheet.flatten([
-              itemContainerStyle,
-              selected && {
-                backgroundColor: activeColor,
-              },
-            ])}
-          >
-            {renderItem ? (
-              renderItem(item, selected)
-            ) : (
-              <View style={styles.item}>
-                <Text
-                  style={StyleSheet.flatten([
-                    styles.textItem,
-                    itemTextStyle,
-                    font(),
-                  ])}
-                >
-                  {_get(item, labelField)}
-                </Text>
-              </View>
-            )}
-          </View>
-        </TouchableHighlight>
-      );
-    },
-    [
-      accessibilityLabel,
-      activeColor,
-      currentValue,
-      font,
-      itemAccessibilityLabelField,
-      itemContainerStyle,
-      itemTestIDField,
-      itemTextStyle,
-      labelField,
-      onSelect,
-      renderItem,
-      valueField,
-    ]
-  );
-
-  const renderSearch = useCallback(() => {
-    if (search) {
-      if (renderInputSearch) {
-        return renderInputSearch((text) => {
-          if (onChangeText) {
-            setSearchText(text);
-            onChangeText(text);
+            const filterData = excludeData(excludeSearchData);
+            setListData(filterData);
+          } else {
+            setListData(dataSearch);
           }
-          onSearch(text);
-        });
-      } else {
-        return (
-          <CInput
-            testID={testID + ' input'}
-            accessibilityLabel={accessibilityLabel + ' input'}
-            style={[styles.input, inputSearchStyle]}
-            inputStyle={[inputSearchStyle, font()]}
-            value={searchText}
-            autoCorrect={false}
-            placeholder={searchPlaceholder}
-            onChangeText={(e) => {
-              if (onChangeText) {
-                setSearchText(e);
-                onChangeText(e);
-              }
-              onSearch(e);
-            }}
-            placeholderTextColor={searchPlaceholderTextColor}
-            showIcon
-            iconStyle={[{ tintColor: iconColor }, iconStyle]}
-          />
-        );
-      }
-    }
-    return null;
-  }, [
-    accessibilityLabel,
-    font,
-    iconColor,
-    iconStyle,
-    inputSearchStyle,
-    onChangeText,
-    onSearch,
-    renderInputSearch,
-    search,
-    searchPlaceholder,
-    searchPlaceholderTextColor,
-    testID,
-    searchText,
-  ]);
+        } else {
+          const filterData = excludeData(data);
+          setListData(filterData);
+        }
+      },
+      [
+        data,
+        searchQuery,
+        excludeSearchItems,
+        excludeItems,
+        searchField,
+        labelField,
+        valueField,
+        excludeData,
+      ]
+    );
 
-  const _renderList = useCallback(
-    (isTopPosition: boolean) => {
-      const isInverted = !inverted ? false : isTopPosition;
+    const onSelect = useCallback(
+      (item: any) => {
+        if (confirmSelectItem && onConfirmSelectItem) {
+          return onConfirmSelectItem(item);
+        }
 
-      const _renderListHelper = () => {
-        return (
-          <FlatList
-            testID={testID + ' flatlist'}
-            accessibilityLabel={accessibilityLabel + ' flatlist'}
-            {...flatListProps}
-            keyboardShouldPersistTaps="handled"
-            ref={refList}
-            onContentSizeChange={scrollIndex}
-            onScrollToIndexFailed={scrollIndex}
-            data={listData}
-            inverted={isTopPosition ? inverted : false}
-            renderItem={_renderItem}
-            keyExtractor={(_item, index) => index.toString()}
-            showsVerticalScrollIndicator={showsVerticalScrollIndicator}
-          />
-        );
-      };
+        setCurrentValue(item);
+        onChange(item);
 
+        if (closeModalWhenSelectedItem) {
+          if (onChangeText) {
+            onChangeText('');
+          }
+          setSearchText('');
+          onSearch('');
+          eventClose();
+        }
+      },
+      [
+        confirmSelectItem,
+        eventClose,
+        onChange,
+        onChangeText,
+        onConfirmSelectItem,
+        onSearch,
+        closeModalWhenSelectedItem,
+      ]
+    );
+
+    const _renderDropdown = () => {
+      const isSelected = currentValue && _get(currentValue, valueField);
       return (
-        <TouchableWithoutFeedback>
-          <View style={styles.flexShrink}>
-            {isInverted && _renderListHelper()}
-            {renderSearch()}
-            {!isInverted && _renderListHelper()}
+        <TouchableWithoutFeedback
+          testID={testID}
+          accessible={!!accessibilityLabel}
+          accessibilityLabel={accessibilityLabel}
+          onPress={showOrClose}
+        >
+          <View style={styles.dropdown}>
+            {renderLeftIcon?.(visible)}
+            <Text
+              style={[
+                styles.textItem,
+                isSelected !== null ? selectedTextStyle : placeholderStyle,
+                font(),
+              ]}
+              {...selectedTextProps}
+            >
+              {isSelected !== null
+                ? _get(currentValue, labelField)
+                : placeholder}
+            </Text>
+            {renderRightIcon ? (
+              renderRightIcon(visible)
+            ) : (
+              <Image
+                source={ic_down}
+                style={StyleSheet.flatten([
+                  styles.icon,
+                  { tintColor: iconColor },
+                  iconStyle,
+                ])}
+              />
+            )}
           </View>
         </TouchableWithoutFeedback>
       );
-    },
-    [
-      _renderItem,
+    };
+
+    const _renderItem = useCallback(
+      ({ item, index }: { item: any; index: number }) => {
+        const isSelected = currentValue && _get(currentValue, valueField);
+        const selected = _isEqual(_get(item, valueField), isSelected);
+        _assign(item, { _index: index });
+        return (
+          <TouchableHighlight
+            key={index.toString()}
+            testID={_get(item, itemTestIDField || labelField)}
+            accessible={!!accessibilityLabel}
+            accessibilityLabel={_get(
+              item,
+              itemAccessibilityLabelField || labelField
+            )}
+            underlayColor={activeColor}
+            onPress={() => onSelect(item)}
+          >
+            <View
+              style={StyleSheet.flatten([
+                itemContainerStyle,
+                selected && {
+                  backgroundColor: activeColor,
+                },
+              ])}
+            >
+              {renderItem ? (
+                renderItem(item, selected)
+              ) : (
+                <View style={styles.item}>
+                  <Text
+                    style={StyleSheet.flatten([
+                      styles.textItem,
+                      itemTextStyle,
+                      font(),
+                    ])}
+                  >
+                    {_get(item, labelField)}
+                  </Text>
+                </View>
+              )}
+            </View>
+          </TouchableHighlight>
+        );
+      },
+      [
+        accessibilityLabel,
+        activeColor,
+        currentValue,
+        font,
+        itemAccessibilityLabelField,
+        itemContainerStyle,
+        itemTestIDField,
+        itemTextStyle,
+        labelField,
+        onSelect,
+        renderItem,
+        valueField,
+      ]
+    );
+
+    const renderSearch = useCallback(() => {
+      if (search) {
+        if (renderInputSearch) {
+          return renderInputSearch((text) => {
+            if (onChangeText) {
+              setSearchText(text);
+              onChangeText(text);
+            }
+            onSearch(text);
+          });
+        } else {
+          return (
+            <CInput
+              testID={testID + ' input'}
+              accessibilityLabel={accessibilityLabel + ' input'}
+              style={[styles.input, inputSearchStyle]}
+              inputStyle={[inputSearchStyle, font()]}
+              value={searchText}
+              autoCorrect={false}
+              placeholder={searchPlaceholder}
+              onChangeText={(e) => {
+                if (onChangeText) {
+                  setSearchText(e);
+                  onChangeText(e);
+                }
+                onSearch(e);
+              }}
+              placeholderTextColor={searchPlaceholderTextColor}
+              showIcon
+              iconStyle={[{ tintColor: iconColor }, iconStyle]}
+            />
+          );
+        }
+      }
+      return null;
+    }, [
       accessibilityLabel,
-      flatListProps,
-      listData,
-      inverted,
-      renderSearch,
-      scrollIndex,
-      showsVerticalScrollIndicator,
+      font,
+      iconColor,
+      iconStyle,
+      inputSearchStyle,
+      onChangeText,
+      onSearch,
+      renderInputSearch,
+      search,
+      searchPlaceholder,
+      searchPlaceholderTextColor,
       testID,
-    ]
-  );
+      searchText,
+    ]);
 
-  const _renderModal = useCallback(() => {
-    if (visible && position) {
-      const { isFull, width, height, top, bottom, left } = position;
+    const _renderList = useCallback(
+      (isTopPosition: boolean) => {
+        const isInverted = !inverted ? false : isTopPosition;
 
-      const onAutoPosition = () => {
-        if (keyboardHeight > 0) {
-          return bottom < keyboardHeight + height;
-        }
-
-        return bottom < (search ? 150 : 100);
-      };
-
-      if (width && top && bottom) {
-        const styleVertical: ViewStyle = {
-          left: left,
-          maxHeight: maxHeight,
-          minHeight: minHeight,
+        const _renderListHelper = () => {
+          return (
+            <FlatList
+              testID={testID + ' flatlist'}
+              accessibilityLabel={accessibilityLabel + ' flatlist'}
+              {...flatListProps}
+              keyboardShouldPersistTaps="handled"
+              ref={refList}
+              onContentSizeChange={scrollIndex}
+              onScrollToIndexFailed={scrollIndex}
+              data={listData}
+              inverted={isTopPosition ? inverted : false}
+              renderItem={_renderItem}
+              keyExtractor={(_item, index) => index.toString()}
+              showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+            />
+          );
         };
-        const isTopPosition =
-          dropdownPosition === 'auto'
-            ? onAutoPosition()
-            : dropdownPosition === 'top';
-
-        let keyboardStyle: ViewStyle = {};
-
-        let extendHeight = !isTopPosition ? top : bottom;
-        if (
-          keyboardAvoiding &&
-          keyboardHeight > 0 &&
-          isTopPosition &&
-          dropdownPosition === 'auto'
-        ) {
-          extendHeight = keyboardHeight;
-        }
 
         return (
-          <Modal
-            transparent
-            statusBarTranslucent
-            visible={visible}
-            supportedOrientations={['landscape', 'portrait']}
-            onRequestClose={showOrClose}
-          >
-            <TouchableWithoutFeedback onPress={showOrClose}>
-              <View
-                style={StyleSheet.flatten([
-                  styles.flex1,
-                  isFull && styleContainerVertical,
-                  backgroundColor && { backgroundColor: backgroundColor },
-                  keyboardStyle,
-                ])}
-              >
+          <TouchableWithoutFeedback>
+            <View style={styles.flexShrink}>
+              {isInverted && _renderListHelper()}
+              {renderSearch()}
+              {!isInverted && _renderListHelper()}
+            </View>
+          </TouchableWithoutFeedback>
+        );
+      },
+      [
+        _renderItem,
+        accessibilityLabel,
+        flatListProps,
+        listData,
+        inverted,
+        renderSearch,
+        scrollIndex,
+        showsVerticalScrollIndicator,
+        testID,
+      ]
+    );
+
+    const _renderModal = useCallback(() => {
+      if (visible && position) {
+        const { isFull, width, height, top, bottom, left } = position;
+
+        const onAutoPosition = () => {
+          if (keyboardHeight > 0) {
+            return bottom < keyboardHeight + height;
+          }
+
+          return bottom < (search ? 150 : 100);
+        };
+
+        if (width && top && bottom) {
+          const styleVertical: ViewStyle = {
+            left: left,
+            maxHeight: maxHeight,
+            minHeight: minHeight,
+          };
+          const isTopPosition =
+            dropdownPosition === 'auto'
+              ? onAutoPosition()
+              : dropdownPosition === 'top';
+
+          let keyboardStyle: ViewStyle = {};
+
+          let extendHeight = !isTopPosition ? top : bottom;
+          if (
+            keyboardAvoiding &&
+            keyboardHeight > 0 &&
+            isTopPosition &&
+            dropdownPosition === 'auto'
+          ) {
+            extendHeight = keyboardHeight;
+          }
+
+          return (
+            <Modal
+              transparent
+              statusBarTranslucent
+              visible={visible}
+              supportedOrientations={['landscape', 'portrait']}
+              onRequestClose={showOrClose}
+            >
+              <TouchableWithoutFeedback onPress={showOrClose}>
                 <View
                   style={StyleSheet.flatten([
                     styles.flex1,
-                    !isTopPosition
-                      ? { paddingTop: extendHeight }
-                      : {
-                          justifyContent: 'flex-end',
-                          paddingBottom: extendHeight,
-                        },
-                    isFull && styles.fullScreen,
+                    isFull && styleContainerVertical,
+                    backgroundColor && { backgroundColor: backgroundColor },
+                    keyboardStyle,
                   ])}
                 >
                   <View
                     style={StyleSheet.flatten([
-                      styles.container,
-                      isFull ? styleHorizontal : styleVertical,
-                      {
-                        width,
-                      },
-                      containerStyle,
+                      styles.flex1,
+                      !isTopPosition
+                        ? { paddingTop: extendHeight }
+                        : {
+                            justifyContent: 'flex-end',
+                            paddingBottom: extendHeight,
+                          },
+                      isFull && styles.fullScreen,
                     ])}
                   >
-                    {_renderList(isTopPosition)}
+                    <View
+                      style={StyleSheet.flatten([
+                        styles.container,
+                        isFull ? styleHorizontal : styleVertical,
+                        {
+                          width,
+                        },
+                        containerStyle,
+                      ])}
+                    >
+                      {_renderList(isTopPosition)}
+                    </View>
                   </View>
                 </View>
-              </View>
-            </TouchableWithoutFeedback>
-          </Modal>
-        );
+              </TouchableWithoutFeedback>
+            </Modal>
+          );
+        }
+        return null;
       }
       return null;
-    }
-    return null;
-  }, [
-    visible,
-    search,
-    position,
-    keyboardHeight,
-    maxHeight,
-    minHeight,
-    dropdownPosition,
-    keyboardAvoiding,
-    showOrClose,
-    styleContainerVertical,
-    backgroundColor,
-    containerStyle,
-    styleHorizontal,
-    _renderList,
-  ]);
+    }, [
+      visible,
+      search,
+      position,
+      keyboardHeight,
+      maxHeight,
+      minHeight,
+      dropdownPosition,
+      keyboardAvoiding,
+      showOrClose,
+      styleContainerVertical,
+      backgroundColor,
+      containerStyle,
+      styleHorizontal,
+      _renderList,
+    ]);
 
-  return (
-    <View
-      style={StyleSheet.flatten([styles.mainWrap, style])}
-      ref={ref}
-      onLayout={_measure}
-    >
-      {_renderDropdown()}
-      {_renderModal()}
-    </View>
-  );
-});
+    return (
+      <View
+        style={StyleSheet.flatten([styles.mainWrap, style])}
+        ref={ref}
+        onLayout={_measure}
+      >
+        {_renderDropdown()}
+        {_renderModal()}
+      </View>
+    );
+  }
+);
 
 export default DropdownComponent;

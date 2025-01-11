@@ -29,16 +29,17 @@ import {
 import { useDetectDevice } from '../../toolkits';
 import { useDeviceOrientation } from '../../useDeviceOrientation';
 import CInput from '../TextInput';
-import { MultiSelectProps } from './model';
+import { IMultiSelectRef, MultiSelectProps } from './model';
 import { styles } from './styles';
 
 const { isTablet } = useDetectDevice;
 const ic_down = require('../../assets/down.png');
 const statusBarHeight: number = StatusBar.currentHeight || 0;
 
-const MultiSelectComponent: <T>(
-  props: MultiSelectProps<T>
-) => React.ReactElement | null = React.forwardRef((props, currentRef) => {
+const MultiSelectComponent = React.forwardRef<
+  IMultiSelectRef,
+  MultiSelectProps<any>
+>((props, currentRef) => {
   const orientation = useDeviceOrientation();
   const {
     testID,
