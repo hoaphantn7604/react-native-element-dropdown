@@ -61,6 +61,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
       labelField,
       valueField,
       searchField,
+      searchKeyboardType,
       value,
       activeColor = '#F6F7F8',
       fontFamily,
@@ -559,6 +560,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
               inputStyle={[inputSearchStyle, font()]}
               value={searchText}
               autoCorrect={false}
+              keyboardType={searchKeyboardType || 'default'}
               placeholder={searchPlaceholder}
               onChangeText={(e) => {
                 if (onChangeText) {
