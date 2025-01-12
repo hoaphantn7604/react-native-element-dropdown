@@ -89,6 +89,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
       onChangeText,
       confirmSelectItem,
       onConfirmSelectItem,
+      onEndReached,
       accessibilityLabel,
       itemAccessibilityLabelField,
       mode = 'default',
@@ -609,6 +610,8 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
               inverted={isTopPosition ? inverted : false}
               renderItem={_renderItem}
               keyExtractor={(_item, index) => index.toString()}
+              onEndReachedThreshold={0.5}
+              onEndReached={onEndReached}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
           );
@@ -633,6 +636,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
         renderSearch,
         scrollIndex,
         showsVerticalScrollIndicator,
+        onEndReached,
         testID,
       ]
     );
@@ -695,9 +699,9 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
                       !isTopPosition
                         ? { paddingTop: extendHeight }
                         : {
-                            justifyContent: 'flex-end',
-                            paddingBottom: extendHeight,
-                          },
+                          justifyContent: 'flex-end',
+                          paddingBottom: extendHeight,
+                        },
                       isFull && styles.fullScreen,
                     ])}
                   >
