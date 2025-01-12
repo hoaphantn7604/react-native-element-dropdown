@@ -61,6 +61,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
       labelField,
       valueField,
       searchField,
+      searchKeyboardType,
       value,
       activeColor = '#F6F7F8',
       fontFamily,
@@ -69,6 +70,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
       searchPlaceholderTextColor = 'gray',
       placeholder = 'Select item',
       search = false,
+      searchBothFields = false,
       maxHeight = 340,
       minHeight = 0,
       disable = false,
@@ -372,6 +374,30 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
             return item.indexOf(key) >= 0;
           };
 
+          const searchBothFieldFunction = (e: any) => {
+            const item = _get(e, labelField)
+              ?.toLowerCase()
+              .replace(/\s/g, '')
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '');
+            const key = text
+              .toLowerCase()
+              .replace(/\s/g, '')
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '');
+
+            const item1 = _get(e, valueField)
+              ?.toLowerCase()
+              .replace(/\s/g, '')
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '');
+
+              const isLabelMatch = item.indexOf(key) >= 0;
+              const isValueMatch = item1.indexOf(key) >= 0;
+
+            return isLabelMatch || isValueMatch;
+          };
+
           const propSearchFunction = (e: any) => {
             const labelText = _get(e, searchField || labelField);
 
@@ -379,7 +405,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
           };
 
           const dataSearch = data.filter(
-            searchQuery ? propSearchFunction : defaultFilterFunction
+            searchQuery ? propSearchFunction : searchBothFields ? searchBothFieldFunction: defaultFilterFunction
           );
 
           if (excludeSearchItems.length > 0 || excludeItems.length > 0) {
@@ -402,6 +428,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
       [
         data,
         searchQuery,
+        searchBothFields,
         excludeSearchItems,
         excludeItems,
         searchField,
@@ -559,6 +586,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
               inputStyle={[inputSearchStyle, font()]}
               value={searchText}
               autoCorrect={false}
+              keyboardType={searchKeyboardType || 'default'}
               placeholder={searchPlaceholder}
               onChangeText={(e) => {
                 if (onChangeText) {
@@ -606,6 +634,19 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
               onContentSizeChange={scrollIndex}
               onScrollToIndexFailed={scrollIndex}
               data={listData}
+              ListEmptyComponent={
+                <View style={styles.item}>
+                <Text
+                  style={StyleSheet.flatten([
+                    styles.textItem,
+                    itemTextStyle,
+                    font(),
+                  ])}
+                >
+                No Result Found
+                </Text>
+              </View>
+              }
               inverted={isTopPosition ? inverted : false}
               renderItem={_renderItem}
               keyExtractor={(_item, index) => index.toString()}
