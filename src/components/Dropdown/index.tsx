@@ -95,6 +95,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
       closeModalWhenSelectedItem = true,
       excludeItems = [],
       excludeSearchItems = [],
+      selectedVal
     } = props;
 
     const ref = useRef<View>(null);
@@ -451,7 +452,8 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
         >
           <View style={styles.dropdown}>
             {renderLeftIcon?.(visible)}
-            <Text
+            {__renderSelectedVal()}
+            {!selectedVal && <Text
               style={[
                 styles.textItem,
                 isSelected !== null ? selectedTextStyle : placeholderStyle,
@@ -462,7 +464,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
               {isSelected !== null
                 ? _get(currentValue, labelField)
                 : placeholder}
-            </Text>
+            </Text>}
             {renderRightIcon ? (
               renderRightIcon(visible)
             ) : (
@@ -478,6 +480,13 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
           </View>
         </TouchableWithoutFeedback>
       );
+    };
+
+    const __renderSelectedVal = () => {
+      if (selectedVal) {
+        return selectedVal;
+      }
+      return null;
     };
 
     const _renderItem = useCallback(
