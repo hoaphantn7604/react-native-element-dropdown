@@ -207,11 +207,11 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
 
           setPosition({
             isFull,
-            width: Math.floor(width),
+            width: width,
             top: Math.floor(top + statusBarHeight),
             bottom: Math.floor(bottom - statusBarHeight),
-            left: Math.floor(left),
-            height: Math.floor(height),
+            left: left,
+            height: height,
           });
         });
       }
