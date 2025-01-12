@@ -703,6 +703,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
                   >
                     <View
                       style={StyleSheet.flatten([
+                        { width },
                         styles.container,
                         isFull ? styleHorizontal : styleVertical,
                         {
