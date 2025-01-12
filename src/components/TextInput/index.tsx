@@ -48,7 +48,10 @@ const TextInputComponent: CTextInput = (props) => {
       }
       if (text.length > 0) {
         return (
-          <TouchableOpacity onPress={() => onChange('')}>
+          <TouchableOpacity
+            accessibilityRole="button"
+            onPress={() => onChange('')}
+          >
             <Image
               source={ic_close}
               style={StyleSheet.flatten([styles.icon, iconStyle])}

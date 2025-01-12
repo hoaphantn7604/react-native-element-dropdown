@@ -447,6 +447,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
           testID={testID}
           accessible={!!accessibilityLabel}
           accessibilityLabel={accessibilityLabel}
+          accessibilityRole="button"
           onPress={showOrClose}
         >
           <View style={styles.dropdown}>
@@ -680,7 +681,10 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
               supportedOrientations={['landscape', 'portrait']}
               onRequestClose={showOrClose}
             >
-              <TouchableWithoutFeedback onPress={showOrClose}>
+              <TouchableWithoutFeedback
+                accessibilityRole="button"
+                onPress={showOrClose}
+              >
                 <View
                   style={StyleSheet.flatten([
                     styles.flex1,
