@@ -76,6 +76,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
       inverted = true,
       renderLeftIcon,
       renderRightIcon,
+      renderMainView,
       renderItem,
       renderInputSearch,
       onFocus,
@@ -449,6 +450,8 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
           accessibilityLabel={accessibilityLabel}
           onPress={showOrClose}
         >
+          {renderMainView?
+            renderMainView() :
           <View style={styles.dropdown}>
             {renderLeftIcon?.(visible)}
             <Text
@@ -475,7 +478,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
                 ])}
               />
             )}
-          </View>
+          </View>}
         </TouchableWithoutFeedback>
       );
     };
