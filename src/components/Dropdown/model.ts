@@ -62,6 +62,7 @@ export interface DropdownProps<T> {
   onChange: (item: T) => void;
   renderLeftIcon?: (visible?: boolean) => React.ReactElement | null;
   renderRightIcon?: (visible?: boolean) => React.ReactElement | null;
+  renderMainView?: () => React.ReactElement | null;
   renderItem?: (item: T, selected?: boolean) => React.ReactElement | null;
   renderInputSearch?: (
     onSearch: (text: string) => void
