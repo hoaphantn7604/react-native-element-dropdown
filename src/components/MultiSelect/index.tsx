@@ -53,7 +53,9 @@ const MultiSelectComponent = React.forwardRef<
     searchField,
     selectedStyle,
     selectedTextStyle,
+    itemTouchableStyle,
     itemContainerStyle,
+    itemTextContainerStyle,
     itemTextStyle,
     iconStyle,
     selectedTextProps = {},
@@ -97,6 +99,7 @@ const MultiSelectComponent = React.forwardRef<
     mode = 'default',
     excludeItems = [],
     excludeSearchItems = [],
+    alwaysDismissKeyboard = false,
   } = props;
 
   const ref = useRef<View>(null);
@@ -261,12 +264,16 @@ const MultiSelectComponent = React.forwardRef<
     getValue();
   }, [getValue, value]);
 
-  const showOrClose = useCallback(() => {
+  const showOrClose = useCallback(async () => {
     if (!disable) {
       const visibleStatus = !visible;
 
       if (keyboardHeight > 0 && !visibleStatus) {
         return Keyboard.dismiss();
+      }
+      if (keyboardHeight > 0 && alwaysDismissKeyboard) {
+        Keyboard.dismiss();
+        await new Promise((resolve) => setTimeout(resolve, 200));
       }
 
       _measure();
@@ -469,6 +476,7 @@ const MultiSelectComponent = React.forwardRef<
           )}
           underlayColor={activeColor}
           onPress={() => onSelect(item)}
+          style={itemTouchableStyle}
         >
           <View
             style={StyleSheet.flatten([
@@ -482,7 +490,12 @@ const MultiSelectComponent = React.forwardRef<
             {renderItem ? (
               renderItem(item, selected)
             ) : (
-              <View style={styles.item}>
+              <View
+                style={StyleSheet.flatten([
+                  styles.item,
+                  itemTextContainerStyle,
+                ])}
+              >
                 <Text
                   style={StyleSheet.flatten([
                     styles.textItem,
@@ -504,8 +517,10 @@ const MultiSelectComponent = React.forwardRef<
       checkSelected,
       font,
       itemAccessibilityLabelField,
+      itemTouchableStyle,
       itemContainerStyle,
       itemTestIDField,
+      itemTextContainerStyle,
       itemTextStyle,
       labelField,
       onSelect,

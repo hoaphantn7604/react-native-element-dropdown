@@ -52,7 +52,9 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
       containerStyle,
       placeholderStyle,
       selectedTextStyle,
+      itemTouchableStyle,
       itemContainerStyle,
+      itemTextContainerStyle,
       itemTextStyle,
       inputSearchStyle,
       iconStyle,
@@ -95,6 +97,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
       closeModalWhenSelectedItem = true,
       excludeItems = [],
       excludeSearchItems = [],
+      alwaysDismissKeyboard = false,
     } = props;
 
     const ref = useRef<View>(null);
@@ -304,12 +307,16 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
       200
     );
 
-    const showOrClose = useCallback(() => {
+    const showOrClose = useCallback(async () => {
       if (!disable) {
         const visibleStatus = !visible;
 
         if (keyboardHeight > 0 && !visibleStatus) {
           return Keyboard.dismiss();
+        }
+        if (keyboardHeight > 0 && alwaysDismissKeyboard) {
+          Keyboard.dismiss();
+          await new Promise((resolve) => setTimeout(resolve, 200));
         }
 
         if (!visibleStatus) {
@@ -496,6 +503,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
             )}
             underlayColor={activeColor}
             onPress={() => onSelect(item)}
+            style={itemTouchableStyle}
           >
             <View
               style={StyleSheet.flatten([
@@ -508,7 +516,12 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
               {renderItem ? (
                 renderItem(item, selected)
               ) : (
-                <View style={styles.item}>
+                <View
+                  style={StyleSheet.flatten([
+                    styles.item,
+                    itemTextContainerStyle,
+                  ])}
+                >
                   <Text
                     style={StyleSheet.flatten([
                       styles.textItem,
@@ -530,8 +543,10 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
         currentValue,
         font,
         itemAccessibilityLabelField,
+        itemTouchableStyle,
         itemContainerStyle,
         itemTestIDField,
+        itemTextContainerStyle,
         itemTextStyle,
         labelField,
         onSelect,
