@@ -16,6 +16,7 @@ const SelectCountryComponent = React.forwardRef<
     imageField,
     selectedTextStyle,
     imageStyle,
+    allowFontScaling = false,
   } = props;
   const ref: any = useRef(null);
 
@@ -35,7 +36,10 @@ const SelectCountryComponent = React.forwardRef<
     return (
       <View style={styles.item}>
         <Image source={item[imageField]} style={[styles.image, imageStyle]} />
-        <Text style={[styles.selectedTextStyle, selectedTextStyle]}>
+        <Text
+          allowFontScaling={allowFontScaling}
+          style={[styles.selectedTextStyle, selectedTextStyle]}
+        >
           {item[labelField]}
         </Text>
       </View>

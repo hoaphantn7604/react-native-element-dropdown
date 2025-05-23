@@ -26,6 +26,7 @@ const TextInputComponent: CTextInput = (props) => {
     onChangeText = (_value: string) => {},
     renderLeftIcon,
     renderRightIcon,
+    allowFontScaling = false,
   } = props;
 
   const [text, setText] = useState<string>('');
@@ -77,6 +78,7 @@ const TextInputComponent: CTextInput = (props) => {
         <View style={styles.textInput}>
           {renderLeftIcon?.()}
           <TextInput
+            allowFontScaling={allowFontScaling}
             {...props}
             style={StyleSheet.flatten([styles.input, inputStyle, font()])}
             value={text}
