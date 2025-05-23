@@ -95,6 +95,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
       closeModalWhenSelectedItem = true,
       excludeItems = [],
       excludeSearchItems = [],
+      allowFontScaling = false,
     } = props;
 
     const ref = useRef<View>(null);
@@ -452,6 +453,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
           <View style={styles.dropdown}>
             {renderLeftIcon?.(visible)}
             <Text
+              allowFontScaling={allowFontScaling}
               style={[
                 styles.textItem,
                 isSelected !== null ? selectedTextStyle : placeholderStyle,
@@ -510,6 +512,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
               ) : (
                 <View style={styles.item}>
                   <Text
+                    allowFontScaling={allowFontScaling}
                     style={StyleSheet.flatten([
                       styles.textItem,
                       itemTextStyle,

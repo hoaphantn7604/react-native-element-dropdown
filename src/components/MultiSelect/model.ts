@@ -79,4 +79,5 @@ export interface MultiSelectProps<T> {
   searchQuery?: (keyword: string, labelValue: string) => boolean;
   onChangeText?: (search: string) => void;
   onConfirmSelectItem?: (item: any) => void;
+  allowFontScaling?: boolean;
 }

@@ -97,6 +97,7 @@ const MultiSelectComponent = React.forwardRef<
     mode = 'default',
     excludeItems = [],
     excludeSearchItems = [],
+    allowFontScaling = false,
   } = props;
 
   const ref = useRef<View>(null);
@@ -420,6 +421,7 @@ const MultiSelectComponent = React.forwardRef<
         <View style={styles.dropdown}>
           {renderLeftIcon?.(visible)}
           <Text
+            allowFontScaling={allowFontScaling}
             style={StyleSheet.flatten([
               styles.textItem,
               placeholderStyle,
@@ -484,6 +486,7 @@ const MultiSelectComponent = React.forwardRef<
             ) : (
               <View style={styles.item}>
                 <Text
+                  allowFontScaling={allowFontScaling}
                   style={StyleSheet.flatten([
                     styles.textItem,
                     itemTextStyle,
@@ -764,6 +767,7 @@ const MultiSelectComponent = React.forwardRef<
                   ])}
                 >
                   <Text
+                    allowFontScaling={allowFontScaling}
                     style={StyleSheet.flatten([
                       styles.selectedTextLeftItem,
                       selectedTextStyle,
@@ -773,6 +777,7 @@ const MultiSelectComponent = React.forwardRef<
                     {_get(e, labelField)}
                   </Text>
                   <Text
+                    allowFontScaling={allowFontScaling}
                     style={StyleSheet.flatten([
                       styles.selectedTextItem,
                       selectedTextStyle,
@@ -816,6 +821,7 @@ const MultiSelectComponent = React.forwardRef<
             _renderItemSelected(true)
           ) : (
             <Text
+              allowFontScaling={allowFontScaling}
               style={StyleSheet.flatten([
                 styles.textItem,
                 placeholderStyle,
