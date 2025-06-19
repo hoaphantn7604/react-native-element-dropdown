@@ -49,7 +49,8 @@ yarn add react-native-element-dropdown
 | value              | Item                                            | No        | Set default value                                                   |
 | placeholder        | String                                          | No        | The string that will be rendered before dropdown has been selected  |
 | placeholderStyle   | TextStyle                                       | No        | Styling for text placeholder                                        |
-| selectedTextStyle  | TextStyle                                       | No        | Styling for selected text                                           |
+| selectedText       | TextStyle                                       | No        | Styling for selected text                                           |
+| selectedTextStyle  | TextStyle                                       | No        | Custom selected text                                                |
 | selectedTextProps  | TextProps                                       | No        | Text Props for selected text. Ex: numberOfLines={1}                 |
 | style              | ViewStyle                                       | No        | Styling for view container                                          |
 | containerStyle     | ViewStyle                                       | No        | Styling for list container                                          |

@@ -24,6 +24,7 @@ export interface DropdownProps<T> {
   style?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
   placeholderStyle?: StyleProp<TextStyle>;
+  selectedText?: string;
   selectedTextStyle?: StyleProp<TextStyle>;
   selectedTextProps?: TextProps;
   itemContainerStyle?: StyleProp<ViewStyle>;
