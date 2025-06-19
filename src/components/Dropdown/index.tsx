@@ -51,6 +51,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
       style = {},
       containerStyle,
       placeholderStyle,
+      selectedText,
       selectedTextStyle,
       itemContainerStyle,
       itemTextStyle,
@@ -460,7 +461,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
               {...selectedTextProps}
             >
               {isSelected !== null
-                ? _get(currentValue, labelField)
+                ? (selectedText ? selectedText : _get(currentValue, labelField))
                 : placeholder}
             </Text>
             {renderRightIcon ? (
