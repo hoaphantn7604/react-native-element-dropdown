@@ -43,9 +43,10 @@ yarn add react-native-element-dropdown
 | data               | Array                                           | Yes       | Data is a plain array                                               |
 | labelField         | String                                          | Yes       | Extract the label from the data item                                |
 | valueField         | String                                          | Yes       | Extract the primary key from the data item                          |
-| searchField        | String                                          | No       | Specify the field of data list you want to search                   |
+| searchField        | String                                          | No        | Specify the field of data list you want to search                   |
+| searchKeyboardType | KeyboardTypeOptions                             | No        | Specify the field of keyboard type list you want to use             | 
 | onChange           | (item: object) => void                          | Yes       | Selection callback                                                  |
-| onChangeText       | (search: string) => void                        | No       | Callback that is called when the text input's text changes          |
+| onChangeText       | (search: string) => void                        | No        | Callback that is called when the text input's text changes          |
 | value              | Item                                            | No        | Set default value                                                   |
 | placeholder        | String                                          | No        | The string that will be rendered before dropdown has been selected  |
 | placeholderStyle   | TextStyle                                       | No        | Styling for text placeholder                                        |
@@ -62,6 +63,7 @@ yarn add react-native-element-dropdown
 | itemTextStyle      | TextStyle                                       | No        | Styling for text item in list                                       |
 | activeColor        | String                                          | No        | Background color for item selected in list container                |
 | search             | Boolean                                         | No        | Show or hide input search                                           |
+| searchBothFields   | Boolean                                         | No        | Search by valueField and labelField                                 |
 | searchQuery        | (keyword: string, labelValue: string) => Boolean| No        | Callback used to filter the list of items                           |
 | inputSearchStyle   | ViewStyle                                       | No        | Styling for input search                                            |
 | searchPlaceholder  | String                                          | No        | The string that will be rendered before text input has been entered |
