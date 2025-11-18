@@ -148,14 +148,18 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
     useEffect(() => {
       if (data && searchText.length === 0) {
         const filterData = excludeData(data);
-        setListData([...filterData]);
+        // only update state when the filtered data actually differs to avoid infinite re-renders
+        if (!_isEqual(filterData, listData)) {
+          setListData([...filterData]);
+        }
       }
 
       if (searchText) {
+        // call the search handler when there is a search term
         onSearch(searchText);
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data, searchText]);
+      // eslint-enable-next-line react-hooks/exhaustive-deps
+    }, [data, searchText, excludeData, listData]);
 
     const eventOpen = () => {
       if (!disable) {
@@ -300,7 +304,7 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
             }
           }
         }
-      }, [autoScroll, data.length, listData, value, valueField]),
+      }, [autoScroll, data.length, value, valueField]), // to fix Maximum Depth Exceeded warning | removed listData from dependency array
       200
     );
 
