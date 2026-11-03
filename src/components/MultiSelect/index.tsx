@@ -22,10 +22,12 @@ import {
   Text,
   TouchableHighlight,
   TouchableWithoutFeedback,
+  TurboModuleRegistry,
   View,
   ViewStyle,
   StatusBar,
 } from 'react-native';
+import type { TurboModule } from 'react-native';
 import { useDetectDevice } from '../../toolkits';
 import { useDeviceOrientation } from '../../useDeviceOrientation';
 import CInput from '../TextInput';
@@ -34,7 +36,21 @@ import { styles } from './styles';
 
 const { isTablet } = useDetectDevice;
 const ic_down = require('../../assets/down.png');
-const statusBarHeight: number = StatusBar.currentHeight || 0;
+
+interface DeviceInfoModule extends TurboModule {
+  getConstants?: () => { isEdgeToEdge?: boolean };
+}
+
+// The list opens in a statusBarTranslucent Modal, which starts at the top of the screen.
+// measureInWindow starts there too when React Native runs edge-to-edge (edgeToEdgeEnabled,
+// or Android 15+ enforcing it for apps targeting SDK 35+). Otherwise it starts below the
+// status bar, so add its height.
+const getStatusBarOffset = (): number => {
+  const deviceInfo = TurboModuleRegistry.get<DeviceInfoModule>('DeviceInfo');
+  const isEdgeToEdge = deviceInfo?.getConstants?.().isEdgeToEdge === true;
+
+  return isEdgeToEdge ? 0 : StatusBar.currentHeight || 0;
+};
 
 const MultiSelectComponent = React.forwardRef<
   IMultiSelectRef,
@@ -210,12 +226,13 @@ const MultiSelectComponent = React.forwardRef<
         const top = isFull ? 20 : height + pageY + 2;
         const bottom = H - top + height;
         const left = I18nManager.isRTL ? W - width - pageX : pageX;
+        const statusBarOffset = getStatusBarOffset();
 
         setPosition({
           isFull,
           width: Math.floor(width),
-          top: Math.floor(top + statusBarHeight),
-          bottom: Math.floor(bottom - statusBarHeight),
+          top: Math.floor(top + statusBarOffset),
+          bottom: Math.floor(bottom - statusBarOffset),
           left: Math.floor(left),
           height: Math.floor(height),
         });
